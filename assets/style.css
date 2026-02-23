@@ -62,6 +62,17 @@ button:hover{border-color:#3d5bb4}
 .list li{margin-bottom:4px}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{font-size:12px;border:1px solid #31518f;background:#172447;color:#d7e3ff;border-radius:999px;padding:5px 9px}
+.ticker-chip{cursor:pointer}
+.ticker-chip.is-active{outline:2px solid var(--accent-2);outline-offset:1px;border-color:#4fb997;background:#123b36}
+
+.report-body{line-height:1.7}
+.report-body h1{font-size:1.7rem;margin-top:0}
+.report-body h2{font-size:1.25rem;margin-top:1.3rem}
+.report-body h3{font-size:1.05rem;margin-top:1rem}
+.report-body p{color:#dbe4ff}
+.report-body ul{padding-left:1.1rem}
+.report-body pre{background:#0b1226;border:1px solid #2a3763;padding:10px;border-radius:10px;overflow:auto}
+.report-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 
 .footer{margin-top:14px;font-size:12px;color:var(--muted)}
 

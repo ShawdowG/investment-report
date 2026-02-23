@@ -1,6 +1,7 @@
 [
   {
     "file": "2026-02-23-us-open.md",
+    "htmlFile": "2026-02-23-us-open.html",
     "title": "US Open +15m",
     "summary": "",
     "date": "2026-02-23",
@@ -34,6 +35,7 @@
   },
   {
     "file": "2026-02-23-pre-close.md",
+    "htmlFile": "2026-02-23-pre-close.html",
     "title": "US Pre-close",
     "summary": "",
     "date": "2026-02-23",
@@ -67,6 +69,7 @@
   },
   {
     "file": "2026-02-23-eu.md",
+    "htmlFile": "2026-02-23-eu.html",
     "title": "EU/Nordic Morning",
     "summary": "",
     "date": "2026-02-23",

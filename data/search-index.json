@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-02-23T18:56:49.184Z",
+  "generatedAt": "2026-02-23T18:59:18.437Z",
   "count": 3,
   "items": [
     {
       "file": "2026-02-23-us-open.md",
+      "htmlFile": "2026-02-23-us-open.html",
       "title": "US Open +15m",
       "summary": "",
       "date": "2026-02-23",
@@ -37,6 +38,7 @@
     },
     {
       "file": "2026-02-23-pre-close.md",
+      "htmlFile": "2026-02-23-pre-close.html",
       "title": "US Pre-close",
       "summary": "",
       "date": "2026-02-23",
@@ -70,6 +72,7 @@
     },
     {
       "file": "2026-02-23-eu.md",
+      "htmlFile": "2026-02-23-eu.html",
       "title": "EU/Nordic Morning",
       "summary": "",
       "date": "2026-02-23",
