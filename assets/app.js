@@ -13,7 +13,6 @@ async function main() {
   const alphaEl = document.getElementById('alphaList');
   const betaEl = document.getElementById('betaList');
   const newsEl = document.getElementById('newsList');
-  const tableBody = document.getElementById('tickerTableBody');
   const sortBtns = [...document.querySelectorAll('.sort-btn')];
 
   if (!results || !dateEl || !moversEl) return;
@@ -68,14 +67,7 @@ async function main() {
     return Number.isFinite(n) ? n : null;
   }
 
-  function renderTable(primary) {
-    if (!tableBody) return;
-    const rows = [...(primary?.movers || [])];
-    if (!rows.length) {
-      tableBody.innerHTML = '<tr><td colspan="3" class="muted">No ticker data for selected report.</td></tr>';
-      return;
-    }
-
+  function sortRows(rows) {
     rows.sort((a, b) => {
       let av, bv;
       if (sortKey === 'ticker') {
@@ -93,17 +85,6 @@ async function main() {
       }
       return sortDir === 'asc' ? av - bv : bv - av;
     });
-
-    tableBody.innerHTML = rows.map(r => {
-      const pct = typeof r.pct === 'number' ? r.pct : null;
-      const pctText = pct === null ? '—' : `${pct > 0 ? '+' : ''}${pct.toFixed(2)}%`;
-      const pctClass = pct === null ? '' : pct < 0 ? 'neg' : 'pos';
-      return `<tr>
-        <td>${r.ticker || '—'}</td>
-        <td>${r.price || '—'}</td>
-        <td class="${pctClass}">${pctText}</td>
-      </tr>`;
-    }).join('');
   }
 
   function renderMoverRow(m) {
@@ -133,10 +114,10 @@ async function main() {
       newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter funnet for valgt rapport.</li>';
       return;
     }
-    const top = movers
+    const top = [...movers]
       .filter(m => typeof m.pct === 'number')
-      .sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))
-      .slice(0,5);
+      .sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct))
+      .slice(0, 5);
     newsEl.innerHTML = top.map(m => {
       const dir = m.pct < 0 ? 'ned' : 'opp';
       const pct = `${m.pct > 0 ? '+' : ''}${m.pct.toFixed(2)}%`;
@@ -174,15 +155,12 @@ async function main() {
       setList(betaEl, [], 'No Beta notes yet.');
       if (pulseEl) pulseEl.textContent = 'No pulse data for selected filters.';
       if (newsEl) newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter for valgt filter.</li>';
-      if (tableBody) tableBody.innerHTML = '<tr><td colspan="3" class="muted">No ticker data for selected report.</td></tr>';
       return;
     }
 
-    if (primary?.movers?.length) {
-      moversEl.innerHTML = primary.movers.slice(0, 10).map(renderMoverRow).join('');
-    } else {
-      moversEl.innerHTML = '<div class="muted">Ingen bevegelser å vise.</div>';
-    }
+    const rows = [...(primary?.movers || [])];
+    sortRows(rows);
+    moversEl.innerHTML = rows.length ? rows.map(renderMoverRow).join('') : '<div class="muted">Ingen bevegelser å vise.</div>';
 
     if (pulseEl) {
       const p = primary?.sections?.pulse || [];
@@ -193,7 +171,6 @@ async function main() {
     setList(alphaEl, primary?.sections?.alpha || [], 'No Alpha notes yet.');
     setList(betaEl, primary?.sections?.beta || [], 'No Beta notes yet.');
     renderNews(primary);
-    renderTable(primary);
 
     results.innerHTML = filtered
       .slice(0, 40)
@@ -224,6 +201,7 @@ async function main() {
       render();
     });
   });
+
   clearBtn?.addEventListener('click', () => {
     if (latest?.date) dateEl.value = latest.date;
     if (tickerEl) tickerEl.value = '';

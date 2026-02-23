@@ -275,24 +275,12 @@ const html = `<!doctype html>
 
       <article class="card col-12">
         <h2>Største bevegelser på listene dine <span id="resultsCount" class="muted"></span></h2>
-        <div id="moversList" class="movers"></div>
-      </article>
-
-      <article class="card col-12">
-        <h2>Full ticker table (sortable)</h2>
-        <p class="muted">Click column headers to sort by ticker, price, or movement.</p>
-        <div class="table-wrap">
-          <table class="ticker-table" id="tickerTable">
-            <thead>
-              <tr>
-                <th><button class="sort-btn" data-sort="ticker" type="button">Ticker</button></th>
-                <th><button class="sort-btn" data-sort="price" type="button">Price</button></th>
-                <th><button class="sort-btn" data-sort="pct" type="button">Δ%</button></th>
-              </tr>
-            </thead>
-            <tbody id="tickerTableBody"></tbody>
-          </table>
+        <div class="chips" style="margin:0 0 10px 0">
+          <button class="sort-btn" data-sort="pct" type="button">Sort: Movement</button>
+          <button class="sort-btn" data-sort="price" type="button">Sort: Price</button>
+          <button class="sort-btn" data-sort="ticker" type="button">Sort: Ticker</button>
         </div>
+        <div id="moversList" class="movers"></div>
       </article>
 
       <article class="card col-4">
