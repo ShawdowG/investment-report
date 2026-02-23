@@ -12,6 +12,7 @@ async function main() {
   const summaryEl = document.getElementById('summaryList');
   const alphaEl = document.getElementById('alphaList');
   const betaEl = document.getElementById('betaList');
+  const newsEl = document.getElementById('newsList');
 
   if (!results || !dateEl || !moversEl) return;
 
@@ -72,6 +73,30 @@ async function main() {
     </div>`;
   }
 
+  function newsLinkFor(ticker) {
+    const q = encodeURIComponent(`${ticker} stock news`);
+    return `https://www.google.com/search?tbm=nws&q=${q}`;
+  }
+
+  function renderNews(primary) {
+    if (!newsEl) return;
+    const movers = primary?.movers || [];
+    if (!movers.length) {
+      newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter funnet for valgt rapport.</li>';
+      return;
+    }
+    const top = movers
+      .filter(m => typeof m.pct === 'number')
+      .sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))
+      .slice(0,5);
+    newsEl.innerHTML = top.map(m => {
+      const dir = m.pct < 0 ? 'ned' : 'opp';
+      const pct = `${m.pct > 0 ? '+' : ''}${m.pct.toFixed(2)}%`;
+      const href = newsLinkFor(m.ticker);
+      return `<li><strong>${m.ticker}</strong>: ${dir} ${pct} i rapporten — <a href="${href}" target="_blank" rel="noopener noreferrer">kilde-søk</a></li>`;
+    }).join('');
+  }
+
   function render() {
     const d = (dateEl.value || '').trim();
     const t = (tickerEl?.value || '').trim().toUpperCase();
@@ -100,6 +125,7 @@ async function main() {
       setList(alphaEl, [], 'No Alpha notes yet.');
       setList(betaEl, [], 'No Beta notes yet.');
       if (pulseEl) pulseEl.textContent = 'No pulse data for selected filters.';
+      if (newsEl) newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter for valgt filter.</li>';
       return;
     }
 
@@ -117,6 +143,7 @@ async function main() {
     setList(summaryEl, [primary.summary || '', ...(primary?.sections?.gamma || [])].slice(0, 5), 'No summary yet.');
     setList(alphaEl, primary?.sections?.alpha || [], 'No Alpha notes yet.');
     setList(betaEl, primary?.sections?.beta || [], 'No Beta notes yet.');
+    renderNews(primary);
 
     results.innerHTML = filtered
       .slice(0, 40)
