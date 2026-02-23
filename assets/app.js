@@ -175,7 +175,7 @@ async function main() {
       pulseEl.innerHTML = p.map(x => `<div>${x}</div>`).join('') || 'Awaiting pulse update.';
     }
 
-    setList(summaryEl, [primary.summary || '', ...(primary?.sections?.gamma || [])].slice(0, 5), 'No summary yet.');
+    setList(summaryEl, [primary.summary || ''].filter(Boolean), 'No summary yet.');
     setList(alphaEl, primary?.sections?.alpha || [], 'No Alpha notes yet.');
     setList(betaEl, primary?.sections?.beta || [], 'No Beta notes yet.');
     renderNews(primary);
