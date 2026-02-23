@@ -23,8 +23,11 @@ h1{margin:0 0 6px;font-size:1.9rem}h2{margin:0 0 10px;font-size:1.1rem}.muted{co
 .col-12{grid-column:span 12}.col-6{grid-column:span 6}.col-4{grid-column:span 4}
 .card{background:linear-gradient(180deg,var(--panel),var(--panel-soft));border:1px solid var(--border);border-radius:14px;padding:14px}
 
-.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;align-items:end}
-.filters.compact{margin-top:10px}
+.filters-panel{margin-top:10px;border:1px solid #30406f;border-radius:10px;background:#0f1730}
+.filters-panel summary{list-style:none;cursor:pointer;padding:10px 12px;font-weight:600;color:#cfe0ff}
+.filters-panel summary::-webkit-details-marker{display:none}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;align-items:end;padding:0 10px 10px}
+.filters.compact{margin-top:0}
 label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
 input,select,button{background:#0f1730;border:1px solid #2f3f71;color:var(--text);padding:9px;border-radius:9px}
 button{cursor:pointer}
@@ -36,7 +39,7 @@ button{cursor:pointer}
 
 .movers{display:flex;flex-direction:column;gap:8px}
 .mover-row{display:grid;grid-template-columns:90px 1.4fr .9fr .9fr .9fr;gap:10px;align-items:center;padding:10px 8px;border-bottom:1px solid #2a3763}
-.mover-header{font-size:12px;color:var(--muted);padding-top:0;padding-bottom:8px;border-bottom:1px solid #3a4a80}
+.mover-header{font-size:12px;color:var(--muted);padding-top:0;padding-bottom:8px;border-bottom:1px solid #3a4a80;position:sticky;top:0;background:linear-gradient(180deg,#131e3e,#121a33);z-index:2}
 .mover-header div{font-weight:600}
 .ticker-badge{display:inline-block;background:#223a78;border:1px solid #4666bc;padding:4px 8px;border-radius:8px;font-weight:700;font-size:12px;max-width:max-content}
 .mover-name{font-weight:600}
@@ -69,6 +72,7 @@ button{cursor:pointer}
 @media (max-width:900px){
   .col-6,.col-4{grid-column:span 12}
   .discussion-grid{grid-template-columns:1fr}
+  .filters-panel[open] summary{border-bottom:1px solid #2f3f71}
   .mover-row{grid-template-columns:80px 1fr .9fr .9fr;grid-template-areas:"ticker name price price" "ticker change pill pill"}
   .ticker-badge{grid-area:ticker}.mover-name{grid-area:name}.mover-price{grid-area:price}.mover-change{grid-area:change}.mover-pill{grid-area:pill}
 }

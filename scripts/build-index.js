@@ -250,23 +250,26 @@ const html = `<!doctype html>
         </div>
         <span class="badge">${items.length} reports indexed</span>
       </div>
-      <div class="filters compact">
-        <label>Date
-          <select id="dateSelect"></select>
-        </label>
-        <label>Session
-          <select id="slotFilter">
-            <option value="">All</option>
-            <option value="eu">EU</option>
-            <option value="us-open">US Open</option>
-            <option value="pre-close">Pre-close</option>
-          </select>
-        </label>
-        <label>Ticker
-          <input id="tickerFilter" type="text" placeholder="NVDA" />
-        </label>
-        <button id="clearFilters" type="button">Reset</button>
-      </div>
+      <details class="filters-panel" open>
+        <summary>Filters</summary>
+        <div class="filters compact">
+          <label>Date
+            <select id="dateSelect"></select>
+          </label>
+          <label>Session
+            <select id="slotFilter">
+              <option value="">All</option>
+              <option value="eu">EU</option>
+              <option value="us-open">US Open</option>
+              <option value="pre-close">Pre-close</option>
+            </select>
+          </label>
+          <label>Ticker
+            <input id="tickerFilter" type="text" placeholder="NVDA" />
+          </label>
+          <button id="clearFilters" type="button">Reset</button>
+        </div>
+      </details>
       <div id="tickerChips" class="chips"></div>
     </section>
 
@@ -280,7 +283,7 @@ const html = `<!doctype html>
         <h2>Tickeroversikt (pris og bevegelse) <span id="resultsCount" class="muted"></span></h2>
         <div class="mover-row mover-header">
           <div><button class="sort-btn" data-sort="ticker" type="button">Ticker</button></div>
-          <div><button class="sort-btn" data-sort="ticker" type="button">Name</button></div>
+          <div><button class="sort-btn" data-sort="name" type="button">Name</button></div>
           <div><button class="sort-btn" data-sort="price" type="button">Price</button></div>
           <div>Δ$</div>
           <div><button class="sort-btn" data-sort="pct" type="button">Δ%</button></div>

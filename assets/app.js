@@ -6,6 +6,7 @@ async function main() {
   const slotEl = document.getElementById('slotFilter');
   const clearBtn = document.getElementById('clearFilters');
   const chipsEl = document.getElementById('tickerChips');
+  const filtersPanel = document.querySelector('.filters-panel');
 
   const moversEl = document.getElementById('moversList');
   const pulseEl = document.getElementById('pulseSummary');
@@ -34,6 +35,10 @@ async function main() {
 
   dateEl.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join('');
   if (latest?.date) dateEl.value = latest.date;
+
+  if (filtersPanel && window.matchMedia('(max-width: 900px)').matches) {
+    filtersPanel.removeAttribute('open');
+  }
 
   chipsEl.innerHTML = tickers.slice(0, 30).map(t => `<button class="chip ticker-chip" data-ticker="${t}" type="button">${t}</button>`).join('');
 
@@ -66,6 +71,7 @@ async function main() {
 
   const sortBaseLabel = {
     ticker: 'Ticker',
+    name: 'Name',
     price: 'Price',
     pct: 'Δ%'
   };
@@ -81,6 +87,13 @@ async function main() {
     });
   }
 
+  const NAME_MAP = {
+    'BTC-USD':'Bitcoin', 'GC=F':'Gold', '^GSPC':'S&P 500', '^NDQ':'Nasdaq 100',
+    'AAPL':'Apple', 'TSLA':'Tesla', 'GOOG':'Alphabet', 'NVDA':'NVIDIA', 'AMZN':'Amazon', 'MSFT':'Microsoft', 'META':'Meta',
+    'DUOL':'Duolingo', 'ADBE.VI':'Adobe', 'AMD':'AMD', 'BABA':'Alibaba', 'LMT':'Lockheed Martin', 'BA':'Boeing',
+    'TM':'Toyota', 'V':'Visa', 'MA':'Mastercard', 'NFLX':'Netflix', 'RDDT':'Reddit', 'NOVO-B.CO':'Novo Nordisk'
+  };
+
   function normPrice(v) {
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
@@ -95,6 +108,12 @@ async function main() {
         const cmp = av.localeCompare(bv);
         return sortDir === 'asc' ? cmp : -cmp;
       }
+      if (sortKey === 'name') {
+        av = (NAME_MAP[a.ticker] || a.name || a.ticker || '').toUpperCase();
+        bv = (NAME_MAP[b.ticker] || b.name || b.ticker || '').toUpperCase();
+        const cmp = av.localeCompare(bv);
+        return sortDir === 'asc' ? cmp : -cmp;
+      }
       if (sortKey === 'price') {
         av = normPrice(a.price) ?? -Infinity;
         bv = normPrice(b.price) ?? -Infinity;
@@ -105,13 +124,6 @@ async function main() {
       return sortDir === 'asc' ? av - bv : bv - av;
     });
   }
-
-  const NAME_MAP = {
-    'BTC-USD':'Bitcoin', 'GC=F':'Gold', '^GSPC':'S&P 500', '^NDQ':'Nasdaq 100',
-    'AAPL':'Apple', 'TSLA':'Tesla', 'GOOG':'Alphabet', 'NVDA':'NVIDIA', 'AMZN':'Amazon', 'MSFT':'Microsoft', 'META':'Meta',
-    'DUOL':'Duolingo', 'ADBE.VI':'Adobe', 'AMD':'AMD', 'BABA':'Alibaba', 'LMT':'Lockheed Martin', 'BA':'Boeing',
-    'TM':'Toyota', 'V':'Visa', 'MA':'Mastercard', 'NFLX':'Netflix', 'RDDT':'Reddit', 'NOVO-B.CO':'Novo Nordisk'
-  };
 
   function renderMoverRow(m) {
     const pct = typeof m.pct === 'number' ? m.pct : null;
@@ -237,7 +249,7 @@ async function main() {
         sortDir = sortDir === 'asc' ? 'desc' : 'asc';
       } else {
         sortKey = key;
-        sortDir = key === 'ticker' ? 'asc' : 'desc';
+        sortDir = (key === 'ticker' || key === 'name') ? 'asc' : 'desc';
       }
       render();
     });
