@@ -15,7 +15,7 @@ fs.mkdirSync(byDateDir, { recursive: true });
 fs.mkdirSync(byTickerDir, { recursive: true });
 
 function escapeHtml(s = '') {
-  return s
+  return String(s)
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
@@ -47,13 +47,12 @@ function renderMarkdownBasic(md) {
   const out = [];
   let inUl = false;
   let inCode = false;
-
-  function closeUl() {
+  const closeUl = () => {
     if (inUl) {
       out.push('</ul>');
       inUl = false;
     }
-  }
+  };
 
   for (const line of lines) {
     if (line.trim().startsWith('```')) {
@@ -107,9 +106,51 @@ function renderMarkdownBasic(md) {
     closeUl();
     out.push(`<p>${escapeHtml(line)}</p>`);
   }
-
   closeUl();
   return out.join('\n');
+}
+
+function extractSection(body, startLabel) {
+  const lines = body.split('\n');
+  const start = lines.findIndex(l => l.trim().startsWith(startLabel));
+  if (start === -1) return [];
+  const out = [];
+  for (let i = start + 1; i < lines.length; i++) {
+    if (lines[i].trim().startsWith('## ')) break;
+    out.push(lines[i]);
+  }
+  return out;
+}
+
+function parseMovers(body, tickers = []) {
+  const movers = [];
+  const lines = body.split('\n');
+  const re = /^\s*([A-Z0-9^.=\-]+)\s*\|\s*([0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)%/;
+  for (const l of lines) {
+    const m = l.match(re);
+    if (!m) continue;
+    const ticker = m[1].trim();
+    const price = m[2].trim();
+    const pctRaw = m[3].replace(',', '.');
+    const pct = Number(pctRaw);
+    movers.push({ ticker, name: ticker, price, pct, change: '' });
+  }
+  if (movers.length) {
+    return movers.sort((a, b) => Math.abs(b.pct || 0) - Math.abs(a.pct || 0)).slice(0, 10);
+  }
+
+  return (tickers || []).slice(0, 8).map(t => ({
+    ticker: t,
+    name: t,
+    price: '—',
+    pct: null,
+    change: '—'
+  }));
+}
+
+function compactSection(lines, fallback) {
+  const clean = lines.map(l => l.trim()).filter(Boolean).filter(l => !l.startsWith('('));
+  return clean.length ? clean.slice(0, 5) : [fallback];
 }
 
 const files = fs.readdirSync(reportsDir).filter(f => f.endsWith('.md')).sort().reverse();
@@ -125,6 +166,12 @@ const items = files.map(file => {
   const regime = meta.regime || (lines.find(l => l.startsWith('- **Regime:**')) || '').replace('- **Regime:**', '').trim();
   const htmlFile = file.replace(/\.md$/, '.html');
 
+  const gamma = compactSection(extractSection(body, '## 1) GAMMA'), 'No data section yet.');
+  const alpha = compactSection(extractSection(body, '## 2) ALPHA'), 'No Alpha discussion yet.');
+  const beta = compactSection(extractSection(body, '## 3) BETA'), 'No Beta discussion yet.');
+  const pulse = compactSection(extractSection(body, '## 0) Executive TL;DR'), 'Awaiting pulse update.');
+  const movers = parseMovers(body, tickers);
+
   const reportHtml = `<!doctype html>
 <html><head>
 <meta charset="utf-8" />
@@ -139,7 +186,7 @@ const items = files.map(file => {
           <h1>${escapeHtml(title)}</h1>
           <p class="muted">${escapeHtml(date)} • ${escapeHtml(slot)} ${regime ? '• ' + escapeHtml(regime) : ''}</p>
         </div>
-        <span class="badge"><a href="../../index.html">← Back to archive</a></span>
+        <span class="badge"><a href="../../index.html">← Back to dashboard</a></span>
       </div>
       <div class="chips">
         ${(tickers || []).slice(0, 12).map(t => `<a class="chip" href="../../index.html?ticker=${encodeURIComponent(t)}">${escapeHtml(t)}</a>`).join('')}
@@ -154,7 +201,7 @@ const items = files.map(file => {
 
   fs.writeFileSync(path.join(reportsHtmlDir, htmlFile), reportHtml);
 
-  return { file, htmlFile, title, summary, date, slot, tickers, regime };
+  return { file, htmlFile, title, summary, date, slot, tickers, regime, sections: { gamma, alpha, beta, pulse }, movers };
 });
 
 const byDate = {};
@@ -168,10 +215,7 @@ for (const i of items) {
     byTicker[tk].push(i);
   }
 }
-
-for (const [d, arr] of Object.entries(byDate)) {
-  fs.writeFileSync(path.join(byDateDir, `${d}.json`), JSON.stringify(arr, null, 2));
-}
+for (const [d, arr] of Object.entries(byDate)) fs.writeFileSync(path.join(byDateDir, `${d}.json`), JSON.stringify(arr, null, 2));
 for (const [t, arr] of Object.entries(byTicker)) {
   const safe = t.replace(/[^A-Z0-9^_.-]/g, '_');
   fs.writeFileSync(path.join(byTickerDir, `${safe}.json`), JSON.stringify(arr, null, 2));
@@ -183,22 +227,14 @@ fs.writeFileSync(path.join(ROOT, 'reports', 'index.json'), JSON.stringify(search
 fs.writeFileSync(path.join(dataDir, 'search-index.json'), JSON.stringify(searchIndex, null, 2));
 
 const latest = items[0];
-const uniqueDates = new Set(items.map(i => i.date).filter(Boolean)).size;
+const allDates = [...new Set(items.map(i => i.date).filter(Boolean))].sort().reverse();
 const allTickers = [...new Set(items.flatMap(i => i.tickers || []))].sort((a, b) => a.localeCompare(b));
-
-const recent = items.slice(0, 30)
-  .map(i => `<li><a href="reports/html/${i.htmlFile}">${i.date} • ${i.slot} • ${i.title}</a>${i.regime ? ` <span class="muted">(${i.regime})</span>` : ''}</li>`)
-  .join('\n');
-
-const chips = allTickers.slice(0, 24)
-  .map(t => `<button class="chip ticker-chip" data-ticker="${escapeHtml(t)}" type="button">${escapeHtml(t)}</button>`)
-  .join('');
 
 const html = `<!doctype html>
 <html><head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Investment Reports</title>
+<title>Investment Reports Dashboard</title>
 <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -206,57 +242,82 @@ const html = `<!doctype html>
     <section class="hero">
       <div class="hero-top">
         <div>
-          <h1>Investment Reports</h1>
-          <p class="muted">Daily market archive • Gamma → Alpha → Beta</p>
+          <h1>Investment Dashboard</h1>
+          <p class="muted">Today-first view with date replay • Gamma, Alpha, Beta</p>
         </div>
-        <span class="badge">Live index: ${items.length} reports</span>
+        <span class="badge">${items.length} reports indexed</span>
       </div>
-      <div class="chips">
-        <span class="chip">EU/Nordic 09:30</span>
-        <span class="chip">US Open +15m</span>
-        <span class="chip">US Pre-close</span>
+      <div class="filters compact">
+        <label>Date
+          <select id="dateSelect"></select>
+        </label>
+        <label>Session
+          <select id="slotFilter">
+            <option value="">All</option>
+            <option value="eu">EU</option>
+            <option value="us-open">US Open</option>
+            <option value="pre-close">Pre-close</option>
+          </select>
+        </label>
+        <label>Ticker
+          <input id="tickerFilter" type="text" placeholder="NVDA" />
+        </label>
+        <button id="clearFilters" type="button">Reset</button>
       </div>
+      <div id="tickerChips" class="chips"></div>
     </section>
 
     <section class="grid">
-      <article class="card col-8">
-        <h2>Browse & Filter <span id="resultsCount" class="muted"></span></h2>
-        <div class="filters">
-          <label>Date <input id="dateFilter" type="date" /></label>
-          <label>Ticker <input id="tickerFilter" type="text" placeholder="e.g. NVDA" /></label>
-          <label>Slot
-            <select id="slotFilter">
-              <option value="">All</option>
-              <option value="eu">EU</option>
-              <option value="us-open">US Open</option>
-              <option value="pre-close">Pre-close</option>
-            </select>
-          </label>
-          <button id="clearFilters" type="button">Clear</button>
-        </div>
-        <div class="chips" style="margin-top:10px">${chips}</div>
-        <ul id="results" class="list"></ul>
+      <article class="card col-12">
+        <h2>Market Pulse</h2>
+        <div id="pulseSummary" class="muted">Awaiting report selection...</div>
       </article>
 
-      <aside class="card col-4">
-        <h2>Latest</h2>
-        ${latest ? `<p><a href="reports/html/${latest.htmlFile}">${latest.date} • ${latest.slot} • ${latest.title}</a></p>` : '<p class="muted">No reports yet.</p>'}
-        <p><a href="today.html">Open stable latest permalink</a></p>
-        <div class="stats">
-          <div class="stat"><span class="muted">Reports</span><b>${items.length}</b></div>
-          <div class="stat"><span class="muted">Days covered</span><b>${uniqueDates}</b></div>
-          <div class="stat"><span class="muted">Updated</span><b>${new Date().toISOString().slice(0, 10)}</b></div>
+      <article class="card col-12">
+        <h2>Største bevegelser på listene dine <span id="resultsCount" class="muted"></span></h2>
+        <div id="moversList" class="movers"></div>
+      </article>
+
+      <article class="card col-4">
+        <h2>Summary</h2>
+        <ul id="summaryList" class="list"></ul>
+      </article>
+      <article class="card col-4">
+        <h2>Alpha discussion</h2>
+        <ul id="alphaList" class="list"></ul>
+      </article>
+      <article class="card col-4">
+        <h2>Beta discussion</h2>
+        <ul id="betaList" class="list"></ul>
+      </article>
+
+      <article class="card col-6">
+        <h2>Listene dine</h2>
+        <div class="watchlists">
+          <button class="watch-card">Ønskeliste <span>8</span></button>
+          <button class="watch-card">List <span>6</span></button>
+          <button class="watch-card">Tech <span>19</span></button>
         </div>
-      </aside>
+      </article>
+      <article class="card col-6">
+        <h2>Dagens finansnyheter</h2>
+        <div class="chips">
+          <span class="chip">Hovedoppslag</span>
+          <span class="chip">Lokalt marked</span>
+          <span class="chip">Globale markeder</span>
+        </div>
+        <p class="muted" style="margin-top:10px">News feed block is ready for source integration.</p>
+      </article>
 
       <article class="card col-12">
-        <h2>Recent Reports</h2>
-        <ul class="list">${recent || '<li class="muted">No reports yet.</li>'}</ul>
+        <h2>Report links</h2>
+        <ul id="results" class="list"></ul>
       </article>
     </section>
 
-    <p class="footer">Built from markdown files in <code>reports/daily/</code>. Filter by date, ticker, or slot.</p>
+    <p class="footer">Latest permalink: <a href="today.html">today.html</a> • Full report pages in <code>reports/html/</code></p>
   </div>
+  <script>window.__DATES__=${JSON.stringify(allDates)};window.__TICKERS__=${JSON.stringify(allTickers)};window.__LATEST__=${JSON.stringify(latest || null)};</script>
   <script src="assets/app.js"></script>
 </body>
 </html>`;

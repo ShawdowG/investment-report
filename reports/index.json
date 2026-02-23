@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-02-23T18:02:16.257Z",
+  "generatedAt": "2026-02-23T19:19:58.027Z",
   "count": 3,
   "items": [
     {
       "file": "2026-02-23-us-open.md",
+      "htmlFile": "2026-02-23-us-open.html",
       "title": "US Open +15m",
       "summary": "",
       "date": "2026-02-23",
@@ -33,10 +34,83 @@
         "RDDT",
         "NOVO-B.CO"
       ],
-      "regime": ""
+      "regime": "",
+      "sections": {
+        "gamma": [
+          "No data section yet."
+        ],
+        "alpha": [
+          "No Alpha discussion yet."
+        ],
+        "beta": [
+          "No Beta discussion yet."
+        ],
+        "pulse": [
+          "Awaiting pulse update."
+        ]
+      },
+      "movers": [
+        {
+          "ticker": "BTC-USD",
+          "name": "BTC-USD",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "GC=F",
+          "name": "GC=F",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "^GSPC",
+          "name": "^GSPC",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "^NDQ",
+          "name": "^NDQ",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "AAPL",
+          "name": "AAPL",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "TSLA",
+          "name": "TSLA",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "GOOG",
+          "name": "GOOG",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVDA",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        }
+      ]
     },
     {
       "file": "2026-02-23-pre-close.md",
+      "htmlFile": "2026-02-23-pre-close.html",
       "title": "US Pre-close",
       "summary": "",
       "date": "2026-02-23",
@@ -66,10 +140,83 @@
         "RDDT",
         "NOVO-B.CO"
       ],
-      "regime": ""
+      "regime": "",
+      "sections": {
+        "gamma": [
+          "No data section yet."
+        ],
+        "alpha": [
+          "No Alpha discussion yet."
+        ],
+        "beta": [
+          "No Beta discussion yet."
+        ],
+        "pulse": [
+          "Awaiting pulse update."
+        ]
+      },
+      "movers": [
+        {
+          "ticker": "BTC-USD",
+          "name": "BTC-USD",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "GC=F",
+          "name": "GC=F",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "^GSPC",
+          "name": "^GSPC",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "^NDQ",
+          "name": "^NDQ",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "AAPL",
+          "name": "AAPL",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "TSLA",
+          "name": "TSLA",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "GOOG",
+          "name": "GOOG",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVDA",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        }
+      ]
     },
     {
       "file": "2026-02-23-eu.md",
+      "htmlFile": "2026-02-23-eu.html",
       "title": "EU/Nordic Morning",
       "summary": "",
       "date": "2026-02-23",
@@ -99,7 +246,79 @@
         "RDDT",
         "NOVO-B.CO"
       ],
-      "regime": ""
+      "regime": "",
+      "sections": {
+        "gamma": [
+          "No data section yet."
+        ],
+        "alpha": [
+          "No Alpha discussion yet."
+        ],
+        "beta": [
+          "No Beta discussion yet."
+        ],
+        "pulse": [
+          "Awaiting pulse update."
+        ]
+      },
+      "movers": [
+        {
+          "ticker": "BTC-USD",
+          "name": "BTC-USD",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "GC=F",
+          "name": "GC=F",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "^GSPC",
+          "name": "^GSPC",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "^NDQ",
+          "name": "^NDQ",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "AAPL",
+          "name": "AAPL",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "TSLA",
+          "name": "TSLA",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "GOOG",
+          "name": "GOOG",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVDA",
+          "price": "—",
+          "pct": null,
+          "change": "—"
+        }
+      ]
     }
   ]
 }

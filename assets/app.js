@@ -1,13 +1,19 @@
 async function main() {
   const results = document.getElementById('results');
   const countEl = document.getElementById('resultsCount');
-  const dateEl = document.getElementById('dateFilter');
+  const dateEl = document.getElementById('dateSelect');
   const tickerEl = document.getElementById('tickerFilter');
   const slotEl = document.getElementById('slotFilter');
   const clearBtn = document.getElementById('clearFilters');
-  const tickerChips = [...document.querySelectorAll('.ticker-chip')];
+  const chipsEl = document.getElementById('tickerChips');
 
-  if (!results) return;
+  const moversEl = document.getElementById('moversList');
+  const pulseEl = document.getElementById('pulseSummary');
+  const summaryEl = document.getElementById('summaryList');
+  const alphaEl = document.getElementById('alphaList');
+  const betaEl = document.getElementById('betaList');
+
+  if (!results || !dateEl || !moversEl) return;
 
   let data = { items: [] };
   try {
@@ -18,14 +24,28 @@ async function main() {
     return;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  if (dateEl && params.get('date')) dateEl.value = params.get('date');
-  if (tickerEl && params.get('ticker')) tickerEl.value = params.get('ticker');
-  if (slotEl && params.get('slot')) slotEl.value = params.get('slot');
+  const dates = Array.isArray(window.__DATES__) ? window.__DATES__ : [];
+  const tickers = Array.isArray(window.__TICKERS__) ? window.__TICKERS__ : [];
+  const latest = window.__LATEST__ || null;
 
-  function itemHtml(i) {
-    const regime = i.regime ? ` <span class="muted">(${i.regime})</span>` : '';
-    return `<li><a href="reports/html/${i.htmlFile}">${i.date} • ${i.slot} • ${i.title}</a>${regime}</li>`;
+  dateEl.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join('');
+  if (latest?.date) dateEl.value = latest.date;
+
+  chipsEl.innerHTML = tickers.slice(0, 30).map(t => `<button class="chip ticker-chip" data-ticker="${t}" type="button">${t}</button>`).join('');
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('date')) dateEl.value = params.get('date');
+  if (params.get('ticker') && tickerEl) tickerEl.value = params.get('ticker');
+  if (params.get('slot') && slotEl) slotEl.value = params.get('slot');
+
+  function setList(el, lines, fallback) {
+    if (!el) return;
+    const arr = (lines || []).filter(Boolean);
+    if (!arr.length) {
+      el.innerHTML = `<li class="muted">${fallback}</li>`;
+      return;
+    }
+    el.innerHTML = arr.map(l => `<li>${l}</li>`).join('');
   }
 
   function syncUrl(d, t, s) {
@@ -37,15 +57,25 @@ async function main() {
     history.replaceState({}, '', `${window.location.pathname}${suffix}`);
   }
 
+  function renderMoverRow(m) {
+    const pct = typeof m.pct === 'number' ? m.pct : null;
+    const isDown = pct !== null ? pct < 0 : null;
+    const direction = pct === null ? '•' : (isDown ? '↓' : '↑');
+    const pctText = pct === null ? '—' : `${pct > 0 ? '+' : ''}${pct.toFixed(2)}%`;
+    return `<div class="mover-row">
+      <div class="ticker-badge">${m.ticker || '—'}</div>
+      <div class="mover-name">${m.name || m.ticker || 'Unknown'}</div>
+      <div class="mover-price">${m.price || '—'}</div>
+      <div class="mover-change ${isDown === null ? '' : isDown ? 'neg':'pos'}">${m.change || '—'}</div>
+      <div class="mover-pill ${isDown === null ? '' : isDown ? 'neg':'pos'}">${direction} ${pctText}</div>
+      <div class="mover-check">✓</div>
+    </div>`;
+  }
+
   function render() {
-    const d = (dateEl?.value || '').trim();
+    const d = (dateEl.value || '').trim();
     const t = (tickerEl?.value || '').trim().toUpperCase();
     const s = (slotEl?.value || '').trim();
-
-    tickerChips.forEach(chip => {
-      const isActive = t && chip.dataset.ticker?.toUpperCase() === t;
-      chip.classList.toggle('is-active', !!isActive);
-    });
 
     const filtered = data.items.filter(item => {
       if (d && item.date !== d) return false;
@@ -54,30 +84,57 @@ async function main() {
       return true;
     });
 
-    if (countEl) countEl.textContent = `${filtered.length} match${filtered.length === 1 ? '' : 'es'}`;
+    const primary = filtered[0] || null;
+
+    document.querySelectorAll('.ticker-chip').forEach(ch => {
+      ch.classList.toggle('is-active', t && ch.dataset.ticker?.toUpperCase() === t);
+    });
+
+    if (countEl) countEl.textContent = `${filtered.length} report${filtered.length === 1 ? '' : 's'}`;
     syncUrl(d, t, s);
 
     if (!filtered.length) {
+      moversEl.innerHTML = '<div class="muted">Ingen bevegelser å vise.</div>';
       results.innerHTML = '<li class="muted">No reports match filters.</li>';
+      setList(summaryEl, [], 'No summary yet.');
+      setList(alphaEl, [], 'No Alpha notes yet.');
+      setList(betaEl, [], 'No Beta notes yet.');
+      if (pulseEl) pulseEl.textContent = 'No pulse data for selected filters.';
       return;
     }
 
-    results.innerHTML = filtered.slice(0, 100).map(itemHtml).join('\n');
+    if (primary?.movers?.length) {
+      moversEl.innerHTML = primary.movers.slice(0, 10).map(renderMoverRow).join('');
+    } else {
+      moversEl.innerHTML = '<div class="muted">Ingen bevegelser å vise.</div>';
+    }
+
+    if (pulseEl) {
+      const p = primary?.sections?.pulse || [];
+      pulseEl.innerHTML = p.map(x => `<div>${x}</div>`).join('') || 'Awaiting pulse update.';
+    }
+
+    setList(summaryEl, [primary.summary || '', ...(primary?.sections?.gamma || [])].slice(0, 5), 'No summary yet.');
+    setList(alphaEl, primary?.sections?.alpha || [], 'No Alpha notes yet.');
+    setList(betaEl, primary?.sections?.beta || [], 'No Beta notes yet.');
+
+    results.innerHTML = filtered
+      .slice(0, 40)
+      .map(i => `<li><a href="reports/html/${i.htmlFile}">${i.date} • ${i.slot} • ${i.title}</a>${i.regime ? ` <span class="muted">(${i.regime})</span>` : ''}</li>`)
+      .join('');
   }
 
   [dateEl, tickerEl, slotEl].forEach(el => el && el.addEventListener('input', render));
-
-  tickerChips.forEach(chip => {
-    chip.addEventListener('click', () => {
+  chipsEl.querySelectorAll('.ticker-chip').forEach(ch => {
+    ch.addEventListener('click', () => {
       if (!tickerEl) return;
-      const target = chip.dataset.ticker || '';
+      const target = ch.dataset.ticker || '';
       tickerEl.value = tickerEl.value.toUpperCase() === target.toUpperCase() ? '' : target;
       render();
     });
   });
-
   clearBtn?.addEventListener('click', () => {
-    if (dateEl) dateEl.value = '';
+    if (latest?.date) dateEl.value = latest.date;
     if (tickerEl) tickerEl.value = '';
     if (slotEl) slotEl.value = '';
     render();

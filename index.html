@@ -2,7 +2,7 @@
 <html><head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Investment Reports</title>
+<title>Investment Reports Dashboard</title>
 <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -10,59 +10,82 @@
     <section class="hero">
       <div class="hero-top">
         <div>
-          <h1>Investment Reports</h1>
-          <p class="muted">Daily market archive • Gamma → Alpha → Beta</p>
+          <h1>Investment Dashboard</h1>
+          <p class="muted">Today-first view with date replay • Gamma, Alpha, Beta</p>
         </div>
-        <span class="badge">Live index: 3 reports</span>
+        <span class="badge">3 reports indexed</span>
       </div>
-      <div class="chips">
-        <span class="chip">EU/Nordic 09:30</span>
-        <span class="chip">US Open +15m</span>
-        <span class="chip">US Pre-close</span>
+      <div class="filters compact">
+        <label>Date
+          <select id="dateSelect"></select>
+        </label>
+        <label>Session
+          <select id="slotFilter">
+            <option value="">All</option>
+            <option value="eu">EU</option>
+            <option value="us-open">US Open</option>
+            <option value="pre-close">Pre-close</option>
+          </select>
+        </label>
+        <label>Ticker
+          <input id="tickerFilter" type="text" placeholder="NVDA" />
+        </label>
+        <button id="clearFilters" type="button">Reset</button>
       </div>
+      <div id="tickerChips" class="chips"></div>
     </section>
 
     <section class="grid">
-      <article class="card col-8">
-        <h2>Browse & Filter <span id="resultsCount" class="muted"></span></h2>
-        <div class="filters">
-          <label>Date <input id="dateFilter" type="date" /></label>
-          <label>Ticker <input id="tickerFilter" type="text" placeholder="e.g. NVDA" /></label>
-          <label>Slot
-            <select id="slotFilter">
-              <option value="">All</option>
-              <option value="eu">EU</option>
-              <option value="us-open">US Open</option>
-              <option value="pre-close">Pre-close</option>
-            </select>
-          </label>
-          <button id="clearFilters" type="button">Clear</button>
-        </div>
-        <div class="chips" style="margin-top:10px"><button class="chip ticker-chip" data-ticker="^GSPC" type="button">^GSPC</button><button class="chip ticker-chip" data-ticker="^NDQ" type="button">^NDQ</button><button class="chip ticker-chip" data-ticker="AAPL" type="button">AAPL</button><button class="chip ticker-chip" data-ticker="ADBE.VI" type="button">ADBE.VI</button><button class="chip ticker-chip" data-ticker="AMD" type="button">AMD</button><button class="chip ticker-chip" data-ticker="AMZN" type="button">AMZN</button><button class="chip ticker-chip" data-ticker="BA" type="button">BA</button><button class="chip ticker-chip" data-ticker="BABA" type="button">BABA</button><button class="chip ticker-chip" data-ticker="BTC-USD" type="button">BTC-USD</button><button class="chip ticker-chip" data-ticker="DUOL" type="button">DUOL</button><button class="chip ticker-chip" data-ticker="GC=F" type="button">GC=F</button><button class="chip ticker-chip" data-ticker="GOOG" type="button">GOOG</button><button class="chip ticker-chip" data-ticker="LMT" type="button">LMT</button><button class="chip ticker-chip" data-ticker="MA" type="button">MA</button><button class="chip ticker-chip" data-ticker="META" type="button">META</button><button class="chip ticker-chip" data-ticker="MSFT" type="button">MSFT</button><button class="chip ticker-chip" data-ticker="NFLX" type="button">NFLX</button><button class="chip ticker-chip" data-ticker="NOVO-B.CO" type="button">NOVO-B.CO</button><button class="chip ticker-chip" data-ticker="NVDA" type="button">NVDA</button><button class="chip ticker-chip" data-ticker="RDDT" type="button">RDDT</button><button class="chip ticker-chip" data-ticker="TM" type="button">TM</button><button class="chip ticker-chip" data-ticker="TSLA" type="button">TSLA</button><button class="chip ticker-chip" data-ticker="V" type="button">V</button></div>
-        <ul id="results" class="list"></ul>
+      <article class="card col-12">
+        <h2>Market Pulse</h2>
+        <div id="pulseSummary" class="muted">Awaiting report selection...</div>
       </article>
 
-      <aside class="card col-4">
-        <h2>Latest</h2>
-        <p><a href="reports/html/2026-02-23-us-open.html">2026-02-23 • us-open • US Open +15m</a></p>
-        <p><a href="today.html">Open stable latest permalink</a></p>
-        <div class="stats">
-          <div class="stat"><span class="muted">Reports</span><b>3</b></div>
-          <div class="stat"><span class="muted">Days covered</span><b>1</b></div>
-          <div class="stat"><span class="muted">Updated</span><b>2026-02-23</b></div>
+      <article class="card col-12">
+        <h2>Største bevegelser på listene dine <span id="resultsCount" class="muted"></span></h2>
+        <div id="moversList" class="movers"></div>
+      </article>
+
+      <article class="card col-4">
+        <h2>Summary</h2>
+        <ul id="summaryList" class="list"></ul>
+      </article>
+      <article class="card col-4">
+        <h2>Alpha discussion</h2>
+        <ul id="alphaList" class="list"></ul>
+      </article>
+      <article class="card col-4">
+        <h2>Beta discussion</h2>
+        <ul id="betaList" class="list"></ul>
+      </article>
+
+      <article class="card col-6">
+        <h2>Listene dine</h2>
+        <div class="watchlists">
+          <button class="watch-card">Ønskeliste <span>8</span></button>
+          <button class="watch-card">List <span>6</span></button>
+          <button class="watch-card">Tech <span>19</span></button>
         </div>
-      </aside>
+      </article>
+      <article class="card col-6">
+        <h2>Dagens finansnyheter</h2>
+        <div class="chips">
+          <span class="chip">Hovedoppslag</span>
+          <span class="chip">Lokalt marked</span>
+          <span class="chip">Globale markeder</span>
+        </div>
+        <p class="muted" style="margin-top:10px">News feed block is ready for source integration.</p>
+      </article>
 
       <article class="card col-12">
-        <h2>Recent Reports</h2>
-        <ul class="list"><li><a href="reports/html/2026-02-23-us-open.html">2026-02-23 • us-open • US Open +15m</a></li>
-<li><a href="reports/html/2026-02-23-pre-close.html">2026-02-23 • pre-close • US Pre-close</a></li>
-<li><a href="reports/html/2026-02-23-eu.html">2026-02-23 • eu • EU/Nordic Morning</a></li></ul>
+        <h2>Report links</h2>
+        <ul id="results" class="list"></ul>
       </article>
     </section>
 
-    <p class="footer">Built from markdown files in <code>reports/daily/</code>. Filter by date, ticker, or slot.</p>
+    <p class="footer">Latest permalink: <a href="today.html">today.html</a> • Full report pages in <code>reports/html/</code></p>
   </div>
+  <script>window.__DATES__=["2026-02-23"];window.__TICKERS__=["^GSPC","^NDQ","AAPL","ADBE.VI","AMD","AMZN","BA","BABA","BTC-USD","DUOL","GC=F","GOOG","LMT","MA","META","MSFT","NFLX","NOVO-B.CO","NVDA","RDDT","TM","TSLA","V"];window.__LATEST__={"file":"2026-02-23-us-open.md","htmlFile":"2026-02-23-us-open.html","title":"US Open +15m","summary":"","date":"2026-02-23","slot":"us-open","tickers":["BTC-USD","GC=F","^GSPC","^NDQ","AAPL","TSLA","GOOG","NVDA","AMZN","MSFT","META","DUOL","ADBE.VI","AMD","BABA","LMT","BA","TM","V","MA","NFLX","RDDT","NOVO-B.CO"],"regime":"","sections":{"gamma":["No data section yet."],"alpha":["No Alpha discussion yet."],"beta":["No Beta discussion yet."],"pulse":["Awaiting pulse update."]},"movers":[{"ticker":"BTC-USD","name":"BTC-USD","price":"—","pct":null,"change":"—"},{"ticker":"GC=F","name":"GC=F","price":"—","pct":null,"change":"—"},{"ticker":"^GSPC","name":"^GSPC","price":"—","pct":null,"change":"—"},{"ticker":"^NDQ","name":"^NDQ","price":"—","pct":null,"change":"—"},{"ticker":"AAPL","name":"AAPL","price":"—","pct":null,"change":"—"},{"ticker":"TSLA","name":"TSLA","price":"—","pct":null,"change":"—"},{"ticker":"GOOG","name":"GOOG","price":"—","pct":null,"change":"—"},{"ticker":"NVDA","name":"NVDA","price":"—","pct":null,"change":"—"}]};</script>
   <script src="assets/app.js"></script>
 </body>
 </html>
