@@ -1,0 +1,347 @@
+[
+  {
+    "file": "2026-02-17-us-open.md",
+    "htmlFile": "2026-02-17-us-open.html",
+    "title": "US Open +15m",
+    "summary": "Sample historical report for layout preview (2026-02-17 us-open).",
+    "date": "2026-02-17",
+    "slot": "us-open",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "risk-off",
+    "sections": {
+      "gamma": [
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "TSLA | 386.30 | -3.55%",
+        "AMD | 289.60 | -3.15%",
+        "MA | 222.20 | -2.75%"
+      ],
+      "alpha": [
+        "- Keep core quality exposure, avoid concentration spikes.",
+        "- Gold/BTC divergence suggests selective defensive behavior.",
+        "- Focus on 1–3y themes, not intraday noise."
+      ],
+      "beta": [
+        "- Prioritize setups with clear invalidation levels.",
+        "- For >2% movers, require catalyst confirmation before entries.",
+        "- Smaller size into volatile sessions."
+      ],
+      "pulse": [
+        "- Risk regime mostly headline-driven with rotation in mega-cap tech.",
+        "- Watch breadth and follow-through before adding risk."
+      ]
+    },
+    "movers": [
+      {
+        "ticker": "TSLA",
+        "name": "TSLA",
+        "price": "386.30",
+        "pct": -3.55,
+        "change": ""
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "price": "289.60",
+        "pct": -3.15,
+        "change": ""
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "222.20",
+        "pct": -2.75,
+        "change": ""
+      },
+      {
+        "ticker": "V",
+        "name": "V",
+        "price": "164.30",
+        "pct": -2.45,
+        "change": ""
+      },
+      {
+        "ticker": "BTC-USD",
+        "name": "BTC-USD",
+        "price": "76.80",
+        "pct": -2.25,
+        "change": ""
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "381.20",
+        "pct": -1.75,
+        "change": ""
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVDA",
+        "price": "377.90",
+        "pct": 1.35,
+        "change": ""
+      },
+      {
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "390.70",
+        "pct": 0.85,
+        "change": ""
+      }
+    ]
+  },
+  {
+    "file": "2026-02-17-pre-close.md",
+    "htmlFile": "2026-02-17-pre-close.html",
+    "title": "US Pre-close",
+    "summary": "Sample historical report for layout preview (2026-02-17 pre-close).",
+    "date": "2026-02-17",
+    "slot": "pre-close",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "neutral",
+    "sections": {
+      "gamma": [
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "TSLA | 398.40 | -3.10%",
+        "AMD | 301.70 | -2.70%",
+        "MA | 234.30 | -2.30%"
+      ],
+      "alpha": [
+        "- Keep core quality exposure, avoid concentration spikes.",
+        "- Gold/BTC divergence suggests selective defensive behavior.",
+        "- Focus on 1–3y themes, not intraday noise."
+      ],
+      "beta": [
+        "- Prioritize setups with clear invalidation levels.",
+        "- For >2% movers, require catalyst confirmation before entries.",
+        "- Smaller size into volatile sessions."
+      ],
+      "pulse": [
+        "- Risk regime mostly headline-driven with rotation in mega-cap tech.",
+        "- Watch breadth and follow-through before adding risk."
+      ]
+    },
+    "movers": [
+      {
+        "ticker": "TSLA",
+        "name": "TSLA",
+        "price": "398.40",
+        "pct": -3.1,
+        "change": ""
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "price": "301.70",
+        "pct": -2.7,
+        "change": ""
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "234.30",
+        "pct": -2.3,
+        "change": ""
+      },
+      {
+        "ticker": "V",
+        "name": "V",
+        "price": "176.40",
+        "pct": -2,
+        "change": ""
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVDA",
+        "price": "386.30",
+        "pct": 1.8,
+        "change": ""
+      },
+      {
+        "ticker": "BTC-USD",
+        "name": "BTC-USD",
+        "price": "88.90",
+        "pct": -1.8,
+        "change": ""
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "389.60",
+        "pct": -1.3,
+        "change": ""
+      },
+      {
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "402.80",
+        "pct": 1.3,
+        "change": ""
+      }
+    ]
+  },
+  {
+    "file": "2026-02-17-eu.md",
+    "htmlFile": "2026-02-17-eu.html",
+    "title": "EU/Nordic Morning",
+    "summary": "Sample historical report for layout preview (2026-02-17 eu).",
+    "date": "2026-02-17",
+    "slot": "eu",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "mixed",
+    "sections": {
+      "gamma": [
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "TSLA | 377.90 | -4.00%",
+        "AMD | 277.50 | -3.60%",
+        "MA | 210.10 | -3.20%"
+      ],
+      "alpha": [
+        "- Keep core quality exposure, avoid concentration spikes.",
+        "- Gold/BTC divergence suggests selective defensive behavior.",
+        "- Focus on 1–3y themes, not intraday noise."
+      ],
+      "beta": [
+        "- Prioritize setups with clear invalidation levels.",
+        "- For >2% movers, require catalyst confirmation before entries.",
+        "- Smaller size into volatile sessions."
+      ],
+      "pulse": [
+        "- Risk regime mostly headline-driven with rotation in mega-cap tech.",
+        "- Watch breadth and follow-through before adding risk."
+      ]
+    },
+    "movers": [
+      {
+        "ticker": "TSLA",
+        "name": "TSLA",
+        "price": "377.90",
+        "pct": -4,
+        "change": ""
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "price": "277.50",
+        "pct": -3.6,
+        "change": ""
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "210.10",
+        "pct": -3.2,
+        "change": ""
+      },
+      {
+        "ticker": "V",
+        "name": "V",
+        "price": "155.90",
+        "pct": -2.9,
+        "change": ""
+      },
+      {
+        "ticker": "BTC-USD",
+        "name": "BTC-USD",
+        "price": "68.40",
+        "pct": -2.7,
+        "change": ""
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "369.10",
+        "pct": -2.2,
+        "change": ""
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVDA",
+        "price": "365.80",
+        "pct": 0.9,
+        "change": ""
+      },
+      {
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "382.30",
+        "pct": 0.4,
+        "change": ""
+      }
+    ]
+  }
+]
