@@ -1,5 +1,6 @@
 async function main() {
   const results = document.getElementById('results');
+  const countEl = document.getElementById('resultsCount');
   const dateEl = document.getElementById('dateFilter');
   const tickerEl = document.getElementById('tickerFilter');
   const slotEl = document.getElementById('slotFilter');
@@ -16,6 +17,11 @@ async function main() {
     return;
   }
 
+  function itemHtml(i) {
+    const regime = i.regime ? ` <span class="muted">(${i.regime})</span>` : '';
+    return `<li><a href="reports/daily/${i.file}">${i.date} • ${i.slot} • ${i.title}</a>${regime}</li>`;
+  }
+
   function render() {
     const d = (dateEl?.value || '').trim();
     const t = (tickerEl?.value || '').trim().toUpperCase();
@@ -28,15 +34,14 @@ async function main() {
       return true;
     });
 
+    if (countEl) countEl.textContent = `${filtered.length} match${filtered.length === 1 ? '' : 'es'}`;
+
     if (!filtered.length) {
       results.innerHTML = '<li class="muted">No reports match filters.</li>';
       return;
     }
 
-    results.innerHTML = filtered
-      .slice(0, 100)
-      .map(i => `<li><a href="reports/daily/${i.file}">${i.date} • ${i.slot} • ${i.title}</a>${i.regime ? ` <span class="muted">(${i.regime})</span>` : ''}</li>`)
-      .join('\n');
+    results.innerHTML = filtered.slice(0, 100).map(itemHtml).join('\n');
   }
 
   [dateEl, tickerEl, slotEl].forEach(el => el && el.addEventListener('input', render));
