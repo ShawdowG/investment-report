@@ -13,6 +13,8 @@ async function main() {
   const alphaEl = document.getElementById('alphaList');
   const betaEl = document.getElementById('betaList');
   const newsEl = document.getElementById('newsList');
+  const agreementEl = document.getElementById('agreementLine');
+  const disagreementEl = document.getElementById('disagreementLine');
   const sortBtns = [...document.querySelectorAll('.sort-btn')];
 
   if (!results || !dateEl || !moversEl) return;
@@ -161,6 +163,8 @@ async function main() {
       setList(summaryEl, [], 'No summary yet.');
       setList(alphaEl, [], 'No Alpha notes yet.');
       setList(betaEl, [], 'No Beta notes yet.');
+      if (agreementEl) agreementEl.textContent = 'No shared view yet.';
+      if (disagreementEl) disagreementEl.textContent = 'No active disagreement.';
       if (pulseEl) pulseEl.textContent = 'No pulse data for selected filters.';
       if (newsEl) newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter for valgt filter.</li>';
       return;
@@ -176,8 +180,20 @@ async function main() {
     }
 
     setList(summaryEl, [primary.summary || ''].filter(Boolean), 'No summary yet.');
-    setList(alphaEl, primary?.sections?.alpha || [], 'No Alpha notes yet.');
-    setList(betaEl, primary?.sections?.beta || [], 'No Beta notes yet.');
+    const alphaLines = primary?.sections?.alpha || [];
+    const betaLines = primary?.sections?.beta || [];
+    setList(alphaEl, alphaLines, 'No Alpha notes yet.');
+    setList(betaEl, betaLines, 'No Beta notes yet.');
+
+    const a = alphaLines.find(x => x && !x.toLowerCase().includes('no ')) || alphaLines[0] || '';
+    const b = betaLines.find(x => x && !x.toLowerCase().includes('no ')) || betaLines[0] || '';
+    if (agreementEl) {
+      agreementEl.textContent = a && b ? 'Both lean defensive/selective unless confirmation improves.' : 'Awaiting clearer overlap between Alpha and Beta.';
+    }
+    if (disagreementEl) {
+      disagreementEl.textContent = a && b ? 'Timing of re-risking (buy now vs wait for confirmation).' : 'No active disagreement.';
+    }
+
     renderNews(primary);
 
     results.innerHTML = filtered

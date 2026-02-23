@@ -301,6 +301,10 @@ const html = `<!doctype html>
             <ul id="betaList" class="list"></ul>
           </div>
         </div>
+        <div class="agreement-box">
+          <p><strong>Agreement:</strong> <span id="agreementLine" class="muted">—</span></p>
+          <p><strong>Disagreement:</strong> <span id="disagreementLine" class="muted">—</span></p>
+        </div>
       </article>
 
       <article class="card col-12">
