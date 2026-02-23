@@ -241,7 +241,7 @@ const html = `<!doctype html>
       <div class="hero-top">
         <div>
           <h1>Investment Dashboard</h1>
-          <p class="muted">Today-first view with date replay • Gamma, Alpha, Beta</p>
+          <p class="muted">Today-first market view • clearer read for Pulse, Tickers, Discussion</p>
         </div>
         <span class="badge">${items.length} reports indexed</span>
       </div>
@@ -267,7 +267,7 @@ const html = `<!doctype html>
 
     <section class="grid">
       <article class="card col-12">
-        <h2>Market Pulse</h2>
+        <h2>📈 Market Pulse</h2>
         <div id="pulseSummary" class="muted">Awaiting report selection...</div>
       </article>
 
@@ -285,12 +285,12 @@ const html = `<!doctype html>
       </article>
 
       <article class="card col-12">
-        <h2>Summary</h2>
+        <h2>📌 Today’s takeaway</h2>
         <ul id="summaryList" class="list"></ul>
       </article>
 
       <article class="card col-12">
-        <h2>Agent discussion (Alpha + Beta)</h2>
+        <h2>🧠 Alpha vs Beta</h2>
         <div class="discussion-grid">
           <div>
             <h3 class="muted" style="margin:0 0 6px">Alpha</h3>
@@ -308,7 +308,7 @@ const html = `<!doctype html>
       </article>
 
       <article class="card col-12">
-        <h2>Relevante finansnyheter (knyttet til dagens highlights)</h2>
+        <h2>📰 News linked to movers</h2>
         <div class="chips">
           <span class="chip">Hovedoppslag</span>
           <span class="chip">Koblet til movers</span>

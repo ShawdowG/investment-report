@@ -158,15 +158,15 @@ async function main() {
     syncUrl(d, t, s);
 
     if (!filtered.length) {
-      moversEl.innerHTML = '<div class="muted">Ingen bevegelser å vise.</div>';
+      moversEl.innerHTML = '<div class="muted">Ingen bevegelser å vise for dette utvalget.</div>';
       results.innerHTML = '<li class="muted">No reports match filters.</li>';
-      setList(summaryEl, [], 'No summary yet.');
-      setList(alphaEl, [], 'No Alpha notes yet.');
-      setList(betaEl, [], 'No Beta notes yet.');
-      if (agreementEl) agreementEl.textContent = 'No shared view yet.';
-      if (disagreementEl) disagreementEl.textContent = 'No active disagreement.';
+      setList(summaryEl, [], 'Awaiting next Gamma sync.');
+      setList(alphaEl, [], 'Awaiting Alpha commentary.');
+      setList(betaEl, [], 'Awaiting Beta commentary.');
+      if (agreementEl) agreementEl.textContent = 'Awaiting shared view from Alpha and Beta.';
+      if (disagreementEl) disagreementEl.textContent = 'No active disagreement logged.';
       if (pulseEl) pulseEl.textContent = 'No pulse data for selected filters.';
-      if (newsEl) newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter for valgt filter.</li>';
+      if (newsEl) newsEl.innerHTML = '<li class="muted">No linked source for this filter yet.</li>';
       return;
     }
 

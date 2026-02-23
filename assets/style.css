@@ -35,15 +35,15 @@ button{cursor:pointer}
 .ticker-chip.is-active{outline:2px solid #71e2bd;outline-offset:1px;background:#113730;border-color:#3d9f84}
 
 .movers{display:flex;flex-direction:column;gap:8px}
-.mover-row{display:grid;grid-template-columns:90px 1.2fr .9fr .9fr .9fr 60px;gap:8px;align-items:center;padding:8px 6px;border-bottom:1px solid #2a3763}
+.mover-row{display:grid;grid-template-columns:90px 1.2fr .9fr .9fr .9fr 60px;gap:10px;align-items:center;padding:10px 8px;border-bottom:1px solid #2a3763}
 .mover-header{font-size:12px;color:var(--muted);padding-top:0;padding-bottom:8px;border-bottom:1px solid #3a4a80}
 .mover-header div{font-weight:600}
 .ticker-badge{display:inline-block;background:#223a78;border:1px solid #4666bc;padding:4px 8px;border-radius:8px;font-weight:700;font-size:12px;max-width:max-content}
 .mover-name{font-weight:600}
-.mover-price,.mover-change{font-variant-numeric:tabular-nums}
-.mover-pill{font-size:12px;padding:4px 8px;border-radius:999px;max-width:max-content}
-.mover-pill.neg{background:#4a1b28;color:#ff9caf;border:1px solid #884055}
-.mover-pill.pos{background:#163a2d;color:#98ffd4;border:1px solid #2f8c69}
+.mover-price,.mover-change{font-variant-numeric:tabular-nums;text-align:right}
+.mover-pill{font-size:12px;padding:5px 9px;border-radius:999px;max-width:max-content;font-weight:600}
+.mover-pill.neg{background:#5a1f2f;color:#ffc2cf;border:1px solid #a7546b}
+.mover-pill.pos{background:#184434;color:#b9ffe4;border:1px solid #45a882}
 .mover-change.neg{color:#ff9caf}.mover-change.pos{color:#8ff7cb}
 .mover-check{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#2a355a;border:1px solid #475689;color:#dde5ff}
 
