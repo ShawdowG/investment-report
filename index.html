@@ -7,15 +7,28 @@
 <h1>Investment Reports</h1>
 <p class="muted">Full daily archive (Gamma → Alpha → Beta)</p>
 <div class="card">
-<h2>Latest Report</h2>
-<a href="reports/daily/2026-02-23-us-open.md">2026-02-23 — US Open +15m — 2026-02-23</a>
+  <h2>Today</h2>
+  <p><a href="today.html">Open latest report permalink</a></p>
+  <p class="muted">Current latest: <a href="reports/daily/2026-02-23-us-open.md">2026-02-23 • us-open</a></p>
 </div>
-<div class="card"><h2>Recent Reports</h2><ul><li><a href="reports/daily/2026-02-23-us-open.md">2026-02-23 — US Open +15m — 2026-02-23</a></li>
-<li><a href="reports/daily/2026-02-23-pre-close.md">2026-02-23 — US Pre-close — 2026-02-23</a></li>
-<li><a href="reports/daily/2026-02-23-eu.md">2026-02-23 — EU/Nordic Morning — 2026-02-23</a></li></ul></div>
-<div class="card"><h2>Publishing Flow</h2><ul>
-<li>Generate full report markdown in <code>reports/daily/</code></li>
-<li>Run <code>node scripts/build-index.js</code></li>
-<li>Commit + push to GitHub (Pages serves latest)</li>
-</ul></div>
-</div></body></html>
+<div class="card">
+  <h2>Filter Reports</h2>
+  <div class="filters">
+    <label>Date <input id="dateFilter" type="date" /></label>
+    <label>Ticker <input id="tickerFilter" type="text" placeholder="e.g. NVDA" /></label>
+    <label>Slot
+      <select id="slotFilter">
+        <option value="">All</option>
+        <option value="eu">EU</option>
+        <option value="us-open">US Open</option>
+        <option value="pre-close">Pre-close</option>
+      </select>
+    </label>
+    <button id="clearFilters">Clear</button>
+  </div>
+  <ul id="results"></ul>
+</div>
+<div class="card"><h2>Recent Reports</h2><ul><li><a href="reports/daily/2026-02-23-us-open.md">2026-02-23 • us-open • US Open +15m</a></li>
+<li><a href="reports/daily/2026-02-23-pre-close.md">2026-02-23 • pre-close • US Pre-close</a></li>
+<li><a href="reports/daily/2026-02-23-eu.md">2026-02-23 • eu • EU/Nordic Morning</a></li></ul></div>
+</div><script src="assets/app.js"></script></body></html>
