@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-02-23T17:38:56.131Z",
+  "count": 3,
+  "items": [
+    {
+      "file": "2026-02-23-us-open.md",
+      "title": "US Open +15m — 2026-02-23",
+      "summary": "",
+      "date": "2026-02-23"
+    },
+    {
+      "file": "2026-02-23-pre-close.md",
+      "title": "US Pre-close — 2026-02-23",
+      "summary": "",
+      "date": "2026-02-23"
+    },
+    {
+      "file": "2026-02-23-eu.md",
+      "title": "EU/Nordic Morning — 2026-02-23",
+      "summary": "",
+      "date": "2026-02-23"
+    }
+  ]
+}

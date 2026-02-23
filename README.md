@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# investment-report
-=======
 # investment-report
 
 Daily market report archive for:
@@ -8,24 +5,38 @@ Daily market report archive for:
 - US open +15m
 - US pre-close (~1h before close)
 
+## Stack
+- Static site (plain HTML + CSS) for GitHub Pages
+- Markdown files per report in `reports/daily/`
+- Node scripts for index generation and report scaffolding
+
 ## Structure
+- `reports/daily/YYYY-MM-DD-eu.md`
+- `reports/daily/YYYY-MM-DD-us-open.md`
+- `reports/daily/YYYY-MM-DD-pre-close.md`
+- `reports/index.json`
+- `index.html`
 
-- `reports/YYYY-MM-DD-eu.md`
-- `reports/YYYY-MM-DD-us-open.md`
-- `reports/YYYY-MM-DD-pre-close.md`
-- `index.html` links to latest reports
+## Commands
 
-## Local preview
+```bash
+# create a report scaffold
+node scripts/new-report.js 2026-02-23 eu
 
-Open `index.html` in browser.
+# rebuild index from all report files
+node scripts/build-index.js
+
+# publish
+git add .
+git commit -m "Add report"
+git push
+```
 
 ## GitHub Pages
-
 1. Push this repo to GitHub.
 2. In GitHub: Settings -> Pages
 3. Source: `Deploy from branch`
 4. Branch: `main` / root
 
-Your site URL will look like:
+Site URL pattern:
 `https://<username>.github.io/investment-report/`
->>>>>>> 5b9ab29 (Initial scaffold for investment-report GitHub Pages archive)

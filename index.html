@@ -1,29 +1,21 @@
 <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Investment Reports</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-    h1 { margin-bottom: .25rem; }
-    .muted { color: #666; margin-bottom: 1rem; }
-    ul { line-height: 1.6; }
-  </style>
-</head>
-<body>
-  <h1>Investment Reports</h1>
-  <p class="muted">Daily full reports archive (Gamma -> Alpha -> Beta)</p>
-
-  <h2>Latest</h2>
-  <ul>
-    <li><a href="reports/README.md">Report archive (placeholder)</a></li>
-  </ul>
-
-  <h2>Notes</h2>
-  <ul>
-    <li>Discord gets short summaries.</li>
-    <li>This site stores full daily versions.</li>
-  </ul>
-</body>
-</html>
+<html><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Investment Reports</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head><body><div class="wrap">
+<h1>Investment Reports</h1>
+<p class="muted">Full daily archive (Gamma → Alpha → Beta)</p>
+<div class="card">
+<h2>Latest Report</h2>
+<a href="reports/daily/2026-02-23-us-open.md">2026-02-23 — US Open +15m — 2026-02-23</a>
+</div>
+<div class="card"><h2>Recent Reports</h2><ul><li><a href="reports/daily/2026-02-23-us-open.md">2026-02-23 — US Open +15m — 2026-02-23</a></li>
+<li><a href="reports/daily/2026-02-23-pre-close.md">2026-02-23 — US Pre-close — 2026-02-23</a></li>
+<li><a href="reports/daily/2026-02-23-eu.md">2026-02-23 — EU/Nordic Morning — 2026-02-23</a></li></ul></div>
+<div class="card"><h2>Publishing Flow</h2><ul>
+<li>Generate full report markdown in <code>reports/daily/</code></li>
+<li>Run <code>node scripts/build-index.js</code></li>
+<li>Commit + push to GitHub (Pages serves latest)</li>
+</ul></div>
+</div></body></html>
