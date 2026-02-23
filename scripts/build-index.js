@@ -273,17 +273,12 @@ const html = `<!doctype html>
 
       <article class="card col-12">
         <h2>Tickeroversikt (pris og bevegelse) <span id="resultsCount" class="muted"></span></h2>
-        <div class="chips" style="margin:0 0 10px 0">
-          <button class="sort-btn" data-sort="pct" type="button">Sort: Movement</button>
-          <button class="sort-btn" data-sort="price" type="button">Sort: Price</button>
-          <button class="sort-btn" data-sort="ticker" type="button">Sort: Ticker</button>
-        </div>
         <div class="mover-row mover-header">
-          <div>Ticker</div>
-          <div>Name</div>
-          <div>Price</div>
+          <div><button class="sort-btn" data-sort="ticker" type="button">Ticker</button></div>
+          <div><button class="sort-btn" data-sort="ticker" type="button">Name</button></div>
+          <div><button class="sort-btn" data-sort="price" type="button">Price</button></div>
           <div>Δ$</div>
-          <div>Δ%</div>
+          <div><button class="sort-btn" data-sort="pct" type="button">Δ%</button></div>
           <div>In list</div>
         </div>
         <div id="moversList" class="movers"></div>
