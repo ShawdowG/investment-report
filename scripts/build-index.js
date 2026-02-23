@@ -135,17 +135,15 @@ function parseMovers(body, tickers = []) {
     const pct = Number(pctRaw);
     movers.push({ ticker, name: ticker, price, pct, change: '' });
   }
-  if (movers.length) {
-    return movers.sort((a, b) => Math.abs(b.pct || 0) - Math.abs(a.pct || 0)).slice(0, 10);
+
+  const byTicker = new Map(movers.map(m => [m.ticker, m]));
+  for (const t of (tickers || [])) {
+    if (!byTicker.has(t)) {
+      byTicker.set(t, { ticker: t, name: t, price: '—', pct: null, change: '—' });
+    }
   }
 
-  return (tickers || []).slice(0, 8).map(t => ({
-    ticker: t,
-    name: t,
-    price: '—',
-    pct: null,
-    change: '—'
-  }));
+  return [...byTicker.values()];
 }
 
 function compactSection(lines, fallback) {
@@ -274,7 +272,7 @@ const html = `<!doctype html>
       </article>
 
       <article class="card col-12">
-        <h2>Største bevegelser på listene dine <span id="resultsCount" class="muted"></span></h2>
+        <h2>Tickeroversikt (pris og bevegelse) <span id="resultsCount" class="muted"></span></h2>
         <div class="chips" style="margin:0 0 10px 0">
           <button class="sort-btn" data-sort="pct" type="button">Sort: Movement</button>
           <button class="sort-btn" data-sort="price" type="button">Sort: Price</button>

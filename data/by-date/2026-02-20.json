@@ -111,6 +111,111 @@
         "price": "216.70",
         "pct": -1.4,
         "change": ""
+      },
+      {
+        "ticker": "BTC-USD",
+        "name": "BTC-USD",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "—",
+        "pct": null,
+        "change": "—"
       }
     ]
   },
@@ -226,6 +331,111 @@
         "price": "228.80",
         "pct": -0.95,
         "change": ""
+      },
+      {
+        "ticker": "BTC-USD",
+        "name": "BTC-USD",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "—",
+        "pct": null,
+        "change": "—"
       }
     ]
   },
@@ -341,6 +551,111 @@
         "price": "406.10",
         "pct": 1.15,
         "change": ""
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "LMT",
+        "name": "LMT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "—",
+        "pct": null,
+        "change": "—"
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "—",
+        "pct": null,
+        "change": "—"
       }
     ]
   }
