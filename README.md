@@ -1,5 +1,11 @@
 # investment-report
 
+## Live Site
+- Full reports site: `https://shawdowg.github.io/investment-report/`
+- Latest report permalink: `https://shawdowg.github.io/investment-report/today.html`
+
+> If these links 404, enable GitHub Pages in repo settings (main branch / root) and wait 1–2 minutes.
+
 Daily market report archive for:
 - EU/Nordic 09:30 (Oslo)
 - US open +15m
