@@ -3,7 +3,7 @@
     "file": "2026-02-23-us-open.md",
     "htmlFile": "2026-02-23-us-open.html",
     "title": "US Open +15m",
-    "summary": "",
+    "summary": "Live ticker values populated for today.",
     "date": "2026-02-23",
     "slot": "us-open",
     "tickers": [
@@ -34,7 +34,11 @@
     "regime": "",
     "sections": {
       "gamma": [
-        "No data section yet."
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "BTC-USD | 64519.00 | -4.69%",
+        "GC=F | 5210.91 | +1.98%",
+        "^GSPC | 6833.77 | -1.08%"
       ],
       "alpha": [
         "No Alpha discussion yet."
@@ -48,60 +52,74 @@
     },
     "movers": [
       {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "106.26",
+        "pct": -5.42,
+        "change": ""
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "494.49",
+        "pct": -4.98,
+        "change": ""
+      },
+      {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "price": "64519.00",
+        "pct": -4.69,
+        "change": ""
       },
       {
-        "ticker": "GC=F",
-        "name": "GC=F",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "141.51",
+        "pct": -4.64,
+        "change": ""
       },
       {
-        "ticker": "^GSPC",
-        "name": "^GSPC",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "V",
+        "name": "V",
+        "price": "306.52",
+        "pct": -3.92,
+        "change": ""
       },
       {
-        "ticker": "^NDQ",
-        "name": "^NDQ",
-        "price": "—",
-        "pct": null,
-        "change": "—"
-      },
-      {
-        "ticker": "AAPL",
-        "name": "AAPL",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "245.47",
+        "pct": -3.41,
+        "change": ""
       },
       {
         "ticker": "TSLA",
         "name": "TSLA",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "price": "395.20",
+        "pct": -2.97,
+        "change": ""
       },
       {
-        "ticker": "GOOG",
-        "name": "GOOG",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "386.56",
+        "pct": -2.14,
+        "change": ""
       },
       {
-        "ticker": "NVDA",
-        "name": "NVDA",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "76.125",
+        "pct": -2.14,
+        "change": ""
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "5210.91",
+        "pct": 1.98,
+        "change": ""
       }
     ]
   },
@@ -109,7 +127,7 @@
     "file": "2026-02-23-pre-close.md",
     "htmlFile": "2026-02-23-pre-close.html",
     "title": "US Pre-close",
-    "summary": "",
+    "summary": "Live ticker values populated for today.",
     "date": "2026-02-23",
     "slot": "pre-close",
     "tickers": [
@@ -140,7 +158,11 @@
     "regime": "",
     "sections": {
       "gamma": [
-        "No data section yet."
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "BTC-USD | 64519.00 | -4.69%",
+        "GC=F | 5210.91 | +1.98%",
+        "^GSPC | 6833.77 | -1.08%"
       ],
       "alpha": [
         "No Alpha discussion yet."
@@ -154,60 +176,74 @@
     },
     "movers": [
       {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "106.26",
+        "pct": -5.42,
+        "change": ""
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "494.49",
+        "pct": -4.98,
+        "change": ""
+      },
+      {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "price": "64519.00",
+        "pct": -4.69,
+        "change": ""
       },
       {
-        "ticker": "GC=F",
-        "name": "GC=F",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "141.51",
+        "pct": -4.64,
+        "change": ""
       },
       {
-        "ticker": "^GSPC",
-        "name": "^GSPC",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "V",
+        "name": "V",
+        "price": "306.52",
+        "pct": -3.92,
+        "change": ""
       },
       {
-        "ticker": "^NDQ",
-        "name": "^NDQ",
-        "price": "—",
-        "pct": null,
-        "change": "—"
-      },
-      {
-        "ticker": "AAPL",
-        "name": "AAPL",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "245.47",
+        "pct": -3.41,
+        "change": ""
       },
       {
         "ticker": "TSLA",
         "name": "TSLA",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "price": "395.20",
+        "pct": -2.97,
+        "change": ""
       },
       {
-        "ticker": "GOOG",
-        "name": "GOOG",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "386.56",
+        "pct": -2.14,
+        "change": ""
       },
       {
-        "ticker": "NVDA",
-        "name": "NVDA",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "76.125",
+        "pct": -2.14,
+        "change": ""
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "5210.91",
+        "pct": 1.98,
+        "change": ""
       }
     ]
   },
@@ -215,7 +251,7 @@
     "file": "2026-02-23-eu.md",
     "htmlFile": "2026-02-23-eu.html",
     "title": "EU/Nordic Morning",
-    "summary": "",
+    "summary": "Live ticker values populated for today.",
     "date": "2026-02-23",
     "slot": "eu",
     "tickers": [
@@ -246,7 +282,11 @@
     "regime": "",
     "sections": {
       "gamma": [
-        "No data section yet."
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "BTC-USD | 64519.00 | -4.69%",
+        "GC=F | 5210.91 | +1.98%",
+        "^GSPC | 6833.77 | -1.08%"
       ],
       "alpha": [
         "No Alpha discussion yet."
@@ -260,60 +300,74 @@
     },
     "movers": [
       {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "106.26",
+        "pct": -5.42,
+        "change": ""
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "494.49",
+        "pct": -4.98,
+        "change": ""
+      },
+      {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "price": "64519.00",
+        "pct": -4.69,
+        "change": ""
       },
       {
-        "ticker": "GC=F",
-        "name": "GC=F",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "141.51",
+        "pct": -4.64,
+        "change": ""
       },
       {
-        "ticker": "^GSPC",
-        "name": "^GSPC",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "V",
+        "name": "V",
+        "price": "306.52",
+        "pct": -3.92,
+        "change": ""
       },
       {
-        "ticker": "^NDQ",
-        "name": "^NDQ",
-        "price": "—",
-        "pct": null,
-        "change": "—"
-      },
-      {
-        "ticker": "AAPL",
-        "name": "AAPL",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "245.47",
+        "pct": -3.41,
+        "change": ""
       },
       {
         "ticker": "TSLA",
         "name": "TSLA",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "price": "395.20",
+        "pct": -2.97,
+        "change": ""
       },
       {
-        "ticker": "GOOG",
-        "name": "GOOG",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "386.56",
+        "pct": -2.14,
+        "change": ""
       },
       {
-        "ticker": "NVDA",
-        "name": "NVDA",
-        "price": "—",
-        "pct": null,
-        "change": "—"
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "76.125",
+        "pct": -2.14,
+        "change": ""
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "5210.91",
+        "pct": 1.98,
+        "change": ""
       }
     ]
   },
