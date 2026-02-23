@@ -42,6 +42,11 @@ function parseFrontmatter(content) {
   return { meta: obj, body };
 }
 
+function formatInline(txt) {
+  const escaped = escapeHtml(txt);
+  return escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+
 function renderMarkdownBasic(md) {
   const lines = md.split('\n');
   const out = [];
@@ -93,7 +98,7 @@ function renderMarkdownBasic(md) {
         inUl = true;
         out.push('<ul>');
       }
-      out.push(`<li>${escapeHtml(line.slice(2))}</li>`);
+      out.push(`<li>${formatInline(line.slice(2))}</li>`);
       continue;
     }
 
@@ -104,7 +109,7 @@ function renderMarkdownBasic(md) {
     }
 
     closeUl();
-    out.push(`<p>${escapeHtml(line)}</p>`);
+    out.push(`<p>${formatInline(line)}</p>`);
   }
   closeUl();
   return out.join('\n');
@@ -279,7 +284,6 @@ const html = `<!doctype html>
           <div><button class="sort-btn" data-sort="price" type="button">Price</button></div>
           <div>Δ$</div>
           <div><button class="sort-btn" data-sort="pct" type="button">Δ%</button></div>
-          <div>In list</div>
         </div>
         <div id="moversList" class="movers"></div>
       </article>
@@ -310,9 +314,9 @@ const html = `<!doctype html>
       <article class="card col-12">
         <h2>📰 News linked to movers</h2>
         <div class="chips">
-          <span class="chip">Hovedoppslag</span>
-          <span class="chip">Koblet til movers</span>
-          <span class="chip">Kilde-lenker</span>
+          <span class="chip">Top stories</span>
+          <span class="chip">Linked to movers</span>
+          <span class="chip">Source links</span>
         </div>
         <ul id="newsList" class="list"></ul>
       </article>

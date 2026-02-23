@@ -64,6 +64,23 @@ async function main() {
   let sortKey = 'pct';
   let sortDir = 'desc';
 
+  const sortBaseLabel = {
+    ticker: 'Ticker',
+    price: 'Price',
+    pct: 'Δ%'
+  };
+
+  function updateSortButtons() {
+    sortBtns.forEach(btn => {
+      const key = btn.dataset.sort;
+      if (!key) return;
+      const active = key === sortKey;
+      btn.classList.toggle('active', active);
+      const arrow = active ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '';
+      btn.textContent = `${sortBaseLabel[key] || key}${arrow}`;
+    });
+  }
+
   function normPrice(v) {
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
@@ -108,7 +125,6 @@ async function main() {
       <div class="mover-price">${m.price || '—'}</div>
       <div class="mover-change ${isDown === null ? '' : isDown ? 'neg':'pos'}">${m.change || '—'}</div>
       <div class="mover-pill ${isDown === null ? '' : isDown ? 'neg':'pos'}">${direction} ${pctText}</div>
-      <div class="mover-check">✓</div>
     </div>`;
   }
 
@@ -156,6 +172,7 @@ async function main() {
 
     if (countEl) countEl.textContent = `${filtered.length} report${filtered.length === 1 ? '' : 's'}`;
     syncUrl(d, t, s);
+    updateSortButtons();
 
     if (!filtered.length) {
       moversEl.innerHTML = '<div class="muted">Ingen bevegelser å vise for dette utvalget.</div>';

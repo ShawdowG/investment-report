@@ -35,7 +35,7 @@ button{cursor:pointer}
 .ticker-chip.is-active{outline:2px solid #71e2bd;outline-offset:1px;background:#113730;border-color:#3d9f84}
 
 .movers{display:flex;flex-direction:column;gap:8px}
-.mover-row{display:grid;grid-template-columns:90px 1.2fr .9fr .9fr .9fr 60px;gap:10px;align-items:center;padding:10px 8px;border-bottom:1px solid #2a3763}
+.mover-row{display:grid;grid-template-columns:90px 1.4fr .9fr .9fr .9fr;gap:10px;align-items:center;padding:10px 8px;border-bottom:1px solid #2a3763}
 .mover-header{font-size:12px;color:var(--muted);padding-top:0;padding-bottom:8px;border-bottom:1px solid #3a4a80}
 .mover-header div{font-weight:600}
 .ticker-badge{display:inline-block;background:#223a78;border:1px solid #4666bc;padding:4px 8px;border-radius:8px;font-weight:700;font-size:12px;max-width:max-content}
@@ -45,7 +45,6 @@ button{cursor:pointer}
 .mover-pill.neg{background:#5a1f2f;color:#ffc2cf;border:1px solid #a7546b}
 .mover-pill.pos{background:#184434;color:#b9ffe4;border:1px solid #45a882}
 .mover-change.neg{color:#ff9caf}.mover-change.pos{color:#8ff7cb}
-.mover-check{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#2a355a;border:1px solid #475689;color:#dde5ff}
 
 .list{margin:6px 0 0;padding-left:18px;line-height:1.65}
 .table-wrap{overflow:auto}
@@ -53,6 +52,7 @@ button{cursor:pointer}
 .ticker-table th,.ticker-table td{padding:10px;border-bottom:1px solid #2a3763;text-align:left}
 .sort-btn{all:unset;cursor:pointer;color:#cfe0ff;padding:4px 6px;border-radius:6px}
 .sort-btn:hover{background:#1c2950}
+.sort-btn.active{background:#1f2f5f;border:1px solid #3d58a6;padding:3px 7px}
 .ticker-table td.neg{color:#ff9caf}
 .ticker-table td.pos{color:#8ff7cb}
 .discussion-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -69,6 +69,6 @@ button{cursor:pointer}
 @media (max-width:900px){
   .col-6,.col-4{grid-column:span 12}
   .discussion-grid{grid-template-columns:1fr}
-  .mover-row{grid-template-columns:80px 1fr .9fr .9fr;grid-template-areas:"ticker name price check" "ticker change pill check"}
-  .ticker-badge{grid-area:ticker}.mover-name{grid-area:name}.mover-price{grid-area:price}.mover-change{grid-area:change}.mover-pill{grid-area:pill}.mover-check{grid-area:check;justify-self:end}
+  .mover-row{grid-template-columns:80px 1fr .9fr .9fr;grid-template-areas:"ticker name price price" "ticker change pill pill"}
+  .ticker-badge{grid-area:ticker}.mover-name{grid-area:name}.mover-price{grid-area:price}.mover-change{grid-area:change}.mover-pill{grid-area:pill}
 }
