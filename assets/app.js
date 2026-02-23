@@ -13,6 +13,8 @@ async function main() {
   const alphaEl = document.getElementById('alphaList');
   const betaEl = document.getElementById('betaList');
   const newsEl = document.getElementById('newsList');
+  const tableBody = document.getElementById('tickerTableBody');
+  const sortBtns = [...document.querySelectorAll('.sort-btn')];
 
   if (!results || !dateEl || !moversEl) return;
 
@@ -56,6 +58,52 @@ async function main() {
     if (s) q.set('slot', s);
     const suffix = q.toString() ? `?${q.toString()}` : '';
     history.replaceState({}, '', `${window.location.pathname}${suffix}`);
+  }
+
+  let sortKey = 'pct';
+  let sortDir = 'desc';
+
+  function normPrice(v) {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function renderTable(primary) {
+    if (!tableBody) return;
+    const rows = [...(primary?.movers || [])];
+    if (!rows.length) {
+      tableBody.innerHTML = '<tr><td colspan="3" class="muted">No ticker data for selected report.</td></tr>';
+      return;
+    }
+
+    rows.sort((a, b) => {
+      let av, bv;
+      if (sortKey === 'ticker') {
+        av = (a.ticker || '').toUpperCase();
+        bv = (b.ticker || '').toUpperCase();
+        const cmp = av.localeCompare(bv);
+        return sortDir === 'asc' ? cmp : -cmp;
+      }
+      if (sortKey === 'price') {
+        av = normPrice(a.price) ?? -Infinity;
+        bv = normPrice(b.price) ?? -Infinity;
+      } else {
+        av = typeof a.pct === 'number' ? a.pct : -Infinity;
+        bv = typeof b.pct === 'number' ? b.pct : -Infinity;
+      }
+      return sortDir === 'asc' ? av - bv : bv - av;
+    });
+
+    tableBody.innerHTML = rows.map(r => {
+      const pct = typeof r.pct === 'number' ? r.pct : null;
+      const pctText = pct === null ? '—' : `${pct > 0 ? '+' : ''}${pct.toFixed(2)}%`;
+      const pctClass = pct === null ? '' : pct < 0 ? 'neg' : 'pos';
+      return `<tr>
+        <td>${r.ticker || '—'}</td>
+        <td>${r.price || '—'}</td>
+        <td class="${pctClass}">${pctText}</td>
+      </tr>`;
+    }).join('');
   }
 
   function renderMoverRow(m) {
@@ -126,6 +174,7 @@ async function main() {
       setList(betaEl, [], 'No Beta notes yet.');
       if (pulseEl) pulseEl.textContent = 'No pulse data for selected filters.';
       if (newsEl) newsEl.innerHTML = '<li class="muted">Ingen relevante nyheter for valgt filter.</li>';
+      if (tableBody) tableBody.innerHTML = '<tr><td colspan="3" class="muted">No ticker data for selected report.</td></tr>';
       return;
     }
 
@@ -144,6 +193,7 @@ async function main() {
     setList(alphaEl, primary?.sections?.alpha || [], 'No Alpha notes yet.');
     setList(betaEl, primary?.sections?.beta || [], 'No Beta notes yet.');
     renderNews(primary);
+    renderTable(primary);
 
     results.innerHTML = filtered
       .slice(0, 40)
@@ -157,6 +207,20 @@ async function main() {
       if (!tickerEl) return;
       const target = ch.dataset.ticker || '';
       tickerEl.value = tickerEl.value.toUpperCase() === target.toUpperCase() ? '' : target;
+      render();
+    });
+  });
+
+  sortBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.sort;
+      if (!key) return;
+      if (sortKey === key) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDir = key === 'ticker' ? 'asc' : 'desc';
+      }
       render();
     });
   });
