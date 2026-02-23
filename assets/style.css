@@ -35,7 +35,9 @@ button{cursor:pointer}
 .ticker-chip.is-active{outline:2px solid #71e2bd;outline-offset:1px;background:#113730;border-color:#3d9f84}
 
 .movers{display:flex;flex-direction:column;gap:8px}
-.mover-row{display:grid;grid-template-columns:90px 1.2fr .9fr .9fr .9fr 40px;gap:8px;align-items:center;padding:8px 6px;border-bottom:1px solid #2a3763}
+.mover-row{display:grid;grid-template-columns:90px 1.2fr .9fr .9fr .9fr 60px;gap:8px;align-items:center;padding:8px 6px;border-bottom:1px solid #2a3763}
+.mover-header{font-size:12px;color:var(--muted);padding-top:0;padding-bottom:8px;border-bottom:1px solid #3a4a80}
+.mover-header div{font-weight:600}
 .ticker-badge{display:inline-block;background:#223a78;border:1px solid #4666bc;padding:4px 8px;border-radius:8px;font-weight:700;font-size:12px;max-width:max-content}
 .mover-name{font-weight:600}
 .mover-price,.mover-change{font-variant-numeric:tabular-nums}

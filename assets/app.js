@@ -87,14 +87,22 @@ async function main() {
     });
   }
 
+  const NAME_MAP = {
+    'BTC-USD':'Bitcoin', 'GC=F':'Gold', '^GSPC':'S&P 500', '^NDQ':'Nasdaq 100',
+    'AAPL':'Apple', 'TSLA':'Tesla', 'GOOG':'Alphabet', 'NVDA':'NVIDIA', 'AMZN':'Amazon', 'MSFT':'Microsoft', 'META':'Meta',
+    'DUOL':'Duolingo', 'ADBE.VI':'Adobe', 'AMD':'AMD', 'BABA':'Alibaba', 'LMT':'Lockheed Martin', 'BA':'Boeing',
+    'TM':'Toyota', 'V':'Visa', 'MA':'Mastercard', 'NFLX':'Netflix', 'RDDT':'Reddit', 'NOVO-B.CO':'Novo Nordisk'
+  };
+
   function renderMoverRow(m) {
     const pct = typeof m.pct === 'number' ? m.pct : null;
     const isDown = pct !== null ? pct < 0 : null;
     const direction = pct === null ? '•' : (isDown ? '↓' : '↑');
     const pctText = pct === null ? '—' : `${pct > 0 ? '+' : ''}${pct.toFixed(2)}%`;
+    const name = NAME_MAP[m.ticker] || m.name || m.ticker || 'Unknown';
     return `<div class="mover-row">
       <div class="ticker-badge">${m.ticker || '—'}</div>
-      <div class="mover-name">${m.name || m.ticker || 'Unknown'}</div>
+      <div class="mover-name">${name}</div>
       <div class="mover-price">${m.price || '—'}</div>
       <div class="mover-change ${isDown === null ? '' : isDown ? 'neg':'pos'}">${m.change || '—'}</div>
       <div class="mover-pill ${isDown === null ? '' : isDown ? 'neg':'pos'}">${direction} ${pctText}</div>
