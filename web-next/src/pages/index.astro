@@ -2,10 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeaderBar from '../components/HeaderBar.astro';
 import MarketPulse from '../components/MarketPulse.astro';
+import TickerTable from '../components/TickerTable.astro';
+import DiscussionPanel from '../components/DiscussionPanel.astro';
 import { loadSearchIndex } from '../lib/loaders.js';
 
 const idx = await loadSearchIndex();
 const slot = Astro.url.searchParams.get('slot') ?? 'pre-close';
+const sort = Astro.url.searchParams.get('sort') ?? 'pct';
+const collapsed = Astro.url.searchParams.get('collapsed') === '1';
 const latest = idx.items?.find((it) => it.slot === slot) ?? idx.items?.[0];
 ---
 <BaseLayout title="Investment Report — Astro Migration">
@@ -20,6 +24,16 @@ const latest = idx.items?.find((it) => it.slot === slot) ?? idx.items?.[0];
     beta={latest?.sections?.beta ?? []}
     pulse={latest?.sections?.pulse ?? []}
   />
+
+  <p class="muted">
+    Table controls:
+    <a href={`/?slot=${latest?.slot ?? slot}&sort=ticker&collapsed=0`}>sort=ticker</a> ·
+    <a href={`/?slot=${latest?.slot ?? slot}&sort=pct&collapsed=0`}>sort=pct</a> ·
+    <a href={`/?slot=${latest?.slot ?? slot}&sort=${sort}&collapsed=1`}>collapsed</a>
+  </p>
+
+  <TickerTable movers={latest?.movers ?? []} sortBy={sort} collapsed={collapsed} />
+  <DiscussionPanel alpha={latest?.sections?.alpha ?? []} beta={latest?.sections?.beta ?? []} />
 
   <h3>Index status</h3>
   <ul>

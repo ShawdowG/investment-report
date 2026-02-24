@@ -1,0 +1,43 @@
+---
+const { movers = [], collapsed = false, sortBy = 'ticker' } = Astro.props;
+
+const list = Array.isArray(movers) ? [...movers] : [];
+const key = sortBy === 'pct' ? 'pct' : 'ticker';
+list.sort((a, b) => {
+  if (key === 'pct') {
+    const av = typeof a?.pct === 'number' ? a.pct : -9999;
+    const bv = typeof b?.pct === 'number' ? b.pct : -9999;
+    return bv - av;
+  }
+  return String(a?.ticker ?? '').localeCompare(String(b?.ticker ?? ''));
+});
+---
+<section class="ticker-table">
+  <details open={!collapsed}>
+    <summary><strong>Ticker Table</strong> ({list.length})</summary>
+    <table>
+      <thead>
+        <tr><th>Ticker</th><th>Name</th><th>Price</th><th>Δ%</th></tr>
+      </thead>
+      <tbody>
+        {list.map((r) => (
+          <tr>
+            <td>{r.ticker}</td>
+            <td>{r.name}</td>
+            <td>{r.price}</td>
+            <td class={typeof r.pct === 'number' && r.pct >= 0 ? 'pos' : 'neg'}>{typeof r.pct === 'number' ? `${r.pct > 0 ? '+' : ''}${r.pct.toFixed(2)}%` : 'n/a'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </details>
+</section>
+
+<style>
+  details { border:1px solid #e5e7eb; border-radius:10px; padding:.7rem 1rem; background:#fff; }
+  summary { cursor:pointer; margin-bottom:.6rem; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; }
+  th,td { text-align:left; border-bottom:1px solid #f0f2f4; padding:.4rem .3rem; }
+  .pos { color:#067647; }
+  .neg { color:#b42318; }
+</style>

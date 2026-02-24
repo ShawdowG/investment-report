@@ -1,0 +1,23 @@
+---
+const { alpha = [], beta = [] } = Astro.props;
+---
+<section class="discussion-panel">
+  <h2>Discussion Panel</h2>
+  <div class="grid">
+    <article>
+      <h3>Alpha (Strategic)</h3>
+      <ul>{alpha.map((line) => <li>{line.replace(/^-\s*/, '')}</li>)}</ul>
+    </article>
+    <article>
+      <h3>Beta (Tactical)</h3>
+      <ul>{beta.map((line) => <li>{line.replace(/^-\s*/, '')}</li>)}</ul>
+    </article>
+  </div>
+</section>
+
+<style>
+  .discussion-panel { border:1px solid #e5e7eb; border-radius:10px; padding:1rem; background:#fff; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media (max-width:760px){ .grid { grid-template-columns:1fr; } }
+  h2,h3 { margin:.2rem 0 .5rem; }
+</style>

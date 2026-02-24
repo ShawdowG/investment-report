@@ -18,8 +18,8 @@ Status: Todo | InProgress | Blocked | Done
 - [x] M-10 | Eta   | P0 | Done | Setup preview deployment target
 - [x] M-11 | Epsi  | P1 | Done | Build `HeaderBar` + `TimeRangePicker`
 - [x] M-12 | Epsi  | P1 | Done | Build `MarketPulse`
-- [ ] M-13 | Epsi  | P1 | Todo | Build `TickerTable` (collapse/sort)
-- [ ] M-14 | Epsi  | P1 | Todo | Build `DiscussionPanel`
+- [x] M-13 | Epsi  | P1 | Done | Build `TickerTable` (collapse/sort)
+- [x] M-14 | Epsi  | P1 | Done | Build `DiscussionPanel`
 - [ ] M-15 | Epsi  | P1 | Todo | Build `NewsMoversTable`
 - [ ] M-16 | Gamma | P1 | Todo | Adapter utilities (sorting/fallbacks)
 - [ ] M-17 | Eta   | P0 | Todo | Parity check script (legacy vs Astro)
@@ -40,3 +40,4 @@ Status: Todo | InProgress | Blocked | Done
 - 2026-02-24 22:55 CET: M-08→Done, M-09→Done (created `web-next` Astro static scaffold + JSON/MD data loaders).
 - 2026-02-24 23:00 CET: M-10→Done (added GitHub Pages preview target via `.github/workflows/web-next-preview.yml` + `migration/PREVIEW_DEPLOY.md`).
 - 2026-02-24 23:05 CET: M-11→Done, M-12→Done (implemented `HeaderBar`, `TimeRangePicker`, and `MarketPulse` in `web-next/src/components`, wired on index page).
+- 2026-02-24 23:10 CET: M-13→Done, M-14→Done (added `TickerTable` with collapse/sort controls and `DiscussionPanel`, both wired into `web-next/src/pages/index.astro`).
