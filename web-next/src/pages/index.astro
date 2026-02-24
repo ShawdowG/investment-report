@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadSearchIndex } from '../lib/loaders.js';
+
+const idx = await loadSearchIndex();
+const latest = idx.items?.[0];
+---
+<BaseLayout title="Investment Report — Astro Migration">
+  <h1>Investment Report — Astro migration scaffold</h1>
+  <p class="muted">Static mode scaffold complete. Data loaders are wired to existing JSON/MD sources.</p>
+  <ul>
+    <li>generatedAt: {idx.generatedAt}</li>
+    <li>reports indexed: {idx.count}</li>
+    <li>latest item: {latest ? `${latest.date} / ${latest.slot}` : 'n/a'}</li>
+  </ul>
+</BaseLayout>

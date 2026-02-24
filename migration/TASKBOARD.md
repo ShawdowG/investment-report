@@ -13,8 +13,8 @@ Status: Todo | InProgress | Blocked | Done
 - [x] M-05 | Alpha | P0 | Done | Define required narrative fields
 - [x] M-06 | Beta  | P0 | Done | Define required tactical fields
 - [x] M-07 | Epsi  | P0 | Done | Field-to-component mapping matrix
-- [ ] M-08 | Epsi  | P0 | Todo | Scaffold Astro app (`web-next` static mode)
-- [ ] M-09 | Gamma | P0 | Todo | Wire data loaders from existing JSON/MD
+- [x] M-08 | Epsi  | P0 | Done | Scaffold Astro app (`web-next` static mode)
+- [x] M-09 | Gamma | P0 | Done | Wire data loaders from existing JSON/MD
 - [ ] M-10 | Eta   | P0 | Todo | Setup preview deployment target
 - [ ] M-11 | Epsi  | P1 | Todo | Build `HeaderBar` + `TimeRangePicker`
 - [ ] M-12 | Epsi  | P1 | Todo | Build `MarketPulse`
@@ -37,3 +37,4 @@ Status: Todo | InProgress | Blocked | Done
 - 2026-02-24: Initialized canonical taskboard source.
 - 2026-02-24 22:45 CET: M-01→Done, M-02→Done, M-03→Done, M-04→Done (schema spec, examples, validator, CI gate).
 - 2026-02-24 22:50 CET: M-05→Done, M-06→Done, M-07→Done (`migration/REQUIREMENTS.md`, `migration/COMPONENT_MAPPING.md`).
+- 2026-02-24 22:55 CET: M-08→Done, M-09→Done (created `web-next` Astro static scaffold + JSON/MD data loaders).
