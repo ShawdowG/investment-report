@@ -1,0 +1,34 @@
+{
+  "file": "2026-02-24-pre-close.md",
+  "htmlFile": "2026-02-24-pre-close.html",
+  "title": "US Pre-close",
+  "summary": "Indices and most single names are green into the final hour.",
+  "date": "2026-02-24",
+  "slot": "pre-close",
+  "tickers": ["BTC-USD", "GC=F", "^GSPC"],
+  "regime": "Broad risk-on",
+  "sections": {
+    "gamma": ["Ticker | Price | Δ%", "---|---:|---:"],
+    "alpha": ["- Keep core long exposure on."],
+    "beta": ["- Favor relative-strength continuation setups."],
+    "pulse": ["Awaiting pulse update."]
+  },
+  "movers": [
+    {
+      "ticker": "BTC-USD",
+      "name": "BTC-USD",
+      "price": "64467.40",
+      "pct": -0.4,
+      "change": ""
+    }
+  ],
+  "news": [
+    {
+      "headline": "Example catalyst headline",
+      "ticker": "BTC-USD",
+      "source": "ExampleWire",
+      "url": "https://example.com/story",
+      "publishedAt": "2026-02-24T20:00:00.000Z"
+    }
+  ]
+}

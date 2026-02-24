@@ -15,5 +15,7 @@ jobs:
           node-version: 20
       - name: Validate reports
         run: node scripts/validate-reports.js
+      - name: Validate migration schema
+        run: node scripts/validate-schema.js
       - name: Build index
         run: node scripts/build-index.js

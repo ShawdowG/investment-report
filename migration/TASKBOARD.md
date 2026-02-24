@@ -6,10 +6,10 @@ Status: Todo | InProgress | Blocked | Done
 
 ## Tasks
 
-- [ ] M-01 | Gamma | P0 | Todo | Define schema v1 (`search-index`, frontmatter, movers/news rows)
-- [ ] M-02 | Gamma | P0 | Todo | Create `SCHEMA.md` + example payloads
-- [ ] M-03 | Gamma | P0 | Todo | Add `scripts/validate-schema.js`
-- [ ] M-04 | Eta   | P0 | Todo | Add CI gate for schema validation
+- [x] M-01 | Gamma | P0 | Done | Define schema v1 (`search-index`, frontmatter, movers/news rows)
+- [x] M-02 | Gamma | P0 | Done | Create `SCHEMA.md` + example payloads
+- [x] M-03 | Gamma | P0 | Done | Add `scripts/validate-schema.js`
+- [x] M-04 | Eta   | P0 | Done | Add CI gate for schema validation
 - [ ] M-05 | Alpha | P0 | Todo | Define required narrative fields
 - [ ] M-06 | Beta  | P0 | Todo | Define required tactical fields
 - [ ] M-07 | Epsi  | P0 | Todo | Field-to-component mapping matrix
@@ -35,3 +35,4 @@ Status: Todo | InProgress | Blocked | Done
 ## Progress log
 
 - 2026-02-24: Initialized canonical taskboard source.
+- 2026-02-24 22:45 CET: M-01→Done, M-02→Done, M-03→Done, M-04→Done (schema spec, examples, validator, CI gate).
