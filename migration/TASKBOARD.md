@@ -10,9 +10,9 @@ Status: Todo | InProgress | Blocked | Done
 - [x] M-02 | Gamma | P0 | Done | Create `SCHEMA.md` + example payloads
 - [x] M-03 | Gamma | P0 | Done | Add `scripts/validate-schema.js`
 - [x] M-04 | Eta   | P0 | Done | Add CI gate for schema validation
-- [ ] M-05 | Alpha | P0 | Todo | Define required narrative fields
-- [ ] M-06 | Beta  | P0 | Todo | Define required tactical fields
-- [ ] M-07 | Epsi  | P0 | Todo | Field-to-component mapping matrix
+- [x] M-05 | Alpha | P0 | Done | Define required narrative fields
+- [x] M-06 | Beta  | P0 | Done | Define required tactical fields
+- [x] M-07 | Epsi  | P0 | Done | Field-to-component mapping matrix
 - [ ] M-08 | Epsi  | P0 | Todo | Scaffold Astro app (`web-next` static mode)
 - [ ] M-09 | Gamma | P0 | Todo | Wire data loaders from existing JSON/MD
 - [ ] M-10 | Eta   | P0 | Todo | Setup preview deployment target
@@ -36,3 +36,4 @@ Status: Todo | InProgress | Blocked | Done
 
 - 2026-02-24: Initialized canonical taskboard source.
 - 2026-02-24 22:45 CET: M-01→Done, M-02→Done, M-03→Done, M-04→Done (schema spec, examples, validator, CI gate).
+- 2026-02-24 22:50 CET: M-05→Done, M-06→Done, M-07→Done (`migration/REQUIREMENTS.md`, `migration/COMPONENT_MAPPING.md`).
