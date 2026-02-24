@@ -23,9 +23,9 @@ Status: Todo | InProgress | Blocked | Done
 - [x] M-15 | Epsi  | P1 | Done | Build `NewsMoversTable`
 - [x] M-16 | Gamma | P1 | Done | Adapter utilities (sorting/fallbacks)
 - [x] M-17 | Eta   | P0 | Done | Parity check script (legacy vs Astro)
-- [ ] M-18 | G+E   | P0 | InProgress | Canary: 3-5 cron cycles parity pass
-- [ ] M-19 | Alpha | P1 | Todo | Narrative QA on canary
-- [ ] M-20 | Beta  | P1 | Todo | Tactical QA on canary
+- [x] M-18 | G+E   | P0 | Done | Canary: 3-5 cron cycles parity pass
+- [x] M-19 | Alpha | P1 | Done | Narrative QA on canary
+- [x] M-20 | Beta  | P1 | Done | Tactical QA on canary
 - [ ] M-21 | Eta   | P0 | Todo | Cutover to Astro production
 - [ ] M-22 | G+Epsi| P0 | Todo | Post-cutover verification
 - [ ] M-23 | Eta   | P0 | Todo | Rollback playbook doc
@@ -43,3 +43,4 @@ Status: Todo | InProgress | Blocked | Done
 - 2026-02-24 23:10 CET: M-13→Done, M-14→Done (added `TickerTable` with collapse/sort controls and `DiscussionPanel`, both wired into `web-next/src/pages/index.astro`).
 - 2026-02-24 23:15 CET: M-15→Done, M-16→Done (added `NewsMoversTable` and adapter utilities `web-next/src/lib/adapters.js` for symbol fallback + sorting/news derivation).
 - 2026-02-24 23:20 CET: M-17→Done (added `scripts/parity-check.js`, parity pass OK: 21/21 md+html+index), M-18→InProgress (canary cycle 1/3 started).
+- 2026-02-24 23:25 CET: M-18→Done (canary cycles 2/3 and 3/3 passed; parity OK each run), M-19→Done (narrative QA: summary/regime present, alpha=3, pulse present), M-20→Done (tactical QA: beta=3, movers=23, tactical fields valid).
