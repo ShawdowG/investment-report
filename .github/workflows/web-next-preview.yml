@@ -1,0 +1,61 @@
+name: Web Next Preview Deploy
+
+on:
+  pull_request:
+    paths:
+      - 'web-next/**'
+      - 'data/**'
+      - 'reports/**'
+      - '.github/workflows/web-next-preview.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'web-next/**'
+      - 'data/**'
+      - 'reports/**'
+      - '.github/workflows/web-next-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install web-next deps
+        run: npm install
+        working-directory: web-next
+      - name: Build Astro site
+        run: npm run build
+        working-directory: web-next
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-next-preview
+          path: web-next/dist
+
+  deploy-pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-next-preview
+          path: web-next/dist
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web-next/dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
