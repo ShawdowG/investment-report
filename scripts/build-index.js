@@ -246,16 +246,30 @@ const html = `<!doctype html>
       <div class="hero-top">
         <div>
           <h1>Investment Dashboard</h1>
-          <p class="muted">Today-first market view • clearer read for Pulse, Tickers, Discussion</p>
+          <p id="headerContext" class="muted">Showing: Today • All sessions • All tickers</p>
         </div>
-        <span class="badge">${items.length} reports indexed</span>
-      </div>
-      <details class="filters-panel" open>
-        <summary>Filters</summary>
-        <div class="filters compact">
-          <label>Date
-            <select id="dateSelect"></select>
+        <div class="time-presets">
+          <button id="rangeToday" class="time-btn" type="button">Today</button>
+          <button id="rangeYesterday" class="time-btn" type="button">Yesterday</button>
+          <button id="range7" class="time-btn" type="button">Last 7 days</button>
+          <button id="range30" class="time-btn" type="button">Last 30 days</button>
+          <label class="pick-date-label">Pick date
+            <input id="headerDate" type="date" />
           </label>
+        </div>
+      </div>
+      <span class="badge">${items.length} reports indexed</span>
+    </section>
+
+    <section class="grid">
+      <article class="card col-12">
+        <h2>📈 Market Pulse</h2>
+        <div id="pulseSummary" class="muted">Awaiting report selection...</div>
+      </article>
+
+      <article class="card col-12">
+        <h2>Tickeroversikt (pris og bevegelse) <span id="resultsCount" class="muted"></span></h2>
+        <div class="section-filters">
           <label>Session
             <select id="slotFilter">
               <option value="">All</option>
@@ -267,20 +281,8 @@ const html = `<!doctype html>
           <label>Ticker
             <input id="tickerFilter" type="text" placeholder="NVDA" />
           </label>
-          <button id="clearFilters" type="button">Reset</button>
+          <button id="clearFilters" type="button">Reset filters</button>
         </div>
-      </details>
-      <div id="tickerChips" class="chips"></div>
-    </section>
-
-    <section class="grid">
-      <article class="card col-12">
-        <h2>📈 Market Pulse</h2>
-        <div id="pulseSummary" class="muted">Awaiting report selection...</div>
-      </article>
-
-      <article class="card col-12">
-        <h2>Tickeroversikt (pris og bevegelse) <span id="resultsCount" class="muted"></span></h2>
         <div class="mover-row mover-header">
           <div><button class="sort-btn" data-sort="ticker" type="button">Ticker</button></div>
           <div><button class="sort-btn" data-sort="name" type="button">Name</button></div>
