@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-02-24T19:02:50.167Z",
-  "count": 20,
+  "generatedAt": "2026-02-24T20:00:50.921Z",
+  "count": 21,
   "items": [
     {
       "file": "2026-02-24-us-open.md",
@@ -217,6 +217,225 @@
           "name": "NOVO-B.CO",
           "price": "38.44",
           "pct": -0.16,
+          "change": ""
+        }
+      ]
+    },
+    {
+      "file": "2026-02-24-pre-close.md",
+      "htmlFile": "2026-02-24-pre-close.html",
+      "title": "US Pre-close",
+      "summary": "Indices and most single names are green into the final hour, led by ADBE/DUOL/TSLA/BA while gold and BTC lag.",
+      "date": "2026-02-24",
+      "slot": "pre-close",
+      "tickers": [
+        "BTC-USD",
+        "GC=F",
+        "^GSPC",
+        "^NDQ",
+        "AAPL",
+        "TSLA",
+        "GOOG",
+        "NVDA",
+        "AMZN",
+        "MSFT",
+        "META",
+        "DUOL",
+        "ADBE.VI",
+        "AMD",
+        "BABA",
+        "LMT",
+        "BA",
+        "TM",
+        "V",
+        "MA",
+        "NFLX",
+        "RDDT",
+        "NOVO-B.CO"
+      ],
+      "regime": "Broad risk-on with cyclical catch-up",
+      "sections": {
+        "gamma": [
+          "Ticker | Price | Δ%",
+          "---|---:|---:",
+          "BTC-USD | 64467.40 | -0.40%",
+          "GC=F | 5154.07 | -1.40%",
+          "^GSPC | 6887.66 | +0.72%"
+        ],
+        "alpha": [
+          "- Risk appetite improved materially versus open; this supports keeping core long exposure on.",
+          "- Leadership breadth is healthier (software, internet, industrial/aero), reducing single-theme fragility.",
+          "- Treat late-session strength as valid but monitor for end-of-day fade after sharp intraday recoveries."
+        ],
+        "beta": [
+          "- Favor relative-strength continuation setups: ADBE, DUOL, TSLA, BA, NFLX.",
+          "- Trim/add only on pullbacks toward intraday support instead of momentum chasing near highs.",
+          "- Keep catalyst discipline on flagged movers (ADBE/DUOL/TSLA/BA) before carrying oversized overnight risk."
+        ],
+        "pulse": [
+          "Awaiting pulse update."
+        ]
+      },
+      "movers": [
+        {
+          "ticker": "BTC-USD",
+          "name": "BTC-USD",
+          "price": "64467.40",
+          "pct": -0.4,
+          "change": ""
+        },
+        {
+          "ticker": "GC=F",
+          "name": "GC=F",
+          "price": "5154.07",
+          "pct": -1.4,
+          "change": ""
+        },
+        {
+          "ticker": "^GSPC",
+          "name": "^GSPC",
+          "price": "6887.66",
+          "pct": 0.72,
+          "change": ""
+        },
+        {
+          "ticker": "^NDQ",
+          "name": "^NDQ",
+          "price": "22856.34",
+          "pct": 0.96,
+          "change": ""
+        },
+        {
+          "ticker": "AAPL",
+          "name": "AAPL",
+          "price": "272.54",
+          "pct": 1.75,
+          "change": ""
+        },
+        {
+          "ticker": "TSLA",
+          "name": "TSLA",
+          "price": "408.86",
+          "pct": 2.34,
+          "change": ""
+        },
+        {
+          "ticker": "GOOG",
+          "name": "GOOG",
+          "price": "311.00",
+          "pct": 0.11,
+          "change": ""
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVDA",
+          "price": "192.57",
+          "pct": 0.58,
+          "change": ""
+        },
+        {
+          "ticker": "AMZN",
+          "name": "AMZN",
+          "price": "208.96",
+          "pct": 1.7,
+          "change": ""
+        },
+        {
+          "ticker": "MSFT",
+          "name": "MSFT",
+          "price": "387.61",
+          "pct": 0.9,
+          "change": ""
+        },
+        {
+          "ticker": "META",
+          "name": "META",
+          "price": "639.20",
+          "pct": 0.97,
+          "change": ""
+        },
+        {
+          "ticker": "DUOL",
+          "name": "DUOL",
+          "price": "109.15",
+          "pct": 2.97,
+          "change": ""
+        },
+        {
+          "ticker": "ADBE.VI",
+          "name": "ADBE.VI",
+          "price": "255.00",
+          "pct": 3.84,
+          "change": ""
+        },
+        {
+          "ticker": "AMD",
+          "name": "AMD",
+          "price": "213.94",
+          "pct": 1.09,
+          "change": ""
+        },
+        {
+          "ticker": "BABA",
+          "name": "BABA",
+          "price": "152.62",
+          "pct": 0.6,
+          "change": ""
+        },
+        {
+          "ticker": "LMT",
+          "name": "LMT",
+          "price": "666.92",
+          "pct": 1.38,
+          "change": ""
+        },
+        {
+          "ticker": "BA",
+          "name": "BA",
+          "price": "234.67",
+          "pct": 2.33,
+          "change": ""
+        },
+        {
+          "ticker": "TM",
+          "name": "TM",
+          "price": "238.56",
+          "pct": 1.14,
+          "change": ""
+        },
+        {
+          "ticker": "V",
+          "name": "V",
+          "price": "306.82",
+          "pct": 0.43,
+          "change": ""
+        },
+        {
+          "ticker": "MA",
+          "name": "MA",
+          "price": "498.00",
+          "pct": 0.59,
+          "change": ""
+        },
+        {
+          "ticker": "NFLX",
+          "name": "NFLX",
+          "price": "77.18",
+          "pct": 1.91,
+          "change": ""
+        },
+        {
+          "ticker": "RDDT",
+          "name": "RDDT",
+          "price": "143.39",
+          "pct": 0.32,
+          "change": ""
+        },
+        {
+          "ticker": "NOVO-B.CO",
+          "name": "NOVO-B.CO",
+          "price": "38.61",
+          "pct": 0.27,
           "change": ""
         }
       ]
