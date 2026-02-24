@@ -1,0 +1,26 @@
+---
+const { selected = 'pre-close' } = Astro.props;
+const ranges = [
+  { key: 'eu', label: 'EU' },
+  { key: 'us-open', label: 'US Open' },
+  { key: 'pre-close', label: 'Pre-close' },
+];
+---
+<div class="range-picker" role="tablist" aria-label="Time range">
+  {ranges.map((r) => (
+    <a
+      href={`/?slot=${r.key}`}
+      role="tab"
+      aria-selected={selected === r.key ? 'true' : 'false'}
+      class={`pill ${selected === r.key ? 'active' : ''}`}
+    >
+      {r.label}
+    </a>
+  ))}
+</div>
+
+<style>
+  .range-picker { display:flex; gap:.5rem; flex-wrap:wrap; }
+  .pill { border:1px solid #d0d5dd; border-radius:999px; padding:.35rem .7rem; text-decoration:none; color:#222; font-size:.9rem; }
+  .pill.active { background:#111; color:#fff; border-color:#111; }
+</style>

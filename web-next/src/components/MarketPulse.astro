@@ -1,0 +1,32 @@
+---
+const { summary = '', regime = '', alpha = [], beta = [], pulse = [] } = Astro.props;
+---
+<section class="market-pulse">
+  <h2>Market Pulse</h2>
+  <p><strong>Regime:</strong> {regime || 'n/a'}</p>
+  <p>{summary}</p>
+  <div class="grid">
+    <article>
+      <h3>Alpha</h3>
+      <ul>{alpha.map((line) => <li>{line.replace(/^-\s*/, '')}</li>)}</ul>
+    </article>
+    <article>
+      <h3>Beta</h3>
+      <ul>{beta.map((line) => <li>{line.replace(/^-\s*/, '')}</li>)}</ul>
+    </article>
+  </div>
+  {pulse.length > 0 && (
+    <article>
+      <h3>Pulse Notes</h3>
+      <ul>{pulse.map((line) => <li>{line.replace(/^-\s*/, '')}</li>)}</ul>
+    </article>
+  )}
+</section>
+
+<style>
+  .market-pulse { border:1px solid #e5e7eb; border-radius:10px; padding:1rem; background:#fff; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media (max-width: 760px){ .grid { grid-template-columns:1fr; } }
+  h2,h3 { margin:.2rem 0 .5rem; }
+  ul { margin:.2rem 0 .6rem 1.1rem; }
+</style>

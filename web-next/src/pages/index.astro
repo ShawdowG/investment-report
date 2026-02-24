@@ -1,16 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeaderBar from '../components/HeaderBar.astro';
+import MarketPulse from '../components/MarketPulse.astro';
 import { loadSearchIndex } from '../lib/loaders.js';
 
 const idx = await loadSearchIndex();
-const latest = idx.items?.[0];
+const slot = Astro.url.searchParams.get('slot') ?? 'pre-close';
+const latest = idx.items?.find((it) => it.slot === slot) ?? idx.items?.[0];
 ---
 <BaseLayout title="Investment Report — Astro Migration">
-  <h1>Investment Report — Astro migration scaffold</h1>
-  <p class="muted">Static mode scaffold complete. Data loaders are wired to existing JSON/MD sources.</p>
+  <HeaderBar title="Investment Report — Astro migration" date={latest?.date ?? 'n/a'} slot={latest?.slot ?? slot} />
+
+  <p class="muted">Static migration scaffold with live JSON/MD loader wiring.</p>
+
+  <MarketPulse
+    summary={latest?.summary ?? ''}
+    regime={latest?.regime ?? ''}
+    alpha={latest?.sections?.alpha ?? []}
+    beta={latest?.sections?.beta ?? []}
+    pulse={latest?.sections?.pulse ?? []}
+  />
+
+  <h3>Index status</h3>
   <ul>
     <li>generatedAt: {idx.generatedAt}</li>
     <li>reports indexed: {idx.count}</li>
-    <li>latest item: {latest ? `${latest.date} / ${latest.slot}` : 'n/a'}</li>
+    <li>active item: {latest ? `${latest.date} / ${latest.slot}` : 'n/a'}</li>
   </ul>
 </BaseLayout>
