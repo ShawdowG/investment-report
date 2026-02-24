@@ -1,7 +1,226 @@
 {
-  "generatedAt": "2026-02-24T13:34:36.109Z",
-  "count": 19,
+  "generatedAt": "2026-02-24T14:45:58.776Z",
+  "count": 20,
   "items": [
+    {
+      "file": "2026-02-24-us-open.md",
+      "htmlFile": "2026-02-24-us-open.html",
+      "title": "US Open +15m",
+      "summary": "Indices opened slightly positive, but dispersion remains high with notable single-name downside in DUOL/MA/RDDT/V.",
+      "date": "2026-02-24",
+      "slot": "us-open",
+      "tickers": [
+        "BTC-USD",
+        "GC=F",
+        "^GSPC",
+        "^NDQ",
+        "AAPL",
+        "TSLA",
+        "GOOG",
+        "NVDA",
+        "AMZN",
+        "MSFT",
+        "META",
+        "DUOL",
+        "ADBE.VI",
+        "AMD",
+        "BABA",
+        "LMT",
+        "BA",
+        "TM",
+        "V",
+        "MA",
+        "NFLX",
+        "RDDT",
+        "NOVO-B.CO"
+      ],
+      "regime": "Mixed / selective risk-on",
+      "sections": {
+        "gamma": [
+          "Ticker | Price | Δ%",
+          "---|---:|---:",
+          "BTC-USD | 63364.90 | -2.10%",
+          "GC=F | 5137.30 | -1.72%",
+          "^GSPC | 6854.80 | +0.24%"
+        ],
+        "alpha": [
+          "- Market tone is not broad risk-on; it is concentrated resilience in index heavyweights.",
+          "- Dispersion favors stock selection over directional index aggression.",
+          "- Keep strategic size in stable leaders; treat sharp single-name gaps as event-risk until catalysts are verified."
+        ],
+        "beta": [
+          "- If S&P/NDQ hold opening range highs, allow small tactical adds in relative-strength names (AAPL, LMT).",
+          "- Avoid bottom-fishing DUOL/MA/RDDT/V until at least one higher-low and volume normalization appears.",
+          "- Keep tighter stops than usual; today’s tape can rotate fast between “calm index” and “single-name stress.”"
+        ],
+        "pulse": [
+          "Awaiting pulse update."
+        ]
+      },
+      "movers": [
+        {
+          "ticker": "BTC-USD",
+          "name": "BTC-USD",
+          "price": "63364.90",
+          "pct": -2.1,
+          "change": ""
+        },
+        {
+          "ticker": "GC=F",
+          "name": "GC=F",
+          "price": "5137.30",
+          "pct": -1.72,
+          "change": ""
+        },
+        {
+          "ticker": "^GSPC",
+          "name": "^GSPC",
+          "price": "6854.80",
+          "pct": 0.24,
+          "change": ""
+        },
+        {
+          "ticker": "^NDQ",
+          "name": "^NDQ",
+          "price": "22690.96",
+          "pct": 0.23,
+          "change": ""
+        },
+        {
+          "ticker": "AAPL",
+          "name": "AAPL",
+          "price": "266.18",
+          "pct": 1.02,
+          "change": ""
+        },
+        {
+          "ticker": "TSLA",
+          "name": "TSLA",
+          "price": "399.40",
+          "pct": -0.02,
+          "change": ""
+        },
+        {
+          "ticker": "GOOG",
+          "name": "GOOG",
+          "price": "310.62",
+          "pct": -0.01,
+          "change": ""
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVDA",
+          "price": "191.55",
+          "pct": 0.08,
+          "change": ""
+        },
+        {
+          "ticker": "AMZN",
+          "name": "AMZN",
+          "price": "205.44",
+          "pct": -0.01,
+          "change": ""
+        },
+        {
+          "ticker": "MSFT",
+          "name": "MSFT",
+          "price": "384.14",
+          "pct": 0,
+          "change": ""
+        },
+        {
+          "ticker": "META",
+          "name": "META",
+          "price": "633.37",
+          "pct": 0.05,
+          "change": ""
+        },
+        {
+          "ticker": "DUOL",
+          "name": "DUOL",
+          "price": "106.13",
+          "pct": -5.53,
+          "change": ""
+        },
+        {
+          "ticker": "ADBE.VI",
+          "name": "ADBE.VI",
+          "price": "246.68",
+          "pct": -2.94,
+          "change": ""
+        },
+        {
+          "ticker": "AMD",
+          "name": "AMD",
+          "price": "211.67",
+          "pct": 0.02,
+          "change": ""
+        },
+        {
+          "ticker": "BABA",
+          "name": "BABA",
+          "price": "152.78",
+          "pct": -1.75,
+          "change": ""
+        },
+        {
+          "ticker": "LMT",
+          "name": "LMT",
+          "price": "660.62",
+          "pct": 0.86,
+          "change": ""
+        },
+        {
+          "ticker": "BA",
+          "name": "BA",
+          "price": "230.44",
+          "pct": -0.46,
+          "change": ""
+        },
+        {
+          "ticker": "TM",
+          "name": "TM",
+          "price": "238.03",
+          "pct": 0.03,
+          "change": ""
+        },
+        {
+          "ticker": "V",
+          "name": "V",
+          "price": "306.52",
+          "pct": -3.92,
+          "change": ""
+        },
+        {
+          "ticker": "MA",
+          "name": "MA",
+          "price": "496.03",
+          "pct": -4.68,
+          "change": ""
+        },
+        {
+          "ticker": "NFLX",
+          "name": "NFLX",
+          "price": "75.67",
+          "pct": -0.08,
+          "change": ""
+        },
+        {
+          "ticker": "RDDT",
+          "name": "RDDT",
+          "price": "142.46",
+          "pct": -4,
+          "change": ""
+        },
+        {
+          "ticker": "NOVO-B.CO",
+          "name": "NOVO-B.CO",
+          "price": "38.44",
+          "pct": -0.16,
+          "change": ""
+        }
+      ]
+    },
     {
       "file": "2026-02-24-eu.md",
       "htmlFile": "2026-02-24-eu.html",
