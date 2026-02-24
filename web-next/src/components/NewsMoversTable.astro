@@ -1,0 +1,43 @@
+---
+const { movers = [], news = [] } = Astro.props;
+---
+<section class="news-movers">
+  <div class="grid">
+    <article>
+      <h2>Top Movers</h2>
+      <table>
+        <thead><tr><th>Ticker</th><th>Δ%</th></tr></thead>
+        <tbody>
+          {movers.map((m) => (
+            <tr>
+              <td>{m.ticker}</td>
+              <td class={typeof m.pct === 'number' && m.pct >= 0 ? 'pos' : 'neg'}>{typeof m.pct === 'number' ? `${m.pct > 0 ? '+' : ''}${m.pct.toFixed(2)}%` : 'n/a'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
+    <article>
+      <h2>News/Catalysts</h2>
+      <ul>
+        {news.map((n) => (
+          <li>
+            <strong>{n.ticker ?? 'MARKET'}:</strong> {n.headline}
+            {n.url && <a href={n.url} target="_blank" rel="noreferrer"> source</a>}
+          </li>
+        ))}
+      </ul>
+    </article>
+  </div>
+</section>
+
+<style>
+  .news-movers { border:1px solid #e5e7eb; border-radius:10px; padding:1rem; background:#fff; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media (max-width:760px){ .grid { grid-template-columns:1fr; } }
+  table { width:100%; border-collapse:collapse; }
+  th,td { text-align:left; border-bottom:1px solid #f0f2f4; padding:.35rem .25rem; }
+  .pos { color:#067647; }
+  .neg { color:#b42318; }
+  ul { margin:.2rem 0 0 1rem; }
+</style>

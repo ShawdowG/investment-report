@@ -4,13 +4,17 @@ import HeaderBar from '../components/HeaderBar.astro';
 import MarketPulse from '../components/MarketPulse.astro';
 import TickerTable from '../components/TickerTable.astro';
 import DiscussionPanel from '../components/DiscussionPanel.astro';
+import NewsMoversTable from '../components/NewsMoversTable.astro';
 import { loadSearchIndex } from '../lib/loaders.js';
+import { adaptMovers, deriveNewsFromMovers } from '../lib/adapters.js';
 
 const idx = await loadSearchIndex();
 const slot = Astro.url.searchParams.get('slot') ?? 'pre-close';
 const sort = Astro.url.searchParams.get('sort') ?? 'pct';
 const collapsed = Astro.url.searchParams.get('collapsed') === '1';
 const latest = idx.items?.find((it) => it.slot === slot) ?? idx.items?.[0];
+const adaptedMovers = adaptMovers(latest?.movers ?? [], { sortBy: sort === 'ticker' ? 'ticker' : 'pct', limit: 50 });
+const adaptedNews = Array.isArray(latest?.news) && latest.news.length > 0 ? latest.news : deriveNewsFromMovers(adaptedMovers);
 ---
 <BaseLayout title="Investment Report — Astro Migration">
   <HeaderBar title="Investment Report — Astro migration" date={latest?.date ?? 'n/a'} slot={latest?.slot ?? slot} />
@@ -32,8 +36,9 @@ const latest = idx.items?.find((it) => it.slot === slot) ?? idx.items?.[0];
     <a href={`/?slot=${latest?.slot ?? slot}&sort=${sort}&collapsed=1`}>collapsed</a>
   </p>
 
-  <TickerTable movers={latest?.movers ?? []} sortBy={sort} collapsed={collapsed} />
+  <TickerTable movers={adaptedMovers} sortBy={sort} collapsed={collapsed} />
   <DiscussionPanel alpha={latest?.sections?.alpha ?? []} beta={latest?.sections?.beta ?? []} />
+  <NewsMoversTable movers={adaptMovers(latest?.movers ?? [], { sortBy: 'absPct', limit: 8 })} news={adaptedNews} />
 
   <h3>Index status</h3>
   <ul>
