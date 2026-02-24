@@ -1,0 +1,23 @@
+name: Monitoring Health Checks
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build index
+        run: node scripts/build-index.js
+      - name: Parity check
+        run: node scripts/parity-check.js
+      - name: Cutover verify
+        run: node scripts/post-cutover-verify.js
+      - name: Health monitor
+        run: node scripts/monitor-health.js

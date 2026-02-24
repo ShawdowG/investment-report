@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-02-24T22:32:48.050Z",
+  "snapshots": {
+    "src/pages/index.astro": {
+      "bytes": 2335,
+      "hash": "5127f2d02bd9e380780e47afbdd1ba76a0b6543e12c384b7ed78e0d3f6e8be0b",
+      "h1Count": 0,
+      "tableCount": 0,
+      "listCount": 1
+    }
+  }
+}
