@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-02-24T08:30:46.019Z",
+  "generatedAt": "2026-02-24T13:34:36.109Z",
   "count": 19,
   "items": [
     {
       "file": "2026-02-24-eu.md",
       "htmlFile": "2026-02-24-eu.html",
       "title": "EU/Nordic Morning",
-      "summary": "Synced with latest Gamma snapshot.",
+      "summary": "Risk-off tone; biggest movers DUOL, MA.",
       "date": "2026-02-24",
       "slot": "eu",
       "tickers": [
@@ -34,7 +34,7 @@
         "RDDT",
         "NOVO-B.CO"
       ],
-      "regime": "",
+      "regime": "Risk-off",
       "sections": {
         "gamma": [
           "Ticker | Price | Δ%",
