@@ -22,8 +22,8 @@ Status: Todo | InProgress | Blocked | Done
 - [x] M-14 | Epsi  | P1 | Done | Build `DiscussionPanel`
 - [x] M-15 | Epsi  | P1 | Done | Build `NewsMoversTable`
 - [x] M-16 | Gamma | P1 | Done | Adapter utilities (sorting/fallbacks)
-- [ ] M-17 | Eta   | P0 | Todo | Parity check script (legacy vs Astro)
-- [ ] M-18 | G+E   | P0 | Todo | Canary: 3-5 cron cycles parity pass
+- [x] M-17 | Eta   | P0 | Done | Parity check script (legacy vs Astro)
+- [ ] M-18 | G+E   | P0 | InProgress | Canary: 3-5 cron cycles parity pass
 - [ ] M-19 | Alpha | P1 | Todo | Narrative QA on canary
 - [ ] M-20 | Beta  | P1 | Todo | Tactical QA on canary
 - [ ] M-21 | Eta   | P0 | Todo | Cutover to Astro production
@@ -42,3 +42,4 @@ Status: Todo | InProgress | Blocked | Done
 - 2026-02-24 23:05 CET: M-11→Done, M-12→Done (implemented `HeaderBar`, `TimeRangePicker`, and `MarketPulse` in `web-next/src/components`, wired on index page).
 - 2026-02-24 23:10 CET: M-13→Done, M-14→Done (added `TickerTable` with collapse/sort controls and `DiscussionPanel`, both wired into `web-next/src/pages/index.astro`).
 - 2026-02-24 23:15 CET: M-15→Done, M-16→Done (added `NewsMoversTable` and adapter utilities `web-next/src/lib/adapters.js` for symbol fallback + sorting/news derivation).
+- 2026-02-24 23:20 CET: M-17→Done (added `scripts/parity-check.js`, parity pass OK: 21/21 md+html+index), M-18→InProgress (canary cycle 1/3 started).
