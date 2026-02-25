@@ -53,7 +53,8 @@ button{cursor:pointer}
 .mover-pill{font-size:12px;padding:5px 9px;border-radius:999px;max-width:max-content;font-weight:600}
 .mover-pill.neg{background:#5a1f2f;color:#ffc2cf;border:1px solid #a7546b}
 .mover-pill.pos{background:#184434;color:#b9ffe4;border:1px solid #45a882}
-.mover-change.neg{color:#ff9caf}.mover-change.pos{color:#8ff7cb}
+.mover-pill.flat{background:#2b355b;color:#d3ddff;border:1px solid #4a5d9b}
+.mover-change.neg{color:#ff9caf}.mover-change.pos{color:#8ff7cb}.mover-change.flat{color:#c8d6ff}
 
 .list{margin:6px 0 0;padding-left:18px;line-height:1.65}
 .table-wrap{overflow:auto}
@@ -67,10 +68,21 @@ button{cursor:pointer}
 .agreement-box p{margin:.35rem 0}
 .footer{margin-top:12px;font-size:12px;color:var(--muted)}
 
-.report-body{line-height:1.7}
-.report-body h1{font-size:1.7rem;margin-top:0}
-.report-body h2{font-size:1.25rem;margin-top:1.2rem}
-.report-body p{color:#dbe4ff}
+.signal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.signal-box{background:#0f1730;border:1px solid #30406f;border-radius:10px;padding:10px}
+.signal-box h3{margin:0 0 8px;font-size:.95rem;color:#cfe0ff}
+.signal-box ul{margin:0;padding-left:18px;line-height:1.5}
+
+.report-body{line-height:1.75;font-size:1.02rem}
+.report-body h1{font-size:1.7rem;margin-top:0;margin-bottom:.7rem}
+.report-body h2{font-size:1.18rem;margin-top:1.35rem;border-top:1px solid #2a3763;padding-top:.9rem}
+.report-body h3{font-size:1.05rem;margin-top:1rem}
+.report-body p{color:#dbe4ff;margin:.55rem 0}
+.report-body ul{margin:.35rem 0 .8rem;padding-left:20px}
+.report-body li{margin:.2rem 0}
+.report-body .report-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.report-body .report-table th,.report-body .report-table td{padding:8px 10px;border-bottom:1px solid #2a3763}
+.report-body .report-table th{color:#cfe0ff;background:#101a35}
 .report-body pre{background:#0b1226;border:1px solid #2a3763;padding:10px;border-radius:10px;overflow:auto}
 
 @media (max-width:900px){
@@ -79,6 +91,7 @@ button{cursor:pointer}
   .time-presets{width:100%}
   .pulse-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .section-filters{grid-template-columns:1fr}
+  .signal-grid{grid-template-columns:1fr}
   .mover-row{grid-template-columns:80px 1fr .9fr .9fr;grid-template-areas:"ticker name price price" "ticker change pill pill"}
   .ticker-badge{grid-area:ticker}.mover-name{grid-area:name}.mover-price{grid-area:price}.mover-change{grid-area:change}.mover-pill{grid-area:pill}
 }

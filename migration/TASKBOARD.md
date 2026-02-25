@@ -49,11 +49,12 @@ Status: Todo | InProgress | Blocked | Done
 
 ## UI/Data refinement sprint (2026-02-25)
 
-- [ ] T-01 | Gamma | P0 | InProgress | Fill real Δ$ in ticker table from snapshot math
-- [ ] T-02 | Epsilon | P1 | Todo | Clarify movement pill semantics (arrow + signed %)
-- [ ] T-03 | Alpha+Gamma | P0 | Todo | Remove duplicate ticker data in report page
-- [ ] T-04 | Gamma | P1 | Todo | Redesign Gamma Data Pack into compact signal panel
-- [ ] T-05 | Epsilon | P1 | Todo | Improve report body readability to match main UI
+- [x] T-01 | Gamma | P0 | Done | Fill real Δ$ in ticker table from snapshot math
+- [x] T-02 | Epsilon | P1 | Done | Clarify movement pill semantics (arrow + signed %)
+- [x] T-03 | Alpha+Gamma | P0 | Done | Remove duplicate ticker data in report page
+- [x] T-04 | Gamma | P1 | Done | Redesign Gamma Data Pack into compact signal panel
+- [x] T-05 | Epsilon | P1 | Done | Improve report body readability to match main UI
 
 Progress log:
 - 2026-02-25: Started refinement sprint, T-01 in progress.
+- 2026-02-25 10:15 CET: T-01→Done, T-02→Done, T-03→Done, T-04→Done, T-05→Done (Δ$ math wired across table renderers, movement pills standardized with flat state, report pages de-duplicated by removing inline GAMMA table and adding compact signal panel, report-body markdown/table readability upgraded).

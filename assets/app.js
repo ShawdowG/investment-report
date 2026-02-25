@@ -141,16 +141,16 @@ async function main() {
 
   function renderMoverRow(m) {
     const pct = typeof m.pct === 'number' ? m.pct : null;
-    const isDown = pct !== null ? pct < 0 : null;
-    const direction = pct === null ? '•' : (isDown ? '↓' : '↑');
-    const pctText = pct === null ? '—' : `${pct > 0 ? '+' : ''}${pct.toFixed(2)}%`;
+    const tone = pct === null ? '' : pct < 0 ? 'neg' : pct > 0 ? 'pos' : 'flat';
+    const direction = pct === null ? '•' : pct < 0 ? '↓' : pct > 0 ? '↑' : '→';
+    const pctText = pct === null ? '—' : pct > 0 ? `+${pct.toFixed(2)}%` : pct < 0 ? `${pct.toFixed(2)}%` : '+0.00%';
     const name = NAME_MAP[m.ticker] || m.name || m.ticker || 'Unknown';
     return `<div class="mover-row">
       <div class="ticker-badge">${m.ticker || '—'}</div>
       <div class="mover-name">${name}</div>
       <div class="mover-price">${m.price || '—'}</div>
-      <div class="mover-change ${isDown === null ? '' : isDown ? 'neg':'pos'}">${m.change || '—'}</div>
-      <div class="mover-pill ${isDown === null ? '' : isDown ? 'neg':'pos'}">${direction} ${pctText}</div>
+      <div class="mover-change ${tone}">${m.change || '—'}</div>
+      <div class="mover-pill ${tone}">${direction} ${pctText}</div>
     </div>`;
   }
 

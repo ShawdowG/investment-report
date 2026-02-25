@@ -47,11 +47,16 @@ function formatInline(txt) {
   return escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
 
+function isTableDivider(line = '') {
+  return /^\s*\|?(\s*:?-{3,}:?\s*\|)+\s*:?-{3,}:?\s*\|?\s*$/.test(line);
+}
+
 function renderMarkdownBasic(md) {
   const lines = md.split('\n');
   const out = [];
   let inUl = false;
   let inCode = false;
+
   const closeUl = () => {
     if (inUl) {
       out.push('</ul>');
@@ -59,7 +64,9 @@ function renderMarkdownBasic(md) {
     }
   };
 
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
     if (line.trim().startsWith('```')) {
       closeUl();
       if (!inCode) {
@@ -74,6 +81,38 @@ function renderMarkdownBasic(md) {
 
     if (inCode) {
       out.push(escapeHtml(line));
+      continue;
+    }
+
+    if (line.includes('|') && i + 1 < lines.length && isTableDivider(lines[i + 1])) {
+      closeUl();
+      const headerCells = line.split('|').map(c => c.trim()).filter(Boolean);
+      const alignCells = lines[i + 1].split('|').map(c => c.trim()).filter(Boolean);
+      i += 2;
+      const bodyRows = [];
+      while (i < lines.length && lines[i].includes('|') && lines[i].trim() && !lines[i].trim().startsWith('## ')) {
+        bodyRows.push(lines[i]);
+        i++;
+      }
+      i -= 1;
+
+      const alignFor = (idx) => {
+        const raw = alignCells[idx] || '';
+        if (raw.startsWith(':') && raw.endsWith(':')) return 'center';
+        if (raw.endsWith(':')) return 'right';
+        return 'left';
+      };
+
+      out.push('<div class="table-wrap"><table class="report-table"><thead><tr>');
+      out.push(headerCells.map((cell, idx) => `<th style="text-align:${alignFor(idx)}">${formatInline(cell)}</th>`).join(''));
+      out.push('</tr></thead><tbody>');
+      for (const row of bodyRows) {
+        const cells = row.split('|').map(c => c.trim()).filter(Boolean);
+        out.push('<tr>');
+        out.push(cells.map((cell, idx) => `<td style="text-align:${alignFor(idx)}">${formatInline(cell)}</td>`).join(''));
+        out.push('</tr>');
+      }
+      out.push('</tbody></table></div>');
       continue;
     }
 
@@ -127,10 +166,31 @@ function extractSection(body, startLabel) {
   return out;
 }
 
+function removeSection(body, startLabel) {
+  const lines = body.split('\n');
+  const start = lines.findIndex(l => l.trim().startsWith(startLabel));
+  if (start === -1) return body;
+  let end = lines.length;
+  for (let i = start + 1; i < lines.length; i++) {
+    if (lines[i].trim().startsWith('## ')) {
+      end = i;
+      break;
+    }
+  }
+  return [...lines.slice(0, start), ...lines.slice(end)].join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+function classifyMove(pct) {
+  if (typeof pct !== 'number') return { tone: '', arrow: '•', pctText: '—' };
+  if (pct > 0) return { tone: 'pos', arrow: '↑', pctText: `+${pct.toFixed(2)}%` };
+  if (pct < 0) return { tone: 'neg', arrow: '↓', pctText: `${pct.toFixed(2)}%` };
+  return { tone: 'flat', arrow: '→', pctText: '+0.00%' };
+}
+
 function parseMovers(body, tickers = []) {
   const movers = [];
   const lines = body.split('\n');
-  const re = /^\s*([A-Z0-9^.=\-]+)\s*\|\s*([0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)%/;
+  const re = /^\s*([A-Z0-9^.=-]+)\s*\|\s*([0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)%/;
   for (const l of lines) {
     const m = l.match(re);
     if (!m) continue;
@@ -139,16 +199,19 @@ function parseMovers(body, tickers = []) {
     const pctRaw = m[3].replace(',', '.');
     const pct = Number(pctRaw);
     const closeNum = Number(price.replace(',', '.'));
-    const change = Number.isFinite(closeNum) && Number.isFinite(pct) && (100 + pct) !== 0
-      ? (closeNum - (closeNum / (1 + pct / 100)))
+    const prevClose = Number.isFinite(closeNum) && Number.isFinite(pct) && (1 + pct / 100) !== 0
+      ? closeNum / (1 + pct / 100)
       : null;
-    movers.push({ ticker, name: ticker, price, pct, change: change === null ? '—' : `${change >= 0 ? '+' : ''}${change.toFixed(2)}` });
+    const changeValue = Number.isFinite(prevClose) ? closeNum - prevClose : null;
+    const change = changeValue === null ? '—' : `${changeValue >= 0 ? '+' : ''}${changeValue.toFixed(2)}`;
+
+    movers.push({ ticker, name: ticker, price, pct, change, changeValue });
   }
 
   const byTicker = new Map(movers.map(m => [m.ticker, m]));
   for (const t of (tickers || [])) {
     if (!byTicker.has(t)) {
-      byTicker.set(t, { ticker: t, name: t, price: '—', pct: null, change: '—' });
+      byTicker.set(t, { ticker: t, name: t, price: '—', pct: null, change: '—', changeValue: null });
     }
   }
 
@@ -169,21 +232,50 @@ const NAME_MAP = {
 
 function renderReportMovers(movers = []) {
   if (!movers.length) return '<div class="muted">No ticker data in this report.</div>';
-  const rows = [...movers].sort((a,b)=>Math.abs((b.pct ?? -999)) - Math.abs((a.pct ?? -999)));
+  const rows = [...movers].sort((a, b) => Math.abs((b.pct ?? -999)) - Math.abs((a.pct ?? -999)));
   return rows.map(m => {
-    const pct = typeof m.pct === 'number' ? m.pct : null;
-    const isDown = pct !== null ? pct < 0 : null;
-    const direction = pct === null ? '•' : (isDown ? '↓' : '↑');
-    const pctText = pct === null ? '—' : `${pct > 0 ? '+' : ''}${pct.toFixed(2)}%`;
+    const { tone, arrow, pctText } = classifyMove(m.pct);
     const name = NAME_MAP[m.ticker] || m.name || m.ticker || 'Unknown';
     return `<div class="mover-row">
       <div class="ticker-badge">${escapeHtml(m.ticker || '—')}</div>
       <div class="mover-name">${escapeHtml(name)}</div>
       <div class="mover-price">${escapeHtml(String(m.price || '—'))}</div>
-      <div class="mover-change ${isDown === null ? '' : isDown ? 'neg':'pos'}">${escapeHtml(String(m.change || '—'))}</div>
-      <div class="mover-pill ${isDown === null ? '' : isDown ? 'neg':'pos'}">${direction} ${pctText}</div>
+      <div class="mover-change ${tone}">${escapeHtml(String(m.change || '—'))}</div>
+      <div class="mover-pill ${tone}">${arrow} ${pctText}</div>
     </div>`;
   }).join('');
+}
+
+function renderGammaSignalPanel(movers = []) {
+  const rows = [...movers].filter(m => typeof m.pct === 'number');
+  if (!rows.length) return '<p class="muted">No gamma signal rows parsed for this report.</p>';
+
+  const topUps = rows.slice().sort((a, b) => b.pct - a.pct).slice(0, 3);
+  const topDowns = rows.slice().sort((a, b) => a.pct - b.pct).slice(0, 3);
+  const positive = rows.filter(r => r.pct > 0).length;
+  const negative = rows.filter(r => r.pct < 0).length;
+  const flat = rows.length - positive - negative;
+
+  const renderList = (list) => list.map(r => `<li><strong>${escapeHtml(r.ticker)}</strong> <span class="muted">${r.pct > 0 ? '+' : ''}${r.pct.toFixed(2)}%</span></li>`).join('');
+
+  return `<div class="signal-grid">
+    <article class="signal-box">
+      <h3>Leaders</h3>
+      <ul>${renderList(topUps)}</ul>
+    </article>
+    <article class="signal-box">
+      <h3>Laggards</h3>
+      <ul>${renderList(topDowns)}</ul>
+    </article>
+    <article class="signal-box">
+      <h3>Breadth</h3>
+      <ul>
+        <li><strong>${positive}</strong> positive</li>
+        <li><strong>${negative}</strong> negative</li>
+        <li><strong>${flat}</strong> flat</li>
+      </ul>
+    </article>
+  </div>`;
 }
 
 const files = fs.readdirSync(reportsDir).filter(f => f.endsWith('.md')).sort().reverse();
@@ -204,6 +296,7 @@ const items = files.map(file => {
   const beta = compactSection(extractSection(body, '## 3) BETA'), 'No Beta discussion yet.');
   const pulse = compactSection(extractSection(body, '## 0) Executive TL;DR'), 'Awaiting pulse update.');
   const movers = parseMovers(body, tickers);
+  const reportBody = removeSection(body, '## 1) GAMMA');
 
   const reportHtml = `<!doctype html>
 <html><head>
@@ -227,9 +320,14 @@ const items = files.map(file => {
     </section>
 
     <article class="card">
+      <h2>Gamma signal panel</h2>
+      ${renderGammaSignalPanel(movers)}
+    </article>
+
+    <article class="card">
       <h2>Ticker overview (from this report)</h2>
       <div class="mover-row mover-header">
-        <div>Ticker</div><div>Name</div><div>Price</div><div>Δ$</div><div>Δ%</div>
+        <div>Ticker</div><div>Name</div><div>Price</div><div>Δ$</div><div>Move</div>
       </div>
       <div class="movers">
         ${renderReportMovers(movers)}
@@ -237,7 +335,7 @@ const items = files.map(file => {
     </article>
 
     <article class="card report-body">
-      ${renderMarkdownBasic(body)}
+      ${renderMarkdownBasic(reportBody)}
     </article>
   </div>
 </body></html>`;

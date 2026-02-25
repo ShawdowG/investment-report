@@ -17,17 +17,24 @@ list.sort((a, b) => {
     <summary><strong>Ticker Table</strong> ({list.length})</summary>
     <table>
       <thead>
-        <tr><th>Ticker</th><th>Name</th><th>Price</th><th>Δ%</th></tr>
+        <tr><th>Ticker</th><th>Name</th><th>Price</th><th>Δ$</th><th>Move</th></tr>
       </thead>
       <tbody>
-        {list.map((r) => (
-          <tr>
-            <td>{r.ticker}</td>
-            <td>{r.name}</td>
-            <td>{r.price}</td>
-            <td class={typeof r.pct === 'number' && r.pct >= 0 ? 'pos' : 'neg'}>{typeof r.pct === 'number' ? `${r.pct > 0 ? '+' : ''}${r.pct.toFixed(2)}%` : 'n/a'}</td>
-          </tr>
-        ))}
+        {list.map((r) => {
+          const pct = typeof r.pct === 'number' ? r.pct : null;
+          const tone = pct === null ? '' : pct < 0 ? 'neg' : pct > 0 ? 'pos' : 'flat';
+          const arrow = pct === null ? '•' : pct < 0 ? '↓' : pct > 0 ? '↑' : '→';
+          const move = pct === null ? '—' : pct > 0 ? `+${pct.toFixed(2)}%` : pct < 0 ? `${pct.toFixed(2)}%` : '+0.00%';
+          return (
+            <tr>
+              <td>{r.ticker}</td>
+              <td>{r.name}</td>
+              <td>{r.price}</td>
+              <td class={tone}>{r.change ?? '—'}</td>
+              <td class={tone}>{`${arrow} ${move}`}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </details>
@@ -40,4 +47,5 @@ list.sort((a, b) => {
   th,td { text-align:left; border-bottom:1px solid #f0f2f4; padding:.4rem .3rem; }
   .pos { color:#067647; }
   .neg { color:#b42318; }
+  .flat { color:#475467; }
 </style>

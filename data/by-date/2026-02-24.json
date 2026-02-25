@@ -60,161 +60,184 @@
         "name": "BTC-USD",
         "price": "63364.90",
         "pct": -2.1,
-        "change": "-1359.21"
+        "change": "-1359.21",
+        "changeValue": -1359.2062308478053
       },
       {
         "ticker": "GC=F",
         "name": "GC=F",
         "price": "5137.30",
         "pct": -1.72,
-        "change": "-89.91"
+        "change": "-89.91",
+        "changeValue": -89.90797720797673
       },
       {
         "ticker": "^GSPC",
         "name": "^GSPC",
         "price": "6854.80",
         "pct": 0.24,
-        "change": "+16.41"
+        "change": "+16.41",
+        "changeValue": 16.41213088587392
       },
       {
         "ticker": "^NDQ",
         "name": "^NDQ",
         "price": "22690.96",
         "pct": 0.23,
-        "change": "+52.07"
+        "change": "+52.07",
+        "changeValue": 52.06944826897961
       },
       {
         "ticker": "AAPL",
         "name": "AAPL",
         "price": "266.18",
         "pct": 1.02,
-        "change": "+2.69"
+        "change": "+2.69",
+        "changeValue": 2.6876222530191853
       },
       {
         "ticker": "TSLA",
         "name": "TSLA",
         "price": "399.40",
         "pct": -0.02,
-        "change": "-0.08"
+        "change": "-0.08",
+        "changeValue": -0.07989597919583957
       },
       {
         "ticker": "GOOG",
         "name": "GOOG",
         "price": "310.62",
         "pct": -0.01,
-        "change": "-0.03"
+        "change": "-0.03",
+        "changeValue": -0.03106510651065264
       },
       {
         "ticker": "NVDA",
         "name": "NVDA",
         "price": "191.55",
         "pct": 0.08,
-        "change": "+0.15"
+        "change": "+0.15",
+        "changeValue": 0.1531175059951977
       },
       {
         "ticker": "AMZN",
         "name": "AMZN",
         "price": "205.44",
         "pct": -0.01,
-        "change": "-0.02"
+        "change": "-0.02",
+        "changeValue": -0.020546054605460995
       },
       {
         "ticker": "MSFT",
         "name": "MSFT",
         "price": "384.14",
         "pct": 0,
-        "change": "+0.00"
+        "change": "+0.00",
+        "changeValue": 0
       },
       {
         "ticker": "META",
         "name": "META",
         "price": "633.37",
         "pct": 0.05,
-        "change": "+0.32"
+        "change": "+0.32",
+        "changeValue": 0.3165267366316584
       },
       {
         "ticker": "DUOL",
         "name": "DUOL",
         "price": "106.13",
         "pct": -5.53,
-        "change": "-6.21"
+        "change": "-6.21",
+        "changeValue": -6.2125426061183475
       },
       {
         "ticker": "ADBE.VI",
         "name": "ADBE.VI",
         "price": "246.68",
         "pct": -2.94,
-        "change": "-7.47"
+        "change": "-7.47",
+        "changeValue": -7.472070883989289
       },
       {
         "ticker": "AMD",
         "name": "AMD",
         "price": "211.67",
         "pct": 0.02,
-        "change": "+0.04"
+        "change": "+0.04",
+        "changeValue": 0.04232553489302404
       },
       {
         "ticker": "BABA",
         "name": "BABA",
         "price": "152.78",
         "pct": -1.75,
-        "change": "-2.72"
+        "change": "-2.72",
+        "changeValue": -2.7212722646310397
       },
       {
         "ticker": "LMT",
         "name": "LMT",
         "price": "660.62",
         "pct": 0.86,
-        "change": "+5.63"
+        "change": "+5.63",
+        "changeValue": 5.632889153281781
       },
       {
         "ticker": "BA",
         "name": "BA",
         "price": "230.44",
         "pct": -0.46,
-        "change": "-1.06"
+        "change": "-1.06",
+        "changeValue": -1.0649226441631754
       },
       {
         "ticker": "TM",
         "name": "TM",
         "price": "238.03",
         "pct": 0.03,
-        "change": "+0.07"
+        "change": "+0.07",
+        "changeValue": 0.07138758372488496
       },
       {
         "ticker": "V",
         "name": "V",
         "price": "306.52",
         "pct": -3.92,
-        "change": "-12.51"
+        "change": "-12.51",
+        "changeValue": -12.505811823480428
       },
       {
         "ticker": "MA",
         "name": "MA",
         "price": "496.03",
         "pct": -4.68,
-        "change": "-24.35"
+        "change": "-24.35",
+        "changeValue": -24.353969785984077
       },
       {
         "ticker": "NFLX",
         "name": "NFLX",
         "price": "75.67",
         "pct": -0.08,
-        "change": "-0.06"
+        "change": "-0.06",
+        "changeValue": -0.060584467574059886
       },
       {
         "ticker": "RDDT",
         "name": "RDDT",
         "price": "142.46",
         "pct": -4,
-        "change": "-5.94"
+        "change": "-5.94",
+        "changeValue": -5.935833333333335
       },
       {
         "ticker": "NOVO-B.CO",
         "name": "NOVO-B.CO",
         "price": "38.44",
         "pct": -0.16,
-        "change": "-0.06"
+        "change": "-0.06",
+        "changeValue": -0.06160256410256437
       }
     ]
   },
@@ -279,161 +302,184 @@
         "name": "BTC-USD",
         "price": "64467.40",
         "pct": -0.4,
-        "change": "-258.91"
+        "change": "-258.91",
+        "changeValue": -258.90522088353464
       },
       {
         "ticker": "GC=F",
         "name": "GC=F",
         "price": "5154.07",
         "pct": -1.4,
-        "change": "-73.18"
+        "change": "-73.18",
+        "changeValue": -73.18152129817463
       },
       {
         "ticker": "^GSPC",
         "name": "^GSPC",
         "price": "6887.66",
         "pct": 0.72,
-        "change": "+49.24"
+        "change": "+49.24",
+        "changeValue": 49.23664813344021
       },
       {
         "ticker": "^NDQ",
         "name": "^NDQ",
         "price": "22856.34",
         "pct": 0.96,
-        "change": "+217.33"
+        "change": "+217.33",
+        "changeValue": 217.33445324881177
       },
       {
         "ticker": "AAPL",
         "name": "AAPL",
         "price": "272.54",
         "pct": 1.75,
-        "change": "+4.69"
+        "change": "+4.69",
+        "changeValue": 4.687420147420141
       },
       {
         "ticker": "TSLA",
         "name": "TSLA",
         "price": "408.86",
         "pct": 2.34,
-        "change": "+9.35"
+        "change": "+9.35",
+        "changeValue": 9.348567520031281
       },
       {
         "ticker": "GOOG",
         "name": "GOOG",
         "price": "311.00",
         "pct": 0.11,
-        "change": "+0.34"
+        "change": "+0.34",
+        "changeValue": 0.34172410348617177
       },
       {
         "ticker": "NVDA",
         "name": "NVDA",
         "price": "192.57",
         "pct": 0.58,
-        "change": "+1.11"
+        "change": "+1.11",
+        "changeValue": 1.1104653012527308
       },
       {
         "ticker": "AMZN",
         "name": "AMZN",
         "price": "208.96",
         "pct": 1.7,
-        "change": "+3.49"
+        "change": "+3.49",
+        "changeValue": 3.4929400196656673
       },
       {
         "ticker": "MSFT",
         "name": "MSFT",
         "price": "387.61",
         "pct": 0.9,
-        "change": "+3.46"
+        "change": "+3.46",
+        "changeValue": 3.4573736372645953
       },
       {
         "ticker": "META",
         "name": "META",
         "price": "639.20",
         "pct": 0.97,
-        "change": "+6.14"
+        "change": "+6.14",
+        "changeValue": 6.140675448152933
       },
       {
         "ticker": "DUOL",
         "name": "DUOL",
         "price": "109.15",
         "pct": 2.97,
-        "change": "+3.15"
+        "change": "+3.15",
+        "changeValue": 3.14825191803439
       },
       {
         "ticker": "ADBE.VI",
         "name": "ADBE.VI",
         "price": "255.00",
         "pct": 3.84,
-        "change": "+9.43"
+        "change": "+9.43",
+        "changeValue": 9.42989214175654
       },
       {
         "ticker": "AMD",
         "name": "AMD",
         "price": "213.94",
         "pct": 1.09,
-        "change": "+2.31"
+        "change": "+2.31",
+        "changeValue": 2.3068018597289495
       },
       {
         "ticker": "BABA",
         "name": "BABA",
         "price": "152.62",
         "pct": 0.6,
-        "change": "+0.91"
+        "change": "+0.91",
+        "changeValue": 0.9102584493041661
       },
       {
         "ticker": "LMT",
         "name": "LMT",
         "price": "666.92",
         "pct": 1.38,
-        "change": "+9.08"
+        "change": "+9.08",
+        "changeValue": 9.078216610771392
       },
       {
         "ticker": "BA",
         "name": "BA",
         "price": "234.67",
         "pct": 2.33,
-        "change": "+5.34"
+        "change": "+5.34",
+        "changeValue": 5.343311834261726
       },
       {
         "ticker": "TM",
         "name": "TM",
         "price": "238.56",
         "pct": 1.14,
-        "change": "+2.69"
+        "change": "+2.69",
+        "changeValue": 2.6889301957682505
       },
       {
         "ticker": "V",
         "name": "V",
         "price": "306.82",
         "pct": 0.43,
-        "change": "+1.31"
+        "change": "+1.31",
+        "changeValue": 1.3136771880912193
       },
       {
         "ticker": "MA",
         "name": "MA",
         "price": "498.00",
         "pct": 0.59,
-        "change": "+2.92"
+        "change": "+2.92",
+        "changeValue": 2.920966298836845
       },
       {
         "ticker": "NFLX",
         "name": "NFLX",
         "price": "77.18",
         "pct": 1.91,
-        "change": "+1.45"
+        "change": "+1.45",
+        "changeValue": 1.4465096653910194
       },
       {
         "ticker": "RDDT",
         "name": "RDDT",
         "price": "143.39",
         "pct": 0.32,
-        "change": "+0.46"
+        "change": "+0.46",
+        "changeValue": 0.45738437001597276
       },
       {
         "ticker": "NOVO-B.CO",
         "name": "NOVO-B.CO",
         "price": "38.61",
         "pct": 0.27,
-        "change": "+0.10"
+        "change": "+0.10",
+        "changeValue": 0.10396629101425958
       }
     ]
   },
@@ -494,161 +540,184 @@
         "name": "BTC-USD",
         "price": "63286.3",
         "pct": -2.22,
-        "change": "-1436.85"
+        "change": "-1436.85",
+        "changeValue": -1436.8540192268338
       },
       {
         "ticker": "GC=F",
         "name": "GC=F",
         "price": "5171.545",
         "pct": -1.06,
-        "change": "-55.41"
+        "change": "-55.41",
+        "changeValue": -55.4056771780879
       },
       {
         "ticker": "^GSPC",
         "name": "^GSPC",
         "price": "6837.75",
         "pct": -0.92,
-        "change": "-63.49"
+        "change": "-63.49",
+        "changeValue": -63.49142107387979
       },
       {
         "ticker": "^NDQ",
         "name": "^NDQ",
         "price": "22627.27",
         "pct": -0.94,
-        "change": "-214.71"
+        "change": "-214.71",
+        "changeValue": -214.71465576418268
       },
       {
         "ticker": "AAPL",
         "name": "AAPL",
         "price": "266.18",
         "pct": 1.02,
-        "change": "+2.69"
+        "change": "+2.69",
+        "changeValue": 2.6876222530191853
       },
       {
         "ticker": "TSLA",
         "name": "TSLA",
         "price": "399.83",
         "pct": -1.83,
-        "change": "-7.45"
+        "change": "-7.45",
+        "changeValue": -7.45328409901191
       },
       {
         "ticker": "GOOG",
         "name": "GOOG",
         "price": "311.69",
         "pct": -2.33,
-        "change": "-7.44"
+        "change": "-7.44",
+        "changeValue": -7.435627111702672
       },
       {
         "ticker": "NVDA",
         "name": "NVDA",
         "price": "191.55",
         "pct": 0.08,
-        "change": "+0.15"
+        "change": "+0.15",
+        "changeValue": 0.1531175059951977
       },
       {
         "ticker": "AMZN",
         "name": "AMZN",
         "price": "205.27",
         "pct": -1.36,
-        "change": "-2.83"
+        "change": "-2.83",
+        "changeValue": -2.8301622060016314
       },
       {
         "ticker": "MSFT",
         "name": "MSFT",
         "price": "384.47",
         "pct": -2.67,
-        "change": "-10.55"
+        "change": "-10.55",
+        "changeValue": -10.546952635364221
       },
       {
         "ticker": "META",
         "name": "META",
         "price": "637.25",
         "pct": -2.34,
-        "change": "-15.27"
+        "change": "-15.27",
+        "changeValue": -15.268943272578326
       },
       {
         "ticker": "DUOL",
         "name": "DUOL",
         "price": "106.135",
         "pct": -5.53,
-        "change": "-6.21"
+        "change": "-6.21",
+        "changeValue": -6.212835291626973
       },
       {
         "ticker": "ADBE.VI",
         "name": "ADBE.VI",
         "price": "246.68",
         "pct": -2.94,
-        "change": "-7.47"
+        "change": "-7.47",
+        "changeValue": -7.472070883989289
       },
       {
         "ticker": "AMD",
         "name": "AMD",
         "price": "196.6",
         "pct": -0.75,
-        "change": "-1.49"
+        "change": "-1.49",
+        "changeValue": -1.4856423173803535
       },
       {
         "ticker": "BABA",
         "name": "BABA",
         "price": "152.78",
         "pct": -1.75,
-        "change": "-2.72"
+        "change": "-2.72",
+        "changeValue": -2.7212722646310397
       },
       {
         "ticker": "LMT",
         "name": "LMT",
         "price": "660.62",
         "pct": 0.86,
-        "change": "+5.63"
+        "change": "+5.63",
+        "changeValue": 5.632889153281781
       },
       {
         "ticker": "BA",
         "name": "BA",
         "price": "230.44",
         "pct": -0.46,
-        "change": "-1.06"
+        "change": "-1.06",
+        "changeValue": -1.0649226441631754
       },
       {
         "ticker": "TM",
         "name": "TM",
         "price": "238.03",
         "pct": 0.03,
-        "change": "+0.07"
+        "change": "+0.07",
+        "changeValue": 0.07138758372488496
       },
       {
         "ticker": "V",
         "name": "V",
         "price": "306.52",
         "pct": -3.92,
-        "change": "-12.51"
+        "change": "-12.51",
+        "changeValue": -12.505811823480428
       },
       {
         "ticker": "MA",
         "name": "MA",
         "price": "496.03",
         "pct": -4.68,
-        "change": "-24.35"
+        "change": "-24.35",
+        "changeValue": -24.353969785984077
       },
       {
         "ticker": "NFLX",
         "name": "NFLX",
         "price": "76.02",
         "pct": -2.28,
-        "change": "-1.77"
+        "change": "-1.77",
+        "changeValue": -1.773696275071643
       },
       {
         "ticker": "RDDT",
         "name": "RDDT",
         "price": "142.46",
         "pct": -4,
-        "change": "-5.94"
+        "change": "-5.94",
+        "changeValue": -5.935833333333335
       },
       {
         "ticker": "NOVO-B.CO",
         "name": "NOVO-B.CO",
         "price": "39.63",
         "pct": -1.39,
-        "change": "-0.56"
+        "change": "-0.56",
+        "changeValue": -0.5586218436264048
       }
     ]
   }
