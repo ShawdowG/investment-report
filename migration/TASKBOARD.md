@@ -46,3 +46,14 @@ Status: Todo | InProgress | Blocked | Done
 - 2026-02-24 23:25 CET: M-18→Done (canary cycles 2/3 and 3/3 passed; parity OK each run), M-19→Done (narrative QA: summary/regime present, alpha=3, pulse present), M-20→Done (tactical QA: beta=3, movers=23, tactical fields valid).
 - 2026-02-24 23:30 CET: M-21→Done (production cutover workflow added: `.github/workflows/web-next-production.yml`), M-23→Done (`migration/ROLLBACK_PLAYBOOK.md`), M-24→Done (`scripts/visual-regression-snapshot.js` + `migration/visual-regression/latest.json`), M-25→Done (`scripts/monitor-health.js` + `.github/workflows/monitor-health.yml`), M-22→Blocked (post-cutover local build verification blocked by npm registry connectivity).
 - 2026-02-24 23:36 CET: M-22→Done (retry succeeded: `npm install`, `astro build`, `node scripts/post-cutover-verify.js` => `POST_CUTOVER_OK`).
+
+## UI/Data refinement sprint (2026-02-25)
+
+- [ ] T-01 | Gamma | P0 | InProgress | Fill real Δ$ in ticker table from snapshot math
+- [ ] T-02 | Epsilon | P1 | Todo | Clarify movement pill semantics (arrow + signed %)
+- [ ] T-03 | Alpha+Gamma | P0 | Todo | Remove duplicate ticker data in report page
+- [ ] T-04 | Gamma | P1 | Todo | Redesign Gamma Data Pack into compact signal panel
+- [ ] T-05 | Epsilon | P1 | Todo | Improve report body readability to match main UI
+
+Progress log:
+- 2026-02-25: Started refinement sprint, T-01 in progress.

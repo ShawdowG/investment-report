@@ -138,7 +138,11 @@ function parseMovers(body, tickers = []) {
     const price = m[2].trim();
     const pctRaw = m[3].replace(',', '.');
     const pct = Number(pctRaw);
-    movers.push({ ticker, name: ticker, price, pct, change: '' });
+    const closeNum = Number(price.replace(',', '.'));
+    const change = Number.isFinite(closeNum) && Number.isFinite(pct) && (100 + pct) !== 0
+      ? (closeNum - (closeNum / (1 + pct / 100)))
+      : null;
+    movers.push({ ticker, name: ticker, price, pct, change: change === null ? '—' : `${change >= 0 ? '+' : ''}${change.toFixed(2)}` });
   }
 
   const byTicker = new Map(movers.map(m => [m.ticker, m]));

@@ -61,56 +61,56 @@
         "name": "TSLA",
         "price": "405.00",
         "pct": -3.2,
-        "change": ""
+        "change": "-13.39"
       },
       {
         "ticker": "AMD",
         "name": "AMD",
         "price": "308.30",
         "pct": -2.8,
-        "change": ""
+        "change": "-8.88"
       },
       {
         "ticker": "MA",
         "name": "MA",
         "price": "237.20",
         "pct": -2.4,
-        "change": ""
+        "change": "-5.83"
       },
       {
         "ticker": "V",
         "name": "V",
         "price": "183.00",
         "pct": -2.1,
-        "change": ""
+        "change": "-3.93"
       },
       {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
         "price": "95.50",
         "pct": -1.9,
-        "change": ""
+        "change": "-1.85"
       },
       {
         "ticker": "NVDA",
         "name": "NVDA",
         "price": "392.90",
         "pct": 1.7,
-        "change": ""
+        "change": "+6.57"
       },
       {
         "ticker": "GOOG",
         "name": "GOOG",
         "price": "396.20",
         "pct": -1.4,
-        "change": ""
+        "change": "-5.63"
       },
       {
         "ticker": "NFLX",
         "name": "NFLX",
         "price": "409.40",
         "pct": 1.2,
-        "change": ""
+        "change": "+4.85"
       },
       {
         "ticker": "GC=F",
@@ -281,56 +281,56 @@
         "name": "TSLA",
         "price": "417.10",
         "pct": -2.75,
-        "change": ""
+        "change": "-11.79"
       },
       {
         "ticker": "AMD",
         "name": "AMD",
         "price": "316.70",
         "pct": -2.35,
-        "change": ""
+        "change": "-7.62"
       },
       {
         "ticker": "NVDA",
         "name": "NVDA",
         "price": "405.00",
         "pct": 2.15,
-        "change": ""
+        "change": "+8.52"
       },
       {
         "ticker": "MA",
         "name": "MA",
         "price": "249.30",
         "pct": -1.95,
-        "change": ""
+        "change": "-4.96"
       },
       {
         "ticker": "V",
         "name": "V",
         "price": "195.10",
         "pct": -1.65,
-        "change": ""
+        "change": "-3.27"
       },
       {
         "ticker": "NFLX",
         "name": "NFLX",
         "price": "421.50",
         "pct": 1.65,
-        "change": ""
+        "change": "+6.84"
       },
       {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
         "price": "107.60",
         "pct": -1.45,
-        "change": ""
+        "change": "-1.58"
       },
       {
         "ticker": "AAPL",
         "name": "AAPL",
         "price": "392.90",
         "pct": 1.35,
-        "change": ""
+        "change": "+5.23"
       },
       {
         "ticker": "GC=F",
@@ -501,56 +501,56 @@
         "name": "TSLA",
         "price": "392.90",
         "pct": -3.65,
-        "change": ""
+        "change": "-14.88"
       },
       {
         "ticker": "AMD",
         "name": "AMD",
         "price": "296.20",
         "pct": -3.25,
-        "change": ""
+        "change": "-9.95"
       },
       {
         "ticker": "MA",
         "name": "MA",
         "price": "228.80",
         "pct": -2.85,
-        "change": ""
+        "change": "-6.71"
       },
       {
         "ticker": "V",
         "name": "V",
         "price": "170.90",
         "pct": -2.55,
-        "change": ""
+        "change": "-4.47"
       },
       {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
         "price": "83.40",
         "pct": -2.35,
-        "change": ""
+        "change": "-2.01"
       },
       {
         "ticker": "GOOG",
         "name": "GOOG",
         "price": "384.10",
         "pct": -1.85,
-        "change": ""
+        "change": "-7.24"
       },
       {
         "ticker": "NVDA",
         "name": "NVDA",
         "price": "384.50",
         "pct": 1.25,
-        "change": ""
+        "change": "+4.75"
       },
       {
         "ticker": "NFLX",
         "name": "NFLX",
         "price": "397.30",
         "pct": 0.75,
-        "change": ""
+        "change": "+2.96"
       },
       {
         "ticker": "GC=F",
