@@ -1,0 +1,21 @@
+---
+const { summary = '', regime = '', slot = '', date = '' } = Astro.props;
+
+const items = [
+  summary,
+  regime ? `Regime context: ${regime}.` : '',
+  slot && date ? `Active snapshot: ${date} / ${slot}.` : ''
+].filter(Boolean);
+---
+<section class="panel">
+  <h2>Today’s Takeaway</h2>
+  <ul>
+    {items.map((line) => <li>{line}</li>)}
+  </ul>
+</section>
+
+<style>
+  .panel { border:1px solid #e5e7eb; border-radius:10px; padding:1rem; background:#fff; }
+  h2 { margin:.1rem 0 .55rem; }
+  ul { margin:.2rem 0 0 1.1rem; line-height:1.5; }
+</style>

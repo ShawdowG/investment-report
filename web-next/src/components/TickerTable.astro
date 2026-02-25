@@ -15,9 +15,10 @@ list.sort((a, b) => {
 <section class="ticker-table">
   <details open={!collapsed}>
     <summary><strong>Ticker Table</strong> ({list.length})</summary>
+    <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>Ticker</th><th>Name</th><th>Price</th><th>Δ$</th><th>Move</th></tr>
+        <tr><th>Ticker</th><th>Name</th><th class="num">Price</th><th class="num">Δ$</th><th>Move</th></tr>
       </thead>
       <tbody>
         {list.map((r) => {
@@ -29,22 +30,26 @@ list.sort((a, b) => {
             <tr>
               <td>{r.ticker}</td>
               <td>{r.name}</td>
-              <td>{r.price}</td>
-              <td class={tone}>{r.change ?? '—'}</td>
+              <td class="num">{r.price}</td>
+              <td class={`num ${tone}`}>{r.change ?? '—'}</td>
               <td class={tone}>{`${arrow} ${move}`}</td>
             </tr>
           );
         })}
       </tbody>
     </table>
+    </div>
   </details>
 </section>
 
 <style>
   details { border:1px solid #e5e7eb; border-radius:10px; padding:.7rem 1rem; background:#fff; }
   summary { cursor:pointer; margin-bottom:.6rem; }
-  table { width:100%; border-collapse:collapse; font-size:.92rem; }
-  th,td { text-align:left; border-bottom:1px solid #f0f2f4; padding:.4rem .3rem; }
+  .table-wrap { max-height: 540px; overflow:auto; border:1px solid #f0f2f4; border-radius:8px; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th,td { text-align:left; border-bottom:1px solid #f0f2f4; padding:.5rem .45rem; }
+  thead th { position:sticky; top:0; background:#fff; z-index:1; }
+  .num { text-align:right; font-variant-numeric: tabular-nums; }
   .pos { color:#067647; }
   .neg { color:#b42318; }
   .flat { color:#475467; }

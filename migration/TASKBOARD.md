@@ -61,8 +61,8 @@ Progress log:
 
 ## Revamp backlog (2026-02-25 PM)
 
-- [ ] R-01 | Alpha | P0 | InProgress | Unify information hierarchy: Pulse -> Takeaway -> Alpha/Beta -> Tickers -> News
-- [ ] R-02 | Epsi  | P1 | Todo | Improve table density/legibility (sticky header, row spacing, numeric alignment)
+- [x] R-01 | Alpha | P0 | Done | Unify information hierarchy: Pulse -> Takeaway -> Alpha/Beta -> Tickers -> News
+- [x] R-02 | Epsi  | P1 | Done | Improve table density/legibility (sticky header, row spacing, numeric alignment)
 - [ ] R-03 | Gamma | P0 | Todo | Add reliable Δ$ source field from snapshot (avoid derived approximation when possible)
 - [ ] R-04 | Eta   | P1 | Todo | Add schema field for `changeAbs` + CI gate for missing mover fields
 - [ ] R-05 | Alpha | P1 | Todo | Rewrite summary/discussion templates for less generic language
@@ -80,3 +80,4 @@ Progress log:
 - 2026-02-25: Added revamp backlog R-01..R-08.
 - 2026-02-25: R-01 moved to InProgress (hierarchy pass started).
 - 2026-02-25: R-09/R-10/R-11/R-12/R-13 moved to Done (top nav + main/tracker/reports pages + active nav).
+- 2026-02-25 20:20 CET: R-01→Done, R-02→Done (`web-next` main page reordered to Pulse→Takeaway→Discussion→Tickers→News; added `TakeawayPanel`; ticker table now sticky-header + tighter spacing + tabular numeric alignment).

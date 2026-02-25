@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeaderBar from '../components/HeaderBar.astro';
 import MarketPulse from '../components/MarketPulse.astro';
-import TickerTable from '../components/TickerTable.astro';
+import TakeawayPanel from '../components/TakeawayPanel.astro';
 import DiscussionPanel from '../components/DiscussionPanel.astro';
+import TickerTable from '../components/TickerTable.astro';
 import NewsMoversTable from '../components/NewsMoversTable.astro';
 import { loadSearchIndex } from '../lib/loaders.js';
 import { adaptMovers, deriveNewsFromMovers } from '../lib/adapters.js';
@@ -21,13 +22,9 @@ const adaptedNews = Array.isArray(latest?.news) && latest.news.length > 0 ? late
 
   <p class="muted">Static migration scaffold with live JSON/MD loader wiring.</p>
 
-  <MarketPulse
-    summary={latest?.summary ?? ''}
-    regime={latest?.regime ?? ''}
-    alpha={latest?.sections?.alpha ?? []}
-    beta={latest?.sections?.beta ?? []}
-    pulse={latest?.sections?.pulse ?? []}
-  />
+  <MarketPulse regime={latest?.regime ?? ''} pulse={latest?.sections?.pulse ?? []} />
+  <TakeawayPanel summary={latest?.summary ?? ''} regime={latest?.regime ?? ''} date={latest?.date ?? ''} slot={latest?.slot ?? slot} />
+  <DiscussionPanel alpha={latest?.sections?.alpha ?? []} beta={latest?.sections?.beta ?? []} />
 
   <p class="muted">
     Table controls:
@@ -37,7 +34,6 @@ const adaptedNews = Array.isArray(latest?.news) && latest.news.length > 0 ? late
   </p>
 
   <TickerTable movers={adaptedMovers} sortBy={sort} collapsed={collapsed} />
-  <DiscussionPanel alpha={latest?.sections?.alpha ?? []} beta={latest?.sections?.beta ?? []} />
   <NewsMoversTable movers={adaptMovers(latest?.movers ?? [], { sortBy: 'absPct', limit: 8 })} news={adaptedNews} />
 
   <h3>Index status</h3>
