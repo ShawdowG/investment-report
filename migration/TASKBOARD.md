@@ -61,7 +61,7 @@ Progress log:
 
 ## Revamp backlog (2026-02-25 PM)
 
-- [ ] R-01 | Alpha | P0 | Todo | Unify information hierarchy: Pulse -> Takeaway -> Alpha/Beta -> Tickers -> News
+- [ ] R-01 | Alpha | P0 | InProgress | Unify information hierarchy: Pulse -> Takeaway -> Alpha/Beta -> Tickers -> News
 - [ ] R-02 | Epsi  | P1 | Todo | Improve table density/legibility (sticky header, row spacing, numeric alignment)
 - [ ] R-03 | Gamma | P0 | Todo | Add reliable Δ$ source field from snapshot (avoid derived approximation when possible)
 - [ ] R-04 | Eta   | P1 | Todo | Add schema field for `changeAbs` + CI gate for missing mover fields
@@ -72,3 +72,4 @@ Progress log:
 
 Progress log:
 - 2026-02-25: Added revamp backlog R-01..R-08.
+- 2026-02-25: R-01 moved to InProgress (hierarchy pass started).
