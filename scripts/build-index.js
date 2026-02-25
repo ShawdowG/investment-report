@@ -381,9 +381,12 @@ const html = `<!doctype html>
 <body>
   <div class="wrap">
     <nav class="topnav">
-      <a class="nav-link active" href="index.html">Main</a>
-      <a class="nav-link" href="tracker.html">Tracker</a>
-      <a class="nav-link" href="reports.html">Reports / Analysis</a>
+      <a class="nav-brand" href="index.html">Investment Report</a>
+      <div class="nav-links">
+        <a class="nav-link active" href="index.html">Main</a>
+        <a class="nav-link" href="tracker.html">Tracker</a>
+        <a class="nav-link" href="reports.html">Reports / Analysis</a>
+      </div>
     </nav>
     <section class="hero">
       <div class="hero-top">
@@ -504,9 +507,12 @@ const reportsPage = `<!doctype html>
 </head><body>
   <div class="wrap">
     <nav class="topnav">
-      <a class="nav-link" href="index.html">Main</a>
-      <a class="nav-link" href="tracker.html">Tracker</a>
-      <a class="nav-link active" href="reports.html">Reports / Analysis</a>
+      <a class="nav-brand" href="index.html">Investment Report</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Main</a>
+        <a class="nav-link" href="tracker.html">Tracker</a>
+        <a class="nav-link active" href="reports.html">Reports / Analysis</a>
+      </div>
     </nav>
     <section class="hero"><h1>Reports / Analysis</h1><p class="muted">Browse generated daily reports by date and session.</p></section>
     <article class="card"><ul class="list">${reportsList || '<li class="muted">No reports available.</li>'}</ul></article>
@@ -523,9 +529,12 @@ const trackerPage = `<!doctype html>
 </head><body>
   <div class="wrap">
     <nav class="topnav">
-      <a class="nav-link" href="index.html">Main</a>
-      <a class="nav-link active" href="tracker.html">Tracker</a>
-      <a class="nav-link" href="reports.html">Reports / Analysis</a>
+      <a class="nav-brand" href="index.html">Investment Report</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Main</a>
+        <a class="nav-link active" href="tracker.html">Tracker</a>
+        <a class="nav-link" href="reports.html">Reports / Analysis</a>
+      </div>
     </nav>
     <section class="hero"><h1>Tracker</h1><p class="muted">Live tracking workspace (signals, alerts, watch status) — scaffold ready for next iteration.</p></section>
     <article class="card"><h2>Planned widgets</h2><ul class="list"><li>Watchlist health</li><li>Signal triggers</li><li>Risk posture quick panel</li><li>Catalyst calendar</li></ul></article>
