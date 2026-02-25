@@ -58,3 +58,17 @@ Status: Todo | InProgress | Blocked | Done
 Progress log:
 - 2026-02-25: Started refinement sprint, T-01 in progress.
 - 2026-02-25 10:15 CET: T-01→Done, T-02→Done, T-03→Done, T-04→Done, T-05→Done (Δ$ math wired across table renderers, movement pills standardized with flat state, report pages de-duplicated by removing inline GAMMA table and adding compact signal panel, report-body markdown/table readability upgraded).
+
+## Revamp backlog (2026-02-25 PM)
+
+- [ ] R-01 | Alpha | P0 | Todo | Unify information hierarchy: Pulse -> Takeaway -> Alpha/Beta -> Tickers -> News
+- [ ] R-02 | Epsi  | P1 | Todo | Improve table density/legibility (sticky header, row spacing, numeric alignment)
+- [ ] R-03 | Gamma | P0 | Todo | Add reliable Δ$ source field from snapshot (avoid derived approximation when possible)
+- [ ] R-04 | Eta   | P1 | Todo | Add schema field for `changeAbs` + CI gate for missing mover fields
+- [ ] R-05 | Alpha | P1 | Todo | Rewrite summary/discussion templates for less generic language
+- [ ] R-06 | Epsi  | P1 | Todo | Report page cleanup: collapse raw blocks, keep one canonical data view
+- [ ] R-07 | Beta  | P1 | Todo | Add tactical quick-panel (risk posture, trigger, invalidation)
+- [ ] R-08 | Gamma | P1 | Todo | Direct source-link quality improvement (prefer direct publisher links)
+
+Progress log:
+- 2026-02-25: Added revamp backlog R-01..R-08.
