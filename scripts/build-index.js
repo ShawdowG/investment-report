@@ -380,6 +380,11 @@ const html = `<!doctype html>
 </head>
 <body>
   <div class="wrap">
+    <nav class="topnav">
+      <a class="nav-link active" href="index.html">Main</a>
+      <a class="nav-link" href="tracker.html">Tracker</a>
+      <a class="nav-link" href="reports.html">Reports / Analysis</a>
+    </nav>
     <section class="hero">
       <div class="hero-top">
         <div>
@@ -485,6 +490,48 @@ const html = `<!doctype html>
 </html>`;
 
 fs.writeFileSync(path.join(ROOT, 'index.html'), html);
+
+const reportsList = items.slice(0, 200)
+  .map(i => `<li><a href="reports/html/${i.htmlFile}">${i.date} • ${i.slot} • ${i.title}</a>${i.regime ? ` <span class="muted">(${i.regime})</span>` : ''}</li>`)
+  .join('');
+
+const reportsPage = `<!doctype html>
+<html><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reports / Analysis</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head><body>
+  <div class="wrap">
+    <nav class="topnav">
+      <a class="nav-link" href="index.html">Main</a>
+      <a class="nav-link" href="tracker.html">Tracker</a>
+      <a class="nav-link active" href="reports.html">Reports / Analysis</a>
+    </nav>
+    <section class="hero"><h1>Reports / Analysis</h1><p class="muted">Browse generated daily reports by date and session.</p></section>
+    <article class="card"><ul class="list">${reportsList || '<li class="muted">No reports available.</li>'}</ul></article>
+  </div>
+</body></html>`;
+fs.writeFileSync(path.join(ROOT, 'reports.html'), reportsPage);
+
+const trackerPage = `<!doctype html>
+<html><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tracker</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head><body>
+  <div class="wrap">
+    <nav class="topnav">
+      <a class="nav-link" href="index.html">Main</a>
+      <a class="nav-link active" href="tracker.html">Tracker</a>
+      <a class="nav-link" href="reports.html">Reports / Analysis</a>
+    </nav>
+    <section class="hero"><h1>Tracker</h1><p class="muted">Live tracking workspace (signals, alerts, watch status) — scaffold ready for next iteration.</p></section>
+    <article class="card"><h2>Planned widgets</h2><ul class="list"><li>Watchlist health</li><li>Signal triggers</li><li>Risk posture quick panel</li><li>Catalyst calendar</li></ul></article>
+  </div>
+</body></html>`;
+fs.writeFileSync(path.join(ROOT, 'tracker.html'), trackerPage);
 
 const todayHtml = latest
   ? `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reports/html/${latest.htmlFile}"><title>Latest Report</title><p>Redirecting to <a href="reports/html/${latest.htmlFile}">${latest.htmlFile}</a>...</p>`

@@ -69,7 +69,14 @@ Progress log:
 - [ ] R-06 | Epsi  | P1 | Todo | Report page cleanup: collapse raw blocks, keep one canonical data view
 - [ ] R-07 | Beta  | P1 | Todo | Add tactical quick-panel (risk posture, trigger, invalidation)
 - [ ] R-08 | Gamma | P1 | Todo | Direct source-link quality improvement (prefer direct publisher links)
+- [ ] R-09 | Epsi  | P0 | Done | Add global top navbar + route shell (Main / Tracker / Reports)
+- [ ] R-10 | Alpha | P0 | Done | Move dashboard content under Main page route
+- [ ] R-11 | Beta  | P1 | Done | Build Tracker page scaffold and core widgets placeholders
+- [ ] R-12 | Gamma | P1 | Done | Build Reports page archive with filters/links
+- [ ] R-13 | Epsi  | P1 | Done | Navbar active states + mobile behavior
+- [ ] R-14 | Eta   | P1 | Todo | Route/link compatibility and redirect safety checks
 
 Progress log:
 - 2026-02-25: Added revamp backlog R-01..R-08.
 - 2026-02-25: R-01 moved to InProgress (hierarchy pass started).
+- 2026-02-25: R-09/R-10/R-11/R-12/R-13 moved to Done (top nav + main/tracker/reports pages + active nav).
