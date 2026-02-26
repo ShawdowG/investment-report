@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadSearchIndex } from '../lib/loaders.js';
+
+const idx = await loadSearchIndex();
+const items = (idx.items ?? []).slice().sort((a, b) => {
+  if (b.date !== a.date) return b.date.localeCompare(a.date);
+  const slotOrder = { 'pre-close': 0, 'us-open': 1, 'eu': 2 };
+  return (slotOrder[a.slot] ?? 9) - (slotOrder[b.slot] ?? 9);
+});
+
+// Regime history (all reports newest-first)
+const regimeHistory = items.map((it) => ({
+  date: it.date,
+  slot: it.slot,
+  regime: it.regime ?? '',
+}));
+
+// Ticker frequency: count appearances + avg Δ% + last seen
+const tickerMap = new Map();
+for (const item of items) {
+  for (const mover of item.movers ?? []) {
+    const ticker = String(mover?.ticker ?? '').trim();
+    if (!ticker) continue;
+    const pct = typeof mover.pct === 'number' ? mover.pct : null;
+    if (!tickerMap.has(ticker)) {
+      tickerMap.set(ticker, { ticker, count: 0, pctSum: 0, pctN: 0, lastDate: item.date });
+    }
+    const entry = tickerMap.get(ticker);
+    entry.count++;
+    if (pct !== null) { entry.pctSum += pct; entry.pctN++; }
+    if (item.date > entry.lastDate) entry.lastDate = item.date;
+  }
+}
+const tickerFreq = Array.from(tickerMap.values())
+  .map((e) => ({ ...e, avgPct: e.pctN > 0 ? e.pctSum / e.pctN : null }))
+  .sort((a, b) => b.count - a.count);
+
+const SLOT_LABELS = { eu: 'EU', 'us-open': 'US Open', 'pre-close': 'Pre-close' };
+
+function regimeColor(regime) {
+  const r = String(regime ?? '').toLowerCase();
+  if (r.includes('risk-on') || r.includes('risk on')) return '#067647';
+  if (r.includes('risk-off') || r.includes('risk off')) return '#b42318';
+  return '#475467';
+}
+
+function fmtPct(val) {
+  if (val === null || val === undefined) return '—';
+  return `${val > 0 ? '+' : ''}${val.toFixed(2)}%`;
+}
+---
+<BaseLayout title="Tracker — Investment Report" currentPath="/tracker">
+  <div class="page-header">
+    <h1>Tracker</h1>
+    <p class="muted">Computed from {items.length} reports · updated at each build</p>
+  </div>
+
+  <div class="tracker-grid">
+    <!-- Regime History -->
+    <section class="panel regime-panel">
+      <h2>Regime History</h2>
+      <div class="regime-list-wrap">
+        <table class="regime-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Session</th>
+              <th>Regime</th>
+            </tr>
+          </thead>
+          <tbody>
+            {regimeHistory.map((r) => (
+              <tr>
+                <td class="col-date">{r.date}</td>
+                <td class="col-slot">{SLOT_LABELS[r.slot] ?? r.slot}</td>
+                <td>
+                  <span class="regime-badge" style={`color:${regimeColor(r.regime)};border-color:${regimeColor(r.regime)}30`}>
+                    {r.regime || '—'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ticker Frequency -->
+    <section class="panel freq-panel">
+      <h2>Ticker Frequency</h2>
+      <p class="muted panel-sub">Appearances across all reports + average Δ%</p>
+      <div class="freq-table-wrap">
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th class="num"># Reports</th>
+              <th class="num">Avg Δ%</th>
+              <th>Last seen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tickerFreq.map((t) => (
+              <tr>
+                <td class="col-ticker">{t.ticker}</td>
+                <td class="num">{t.count}</td>
+                <td class:list={['num', t.avgPct !== null && t.avgPct > 0 ? 'pos' : t.avgPct !== null && t.avgPct < 0 ? 'neg' : '']}>
+                  {fmtPct(t.avgPct)}
+                </td>
+                <td class="col-date">{t.lastDate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header { margin-bottom: 1.25rem; }
+  .page-header h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+
+  .tracker-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .tracker-grid { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #fff;
+  }
+  .panel h2 { margin: 0 0 0.5rem; font-size: 1rem; }
+  .panel-sub { margin: -0.25rem 0 0.75rem; font-size: 0.8rem; }
+
+  /* shared table styles */
+  .regime-table, .freq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .regime-table thead th, .freq-table thead th {
+    background: #f9fafb;
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: #555;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+  }
+  .regime-table tbody tr, .freq-table tbody tr { border-bottom: 1px solid #f0f2f4; }
+  .regime-table tbody tr:last-child, .freq-table tbody tr:last-child { border-bottom: none; }
+  .regime-table td, .freq-table td { padding: 0.4rem 0.6rem; }
+
+  .regime-list-wrap, .freq-table-wrap { max-height: 480px; overflow-y: auto; }
+
+  .col-date { white-space: nowrap; color: #555; font-size: 0.82rem; }
+  .col-slot { white-space: nowrap; color: #555; font-size: 0.82rem; }
+  .col-ticker { font-weight: 600; }
+
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pos { color: #067647; }
+  .neg { color: #b42318; }
+
+  .regime-badge {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    border: 1px solid;
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+</style>

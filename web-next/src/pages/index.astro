@@ -17,10 +17,8 @@ const latest = idx.items?.find((it) => it.slot === slot) ?? idx.items?.[0];
 const adaptedMovers = adaptMovers(latest?.movers ?? [], { sortBy: sort === 'ticker' ? 'ticker' : 'pct', limit: 50 });
 const adaptedNews = Array.isArray(latest?.news) && latest.news.length > 0 ? latest.news : deriveNewsFromMovers(adaptedMovers);
 ---
-<BaseLayout title="Investment Report — Astro Migration">
-  <HeaderBar title="Investment Report — Astro migration" date={latest?.date ?? 'n/a'} slot={latest?.slot ?? slot} />
-
-  <p class="muted">Static migration scaffold with live JSON/MD loader wiring.</p>
+<BaseLayout title="Investment Report" currentPath="/">
+  <HeaderBar title="Investment Report" date={latest?.date ?? 'n/a'} slot={latest?.slot ?? slot} />
 
   <MarketPulse regime={latest?.regime ?? ''} pulse={latest?.sections?.pulse ?? []} />
   <TakeawayPanel summary={latest?.summary ?? ''} regime={latest?.regime ?? ''} date={latest?.date ?? ''} slot={latest?.slot ?? slot} />
@@ -35,11 +33,4 @@ const adaptedNews = Array.isArray(latest?.news) && latest.news.length > 0 ? late
 
   <TickerTable movers={adaptedMovers} sortBy={sort} collapsed={collapsed} />
   <NewsMoversTable movers={adaptMovers(latest?.movers ?? [], { sortBy: 'absPct', limit: 8 })} news={adaptedNews} />
-
-  <h3>Index status</h3>
-  <ul>
-    <li>generatedAt: {idx.generatedAt}</li>
-    <li>reports indexed: {idx.count}</li>
-    <li>active item: {latest ? `${latest.date} / ${latest.slot}` : 'n/a'}</li>
-  </ul>
 </BaseLayout>

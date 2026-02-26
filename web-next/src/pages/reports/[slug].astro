@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketPulse from '../../components/MarketPulse.astro';
+import TakeawayPanel from '../../components/TakeawayPanel.astro';
+import DiscussionPanel from '../../components/DiscussionPanel.astro';
+import TickerTable from '../../components/TickerTable.astro';
+import { loadSearchIndex, loadReportMarkdown } from '../../lib/loaders.js';
+import { adaptMovers } from '../../lib/adapters.js';
+
+export async function getStaticPaths() {
+  const idx = await loadSearchIndex();
+  return (idx.items ?? []).map((item) => ({
+    params: { slug: `${item.date}-${item.slot}` },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { slug } = Astro.params;
+
+// Load raw markdown body (strip frontmatter)
+let rawMd = '';
+try {
+  const full = await loadReportMarkdown(item.date, item.slot);
+  rawMd = full.replace(/^---[\s\S]*?---\n?/, '').trim();
+} catch (_) {
+  rawMd = '';
+}
+
+// Minimal build-time markdown → HTML converter for report format
+function mdToHtml(md) {
+  const lines = md.split('\n');
+  const out = [];
+  let inList = false;
+  let inTable = false;
+  let tableRows = [];
+
+  function flushTable() {
+    if (!tableRows.length) return;
+    const [header, _sep, ...body] = tableRows;
+    const thCells = header.split('|').filter((c) => c.trim()).map((c) => `<th>${escape(c.trim())}</th>`).join('');
+    const bodyRows = body.map((row) => {
+      const cells = row.split('|').filter((c) => c.trim()).map((c) => `<td>${escape(c.trim())}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    out.push(`<table class="md-table"><thead><tr>${thCells}</tr></thead><tbody>${bodyRows}</tbody></table>`);
+    tableRows = [];
+    inTable = false;
+  }
+
+  function escape(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('|')) {
+      if (inList) { out.push('</ul>'); inList = false; }
+      inTable = true;
+      tableRows.push(trimmed);
+      continue;
+    } else if (inTable) {
+      flushTable();
+    }
+
+    if (trimmed.startsWith('# ') && !trimmed.startsWith('## ')) {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push(`<h1>${escape(trimmed.slice(2))}</h1>`);
+    } else if (trimmed.startsWith('## ')) {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push(`<h2>${escape(trimmed.slice(3))}</h2>`);
+    } else if (trimmed.startsWith('### ')) {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push(`<h3>${escape(trimmed.slice(4))}</h3>`);
+    } else if (trimmed.startsWith('- ')) {
+      if (!inList) { out.push('<ul>'); inList = true; }
+      out.push(`<li>${escape(trimmed.slice(2))}</li>`);
+    } else if (trimmed === '') {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push('');
+    } else {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push(`<p>${escape(trimmed)}</p>`);
+    }
+  }
+  if (inList) out.push('</ul>');
+  if (inTable) flushTable();
+  return out.join('\n');
+}
+
+const bodyHtml = mdToHtml(rawMd);
+const adaptedMovers = adaptMovers(item.movers ?? [], { sortBy: 'pct', limit: 50 });
+
+const SLOT_LABELS = { eu: 'EU Morning', 'us-open': 'US Open', 'pre-close': 'Pre-close' };
+---
+<BaseLayout title={`${item.date} ${SLOT_LABELS[item.slot] ?? item.slot} — Investment Report`} currentPath="/reports">
+  <div class="breadcrumb">
+    <a href="/reports">Reports</a>
+    <span class="sep">›</span>
+    <span>{item.date} / {SLOT_LABELS[item.slot] ?? item.slot}</span>
+  </div>
+
+  <MarketPulse regime={item.regime ?? ''} pulse={item.sections?.pulse ?? []} />
+  <TakeawayPanel summary={item.summary ?? ''} regime={item.regime ?? ''} date={item.date ?? ''} slot={item.slot ?? ''} />
+  <DiscussionPanel alpha={item.sections?.alpha ?? []} beta={item.sections?.beta ?? []} />
+  <TickerTable movers={adaptedMovers} sortBy="pct" collapsed={false} />
+
+  <details class="report-body-wrap">
+    <summary>Full report text</summary>
+    <div class="report-body" set:html={bodyHtml} />
+  </details>
+
+  <p class="back-link"><a href="/reports">← Back to Reports</a></p>
+</BaseLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: #555;
+    margin-bottom: 1.25rem;
+  }
+  .breadcrumb a { color: #067647; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .sep { color: #aaa; }
+
+  .report-body-wrap {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    background: #fff;
+    margin-top: 1rem;
+  }
+  .report-body-wrap summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  .report-body { padding-top: 0.5rem; font-size: 0.9rem; line-height: 1.6; }
+  .report-body h1 { font-size: 1.15rem; margin: 1rem 0 0.4rem; }
+  .report-body h2 { font-size: 1rem; margin: 1rem 0 0.35rem; border-bottom: 1px solid #f0f2f4; padding-bottom: 0.25rem; }
+  .report-body h3 { font-size: 0.9rem; margin: 0.75rem 0 0.3rem; }
+  .report-body ul { margin: 0.3rem 0 0.3rem 1.2rem; padding: 0; }
+  .report-body li { margin-bottom: 0.2rem; }
+  .report-body p { margin: 0.4rem 0; color: #374151; }
+  :global(.md-table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+  }
+  :global(.md-table th) {
+    background: #f9fafb;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  :global(.md-table td) {
+    padding: 0.35rem 0.6rem;
+    border-bottom: 1px solid #f0f2f4;
+  }
+
+  .back-link { margin-top: 1.5rem; font-size: 0.9rem; }
+  .back-link a { color: #067647; text-decoration: none; }
+  .back-link a:hover { text-decoration: underline; }
+</style>

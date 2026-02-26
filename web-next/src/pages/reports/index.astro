@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadSearchIndex } from '../../lib/loaders.js';
+
+const idx = await loadSearchIndex();
+const items = (idx.items ?? []).slice().sort((a, b) => {
+  if (b.date !== a.date) return b.date.localeCompare(a.date);
+  const slotOrder = { 'pre-close': 0, 'us-open': 1, 'eu': 2 };
+  return (slotOrder[a.slot] ?? 9) - (slotOrder[b.slot] ?? 9);
+});
+
+const SLOT_LABELS = { eu: 'EU Morning', 'us-open': 'US Open', 'pre-close': 'Pre-close' };
+const REGIME_COLORS = {
+  'risk-on': '#067647',
+  'risk-off': '#b42318',
+  'mixed': '#475467',
+  'broad risk-on follow-through': '#067647',
+  'broad risk-on': '#067647',
+};
+function regimeColor(regime) {
+  const r = String(regime ?? '').toLowerCase();
+  for (const [key, color] of Object.entries(REGIME_COLORS)) {
+    if (r.includes(key)) return color;
+  }
+  return '#475467';
+}
+---
+<BaseLayout title="Reports Archive — Investment Report" currentPath="/reports">
+  <div class="page-header">
+    <h1>Reports</h1>
+    <p class="muted">{items.length} reports · use filter to narrow by session</p>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-slot="all">All</button>
+    <button class="filter-btn" data-slot="eu">EU Morning</button>
+    <button class="filter-btn" data-slot="us-open">US Open</button>
+    <button class="filter-btn" data-slot="pre-close">Pre-close</button>
+  </div>
+
+  <div class="reports-table-wrap">
+    <table class="reports-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Session</th>
+          <th>Regime</th>
+          <th>Summary</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="reports-tbody">
+        {items.map((item) => (
+          <tr data-slot={item.slot}>
+            <td class="col-date">{item.date}</td>
+            <td class="col-slot">{SLOT_LABELS[item.slot] ?? item.slot}</td>
+            <td class="col-regime">
+              <span class="regime-badge" style={`color:${regimeColor(item.regime)};border-color:${regimeColor(item.regime)}30`}>
+                {item.regime}
+              </span>
+            </td>
+            <td class="col-summary">{item.summary}</td>
+            <td class="col-link">
+              <a href={`/reports/${item.date}-${item.slot}`} class="report-link">→</a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</BaseLayout>
+
+<script>
+  const filterBar = document.getElementById('filter-bar');
+  const tbody = document.getElementById('reports-tbody');
+  filterBar?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    filterBar.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    const slot = btn.dataset.slot;
+    tbody?.querySelectorAll('tr').forEach((row) => {
+      row.style.display = slot === 'all' || row.dataset.slot === slot ? '' : 'none';
+    });
+  });
+</script>
+
+<style>
+  .page-header { margin-bottom: 1.25rem; }
+  .page-header h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.875rem;
+    color: #555;
+    cursor: pointer;
+  }
+  .filter-btn:hover { background: #f0f2f4; }
+  .filter-btn.active { border-color: #067647; color: #067647; font-weight: 600; background: #f0faf4; }
+
+  .reports-table-wrap {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .reports-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .reports-table thead th {
+    background: #f9fafb;
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #555;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+  }
+  .reports-table tbody tr { border-bottom: 1px solid #f0f2f4; }
+  .reports-table tbody tr:last-child { border-bottom: none; }
+  .reports-table tbody tr:hover { background: #fafafa; }
+  .reports-table td { padding: 0.55rem 0.75rem; vertical-align: top; }
+
+  .col-date { white-space: nowrap; color: #555; font-size: 0.85rem; }
+  .col-slot { white-space: nowrap; }
+  .col-regime { white-space: nowrap; }
+  .col-summary { color: #374151; line-height: 1.4; }
+  .col-link { text-align: right; white-space: nowrap; }
+
+  .regime-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .report-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+  }
+  .report-link:hover { background: #f0f2f4; color: #111; }
+
+  @media (max-width: 760px) {
+    .col-summary { display: none; }
+  }
+</style>
