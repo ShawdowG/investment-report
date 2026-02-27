@@ -1,27 +1,28 @@
 /**
- * Server-only data layer.
- * Reads files from the project root (../reports/, ../data/) using Node.js fs.
- * Must only be imported by Server Components or server actions.
+ * Data layer for report content.
+ * search-index.json is imported directly (bundled at build time, no fs at runtime).
+ * Markdown files are read via fs only during Next.js static export build.
  */
 import fs from "node:fs";
 import path from "node:path";
 import type { ReportItem, SearchIndex } from "@/types/reports";
 
-// Project root is one level above web-app/
+// Direct JSON import — bundled by Turbopack/webpack at build time.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const _rawIndex = require("../../../data/search-index.json") as {
+  generatedAt: string;
+  items: (Omit<ReportItem, "slug"> & { slug?: string; [key: string]: unknown })[];
+};
+
+// Project root is one level above web-app/ — only used at build time.
 const ROOT = path.resolve(process.cwd(), "..");
 
 export function loadSearchIndex(): SearchIndex {
-  const filePath = path.join(ROOT, "data", "search-index.json");
-  const raw = fs.readFileSync(filePath, "utf8");
-  const json = JSON.parse(raw);
-  // Inject slug into each item if not present
-  const items: ReportItem[] = (json.items || []).map(
-    (item: Omit<ReportItem, "slug"> & { slug?: string }) => ({
-      ...item,
-      slug: item.slug ?? `${item.date}-${item.slot}`,
-    })
-  );
-  return { generatedAt: json.generatedAt, items };
+  const items: ReportItem[] = (_rawIndex.items ?? []).map((item) => ({
+    ...(item as object),
+    slug: item.slug ?? `${item.date}-${item.slot}`,
+  })) as ReportItem[];
+  return { generatedAt: _rawIndex.generatedAt, items };
 }
 
 export function loadReportMarkdown(date: string, slot: string): string | null {
