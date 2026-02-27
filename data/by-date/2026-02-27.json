@@ -3,28 +3,28 @@
     "file": "2026-02-27-pre-close.md",
     "htmlFile": "2026-02-27-pre-close.html",
     "title": "US Pre-close — 2026-02-27",
-    "summary": "(fill in)",
+    "summary": "Session dominated by idiosyncratic movers (NFLX) alongside soft index backdrop.",
     "date": "2026-02-27",
     "slot": "pre-close",
     "tickers": [],
-    "regime": "Mild risk-on / orderly tape",
+    "regime": "mild risk-off",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
         "---|---:|---:",
-        "BTC-USD | 65638.25 | -2.69%",
-        "GC=F | 5280.80 | +2.01%",
+        "BTC-USD | 65616.68 | -2.72%",
+        "GC=F | 5280.10 | +2.00%",
         "^GSPC | 6878.88 | -0.43%"
       ],
       "alpha": [
-        "- (fill in — macro/sector thesis, multi-week view)",
-        "- (fill in)",
-        "- (fill in)"
+        "- Session leans risk-off: S&P -0.43%, NDQ -0.30%. Breadth is soft (7 positive vs 12 negative) but selling pressure remains orderly — no signs of forced liquidation.",
+        "- Isolate catalyst-driven outliers (NFLX, DUOL) — these are stock-specific, not market signals.",
+        "- Tilt defensively: trim high-beta positions, avoid forcing new longs into weakness. Let the tape show stabilization before re-engaging."
       ],
       "beta": [
-        "- (fill in — today's specific setup, short-term)",
-        "- (fill in)",
-        "- (fill in)"
+        "- Outlier moves today: NFLX (+13.77%) / DUOL (-14.01%). These are catalyst-driven (likely earnings or news) — do not read them as market-wide signals.",
+        "- Heading into close on weakness — trim exposure rather than adding. Final-hour selling can accelerate; protect open profits.",
+        "- Hard stop discipline: DUOL (-14.01%) shows what happens without exit rules. Keep position sizes appropriate to volatility today."
       ],
       "pulse": [
         "Awaiting pulse update."
@@ -34,18 +34,18 @@
       {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
-        "price": "65638.25",
-        "pct": -2.69,
-        "change": "-1814.48",
-        "changeValue": -1814.4783937930333
+        "price": "65616.68",
+        "pct": -2.72,
+        "change": "-1834.68",
+        "changeValue": -1834.67690789474
       },
       {
         "ticker": "GC=F",
         "name": "GC=F",
-        "price": "5280.80",
-        "pct": 2.01,
-        "change": "+104.05",
-        "changeValue": 104.0526222919325
+        "price": "5280.10",
+        "pct": 2,
+        "change": "+103.53",
+        "changeValue": 103.53137254901958
       },
       {
         "ticker": "^GSPC",
@@ -146,50 +146,50 @@
       {
         "ticker": "BABA",
         "name": "BABA",
-        "price": "144.08",
-        "pct": -2.68,
-        "change": "-3.97",
-        "changeValue": -3.96767776407728
+        "price": "144.11",
+        "pct": -2.66,
+        "change": "-3.94",
+        "changeValue": -3.9380788987055553
       },
       {
         "ticker": "LMT",
         "name": "LMT",
-        "price": "658.22",
-        "pct": 2.59,
-        "change": "+16.62",
-        "changeValue": 16.61750463008093
+        "price": "658.08",
+        "pct": 2.56,
+        "change": "+16.43",
+        "changeValue": 16.42633385335421
       },
       {
         "ticker": "BA",
         "name": "BA",
-        "price": "227.55",
-        "pct": -0.81,
-        "change": "-1.86",
-        "changeValue": -1.8582064724266445
+        "price": "227.53",
+        "pct": -0.82,
+        "change": "-1.88",
+        "changeValue": -1.8811716071788567
       },
       {
         "ticker": "TM",
         "name": "TM",
-        "price": "242.56",
-        "pct": -0.02,
-        "change": "-0.05",
-        "changeValue": -0.048521704340856786
+        "price": "242.38",
+        "pct": -0.1,
+        "change": "-0.24",
+        "changeValue": -0.24262262262263334
       },
       {
         "ticker": "V",
         "name": "V",
-        "price": "319.96",
-        "pct": 1.03,
-        "change": "+3.26",
-        "changeValue": 3.261989508066904
+        "price": "320.14",
+        "pct": 1.09,
+        "change": "+3.45",
+        "changeValue": 3.4519002868730695
       },
       {
         "ticker": "MA",
         "name": "MA",
-        "price": "516.55",
-        "pct": 0.35,
-        "change": "+1.80",
-        "changeValue": 1.801619332336827
+        "price": "517.21",
+        "pct": 0.47,
+        "change": "+2.42",
+        "changeValue": 2.4195152781924207
       },
       {
         "ticker": "NFLX",
@@ -202,18 +202,18 @@
       {
         "ticker": "RDDT",
         "name": "RDDT",
-        "price": "145.72",
-        "pct": -3.66,
-        "change": "-5.54",
-        "changeValue": -5.535968445090305
+        "price": "145.81",
+        "pct": -3.6,
+        "change": "-5.45",
+        "changeValue": -5.445186721991718
       },
       {
         "ticker": "NOVO-B.CO",
         "name": "NOVO-B.CO",
-        "price": "37.46",
-        "pct": -0.44,
+        "price": "37.45",
+        "pct": -0.45,
         "change": "-0.17",
-        "changeValue": -0.1655524306950582
+        "changeValue": -0.16928679055750706
       }
     ]
   }
