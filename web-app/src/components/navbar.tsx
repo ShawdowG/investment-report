@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV_LINKS = [
   { href: "/", label: "Main" },
@@ -42,6 +43,7 @@ export function Navbar({ currentPath = "/" }: NavbarProps) {
               </Link>
             );
           })}
+          <ThemeToggle />
         </div>
       </div>
     </nav>
