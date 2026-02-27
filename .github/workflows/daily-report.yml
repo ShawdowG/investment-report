@@ -35,8 +35,8 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install yfinance
-        run: pip install yfinance --quiet
+      - name: Install Python dependencies
+        run: pip install yfinance ddgs --quiet
 
       - name: Determine slot
         id: slot

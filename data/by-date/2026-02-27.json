@@ -12,8 +12,8 @@
       "gamma": [
         "Ticker | Price | Δ%",
         "---|---:|---:",
-        "BTC-USD | 65616.68 | -2.72%",
-        "GC=F | 5280.10 | +2.00%",
+        "BTC-USD | 65554.59 | -2.82%",
+        "GC=F | 5293.00 | +2.25%",
         "^GSPC | 6878.88 | -0.43%"
       ],
       "alpha": [
@@ -34,18 +34,18 @@
       {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
-        "price": "65616.68",
-        "pct": -2.72,
-        "change": "-1834.68",
-        "changeValue": -1834.67690789474
+        "price": "65554.59",
+        "pct": -2.82,
+        "change": "-1902.28",
+        "changeValue": -1902.2838423543872
       },
       {
         "ticker": "GC=F",
         "name": "GC=F",
-        "price": "5280.10",
-        "pct": 2,
-        "change": "+103.53",
-        "changeValue": 103.53137254901958
+        "price": "5293.00",
+        "pct": 2.25,
+        "change": "+116.47",
+        "changeValue": 116.47188264058695
       },
       {
         "ticker": "^GSPC",
