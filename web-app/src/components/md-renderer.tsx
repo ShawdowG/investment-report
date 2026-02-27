@@ -9,15 +9,35 @@ interface MdRendererProps {
   className?: string;
 }
 
-export function formatInline(text: string): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={i}>{part.slice(2, -2)}</strong>;
-    }
-    return part;
+// Colorize (±X.XX%) patterns within an already-split segment.
+function applyPctColor(text: string, keyBase: number): React.ReactNode[] {
+  const parts = text.split(/(\([+-][0-9]+\.?[0-9]*%\))/g);
+  if (parts.length === 1) return [text];
+  return parts.map((p, i) => {
+    if (/^\(\+/.test(p))
+      return <span key={keyBase + i} className="text-green-600 dark:text-green-400">{p}</span>;
+    if (/^\(-/.test(p))
+      return <span key={keyBase + i} className="text-red-600 dark:text-red-400">{p}</span>;
+    return p;
   });
+}
+
+export function formatInline(text: string): React.ReactNode {
+  const boldParts = text.split(/(\*\*[^*]+\*\*)/g);
+  const hasBold = boldParts.some((p) => p.startsWith("**"));
+  const hasPct  = /\([+-][0-9]/.test(text);
+  if (!hasBold && !hasPct) return text;
+
+  const nodes: React.ReactNode[] = [];
+  boldParts.forEach((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      const inner = applyPctColor(part.slice(2, -2), i * 100);
+      nodes.push(<strong key={i}>{inner}</strong>);
+    } else {
+      applyPctColor(part, i * 100 + 50).forEach((n) => nodes.push(n));
+    }
+  });
+  return nodes;
 }
 
 function isTableDivider(line: string): boolean {
