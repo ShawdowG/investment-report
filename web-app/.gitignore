@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# OpenNext
+.open-next/
+
+# Wrangler
+.wrangler/
+
+# Env
+.env
+.env.local
+.env*.local
+
+# OS
+.DS_Store
