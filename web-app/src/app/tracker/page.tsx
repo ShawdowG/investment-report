@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import { loadSearchIndex } from "@/lib/reports";
 import { Navbar } from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";

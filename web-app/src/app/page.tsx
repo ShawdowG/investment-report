@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import { loadSearchIndex, loadReportMarkdown, parseFrontmatter, extractSection } from "@/lib/reports";
 import { adaptMovers, deriveNewsFromMovers } from "@/lib/adapters";
 import { Navbar } from "@/components/navbar";
