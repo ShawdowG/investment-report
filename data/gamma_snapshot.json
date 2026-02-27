@@ -1,0 +1,41 @@
+{
+  "v": 2,
+  "generatedAt": "2026-02-27T09:30:00.000Z",
+  "date": "2026-02-27",
+  "slot": "eu",
+  "watchlist": [
+    "BTC-USD", "GC=F", "^GSPC", "^NDX",
+    "AAPL", "TSLA", "GOOG", "NVDA", "AMZN", "MSFT", "META",
+    "DUOL", "ADBE", "AMD", "BABA", "LMT", "BA", "TM", "V", "MA", "NFLX", "RDDT", "NVO"
+  ],
+  "prices": {
+    "BTC-USD": { "symbol": "BTC-USD", "name": "Bitcoin",       "price": 85320.50, "prevClose": 88100.00, "change": -2779.50, "changePct": -3.15 },
+    "GC=F":    { "symbol": "GC=F",    "name": "Gold",          "price": 2916.10,  "prevClose": 2895.40,  "change": 20.70,    "changePct": 0.71  },
+    "^GSPC":   { "symbol": "^GSPC",   "name": "S&P 500",       "price": 5861.57,  "prevClose": 5954.89,  "change": -93.32,   "changePct": -1.57 },
+    "^NDX":    { "symbol": "^NDX",    "name": "Nasdaq 100",    "price": 20978.13, "prevClose": 21384.11, "change": -405.98,  "changePct": -1.90 },
+    "AAPL":    { "symbol": "AAPL",    "name": "Apple",         "price": 237.33,   "prevClose": 241.84,   "change": -4.51,    "changePct": -1.86 },
+    "TSLA":    { "symbol": "TSLA",    "name": "Tesla",         "price": 290.56,   "prevClose": 324.98,   "change": -34.42,   "changePct": -10.59 },
+    "GOOG":    { "symbol": "GOOG",    "name": "Alphabet",      "price": 172.10,   "prevClose": 175.20,   "change": -3.10,    "changePct": -1.77 },
+    "NVDA":    { "symbol": "NVDA",    "name": "NVIDIA",        "price": 120.27,   "prevClose": 128.30,   "change": -8.03,    "changePct": -6.26 },
+    "AMZN":    { "symbol": "AMZN",    "name": "Amazon",        "price": 209.54,   "prevClose": 215.74,   "change": -6.20,    "changePct": -2.87 },
+    "MSFT":    { "symbol": "MSFT",    "name": "Microsoft",     "price": 388.47,   "prevClose": 395.14,   "change": -6.67,    "changePct": -1.69 },
+    "META":    { "symbol": "META",    "name": "Meta",          "price": 620.25,   "prevClose": 636.10,   "change": -15.85,   "changePct": -2.49 },
+    "DUOL":    { "symbol": "DUOL",    "name": "Duolingo",      "price": 333.81,   "prevClose": 320.15,   "change": 13.66,    "changePct": 4.27  },
+    "ADBE":    { "symbol": "ADBE",    "name": "Adobe",         "price": 390.00,   "prevClose": 404.50,   "change": -14.50,   "changePct": -3.58 },
+    "AMD":     { "symbol": "AMD",     "name": "AMD",           "price": 104.45,   "prevClose": 108.75,   "change": -4.30,    "changePct": -3.95 },
+    "BABA":    { "symbol": "BABA",    "name": "Alibaba",       "price": 137.40,   "prevClose": 133.90,   "change": 3.50,     "changePct": 2.61  },
+    "LMT":     { "symbol": "LMT",     "name": "Lockheed Martin","price": 481.25,  "prevClose": 479.80,   "change": 1.45,     "changePct": 0.30  },
+    "BA":      { "symbol": "BA",      "name": "Boeing",        "price": 175.38,   "prevClose": 178.90,   "change": -3.52,    "changePct": -1.97 },
+    "TM":      { "symbol": "TM",      "name": "Toyota",        "price": 196.50,   "prevClose": 198.10,   "change": -1.60,    "changePct": -0.81 },
+    "V":       { "symbol": "V",       "name": "Visa",          "price": 336.20,   "prevClose": 340.10,   "change": -3.90,    "changePct": -1.15 },
+    "MA":      { "symbol": "MA",      "name": "Mastercard",    "price": 528.75,   "prevClose": 535.20,   "change": -6.45,    "changePct": -1.21 },
+    "NFLX":    { "symbol": "NFLX",    "name": "Netflix",       "price": 1003.50,  "prevClose": 982.40,   "change": 21.10,    "changePct": 2.15  },
+    "RDDT":    { "symbol": "RDDT",    "name": "Reddit",        "price": 152.75,   "prevClose": 163.40,   "change": -10.65,   "changePct": -6.52 },
+    "NVO":     { "symbol": "NVO",     "name": "Novo Nordisk",  "price": 71.84,    "prevClose": 73.10,    "change": -1.26,    "changePct": -1.72 }
+  },
+  "macro": {
+    "VIX":   { "symbol": "^VIX",      "price": 22.15, "changePct": 18.40 },
+    "DXY":   { "symbol": "DX-Y.NYB",  "price": 107.23, "changePct": 0.65 },
+    "US10Y": { "symbol": "^TNX",      "price": 4.27, "changePct": -1.15 }
+  }
+}

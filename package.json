@@ -1,0 +1,16 @@
+{
+  "name": "investment-report-scripts",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "fetch": "python scripts/fetch-snapshot.py",
+    "generate": "node scripts/generate-report.js",
+    "build-index": "node scripts/build-index.js",
+    "validate": "node scripts/validate-reports.js && node scripts/validate-schema.js",
+    "report": "npm run fetch && npm run generate && npm run build-index"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.7"
+  }
+}

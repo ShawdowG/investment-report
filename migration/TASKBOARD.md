@@ -76,9 +76,18 @@ Progress log:
 - [x] R-13 | Epsi  | P1 | Done | Navbar active states + mobile behavior
 - [ ] R-14 | Eta   | P1 | Todo | Route/link compatibility and redirect safety checks
 
+## LLM Pipeline Rewrite (2026-02-27)
+
+- [x] G-01 | Gamma | P0 | Done | Design gamma_snapshot.json v2 schema (prices + macro, real Δ$)
+- [x] G-02 | Gamma | P0 | Done | Create scripts/fetch-snapshot.py (yfinance, configurable watchlist)
+- [x] G-03 | Gamma | P0 | Done | Create scripts/generate-report.js (reads snapshot → Haiku tool_use → markdown)
+- [x] G-04 | Gamma | P0 | Done | Create scripts/lib/assemble-markdown.js (pure markdown assembler)
+- [ ] G-05 | Eta   | P1 | Todo | Next.js migration (web-app/ alongside web-next/, parity cutover)
+
 Progress log:
 - 2026-02-25: Added revamp backlog R-01..R-08.
 - 2026-02-25: R-01 moved to InProgress (hierarchy pass started).
 - 2026-02-25: R-09/R-10/R-11/R-12/R-13 moved to Done (top nav + main/tracker/reports pages + active nav).
 - 2026-02-25 20:20 CET: R-01→Done, R-02→Done (`web-next` main page reordered to Pulse→Takeaway→Discussion→Tickers→News; added `TakeawayPanel`; ticker table now sticky-header + tighter spacing + tabular numeric alignment).
 - 2026-02-26: Production polish sprint. Removed placeholder/migration text from `index.astro`. Built `Navbar.astro` (sticky, active state, mobile), wired into `BaseLayout.astro`. Built `/reports` archive (slot filter, regime badges, 23 reports). Built `/reports/[slug]` individual report pages (23 static routes via `getStaticPaths`). Built `/tracker` with Regime History list + Ticker Frequency table (build-time computed from search-index.json). Build: 26 pages, 0 errors. R-09..R-13→Done (actual implementation).
+- 2026-02-27: LLM pipeline rewrite. G-01..G-04 Done. New snapshot schema v2 (real Δ$, macro block). Python fetcher (yfinance, configurable watchlist, 3 macro indicators). Node.js generator using Claude Haiku tool_use (~750 tokens/report vs ~3000 before). Markdown assembler. Root package.json added.
