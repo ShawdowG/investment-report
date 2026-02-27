@@ -1,0 +1,108 @@
+name: Daily Report — Auto Price Fetch & Deploy
+
+on:
+  schedule:
+    - cron: "30 8 * * 1-5"   # EU/Nordic morning  (08:30 UTC = 09:30 Oslo)
+    - cron: "45 14 * * 1-5"  # US Open +15m        (14:45 UTC = 09:45 ET)
+    - cron: "0 20 * * 1-5"   # US Pre-close        (20:00 UTC = 15:00 ET)
+
+  # Manual trigger — run it any time from the GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "Slot to generate (eu | us-open | pre-close | auto)"
+        required: false
+        default: "auto"
+
+jobs:
+  generate-and-deploy:
+    name: Fetch prices, generate report, deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # allows the bot to push the new report back to the repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── Step 1: Python — fetch live prices ────────────────────────────────
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install yfinance
+        run: pip install yfinance --quiet
+
+      - name: Determine slot
+        id: slot
+        run: |
+          INPUT="${{ github.event.inputs.slot }}"
+          if [ -n "$INPUT" ] && [ "$INPUT" != "auto" ]; then
+            echo "slot=$INPUT" >> "$GITHUB_OUTPUT"
+          else
+            HOUR=$(date -u +%H)
+            if   [ "$HOUR" -ge 7  ] && [ "$HOUR" -lt 12 ]; then echo "slot=eu"        >> "$GITHUB_OUTPUT"
+            elif [ "$HOUR" -ge 14 ] && [ "$HOUR" -lt 17 ]; then echo "slot=us-open"   >> "$GITHUB_OUTPUT"
+            else                                                   echo "slot=pre-close" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Generate report scaffold (GAMMA price data)
+        # continue-on-error so a duplicate-run (file already exists) doesn't
+        # block the rest of the pipeline — the index + deploy still run.
+        continue-on-error: true
+        run: python scripts/generate-report.py ${{ steps.slot.outputs.slot }}
+
+      # ── Step 2: Node — rebuild search index ───────────────────────────────
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web-app/package-lock.json
+
+      - name: Rebuild search index
+        run: node scripts/build-index.js
+
+      # ── Step 3: Commit new report + index back to main ────────────────────
+
+      - name: Commit and push
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git add reports/daily/ data/ index.html reports.html today.html
+          # Only commit if something actually changed (avoids empty commits)
+          git diff --cached --quiet \
+            && echo "Nothing to commit." \
+            || git commit -m "auto: ${{ steps.slot.outputs.slot }} report $(date -u +%Y-%m-%d)"
+          git push
+
+      # ── Step 4: Build and deploy web-app to Cloudflare Pages ──────────────
+      # (runs in the same job so the fresh data/search-index.json is used)
+
+      - name: Install web-app dependencies
+        run: npm ci
+        working-directory: web-app
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+        working-directory: web-app
+
+      - name: Next.js static export
+        run: npm run build
+        working-directory: web-app
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy out --project-name investment-report-app --commit-dirty=true
+        working-directory: web-app
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
