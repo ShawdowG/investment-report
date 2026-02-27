@@ -89,7 +89,6 @@ export default async function ReportPage({ params }: PageProps) {
 
   const regime = (meta.regime as string) || "";
   const summary = (meta.summary as string) || "";
-  const posture = beta[0] ?? "";
   const title = (meta.title as string) || `${date} — ${slot}`;
 
   // Strip GAMMA section from body for the raw markdown display
@@ -109,7 +108,7 @@ export default async function ReportPage({ params }: PageProps) {
   return (
     <>
       <Navbar currentPath="/reports" />
-      <main className="mx-auto max-w-6xl px-4 py-6 space-y-4">
+      <main className="mx-auto max-w-6xl px-4 py-8 space-y-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-muted-foreground">
           <Link href="/reports" className="hover:text-foreground">
@@ -121,9 +120,9 @@ export default async function ReportPage({ params }: PageProps) {
 
         <HeaderBar title={title} date={date} slot={slot} />
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <MarketPulse regime={regime} summary={summary} pulse={pulse} />
-          <TakeawayPanel summary={summary} posture={posture} />
+          <TakeawayPanel checklist={pulse} />
         </div>
 
         <DiscussionPanel

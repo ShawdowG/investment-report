@@ -19,8 +19,8 @@ export function NewsMoversTable({ rows }: NewsMoversTableProps) {
 
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-base">News Linked to Movers</CardTitle>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-lg">📰 News / Movers</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <Table>

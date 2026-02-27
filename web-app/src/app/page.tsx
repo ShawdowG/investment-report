@@ -62,17 +62,15 @@ export default function DashboardPage() {
 
   const regime = (meta.regime as string) || latest.regime || "Neutral";
   const summary = (meta.summary as string) || latest.summary || "";
-  const posture = beta[0] ?? "";
-
   return (
     <>
       <Navbar currentPath="/" />
-      <main className="mx-auto max-w-6xl px-4 py-6 space-y-4">
+      <main className="mx-auto max-w-6xl px-4 py-8 space-y-6">
         <HeaderBar date={latest.date} slot={latest.slot} />
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <MarketPulse regime={regime} summary={summary} pulse={pulse} />
-          <TakeawayPanel summary={summary} posture={posture} />
+          <TakeawayPanel checklist={pulse} />
         </div>
 
         <DiscussionPanel

@@ -56,9 +56,9 @@ export function TickerTable({ movers }: TickerTableProps) {
 
   return (
     <Card>
-      <CardHeader className="pb-2">
+      <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base">GAMMA — Data Pack</CardTitle>
+          <CardTitle className="text-lg">📊 GAMMA — Data Pack</CardTitle>
           <Button
             variant="ghost"
             size="sm"

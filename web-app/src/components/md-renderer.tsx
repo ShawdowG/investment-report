@@ -9,7 +9,7 @@ interface MdRendererProps {
   className?: string;
 }
 
-function formatInline(text: string): React.ReactNode {
+export function formatInline(text: string): React.ReactNode {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   if (parts.length === 1) return text;
   return parts.map((part, i) => {

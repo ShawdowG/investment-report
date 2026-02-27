@@ -17,14 +17,14 @@ export function HeaderBar({ title, date, slot }: HeaderBarProps) {
   const displayTitle = title ?? slotLabel;
 
   return (
-    <div className="border-b border-border bg-card px-4 py-5">
+    <div className="border-b border-border bg-card px-4 py-6">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">
+            <h1 className="text-2xl font-bold tracking-tight">
               {displayTitle}
             </h1>
-            <p className="mt-0.5 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm text-muted-foreground">
               {date} &middot; {slotLabel}
             </p>
           </div>

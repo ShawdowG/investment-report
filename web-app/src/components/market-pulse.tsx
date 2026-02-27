@@ -1,12 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { formatInline } from "@/components/md-renderer";
 
 const REGIME_COLORS: Record<string, string> = {
-  "risk-on": "bg-green-100 text-green-800 border-green-200",
-  "risk-off": "bg-red-100 text-red-800 border-red-200",
-  neutral: "bg-gray-100 text-gray-700 border-gray-200",
-  mixed: "bg-yellow-100 text-yellow-800 border-yellow-200",
+  "risk-on":  "bg-green-900/40 text-green-300 border-green-700",
+  "risk-off": "bg-red-900/40 text-red-300 border-red-700",
+  neutral:    "bg-zinc-700/40 text-zinc-300 border-zinc-600",
+  mixed:      "bg-yellow-900/40 text-yellow-300 border-yellow-700",
 };
 
 function regimeVariant(regime: string): string {
@@ -23,9 +24,9 @@ interface MarketPulseProps {
 export function MarketPulse({ regime, summary, pulse = [] }: MarketPulseProps) {
   return (
     <Card>
-      <CardHeader className="pb-2">
+      <CardHeader className="pb-3">
         <div className="flex items-center gap-3">
-          <CardTitle className="text-base">Market Pulse</CardTitle>
+          <CardTitle className="text-lg">📈 Market Pulse</CardTitle>
           <Badge
             variant="outline"
             className={cn("text-xs font-medium", regimeVariant(regime))}
@@ -34,14 +35,14 @@ export function MarketPulse({ regime, summary, pulse = [] }: MarketPulseProps) {
           </Badge>
         </div>
       </CardHeader>
-      <CardContent>
-        <p className="mb-3 text-sm text-muted-foreground">{summary}</p>
+      <CardContent className="space-y-3">
+        <p className="text-sm leading-relaxed text-muted-foreground">{summary}</p>
         {pulse.length > 0 && (
-          <ul className="space-y-1">
+          <ul className="space-y-2">
             {pulse.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm">
-                <span className="mt-0.5 text-muted-foreground">•</span>
-                <span>{item.replace(/^[-•]\s*/, "")}</span>
+              <li key={i} className="flex items-start gap-2 text-sm leading-relaxed">
+                <span className="mt-1 shrink-0 text-muted-foreground">•</span>
+                <span>{formatInline(item.replace(/^[-•]\s*/, ""))}</span>
               </li>
             ))}
           </ul>
