@@ -1,11 +1,11 @@
 [
   {
-    "file": "2026-02-27-pre-close.md",
-    "htmlFile": "2026-02-27-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-off conditions. S&P -0.43%, NDQ -0.30%, 36% of tracked names positive, led by NFLX, LMT, GOOG.",
-    "date": "2026-02-27",
-    "slot": "pre-close",
+    "file": "2026-03-02-eu.md",
+    "htmlFile": "2026-03-02-eu.html",
+    "title": "EU/Nordic Morning",
+    "summary": "EU/Nordic Morning shows mild risk-off conditions. S&P -0.43%, NDQ -0.30%, 36% of tracked names positive, led by NFLX, LMT, GOOG.",
+    "date": "2026-03-02",
+    "slot": "eu",
     "tickers": [
       "BTC-USD",
       "GC=F",
@@ -36,8 +36,8 @@
       "gamma": [
         "Ticker | Price | Δ%",
         "---|---:|---:",
-        "BTC-USD | 65554.59 | -2.82%",
-        "GC=F | 5293.00 | +2.25%",
+        "BTC-USD | 66237.01 | +0.76%",
+        "GC=F | 5410.00 | +0.00%",
         "^GSPC | 6878.88 | -0.43%"
       ],
       "alpha": [
@@ -47,7 +47,7 @@
       ],
       "beta": [
         "- Outlier moves today: NFLX (+13.77%) / DUOL (-14.01%). These are catalyst-driven (likely earnings or news) — do not read them as market-wide signals.",
-        "- Heading into close on weakness — trim exposure rather than adding. Final-hour selling can accelerate; protect open profits.",
+        "- EU open is soft. Avoid pre-market chasing; wait for London open confirmation before committing to direction.",
         "- Hard stop discipline: DUOL (-14.01%) shows what happens without exit rules. Keep position sizes appropriate to volatility today."
       ],
       "pulse": [
@@ -58,18 +58,18 @@
       {
         "ticker": "BTC-USD",
         "name": "BTC-USD",
-        "price": "65554.59",
-        "pct": -2.82,
-        "change": "-1902.28",
-        "changeValue": -1902.2838423543872
+        "price": "66237.01",
+        "pct": 0.76,
+        "change": "+499.60",
+        "changeValue": 499.60428344582033
       },
       {
         "ticker": "GC=F",
         "name": "GC=F",
-        "price": "5293.00",
-        "pct": 2.25,
-        "change": "+116.47",
-        "changeValue": 116.47188264058695
+        "price": "5410.00",
+        "pct": 0,
+        "change": "+0.00",
+        "changeValue": 0
       },
       {
         "ticker": "^GSPC",

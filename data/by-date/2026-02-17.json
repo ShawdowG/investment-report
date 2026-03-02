@@ -2,12 +2,36 @@
   {
     "file": "2026-02-17-us-open.md",
     "htmlFile": "2026-02-17-us-open.html",
-    "title": "US Open +15m — 2026-02-17",
-    "summary": "Sample macro flow, yields and USD rotation (us-open).",
+    "title": "US Open +15m",
+    "summary": "Sample historical report for layout preview (2026-02-17 us-open).",
     "date": "2026-02-17",
     "slot": "us-open",
-    "tickers": [],
-    "regime": "Risk-off tilt",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "risk-off",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -95,18 +119,162 @@
         "pct": 0.85,
         "change": "+3.29",
         "changeValue": 3.2929598413485337
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "AAPL",
+        "name": "AAPL",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "LMT",
+        "name": "LMT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
       }
     ]
   },
   {
     "file": "2026-02-17-pre-close.md",
     "htmlFile": "2026-02-17-pre-close.html",
-    "title": "US Pre-close — 2026-02-17",
-    "summary": "Sample macro flow, yields and USD rotation (pre-close).",
+    "title": "US Pre-close",
+    "summary": "Sample historical report for layout preview (2026-02-17 pre-close).",
     "date": "2026-02-17",
     "slot": "pre-close",
-    "tickers": [],
-    "regime": "Mixed to neutral",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "neutral",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -194,18 +362,162 @@
         "pct": 1.3,
         "change": "+5.17",
         "changeValue": 5.169200394866721
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "AAPL",
+        "name": "AAPL",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "LMT",
+        "name": "LMT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
       }
     ]
   },
   {
     "file": "2026-02-17-eu.md",
     "htmlFile": "2026-02-17-eu.html",
-    "title": "EU/Nordic Morning — 2026-02-17",
-    "summary": "Sample macro flow, yields and USD rotation (eu).",
+    "title": "EU/Nordic Morning",
+    "summary": "Sample historical report for layout preview (2026-02-17 eu).",
     "date": "2026-02-17",
     "slot": "eu",
-    "tickers": [],
-    "regime": "Mixed to neutral",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "mixed",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -293,6 +605,126 @@
         "pct": 0.4,
         "change": "+1.52",
         "changeValue": 1.5231075697211054
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "AAPL",
+        "name": "AAPL",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "LMT",
+        "name": "LMT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "—",
+        "pct": null,
+        "change": "—",
+        "changeValue": null
       }
     ]
   }
