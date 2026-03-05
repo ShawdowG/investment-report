@@ -1,0 +1,244 @@
+[
+  {
+    "file": "2026-03-05-eu.md",
+    "htmlFile": "2026-03-05-eu.html",
+    "title": "EU/Nordic Morning",
+    "summary": "EU/Nordic Morning shows mild risk-on conditions. S&P +0.78%, NDQ +1.51%, 63% of tracked names positive, led by AMD, NOVO-B.CO, AMZN.",
+    "date": "2026-03-05",
+    "slot": "eu",
+    "tickers": [
+      "BTC-USD",
+      "GC=F",
+      "^GSPC",
+      "^NDQ",
+      "AAPL",
+      "TSLA",
+      "GOOG",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "META",
+      "DUOL",
+      "ADBE.VI",
+      "AMD",
+      "BABA",
+      "LMT",
+      "BA",
+      "TM",
+      "V",
+      "MA",
+      "NFLX",
+      "RDDT",
+      "NOVO-B.CO"
+    ],
+    "regime": "mild risk-on",
+    "sections": {
+      "gamma": [
+        "Ticker | Price | Δ%",
+        "---|---:|---:",
+        "BTC-USD | 72486.52 | -0.31%",
+        "GC=F | 5173.90 | +1.05%",
+        "^GSPC | 6869.50 | +0.78%"
+      ],
+      "alpha": [
+        "- Tape is modestly positive: S&P +0.78%, NDQ +1.51%. Breadth is constructive (12 up, 6 down) but not euphoric — selective rather than broad-based buying.",
+        "- Isolate catalyst-driven outliers (AMD, NOVO-B.CO, DUOL) — these are stock-specific, not market signals.",
+        "- Keep strategic exposure near target; no urgency to add beta here — wait for breadth to confirm before sizing up."
+      ],
+      "beta": [
+        "- Outlier moves today: AMD (+5.82%) / NOVO-B.CO (+5.02%) / DUOL (-5.35%). These are catalyst-driven (likely earnings or news) — do not read them as market-wide signals.",
+        "- European session showing positive pre-market tone. Prefer adding to liquid names early if indices hold gains past the first 30 minutes.",
+        "- Hard stop discipline: DUOL (-5.35%) shows what happens without exit rules. Keep position sizes appropriate to volatility today."
+      ],
+      "pulse": [
+        "Awaiting pulse update."
+      ]
+    },
+    "movers": [
+      {
+        "ticker": "BTC-USD",
+        "name": "BTC-USD",
+        "price": "72486.52",
+        "pct": -0.31,
+        "change": "-225.41",
+        "changeValue": -225.40697361821367
+      },
+      {
+        "ticker": "GC=F",
+        "name": "GC=F",
+        "price": "5173.90",
+        "pct": 1.05,
+        "change": "+53.76",
+        "changeValue": 53.76145472538337
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "^GSPC",
+        "price": "6869.50",
+        "pct": 0.78,
+        "change": "+53.17",
+        "changeValue": 53.1673943242713
+      },
+      {
+        "ticker": "^NDQ",
+        "name": "^NDQ",
+        "price": "25093.68",
+        "pct": 1.51,
+        "change": "+373.28",
+        "changeValue": 373.27806915574547
+      },
+      {
+        "ticker": "AAPL",
+        "name": "AAPL",
+        "price": "262.52",
+        "pct": -0.47,
+        "change": "-1.24",
+        "changeValue": -1.2396704511202756
+      },
+      {
+        "ticker": "TSLA",
+        "name": "TSLA",
+        "price": "405.94",
+        "pct": 3.44,
+        "change": "+13.50",
+        "changeValue": 13.499938128383576
+      },
+      {
+        "ticker": "GOOG",
+        "name": "GOOG",
+        "price": "303.45",
+        "pct": -0.04,
+        "change": "-0.12",
+        "changeValue": -0.12142857142856656
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVDA",
+        "price": "183.04",
+        "pct": 1.66,
+        "change": "+2.99",
+        "changeValue": 2.9888491048593266
+      },
+      {
+        "ticker": "AMZN",
+        "name": "AMZN",
+        "price": "216.82",
+        "pct": 3.88,
+        "change": "+8.10",
+        "changeValue": 8.098398151713496
+      },
+      {
+        "ticker": "MSFT",
+        "name": "MSFT",
+        "price": "405.20",
+        "pct": 0.31,
+        "change": "+1.25",
+        "changeValue": 1.252238062007791
+      },
+      {
+        "ticker": "META",
+        "name": "META",
+        "price": "667.73",
+        "pct": 1.93,
+        "change": "+12.64",
+        "changeValue": 12.643175708819854
+      },
+      {
+        "ticker": "DUOL",
+        "name": "DUOL",
+        "price": "96.17",
+        "pct": -5.35,
+        "change": "-5.44",
+        "changeValue": -5.435916534601162
+      },
+      {
+        "ticker": "ADBE.VI",
+        "name": "ADBE.VI",
+        "price": "273.12",
+        "pct": 0.79,
+        "change": "+2.14",
+        "changeValue": 2.1407361841452826
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "price": "202.07",
+        "pct": 5.82,
+        "change": "+11.11",
+        "changeValue": 11.113659043659055
+      },
+      {
+        "ticker": "BABA",
+        "name": "BABA",
+        "price": "133.27",
+        "pct": -1.71,
+        "change": "-2.32",
+        "changeValue": -2.3185644521314543
+      },
+      {
+        "ticker": "LMT",
+        "name": "LMT",
+        "price": "664.48",
+        "pct": -0.5,
+        "change": "-3.34",
+        "changeValue": -3.3390954773869908
+      },
+      {
+        "ticker": "BA",
+        "name": "BA",
+        "price": "227.31",
+        "pct": 1.42,
+        "change": "+3.18",
+        "changeValue": 3.182608952869259
+      },
+      {
+        "ticker": "TM",
+        "name": "TM",
+        "price": "232.81",
+        "pct": 0.28,
+        "change": "+0.65",
+        "changeValue": 0.6500478659752389
+      },
+      {
+        "ticker": "V",
+        "name": "V",
+        "price": "320.47",
+        "pct": -0.11,
+        "change": "-0.35",
+        "changeValue": -0.352905195715266
+      },
+      {
+        "ticker": "MA",
+        "name": "MA",
+        "price": "522.92",
+        "pct": -0.27,
+        "change": "-1.42",
+        "changeValue": -1.4157064072996945
+      },
+      {
+        "ticker": "NFLX",
+        "name": "NFLX",
+        "price": "98.66",
+        "pct": 0.98,
+        "change": "+0.96",
+        "changeValue": 0.9574846504258261
+      },
+      {
+        "ticker": "RDDT",
+        "name": "RDDT",
+        "price": "147.29",
+        "pct": 1.1,
+        "change": "+1.60",
+        "changeValue": 1.6025618199801954
+      },
+      {
+        "ticker": "NOVO-B.CO",
+        "name": "NOVO-B.CO",
+        "price": "38.50",
+        "pct": 5.02,
+        "change": "+1.84",
+        "changeValue": 1.8403161302609021
+      }
+    ]
+  }
+]
