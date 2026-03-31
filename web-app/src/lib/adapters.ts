@@ -24,6 +24,16 @@ interface RawMover {
   changePct?: number | null;
   change?: number | string | null;
   changeValue?: number | null;
+  changeAbs?: number | null;
+}
+
+function toNum(v: unknown): number {
+  if (typeof v === "number") return v;
+  if (typeof v === "string") {
+    const n = parseFloat(v.replace(",", "."));
+    return Number.isFinite(n) ? n : 0;
+  }
+  return 0;
 }
 
 export function adaptMovers(
@@ -33,20 +43,10 @@ export function adaptMovers(
   const rows: Mover[] = (Array.isArray(movers) ? movers : []).map((raw) => {
     const m = raw as RawMover;
     const ticker = normalizeSymbol(m?.ticker ?? "");
-    // Support both v1 (pct) and v2 (changePct) snapshot field names
-    const changePct =
-      typeof m?.changePct === "number"
-        ? m.changePct
-        : typeof m?.pct === "number"
-        ? m.pct
-        : 0;
-    const changeAbs =
-      typeof m?.changeValue === "number"
-        ? m.changeValue
-        : typeof m?.change === "number"
-        ? m.change
-        : 0;
-    const price = typeof m?.price === "number" ? m.price : 0;
+    // Support both v1 (pct, change as string) and v2 (changePct, changeValue as number)
+    const changePct = toNum(m?.changePct ?? m?.pct);
+    const changeAbs = toNum(m?.changeAbs ?? m?.changeValue ?? m?.change);
+    const price = toNum(m?.price);
     return {
       ticker,
       name: m?.name ?? ticker,
