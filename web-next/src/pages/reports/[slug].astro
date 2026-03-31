@@ -4,13 +4,14 @@ import MarketPulse from '../../components/MarketPulse.astro';
 import TakeawayPanel from '../../components/TakeawayPanel.astro';
 import DiscussionPanel from '../../components/DiscussionPanel.astro';
 import TickerTable from '../../components/TickerTable.astro';
-import { loadSearchIndex, loadReportMarkdown } from '../../lib/loaders.js';
+import TacticalQuickPanel from '../../components/TacticalQuickPanel.astro';
+import { loadSearchIndex, loadReportMarkdown, sanitizeSlug } from '../../lib/loaders.js';
 import { adaptMovers } from '../../lib/adapters.js';
 
 export async function getStaticPaths() {
   const idx = await loadSearchIndex();
   return (idx.items ?? []).map((item) => ({
-    params: { slug: `${item.date}-${item.slot}` },
+    params: { slug: sanitizeSlug(item.date, item.slot) },
     props: { item },
   }));
 }
@@ -18,11 +19,27 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { slug } = Astro.params;
 
-// Load raw markdown body (strip frontmatter)
+// Load raw markdown body (strip frontmatter + sections already shown in components)
 let rawMd = '';
 try {
   const full = await loadReportMarkdown(item.date, item.slot);
-  rawMd = full.replace(/^---[\s\S]*?---\n?/, '').trim();
+  let body = full.replace(/^---[\s\S]*?---\n?/, '').trim();
+  // Remove sections already rendered by structured components above
+  const sectionsToRemove = [
+    /^# .+$/m,                            // Title heading
+    /^- \*\*Regime:\*\*.+$/m,             // Regime line
+    /^- \*\*Main driver:\*\*.+$/m,        // Main driver line
+    /^- \*\*Posture:\*\*.+$/m,            // Posture line
+    /## 0\) Executive TL;DR[\s\S]*?(?=\n## |\n*$)/,  // Pulse section
+    /## 1\) GAMMA[\s\S]*?(?=\n## |\n*$)/, // GAMMA data table
+    /## 2\) ALPHA[\s\S]*?(?=\n## |\n*$)/, // Alpha section
+    /## 3\) BETA[\s\S]*?(?=\n## |\n*$)/,  // Beta section
+    /## 4\) Agent Discussion[\s\S]*?(?=\n## |\n*$)/, // Discussion section
+  ];
+  for (const re of sectionsToRemove) {
+    body = body.replace(re, '');
+  }
+  rawMd = body.replace(/\n{3,}/g, '\n\n').trim();
 } catch (_) {
   rawMd = '';
 }
@@ -105,12 +122,15 @@ const SLOT_LABELS = { eu: 'EU Morning', 'us-open': 'US Open', 'pre-close': 'Pre-
   <MarketPulse regime={item.regime ?? ''} pulse={item.sections?.pulse ?? []} />
   <TakeawayPanel summary={item.summary ?? ''} regime={item.regime ?? ''} date={item.date ?? ''} slot={item.slot ?? ''} />
   <DiscussionPanel alpha={item.sections?.alpha ?? []} beta={item.sections?.beta ?? []} />
+  <TacticalQuickPanel beta={item.sections?.beta ?? []} discussion={{agreement: '', disagreement: '', resolution: (item.sections?.beta ?? [])[2] ?? ''}} regime={item.regime ?? ''} />
   <TickerTable movers={adaptedMovers} sortBy="pct" collapsed={false} />
 
-  <details class="report-body-wrap">
-    <summary>Full report text</summary>
-    <div class="report-body" set:html={bodyHtml} />
-  </details>
+  {rawMd && (
+    <details class="report-body-wrap" open>
+      <summary>Checklist, Sources & Catalysts</summary>
+      <div class="report-body" set:html={bodyHtml} />
+    </details>
+  )}
 
   <p class="back-link"><a href="/reports">← Back to Reports</a></p>
 </BaseLayout>

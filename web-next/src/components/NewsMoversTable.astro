@@ -23,7 +23,7 @@ const { movers = [], news = [] } = Astro.props;
         {news.map((n) => (
           <li>
             <strong>{n.ticker ?? 'MARKET'}:</strong> {n.headline}
-            {n.url && <a href={n.url} target="_blank" rel="noreferrer"> source</a>}
+            {n.url && <a href={n.url} target="_blank" rel="noreferrer"> [{n.source || 'source'}]</a>}
           </li>
         ))}
       </ul>

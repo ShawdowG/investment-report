@@ -134,7 +134,7 @@ ${topMovers.map(m => `  ${m.ticker} (${m.name}): ${m.price.toFixed(2)} | change 
 
 Macro: ${macroStr}
 
-Generate a concise, trader-focused analysis. Be specific — reference actual tickers and percentages from the data above. Avoid generic statements.`;
+Generate a concise, trader-focused analysis. Every sentence must reference at least one ticker and its % move. Name the leaders and laggards explicitly. If a move exceeds ±5%, flag it as outsized. Do not write anything you cannot back with the numbers above.`;
 
 // ---------------------------------------------------------------------------
 // Call Claude Haiku with structured output (tool_use)
@@ -152,8 +152,13 @@ async function generateAnalysis() {
 
   const systemPrompt = `You are a concise market analyst writing daily investment reports.
 You receive factual market data and generate structured analysis.
-Always reference specific tickers, prices, and percentage moves from the data provided.
-Write in clear, direct language — no fluff, no filler.`;
+
+Rules:
+- Every bullet MUST reference at least one specific ticker and its % move from the data.
+- Never use generic phrases like "markets are mixed", "some names are up", "monitor developments".
+- Name the actual leaders and laggards by ticker. State what they did, not what might happen.
+- If a move is outsized (>5%), call it out explicitly and note whether it looks catalyst-driven or technical.
+- Keep each bullet to 1-2 sentences. No hedging, no filler.`;
 
   const response = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -171,21 +176,21 @@ Write in clear, direct language — no fluff, no filler.`;
           },
           summary: {
             type: 'string',
-            description: 'One precise sentence describing the dominant market dynamic and who is leading/lagging.',
+            description: 'One precise sentence: name the session type, regime, key index moves (S&P/NDQ %), breadth fraction, and the 2-3 tickers leading the move. Example: "EU/Nordic Morning shows mild risk-off conditions. S&P -0.39%, NDQ -0.78%, 42% positive, led by ADBE.VI, META, MA."',
           },
           alpha: {
             type: 'array',
             items: { type: 'string' },
             minItems: 3,
             maxItems: 4,
-            description: 'Strategic framing bullets. Each bullet is one specific observation about structure, regime, or risk (not tactical calls).',
+            description: 'Strategic framing bullets. Bullet 1: tape structure with index breadth and specific % moves. Bullet 2: sector rotation observation naming leading/lagging groups with tickers. Bullet 3: strategic posture recommendation tied to the data. No generic language.',
           },
           beta: {
             type: 'array',
             items: { type: 'string' },
             minItems: 3,
             maxItems: 4,
-            description: 'Tactical action bullets. Each bullet is a specific, actionable instruction referencing actual tickers.',
+            description: 'Tactical action bullets. Bullet 1: call out the 2-3 biggest movers by ticker and %, state if catalyst-driven or technical. Bullet 2: entry framework for this session slot with specific index levels. Bullet 3: position sizing instruction based on today\'s volatility (reference VIX if available). No vague advice.',
           },
           pulse: {
             type: 'array',
@@ -200,15 +205,15 @@ Write in clear, direct language — no fluff, no filler.`;
             properties: {
               agreement: {
                 type: 'string',
-                description: 'What both agents agree on (1 sentence)',
+                description: 'What both strategic and tactical views agree on — name specific tickers or conditions (1 sentence)',
               },
               disagreement: {
                 type: 'string',
-                description: 'Where agents disagree on timing or magnitude (1 sentence)',
+                description: 'Where they differ — be specific about which ticker or trade they disagree on and why (time horizon, sizing, or urgency) (1 sentence)',
               },
               resolution: {
                 type: 'string',
-                description: 'Agreed resolution or posture (1 sentence)',
+                description: 'Concrete instruction that reconciles both views — include a specific action, ticker, or condition to watch (1-2 sentences)',
               },
             },
             required: ['agreement', 'disagreement', 'resolution'],

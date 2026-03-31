@@ -33,7 +33,8 @@ Top-level object:
 - `name` (string)
 - `price` (string)
 - `pct` (number or `null`)
-- `change` (string)
+- `change` (string, formatted Δ$ e.g. "+1.23" or "—")
+- `changeAbs` (number or `null`, raw numeric Δ$ from snapshot)
 
 Optional (for migration parity with future renderer):
 

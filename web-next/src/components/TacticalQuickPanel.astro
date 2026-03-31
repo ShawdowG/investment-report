@@ -1,0 +1,46 @@
+---
+const { beta = [], discussion = {}, regime = '' } = Astro.props;
+
+const clean = (s = '') => s.replace(/^[-•]\s*/, '').trim();
+
+// Derive tactical fields from existing data
+const posture = clean(beta[0]) || 'No posture available';
+const trigger = clean(beta[1]) || 'No trigger specified';
+const invalidation = clean(discussion.resolution) || clean(beta[2]) || 'No invalidation criteria';
+const regimeLabel = regime || 'Unknown';
+const regimeTone = /risk.?off|bearish|defensive/i.test(regimeLabel) ? 'caution'
+  : /risk.?on|bullish|rally/i.test(regimeLabel) ? 'go'
+  : 'neutral';
+---
+<section class="tactical-qp">
+  <h2>Tactical Quick Panel</h2>
+  <div class="qp-grid">
+    <div class="qp-card">
+      <div class="qp-label">Risk Posture</div>
+      <div class={`qp-badge ${regimeTone}`}>{regimeLabel}</div>
+      <div class="qp-detail">{posture}</div>
+    </div>
+    <div class="qp-card">
+      <div class="qp-label">Trigger</div>
+      <div class="qp-detail">{trigger}</div>
+    </div>
+    <div class="qp-card">
+      <div class="qp-label">Invalidation</div>
+      <div class="qp-detail">{invalidation}</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tactical-qp { border:1px solid #e5e7eb; border-radius:10px; padding:1rem; background:#fff; }
+  h2 { margin:.1rem 0 .55rem; }
+  .qp-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.75rem; }
+  @media (max-width:760px){ .qp-grid { grid-template-columns:1fr; } }
+  .qp-card { border:1px solid #f0f2f4; border-radius:8px; padding:.65rem .75rem; }
+  .qp-label { font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#6b7280; margin-bottom:.3rem; }
+  .qp-badge { display:inline-block; font-size:.8rem; font-weight:600; padding:.15rem .55rem; border-radius:6px; margin-bottom:.35rem; }
+  .qp-badge.go { background:#d1fae5; color:#065f46; }
+  .qp-badge.caution { background:#fee2e2; color:#991b1b; }
+  .qp-badge.neutral { background:#f3f4f6; color:#374151; }
+  .qp-detail { font-size:.875rem; line-height:1.45; color:#374151; }
+</style>

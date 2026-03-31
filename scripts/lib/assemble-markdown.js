@@ -34,7 +34,7 @@ function assembleMarkdown({ date, slot, snapshot, analysis }) {
   // Build tickers frontmatter (use watchlist order)
   const tickerList = watchlist.filter(t => prices[t]).join(', ');
 
-  // Build GAMMA table (Ticker | Price | Δ%)
+  // Build GAMMA table (Ticker | Price | Δ$ | Δ%)
   const gammaRows = watchlist
     .filter(t => prices[t])
     .map(t => {
@@ -43,7 +43,10 @@ function assembleMarkdown({ date, slot, snapshot, analysis }) {
         ? `+${p.changePct.toFixed(2)}%`
         : `${p.changePct.toFixed(2)}%`;
       const priceStr = p.price.toFixed(2);
-      return `${t} | ${priceStr} | ${pctStr}`;
+      const changeStr = p.change >= 0
+        ? `+${p.change.toFixed(2)}`
+        : `${p.change.toFixed(2)}`;
+      return `${t} | ${priceStr} | ${changeStr} | ${pctStr}`;
     })
     .join('\n');
 
@@ -105,8 +108,8 @@ tickers: [${tickerList}]
 - **Posture:** ${(beta[0] || '').replace(/^[-•]\s*/, '')}
 
 ## 1) GAMMA — Data Pack
-Ticker | Price | Δ%
----|---:|---:
+Ticker | Price | Δ$ | Δ%
+---|---:|---:|---:
 ${gammaRows}
 
 ## 2) ALPHA — Strategic View

@@ -13,6 +13,7 @@ import { TickerTable } from "@/components/ticker-table";
 import { NewsMoversTable } from "@/components/news-movers-table";
 import { MdRenderer } from "@/components/md-renderer";
 import { Badge } from "@/components/ui/badge";
+import { TacticalQuickPanel } from "@/components/tactical-quick-panel";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -132,6 +133,8 @@ export default async function ReportPage({ params }: PageProps) {
           disagreement={disagreement}
           resolution={resolution}
         />
+
+        <TacticalQuickPanel beta={beta} resolution={resolution} regime={regime} />
 
         <TickerTable movers={movers} />
 

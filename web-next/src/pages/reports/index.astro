@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { loadSearchIndex } from '../../lib/loaders.js';
+import { loadSearchIndex, sanitizeSlug } from '../../lib/loaders.js';
 
 const idx = await loadSearchIndex();
 const items = (idx.items ?? []).slice().sort((a, b) => {
@@ -61,7 +61,7 @@ function regimeColor(regime) {
             </td>
             <td class="col-summary">{item.summary}</td>
             <td class="col-link">
-              <a href={`/reports/${item.date}-${item.slot}`} class="report-link">→</a>
+              <a href={`/reports/${sanitizeSlug(item.date, item.slot)}`} class="report-link">→</a>
             </td>
           </tr>
         ))}

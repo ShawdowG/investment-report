@@ -37,6 +37,7 @@ function validateMover(m, ctx) {
   if (!isString(m.price)) return `${ctx}: mover.price missing`;
   if (!(typeof m.pct === 'number' || m.pct === null)) return `${ctx}: mover.pct must be number|null`;
   if (!isString(m.change)) return `${ctx}: mover.change missing`;
+  if (!(typeof m.changeAbs === 'number' || m.changeAbs === null)) return `${ctx}: mover.changeAbs must be number|null`;
   return null;
 }
 

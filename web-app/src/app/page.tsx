@@ -9,6 +9,7 @@ import { TakeawayPanel } from "@/components/takeaway-panel";
 import { DiscussionPanel } from "@/components/discussion-panel";
 import { TickerTable } from "@/components/ticker-table";
 import { NewsMoversTable } from "@/components/news-movers-table";
+import { TacticalQuickPanel } from "@/components/tactical-quick-panel";
 
 export default function DashboardPage() {
   const index = loadSearchIndex();
@@ -80,6 +81,8 @@ export default function DashboardPage() {
           disagreement={disagreement}
           resolution={resolution}
         />
+
+        <TacticalQuickPanel beta={beta} resolution={resolution} regime={regime} />
 
         <TickerTable movers={movers} />
 

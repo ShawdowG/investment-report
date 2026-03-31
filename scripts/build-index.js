@@ -190,28 +190,41 @@ function classifyMove(pct) {
 function parseMovers(body, tickers = []) {
   const movers = [];
   const lines = body.split('\n');
-  const re = /^\s*([A-Z0-9^.=-]+)\s*\|\s*([0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)%/;
+  // Match 4-column (Ticker | Price | Δ$ | Δ%) or 3-column (Ticker | Price | Δ%) tables
+  const re4 = /^\s*([A-Z0-9^.=-]+)\s*\|\s*([0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)%/;
+  const re3 = /^\s*([A-Z0-9^.=-]+)\s*\|\s*([0-9.,]+)\s*\|\s*([+-]?[0-9.,]+)%/;
   for (const l of lines) {
-    const m = l.match(re);
-    if (!m) continue;
-    const ticker = m[1].trim();
-    const price = m[2].trim();
-    const pctRaw = m[3].replace(',', '.');
-    const pct = Number(pctRaw);
-    const closeNum = Number(price.replace(',', '.'));
-    const prevClose = Number.isFinite(closeNum) && Number.isFinite(pct) && (1 + pct / 100) !== 0
-      ? closeNum / (1 + pct / 100)
-      : null;
-    const changeValue = Number.isFinite(prevClose) ? closeNum - prevClose : null;
-    const change = changeValue === null ? '—' : `${changeValue >= 0 ? '+' : ''}${changeValue.toFixed(2)}`;
-
-    movers.push({ ticker, name: ticker, price, pct, change, changeValue });
+    const m4 = l.match(re4);
+    if (m4) {
+      const ticker = m4[1].trim();
+      const price = m4[2].trim();
+      const changeAbs = Number(m4[3].replace(',', '.'));
+      const pct = Number(m4[4].replace(',', '.'));
+      const changeValue = Number.isFinite(changeAbs) ? changeAbs : null;
+      const change = changeValue === null ? '—' : `${changeValue >= 0 ? '+' : ''}${changeValue.toFixed(2)}`;
+      movers.push({ ticker, name: ticker, price, pct, change, changeValue, changeAbs: changeValue });
+      continue;
+    }
+    const m3 = l.match(re3);
+    if (m3) {
+      const ticker = m3[1].trim();
+      const price = m3[2].trim();
+      const pctRaw = m3[3].replace(',', '.');
+      const pct = Number(pctRaw);
+      const closeNum = Number(price.replace(',', '.'));
+      const prevClose = Number.isFinite(closeNum) && Number.isFinite(pct) && (1 + pct / 100) !== 0
+        ? closeNum / (1 + pct / 100)
+        : null;
+      const changeValue = Number.isFinite(prevClose) ? closeNum - prevClose : null;
+      const change = changeValue === null ? '—' : `${changeValue >= 0 ? '+' : ''}${changeValue.toFixed(2)}`;
+      movers.push({ ticker, name: ticker, price, pct, change, changeValue, changeAbs: changeValue });
+    }
   }
 
   const byTicker = new Map(movers.map(m => [m.ticker, m]));
   for (const t of (tickers || [])) {
     if (!byTicker.has(t)) {
-      byTicker.set(t, { ticker: t, name: t, price: '—', pct: null, change: '—', changeValue: null });
+      byTicker.set(t, { ticker: t, name: t, price: '—', pct: null, change: '—', changeValue: null, changeAbs: null });
     }
   }
 

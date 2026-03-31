@@ -63,18 +63,18 @@ Progress log:
 
 - [x] R-01 | Alpha | P0 | Done | Unify information hierarchy: Pulse -> Takeaway -> Alpha/Beta -> Tickers -> News
 - [x] R-02 | Epsi  | P1 | Done | Improve table density/legibility (sticky header, row spacing, numeric alignment)
-- [ ] R-03 | Gamma | P0 | Todo | Add reliable Δ$ source field from snapshot (avoid derived approximation when possible)
-- [ ] R-04 | Eta   | P1 | Todo | Add schema field for `changeAbs` + CI gate for missing mover fields
-- [ ] R-05 | Alpha | P1 | Todo | Rewrite summary/discussion templates for less generic language
-- [ ] R-06 | Epsi  | P1 | Todo | Report page cleanup: collapse raw blocks, keep one canonical data view
-- [ ] R-07 | Beta  | P1 | Todo | Add tactical quick-panel (risk posture, trigger, invalidation)
-- [ ] R-08 | Gamma | P1 | Todo | Direct source-link quality improvement (prefer direct publisher links)
+- [x] R-03 | Gamma | P0 | Done | Add reliable Δ$ source field from snapshot (avoid derived approximation when possible)
+- [x] R-04 | Eta   | P1 | Done | Add schema field for `changeAbs` + CI gate for missing mover fields
+- [x] R-05 | Alpha | P1 | Done | Rewrite summary/discussion templates for less generic language
+- [x] R-06 | Epsi  | P1 | Done | Report page cleanup: collapse raw blocks, keep one canonical data view
+- [x] R-07 | Beta  | P1 | Done | Add tactical quick-panel (risk posture, trigger, invalidation)
+- [x] R-08 | Gamma | P1 | Done | Direct source-link quality improvement (prefer direct publisher links)
 - [x] R-09 | Epsi  | P0 | Done | Add global top navbar + route shell (Main / Tracker / Reports)
 - [x] R-10 | Alpha | P0 | Done | Move dashboard content under Main page route
 - [x] R-11 | Beta  | P1 | Done | Build Tracker page: regime history + ticker frequency widgets
 - [x] R-12 | Gamma | P1 | Done | Build Reports page archive with slot filters + individual report pages
 - [x] R-13 | Epsi  | P1 | Done | Navbar active states + mobile behavior
-- [ ] R-14 | Eta   | P1 | Todo | Route/link compatibility and redirect safety checks
+- [x] R-14 | Eta   | P1 | Done | Route/link compatibility and redirect safety checks
 
 ## LLM Pipeline Rewrite (2026-02-27)
 
@@ -82,7 +82,7 @@ Progress log:
 - [x] G-02 | Gamma | P0 | Done | Create scripts/fetch-snapshot.py (yfinance, configurable watchlist)
 - [x] G-03 | Gamma | P0 | Done | Create scripts/generate-report.js (reads snapshot → Haiku tool_use → markdown)
 - [x] G-04 | Gamma | P0 | Done | Create scripts/lib/assemble-markdown.js (pure markdown assembler)
-- [ ] G-05 | Eta   | P1 | Todo | Next.js migration (web-app/ alongside web-next/, parity cutover)
+- [x] G-05 | Eta   | P1 | Done | Next.js migration (web-app/ alongside web-next/, parity cutover)
 
 Progress log:
 - 2026-02-25: Added revamp backlog R-01..R-08.
@@ -91,3 +91,4 @@ Progress log:
 - 2026-02-25 20:20 CET: R-01→Done, R-02→Done (`web-next` main page reordered to Pulse→Takeaway→Discussion→Tickers→News; added `TakeawayPanel`; ticker table now sticky-header + tighter spacing + tabular numeric alignment).
 - 2026-02-26: Production polish sprint. Removed placeholder/migration text from `index.astro`. Built `Navbar.astro` (sticky, active state, mobile), wired into `BaseLayout.astro`. Built `/reports` archive (slot filter, regime badges, 23 reports). Built `/reports/[slug]` individual report pages (23 static routes via `getStaticPaths`). Built `/tracker` with Regime History list + Ticker Frequency table (build-time computed from search-index.json). Build: 26 pages, 0 errors. R-09..R-13→Done (actual implementation).
 - 2026-02-27: LLM pipeline rewrite. G-01..G-04 Done. New snapshot schema v2 (real Δ$, macro block). Python fetcher (yfinance, configurable watchlist, 3 macro indicators). Node.js generator using Claude Haiku tool_use (~750 tokens/report vs ~3000 before). Markdown assembler. Root package.json added.
+- 2026-03-31: Revamp + migration sprint. R-03→Done (Δ$ column added to GAMMA table in assemble-markdown, parseMovers updated for 4-col tables). R-04→Done (changeAbs field added to schema + validator). R-05→Done (LLM prompts rewritten: specific ticker/% requirements, no generic language). R-06→Done (report [slug] page strips duplicate sections, shows only checklist/sources/catalysts). R-07→Done (TacticalQuickPanel component: risk posture badge, trigger, invalidation — added to Astro + Next.js). R-08→Done (deriveNewsFromMovers now links to Yahoo Finance, shows source name). R-14→Done (sanitizeSlug utility, consistent slug generation across routes). G-05→Done (TacticalQuickPanel ported to Next.js, wired into dashboard + report pages — migration now at full parity).

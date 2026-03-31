@@ -6,6 +6,7 @@ import TakeawayPanel from '../components/TakeawayPanel.astro';
 import DiscussionPanel from '../components/DiscussionPanel.astro';
 import TickerTable from '../components/TickerTable.astro';
 import NewsMoversTable from '../components/NewsMoversTable.astro';
+import TacticalQuickPanel from '../components/TacticalQuickPanel.astro';
 import { loadSearchIndex } from '../lib/loaders.js';
 import { adaptMovers, deriveNewsFromMovers } from '../lib/adapters.js';
 
@@ -23,6 +24,7 @@ const adaptedNews = Array.isArray(latest?.news) && latest.news.length > 0 ? late
   <MarketPulse regime={latest?.regime ?? ''} pulse={latest?.sections?.pulse ?? []} />
   <TakeawayPanel summary={latest?.summary ?? ''} regime={latest?.regime ?? ''} date={latest?.date ?? ''} slot={latest?.slot ?? slot} />
   <DiscussionPanel alpha={latest?.sections?.alpha ?? []} beta={latest?.sections?.beta ?? []} />
+  <TacticalQuickPanel beta={latest?.sections?.beta ?? []} discussion={{agreement: '', disagreement: '', resolution: (latest?.sections?.beta ?? [])[2] ?? ''}} regime={latest?.regime ?? ''} />
 
   <p class="muted">
     Table controls:
