@@ -3,6 +3,16 @@ import type { Mover, NewsRow } from "@/types/reports";
 // Fix for original adapters.js bug:
 // `SYMBOL_FALLS` was referenced on line 10 before being defined on line 13.
 // Defined here at the top to avoid the ReferenceError.
+const NAME_MAP: Record<string, string> = {
+  "BTC-USD": "Bitcoin", "GC=F": "Gold", "^GSPC": "S&P 500", "^NDX": "Nasdaq 100",
+  "AAPL": "Apple", "TSLA": "Tesla", "GOOG": "Alphabet", "NVDA": "NVIDIA",
+  "AMZN": "Amazon", "MSFT": "Microsoft", "META": "Meta", "DUOL": "Duolingo",
+  "ADBE": "Adobe", "ADBE.VI": "Adobe", "AMD": "AMD", "BABA": "Alibaba",
+  "LMT": "Lockheed Martin", "BA": "Boeing", "TM": "Toyota", "V": "Visa",
+  "MA": "Mastercard", "NFLX": "Netflix", "RDDT": "Reddit",
+  "NVO": "Novo Nordisk", "NOVO-B.CO": "Novo Nordisk",
+};
+
 const SYMBOL_FALLBACKS: Record<string, string> = {
   "GC_F": "GC=F",
   "GC=F": "GC=F",
@@ -49,7 +59,7 @@ export function adaptMovers(
     const price = toNum(m?.price);
     return {
       ticker,
-      name: m?.name ?? ticker,
+      name: NAME_MAP[m?.ticker ?? ""] || NAME_MAP[ticker] || m?.name || ticker,
       price,
       changePct,
       changeAbs,
