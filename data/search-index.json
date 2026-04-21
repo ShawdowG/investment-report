@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-21T15:58:44.439Z",
-  "count": 134,
+  "generatedAt": "2026-04-21T21:00:54.478Z",
+  "count": 135,
   "items": [
     {
       "file": "2026-04-21-us-open.md",
@@ -264,6 +264,271 @@
           "change": "-1.51",
           "changeValue": -1.5053095139177373,
           "changeAbs": -1.5053095139177373
+        }
+      ]
+    },
+    {
+      "file": "2026-04-21-pre-close.md",
+      "htmlFile": "2026-04-21-pre-close.html",
+      "title": "US Pre-close",
+      "summary": "US Pre-close shows mild risk-off conditions. S&P -0.63%, NDQ -0.42%, 15% of tracked names positive, led by AMD, MSFT, AMZN.",
+      "date": "2026-04-21",
+      "slot": "pre-close",
+      "tickers": [
+        "BTC-USD",
+        "GC=F",
+        "^GSPC",
+        "^NDQ",
+        "AAPL",
+        "TSLA",
+        "GOOG",
+        "NVDA",
+        "AMZN",
+        "MSFT",
+        "META",
+        "DUOL",
+        "ADBE.VI",
+        "AMD",
+        "BABA",
+        "LMT",
+        "BA",
+        "TM",
+        "V",
+        "MA",
+        "NFLX",
+        "RDDT",
+        "NOVO-B.CO"
+      ],
+      "regime": "mild risk-off",
+      "sections": {
+        "gamma": [
+          "Ticker | Price | Δ%",
+          "---|---:|---:",
+          "BTC-USD | 75766.77 | -0.14%",
+          "GC=F | 4731.90 | -1.55%",
+          "^GSPC | 7064.01 | -0.63%"
+        ],
+        "alpha": [
+          "- Session leans risk-off: S&P -0.63%, NDQ -0.42%. Breadth is soft (3 positive vs 16 negative) but selling pressure remains orderly — no signs of forced liquidation.",
+          "- Isolate catalyst-driven outliers (TM, RDDT) — these are stock-specific, not market signals.",
+          "- Tilt defensively: trim high-beta positions, avoid forcing new longs into weakness. Let the tape show stabilization before re-engaging."
+        ],
+        "beta": [
+          "- Outlier moves today: TM (-5.24%) / RDDT (-5.69%). These are catalyst-driven (likely earnings or news) — do not read them as market-wide signals.",
+          "- Heading into close on weakness — trim exposure rather than adding. Final-hour selling can accelerate; protect open profits.",
+          "- Hard stop discipline: RDDT (-5.69%) shows what happens without exit rules. Keep position sizes appropriate to volatility today."
+        ],
+        "pulse": [
+          "Awaiting pulse update."
+        ]
+      },
+      "movers": [
+        {
+          "ticker": "BTC-USD",
+          "name": "BTC-USD",
+          "price": "75766.77",
+          "pct": -0.14,
+          "change": "-106.22",
+          "changeValue": -106.22218906469061,
+          "changeAbs": -106.22218906469061
+        },
+        {
+          "ticker": "GC=F",
+          "name": "GC=F",
+          "price": "4731.90",
+          "pct": -1.55,
+          "change": "-74.50",
+          "changeValue": -74.49918740477369,
+          "changeAbs": -74.49918740477369
+        },
+        {
+          "ticker": "^GSPC",
+          "name": "^GSPC",
+          "price": "7064.01",
+          "pct": -0.63,
+          "change": "-44.79",
+          "changeValue": -44.7854110898661,
+          "changeAbs": -44.7854110898661
+        },
+        {
+          "ticker": "^NDQ",
+          "name": "^NDQ",
+          "price": "26479.47",
+          "pct": -0.42,
+          "change": "-111.68",
+          "changeValue": -111.68284193612999,
+          "changeAbs": -111.68284193612999
+        },
+        {
+          "ticker": "AAPL",
+          "name": "AAPL",
+          "price": "266.17",
+          "pct": -2.52,
+          "change": "-6.88",
+          "changeValue": -6.880882232252759,
+          "changeAbs": -6.880882232252759
+        },
+        {
+          "ticker": "TSLA",
+          "name": "TSLA",
+          "price": "386.42",
+          "pct": -1.55,
+          "change": "-6.08",
+          "changeValue": -6.083809040121878,
+          "changeAbs": -6.083809040121878
+        },
+        {
+          "ticker": "GOOG",
+          "name": "GOOG",
+          "price": "330.47",
+          "pct": -1.47,
+          "change": "-4.93",
+          "changeValue": -4.93038566933933,
+          "changeAbs": -4.93038566933933
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVDA",
+          "price": "199.88",
+          "pct": -1.08,
+          "change": "-2.18",
+          "changeValue": -2.1822725434694803,
+          "changeAbs": -2.1822725434694803
+        },
+        {
+          "ticker": "AMZN",
+          "name": "AMZN",
+          "price": "249.91",
+          "pct": 0.66,
+          "change": "+1.64",
+          "changeValue": 1.6385912974369035,
+          "changeAbs": 1.6385912974369035
+        },
+        {
+          "ticker": "MSFT",
+          "name": "MSFT",
+          "price": "424.16",
+          "pct": 1.46,
+          "change": "+6.10",
+          "changeValue": 6.103623102700567,
+          "changeAbs": 6.103623102700567
+        },
+        {
+          "ticker": "META",
+          "name": "META",
+          "price": "668.84",
+          "pct": -0.31,
+          "change": "-2.08",
+          "changeValue": -2.0798515397732444,
+          "changeAbs": -2.0798515397732444
+        },
+        {
+          "ticker": "DUOL",
+          "name": "DUOL",
+          "price": "102.63",
+          "pct": -2.11,
+          "change": "-2.21",
+          "changeValue": -2.2121697824088216,
+          "changeAbs": -2.2121697824088216
+        },
+        {
+          "ticker": "ADBE.VI",
+          "name": "ADBE.VI",
+          "price": "247.18",
+          "pct": -0.58,
+          "change": "-1.44",
+          "changeValue": -1.442007644337167,
+          "changeAbs": -1.442007644337167
+        },
+        {
+          "ticker": "AMD",
+          "name": "AMD",
+          "price": "284.49",
+          "pct": 3.47,
+          "change": "+9.54",
+          "changeValue": 9.540739344737574,
+          "changeAbs": 9.540739344737574
+        },
+        {
+          "ticker": "BABA",
+          "name": "BABA",
+          "price": "135.38",
+          "pct": -3.42,
+          "change": "-4.79",
+          "changeValue": -4.793949057775933,
+          "changeAbs": -4.793949057775933
+        },
+        {
+          "ticker": "LMT",
+          "name": "LMT",
+          "price": "571.95",
+          "pct": -1.61,
+          "change": "-9.36",
+          "changeValue": -9.35907612562255,
+          "changeAbs": -9.35907612562255
+        },
+        {
+          "ticker": "BA",
+          "name": "BA",
+          "price": "219.16",
+          "pct": -2.63,
+          "change": "-5.92",
+          "changeValue": -5.919593303892356,
+          "changeAbs": -5.919593303892356
+        },
+        {
+          "ticker": "TM",
+          "name": "TM",
+          "price": "203.97",
+          "pct": -5.24,
+          "change": "-11.28",
+          "changeValue": -11.279050232165474,
+          "changeAbs": -11.279050232165474
+        },
+        {
+          "ticker": "V",
+          "name": "V",
+          "price": "309.94",
+          "pct": -1.27,
+          "change": "-3.99",
+          "changeValue": -3.986871265066384,
+          "changeAbs": -3.986871265066384
+        },
+        {
+          "ticker": "MA",
+          "name": "MA",
+          "price": "511.35",
+          "pct": -1.03,
+          "change": "-5.32",
+          "changeValue": -5.321718702637099,
+          "changeAbs": -5.321718702637099
+        },
+        {
+          "ticker": "NFLX",
+          "name": "NFLX",
+          "price": "92.58",
+          "pct": -2.37,
+          "change": "-2.25",
+          "changeValue": -2.2474096077025507,
+          "changeAbs": -2.2474096077025507
+        },
+        {
+          "ticker": "RDDT",
+          "name": "RDDT",
+          "price": "156.82",
+          "pct": -5.69,
+          "change": "-9.46",
+          "changeValue": -9.461412363482111,
+          "changeAbs": -9.461412363482111
+        },
+        {
+          "ticker": "NOVO-B.CO",
+          "name": "NOVO-B.CO",
+          "price": "39.42",
+          "pct": -2.57,
+          "change": "-1.04",
+          "changeValue": -1.0398173047315993,
+          "changeAbs": -1.0398173047315993
         }
       ]
     },
