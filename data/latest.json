@@ -89,6 +89,7 @@
       "change": "+445.45",
       "changeValue": 445.4518269514738,
       "changeAbs": 445.4518269514738
+
     },
     {
       "ticker": "AAPL",
@@ -98,6 +99,7 @@
       "change": "+1.28",
       "changeValue": 1.2787705326032892,
       "changeAbs": 1.2787705326032892
+
     },
     {
       "ticker": "TSLA",
@@ -170,6 +172,7 @@
       "change": "-3.96",
       "changeValue": -3.9619857795835287,
       "changeAbs": -3.9619857795835287
+
     },
     {
       "ticker": "AMD",
@@ -179,6 +182,7 @@
       "change": "+57.66",
       "changeValue": 57.6574834380109,
       "changeAbs": 57.6574834380109
+
     },
     {
       "ticker": "BABA",
@@ -188,6 +192,7 @@
       "change": "+9.32",
       "changeValue": 9.324044838860345,
       "changeAbs": 9.324044838860345
+
     },
     {
       "ticker": "LMT",
@@ -197,6 +202,7 @@
       "change": "-1.58",
       "changeValue": -1.5777068913632206,
       "changeAbs": -1.5777068913632206
+
     },
     {
       "ticker": "BA",
@@ -206,6 +212,7 @@
       "change": "+5.56",
       "changeValue": 5.564512099921927,
       "changeAbs": 5.564512099921927
+
     },
     {
       "ticker": "TM",
