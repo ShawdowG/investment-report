@@ -16,7 +16,8 @@ Dette er prioritert rekkefølge for inkrementell levering.
 
 ## P2 — Infra and future sync
 9. SPEC-010: News adapter abstraction + confidence scoring.
-10. SPEC-011: Supabase schema draft + optional sync plan (no runtime dependency).
+10. SPEC-011: Stitch design integration (token mapping + incremental layout alignment).
+11. SPEC-012: Supabase schema draft + optional sync plan (no runtime dependency).
 
 ## Execution rules
 - Én spec per branch.
