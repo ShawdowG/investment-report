@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-07T16:27:53.674Z",
-  "count": 170,
+  "generatedAt": "2026-05-07T21:11:12.311Z",
+  "count": 171,
   "items": [
     {
       "date": "2026-05-07",
@@ -35,6 +35,40 @@
       ],
       "file": "2026-05-07-us-open.md",
       "htmlFile": "2026-05-07-us-open.html"
+    },
+    {
+      "date": "2026-05-07",
+      "slot": "pre-close",
+      "title": "US Pre-close",
+      "regime": "mild risk-off",
+      "summary": "US Pre-close shows mild risk-off conditions. S&P -0.38%, NDQ -0.12%, 52% of tracked names positive, led by DUOL, TSLA, ADBE.VI.",
+      "tickers": [
+        "BTC-USD",
+        "GC=F",
+        "^GSPC",
+        "^NDQ",
+        "AAPL",
+        "TSLA",
+        "GOOG",
+        "NVDA",
+        "AMZN",
+        "MSFT",
+        "META",
+        "DUOL",
+        "ADBE.VI",
+        "AMD",
+        "BABA",
+        "LMT",
+        "BA",
+        "TM",
+        "V",
+        "MA",
+        "NFLX",
+        "RDDT",
+        "NOVO-B.CO"
+      ],
+      "file": "2026-05-07-pre-close.md",
+      "htmlFile": "2026-05-07-pre-close.html"
     },
     {
       "date": "2026-05-07",
