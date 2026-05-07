@@ -1,0 +1,22 @@
+# v3 Spec Status Board
+
+Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
+
+| Spec | Scope | Owner | Status | Blocked by | PR / Commit | Last update |
+|---|---|---|---|---|---|---|
+| SPEC-001 | Shell + navigation | codex-agent | ✅ done | - | 982ecc7 | 2026-05-07 |
+| SPEC-002 | Static report indexes (`latest`, `reports-lite`, `by-date`, `by-ticker`) | codex-agent | 🟡 in_progress | verify consumer pages | 99f6eea | 2026-05-07 |
+| SPEC-003 | Dashboard v3 cards + compare latest/previous | unassigned | ⬜ todo | needs SPEC-002 consume wiring | - | - |
+| SPEC-004 | Watchlist local store (CRUD) | unassigned | ⬜ todo | none | - | - |
+| SPEC-005 | Paste/import ticker parser + preview | unassigned | ⬜ todo | none | - | - |
+| SPEC-006 | Watchlist impact vs latest report | unassigned | ⬜ todo | SPEC-002 + SPEC-004 + SPEC-005 | - | - |
+| SPEC-007 | Ticker detail page + search | unassigned | ⬜ todo | SPEC-002 | - | - |
+| SPEC-008 | Portfolio local store + dashboard impact | unassigned | ⬜ todo | SPEC-004 + SPEC-006 | - | - |
+| SPEC-009 | Notes/journal local-first | unassigned | ⬜ todo | SPEC-007 | - | - |
+| SPEC-010 | News source abstraction/scoring | unassigned | ⬜ todo | none | - | - |
+
+## Status Legend
+- ⬜ todo
+- 🟡 in_progress
+- ⛔ blocked
+- ✅ done
