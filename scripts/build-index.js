@@ -381,6 +381,19 @@ fs.writeFileSync(path.join(ROOT, 'reports', 'index.json'), JSON.stringify(search
 fs.writeFileSync(path.join(dataDir, 'search-index.json'), JSON.stringify(searchIndex, null, 2));
 
 const latest = items[0];
+const reportsLite = items.map((i) => ({
+  date: i.date,
+  slot: i.slot,
+  title: i.title,
+  regime: i.regime,
+  summary: i.summary,
+  tickers: i.tickers,
+  file: i.file,
+  htmlFile: i.htmlFile
+}));
+fs.writeFileSync(path.join(dataDir, 'reports-lite.json'), JSON.stringify({ generatedAt: new Date().toISOString(), count: reportsLite.length, items: reportsLite }, null, 2));
+if (latest) fs.writeFileSync(path.join(dataDir, 'latest.json'), JSON.stringify(latest, null, 2));
+
 const allDates = [...new Set(items.map(i => i.date).filter(Boolean))].sort().reverse();
 const allTickers = [...new Set(items.flatMap(i => i.tickers || []))].sort((a, b) => a.localeCompare(b));
 
@@ -394,17 +407,20 @@ const html = `<!doctype html>
 <body>
   <div class="wrap">
     <nav class="topnav">
-      <a class="nav-brand" href="index.html">Investment Report</a>
+      <a class="nav-brand" href="index.html">Investment Report v3</a>
       <div class="nav-links">
-        <a class="nav-link active" href="index.html">Main</a>
-        <a class="nav-link" href="tracker.html">Tracker</a>
-        <a class="nav-link" href="reports.html">Reports / Analysis</a>
+        <a class="nav-link active" href="index.html">Dashboard</a>
+        <a class="nav-link" href="reports.html">Reports</a>
+        <a class="nav-link" href="watchlist.html">Watchlist</a>
+        <a class="nav-link" href="portfolio.html">Portfolio</a>
+        <a class="nav-link" href="tickers.html">Tickers</a>
+        <a class="nav-link" href="settings.html">Settings</a>
       </div>
     </nav>
     <section class="hero">
       <div class="hero-top">
         <div>
-          <h1>Investment Dashboard</h1>
+          <h1>Dashboard</h1>
           <p id="headerContext" class="muted">Showing: Today • All sessions • All tickers</p>
         </div>
         <div class="time-presets">
