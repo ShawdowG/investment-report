@@ -17,6 +17,7 @@ async function main() {
   const pulseCardsEl = document.getElementById('pulseCards');
   const pulseEl = document.getElementById('pulseSummary');
   const compareEl = document.getElementById('compareSummary');
+  const watchlistImpactEl = document.getElementById('watchlistImpact');
   const summaryEl = document.getElementById('summaryList');
   const alphaEl = document.getElementById('alphaList');
   const betaEl = document.getElementById('betaList');
@@ -268,6 +269,42 @@ async function main() {
     return lines;
   }
 
+  function getWatchlistSymbols() {
+    try {
+      const raw = localStorage.getItem('watchlist_items');
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return [...new Set(parsed.map(x => (x?.symbol || '').toUpperCase()).filter(Boolean))];
+    } catch {
+      return [];
+    }
+  }
+
+  function getWatchlistImpact(latest, watchSymbols) {
+    if (!latest) return ['No latest report loaded yet.'];
+    if (!watchSymbols.length) return ['No local watchlist found yet. Add symbols in upcoming Watchlist MVP.'];
+    const moversByTicker = new Map((latest.movers || []).map(m => [(m.ticker || '').toUpperCase(), m]));
+    const high = [];
+    const medium = [];
+    const missing = [];
+    for (const symbol of watchSymbols) {
+      const m = moversByTicker.get(symbol);
+      if (!m || typeof m.pct !== 'number') {
+        missing.push(symbol);
+        continue;
+      }
+      const row = `${symbol} ${m.pct > 0 ? '+' : ''}${m.pct.toFixed(2)}%`;
+      if (Math.abs(m.pct) >= 3) high.push(row);
+      else medium.push(row);
+    }
+    const out = [];
+    if (high.length) out.push(`High attention: ${high.slice(0, 5).join(', ')}.`);
+    if (medium.length) out.push(`Medium attention: ${medium.slice(0, 5).join(', ')}.`);
+    if (missing.length) out.push(`No report data: ${missing.slice(0, 6).join(', ')}.`);
+    return out.length ? out : ['No watchlist symbols mapped to the latest report yet.'];
+  }
+
   function render() {
     const dateFn = getDateFilterFn();
     const filtered = allItems.filter(item => {
@@ -304,8 +341,10 @@ async function main() {
 
     renderPulse(primary);
     renderDetailedSections(primary);
-    const previous = filtered.find(i => i.file !== primary.file);
+    const previous = filtered.find(i => i.file !== primary.file && i.slot === primary.slot)
+      || filtered.find(i => i.file !== primary.file);
     setList(compareEl, compareReports(primary, previous), 'Awaiting previous report comparison.');
+    setList(watchlistImpactEl, getWatchlistImpact(primary, getWatchlistSymbols()), 'No watchlist impact data.');
     renderNewsTable(primary);
 
     results.innerHTML = filtered.slice(0, 40).map(i => `<li><a href="reports/html/${i.htmlFile}">${i.date} • ${i.slot} • ${i.title}</a>${i.regime ? ` <span class="muted">(${i.regime})</span>` : ''}</li>`).join('');

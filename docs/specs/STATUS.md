@@ -14,6 +14,8 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-008 | Portfolio local store + dashboard impact | unassigned | ⬜ todo | SPEC-004 + SPEC-006 | - | - |
 | SPEC-009 | Notes/journal local-first | unassigned | ⬜ todo | SPEC-007 | - | - |
 | SPEC-010 | News source abstraction/scoring | unassigned | ⬜ todo | none | - | - |
+| SPEC-011 | Stitch design integration (token mapping + layout alignment) | codex-agent | 🟡 in_progress | none |  | 2026-05-07 |
+| SPEC-012 | Supabase-ready schema draft | unassigned | ⬜ todo | none | - | - |
 
 ## Status Legend
 - ⬜ todo

@@ -1,18 +1,19 @@
 :root{
-  --bg:#0b1020;
-  --bg-grad:#1a2a5833;
-  --surface:#111a34;
-  --surface-2:#162245;
-  --surface-3:#0f1730;
-  --text:#edf2ff;
-  --muted:#a2b3df;
-  --accent:#7aa2ff;
-  --accent-strong:#4d73d8;
-  --border:#2c3d72;
-  --border-soft:#253662;
-  --good:#33b67b;
-  --bad:#d85f78;
-  --flat:#8696c5;
+  /* Stitch-inspired v3 dark theme tokens */
+  --bg:#0F172A;
+  --bg-grad:#33415533;
+  --surface:#1E293B;
+  --surface-2:#1d2027;
+  --surface-3:#10131a;
+  --text:#F8FAFC;
+  --muted:#94A3B8;
+  --accent:#adc6ff;
+  --accent-strong:#4d8eff;
+  --border:rgba(255,255,255,0.08);
+  --border-soft:#424754;
+  --good:#10B981;
+  --bad:#EF4444;
+  --flat:#F59E0B;
   --radius:12px;
   --radius-sm:9px;
   --shadow:0 10px 24px rgba(0,0,0,.22);
@@ -44,7 +45,7 @@ a:hover{text-decoration:underline}
   background:transparent;color:#d2defe;
 }
 .nav-link:hover{background:#182750;text-decoration:none}
-.nav-link.active{background:#223a76;border-color:#4a66bf;color:#fff}
+.nav-link.active{background:var(--accent-strong);border-color:#6d9fff;color:#fff}
 
 /* HERO */
 .hero{
