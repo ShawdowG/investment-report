@@ -7,18 +7,21 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="topnav">
-      <a class="nav-brand" href="index.html">Investment Report</a>
+        <nav class="topnav">
+      <a class="nav-brand" href="index.html">Investment Report v3</a>
       <div class="nav-links">
-        <a class="nav-link active" href="index.html">Main</a>
-        <a class="nav-link" href="tracker.html">Tracker</a>
-        <a class="nav-link" href="reports.html">Reports / Analysis</a>
+        <a class="nav-link active" href="index.html">Dashboard</a>
+        <a class="nav-link " href="reports.html">Reports</a>
+        <a class="nav-link " href="watchlist.html">Watchlist</a>
+        <a class="nav-link " href="portfolio.html">Portfolio</a>
+        <a class="nav-link " href="tickers.html">Tickers</a>
+        <a class="nav-link " href="settings.html">Settings</a>
       </div>
     </nav>
     <section class="hero">
       <div class="hero-top">
         <div>
-          <h1>Investment Dashboard</h1>
+          <h1>Dashboard</h1>
           <p id="headerContext" class="muted">Showing: Today • All sessions • All tickers</p>
         </div>
         <div class="time-presets">
@@ -39,6 +42,16 @@
         <h2>📈 Market Pulse</h2>
         <div id="pulseCards" class="pulse-cards"></div>
         <ul id="pulseSummary" class="list"></ul>
+      </article>
+
+      <article class="card col-12">
+        <h2>🆕 Latest vs Previous</h2>
+        <ul id="compareSummary" class="list"></ul>
+      </article>
+
+      <article class="card col-12">
+        <h2>🎯 Watchlist impact (local)</h2>
+        <ul id="watchlistImpact" class="list"></ul>
       </article>
 
       <article class="card col-12">
