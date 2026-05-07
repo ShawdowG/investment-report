@@ -1,41 +1,7 @@
 {
-  "generatedAt": "2026-05-07T10:40:18.664Z",
-  "count": 169,
+  "generatedAt": "2026-05-07T08:59:45.757Z",
+  "count": 168,
   "items": [
-    {
-      "date": "2026-05-07",
-      "slot": "eu",
-      "title": "EU/Nordic Morning",
-      "regime": "risk-on",
-      "summary": "EU/Nordic Morning shows risk-on conditions. S&P +1.46%, NDQ +2.08%, 78% of tracked names positive, led by AMD, BABA, NVDA.",
-      "tickers": [
-        "BTC-USD",
-        "GC=F",
-        "^GSPC",
-        "^NDQ",
-        "AAPL",
-        "TSLA",
-        "GOOG",
-        "NVDA",
-        "AMZN",
-        "MSFT",
-        "META",
-        "DUOL",
-        "ADBE.VI",
-        "AMD",
-        "BABA",
-        "LMT",
-        "BA",
-        "TM",
-        "V",
-        "MA",
-        "NFLX",
-        "RDDT",
-        "NOVO-B.CO"
-      ],
-      "file": "2026-05-07-eu.md",
-      "htmlFile": "2026-05-07-eu.html"
-    },
     {
       "date": "2026-05-06",
       "slot": "us-open",

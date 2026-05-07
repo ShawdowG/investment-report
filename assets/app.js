@@ -16,6 +16,7 @@ async function main() {
   const moversEl = document.getElementById('moversList');
   const pulseCardsEl = document.getElementById('pulseCards');
   const pulseEl = document.getElementById('pulseSummary');
+  const compareEl = document.getElementById('compareSummary');
   const summaryEl = document.getElementById('summaryList');
   const alphaEl = document.getElementById('alphaList');
   const betaEl = document.getElementById('betaList');
@@ -241,6 +242,32 @@ async function main() {
     if (disagreementEl) disagreementEl.textContent = 'Primary debate: re-risk timing (early bounce vs confirmed follow-through).';
   }
 
+  function compareReports(latest, previous) {
+    if (!latest) return ['No latest report available yet.'];
+    if (!previous) return ['No previous report found yet.'];
+    const lines = [];
+    lines.push((latest.regime || '') !== (previous.regime || '')
+      ? `Regime changed: ${previous.regime || 'n/a'} → ${latest.regime || 'n/a'}.`
+      : `Regime unchanged: ${latest.regime || 'n/a'}.`);
+
+    const latestMovers = [...(latest.movers || [])].filter(m => typeof m.pct === 'number');
+    const previousMovers = [...(previous.movers || [])].filter(m => typeof m.pct === 'number');
+    const topUpLatest = latestMovers.sort((a, b) => b.pct - a.pct)[0];
+    const topDownLatest = [...latestMovers].sort((a, b) => a.pct - b.pct)[0];
+    const topUpPrev = previousMovers.sort((a, b) => b.pct - a.pct)[0];
+    const topDownPrev = [...previousMovers].sort((a, b) => a.pct - b.pct)[0];
+    if (topUpLatest) lines.push(`Top leader now: ${topUpLatest.ticker} (${topUpLatest.pct > 0 ? '+' : ''}${topUpLatest.pct.toFixed(2)}%).${topUpPrev ? ` Prev leader: ${topUpPrev.ticker}.` : ''}`);
+    if (topDownLatest) lines.push(`Top laggard now: ${topDownLatest.ticker} (${topDownLatest.pct.toFixed(2)}%).${topDownPrev ? ` Prev laggard: ${topDownPrev.ticker}.` : ''}`);
+
+    const latestSet = new Set((latest.tickers || []).map(t => t.toUpperCase()));
+    const previousSet = new Set((previous.tickers || []).map(t => t.toUpperCase()));
+    const newlyMentioned = [...latestSet].filter(t => !previousSet.has(t)).slice(0, 4);
+    const dropped = [...previousSet].filter(t => !latestSet.has(t)).slice(0, 4);
+    if (newlyMentioned.length) lines.push(`Newly mentioned: ${newlyMentioned.join(', ')}.`);
+    if (dropped.length) lines.push(`No longer mentioned: ${dropped.join(', ')}.`);
+    return lines;
+  }
+
   function render() {
     const dateFn = getDateFilterFn();
     const filtered = allItems.filter(item => {
@@ -266,6 +293,7 @@ async function main() {
       if (disagreementEl) disagreementEl.textContent = 'No active disagreement logged.';
       if (pulseCardsEl) pulseCardsEl.innerHTML = '';
       setList(pulseEl, [], 'No pulse data for selected filters.');
+      setList(compareEl, [], 'No comparison data for selected filters.');
       if (newsTableBodyEl) newsTableBodyEl.innerHTML = '<tr><td colspan="3" class="muted">No linked source for this filter yet.</td></tr>';
       return;
     }
@@ -276,6 +304,8 @@ async function main() {
 
     renderPulse(primary);
     renderDetailedSections(primary);
+    const previous = filtered.find(i => i.file !== primary.file);
+    setList(compareEl, compareReports(primary, previous), 'Awaiting previous report comparison.');
     renderNewsTable(primary);
 
     results.innerHTML = filtered.slice(0, 40).map(i => `<li><a href="reports/html/${i.htmlFile}">${i.date} • ${i.slot} • ${i.title}</a>${i.regime ? ` <span class="muted">(${i.regime})</span>` : ''}</li>`).join('');
