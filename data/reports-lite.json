@@ -1,7 +1,41 @@
 {
-  "generatedAt": "2026-05-08T10:04:41.941Z",
-  "count": 172,
+  "generatedAt": "2026-05-08T16:04:05.459Z",
+  "count": 173,
   "items": [
+    {
+      "date": "2026-05-08",
+      "slot": "us-open",
+      "title": "US Open +15m",
+      "regime": "mild risk-on",
+      "summary": "US Open +15m shows mild risk-on conditions. S&P +0.77%, NDQ +1.82%, 31% of tracked names positive, led by AMD, TSLA, BA.",
+      "tickers": [
+        "BTC-USD",
+        "GC=F",
+        "^GSPC",
+        "^NDQ",
+        "AAPL",
+        "TSLA",
+        "GOOG",
+        "NVDA",
+        "AMZN",
+        "MSFT",
+        "META",
+        "DUOL",
+        "ADBE.VI",
+        "AMD",
+        "BABA",
+        "LMT",
+        "BA",
+        "TM",
+        "V",
+        "MA",
+        "NFLX",
+        "RDDT",
+        "NOVO-B.CO"
+      ],
+      "file": "2026-05-08-us-open.md",
+      "htmlFile": "2026-05-08-us-open.html"
+    },
     {
       "date": "2026-05-08",
       "slot": "eu",
