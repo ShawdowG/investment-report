@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-08T16:04:05.459Z",
-  "count": 173,
+  "generatedAt": "2026-05-08T21:10:40.497Z",
+  "count": 174,
   "items": [
     {
       "date": "2026-05-08",
@@ -35,6 +35,40 @@
       ],
       "file": "2026-05-08-us-open.md",
       "htmlFile": "2026-05-08-us-open.html"
+    },
+    {
+      "date": "2026-05-08",
+      "slot": "pre-close",
+      "title": "US Pre-close",
+      "regime": "mixed / cautious risk-on",
+      "summary": "US Pre-close shows mixed / cautious risk-on conditions. S&P +0.84%, NDQ +2.35%, 42% of tracked names positive, led by AMD, TSLA, BA.",
+      "tickers": [
+        "BTC-USD",
+        "GC=F",
+        "^GSPC",
+        "^NDQ",
+        "AAPL",
+        "TSLA",
+        "GOOG",
+        "NVDA",
+        "AMZN",
+        "MSFT",
+        "META",
+        "DUOL",
+        "ADBE.VI",
+        "AMD",
+        "BABA",
+        "LMT",
+        "BA",
+        "TM",
+        "V",
+        "MA",
+        "NFLX",
+        "RDDT",
+        "NOVO-B.CO"
+      ],
+      "file": "2026-05-08-pre-close.md",
+      "htmlFile": "2026-05-08-pre-close.html"
     },
     {
       "date": "2026-05-08",
