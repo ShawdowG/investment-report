@@ -10,7 +10,7 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-004 | Watchlist local store (CRUD on `/watchlist`, localStorage key `watchlist_items`) | claude-code | ✅ done | - | 8479a92 | 2026-05-10 |
 | SPEC-005 | Paste/import ticker parser + preview (inline import section on `/watchlist`) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
 | SPEC-006 | Watchlist impact vs latest report (high/medium/missing buckets on dashboard) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
-| SPEC-007 | Ticker detail page + search | unassigned | ⬜ todo | SPEC-002 | - | - |
+| SPEC-007 | Ticker detail page + symbol search (`/ticker/[symbol]`, /tickers grid, TopBar search wiring) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-008 | Portfolio local store + dashboard impact | unassigned | ⬜ todo | SPEC-004 + SPEC-006 | - | - |
 | SPEC-009 | Notes/journal local-first | unassigned | ⬜ todo | SPEC-007 | - | - |
 | SPEC-010 | News source abstraction/scoring | unassigned | ⬜ todo | none | - | - |
