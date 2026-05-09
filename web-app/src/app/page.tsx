@@ -10,6 +10,7 @@ import { DiscussionPanel } from "@/components/discussion-panel";
 import { TickerTable } from "@/components/ticker-table";
 import { NewsMoversTable } from "@/components/news-movers-table";
 import { TacticalQuickPanel } from "@/components/tactical-quick-panel";
+import { WatchlistImpactCard } from "@/components/dashboard/watchlist-impact-card";
 
 const stripBullet = (line: string) => line.replace(/^[-•]\s*/, "").trim();
 
@@ -67,6 +68,8 @@ export default function DashboardPage() {
         <TickerTable movers={movers} />
 
         <NewsMoversTable rows={newsRows} />
+
+        <WatchlistImpactCard latest={latest} />
       </main>
     </>
   );
