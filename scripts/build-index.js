@@ -166,6 +166,41 @@ function extractSection(body, startLabel) {
   return out;
 }
 
+function extractInlineBoldField(body, label) {
+  // Match lines like "- **Label:** value" anywhere in the body.
+  const re = new RegExp(`^\\s*-\\s*\\*\\*${label}:\\*\\*\\s*(.+)$`, 'mi');
+  const m = body.match(re);
+  return m ? m[1].trim() : '';
+}
+
+function parseDiscussion(body) {
+  const lines = extractSection(body, '## 4) Agent Discussion');
+  const pick = (label) => {
+    const line = lines.find(l => l.includes(`**${label}:**`));
+    if (!line) return '';
+    // Format: "- **Label:** value" — colon is *inside* the bold delimiters.
+    // Trim first so trailing CR (Windows line endings) doesn't break the $ anchor.
+    const m = line.trim().match(/\*\*[^*]+:\*\*\s*(.+)$/);
+    return m ? m[1].trim() : '';
+  };
+  return {
+    agreement: pick('Agreement'),
+    disagreement: pick('Disagreement'),
+    resolution: pick('Resolution'),
+  };
+}
+
+function parseCatalysts(body) {
+  const lines = extractSection(body, '## 7) Catalyst Signals');
+  const out = {};
+  for (const l of lines) {
+    // Format: "- **TICKER (+pct%):** headline" — colon is inside the bold delimiters.
+    const m = l.trim().match(/^-\s*\*\*([A-Z0-9.^=-]+)\s*\([^)]+\):\*\*\s*(.+)$/);
+    if (m) out[m[1]] = m[2].trim();
+  }
+  return out;
+}
+
 function removeSection(body, startLabel) {
   const lines = body.split('\n');
   const start = lines.findIndex(l => l.trim().startsWith(startLabel));
@@ -309,6 +344,11 @@ const items = files.map(file => {
   const beta = compactSection(extractSection(body, '## 3) BETA'), 'No Beta discussion yet.');
   const pulse = compactSection(extractSection(body, '## 0) Executive TL;DR'), 'Awaiting pulse update.');
   const movers = parseMovers(body, tickers);
+  const mainDriver = extractInlineBoldField(body, 'Main driver');
+  const posture = extractInlineBoldField(body, 'Posture');
+  const checklist = compactSection(extractSection(body, '## 5) Unified Action Checklist'), 'No checklist generated.');
+  const discussion = parseDiscussion(body);
+  const catalysts = parseCatalysts(body);
   const reportBody = removeSection(body, '## 1) GAMMA');
 
   const reportHtml = `<!doctype html>
@@ -355,7 +395,22 @@ const items = files.map(file => {
 
   fs.writeFileSync(path.join(reportsHtmlDir, htmlFile), reportHtml);
 
-  return { file, htmlFile, title, summary, date, slot, tickers, regime, sections: { gamma, alpha, beta, pulse }, movers };
+  return {
+    file,
+    htmlFile,
+    title,
+    summary,
+    date,
+    slot,
+    tickers,
+    regime,
+    mainDriver,
+    posture,
+    sections: { gamma, alpha, beta, pulse, checklist },
+    movers,
+    discussion,
+    catalysts,
+  };
 });
 
 const byDate = {};

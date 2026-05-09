@@ -2,36 +2,14 @@
   {
     "file": "2026-03-18-us-open.md",
     "htmlFile": "2026-03-18-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-off conditions. S&P -0.56%, NDQ -0.46%, 21% of tracked names positive, led by AMD, NFLX, LMT.",
+    "title": "US Open +15m — 2026-03-18",
+    "summary": "Index-led selling (S&P -0.56%) with 21% of names positive.",
     "date": "2026-03-18",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Index-led selling (S&P -0.56%) with 21% of names positive.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+2.01%)**, **NFLX (+0.64%)**, **LMT (+0.62%)**, **NVDA (+0.36%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-3.28%)**, **NOVO-B.CO (-2.97%)**, **MA (-2.88%)**, **V (-2.42%)**",
+        "- Confirm whether index move (S&P -0.56%, NDQ -0.46%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": -1.1414129650623508,
         "changeAbs": -1.1414129650623508
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Skillsoft vs. Duolingo: Which EdTech Stock Is a Smarter Bet Today?",
+      "NOVO-B.CO": "This Promising GLP-1 Drug Could Give Novo Nordisk Investors Renewed Hope for the...",
+      "MA": "How Mastercard’s Stablecoin Settlement Push Could Reshape the Investment Story f..."
+    }
   },
   {
     "file": "2026-03-18-pre-close.md",
     "htmlFile": "2026-03-18-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-off conditions. S&P -1.36%, NDQ -1.43%, 15% of tracked names positive, led by AMD, LMT, NFLX.",
+    "title": "US Pre-close — 2026-03-18",
+    "summary": "Index-led selling (S&P -1.36%) with 15% of names positive.",
     "date": "2026-03-18",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.36%) with 15% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+1.60%)**, **LMT (+0.94%)**, **NFLX (+0.36%)**, **NVDA (-0.84%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-4.13%)**, **MA (-3.57%)**, **ADBE.VI (-3.23%)**, **V (-3.06%)**",
+        "- Confirm whether index move (S&P -1.36%, NDQ -1.43%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +505,29 @@
         "changeValue": -0.9799640841457133,
         "changeAbs": -0.9799640841457133
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Duolingo Reinvestment Pivot And AI Push Mark New Turning Point",
+      "MA": "Why Mastercard (MA) shares are trading lower today",
+      "ADBE.VI": "Adobe Will Soon Get a New CEO. Should You Buy ADBE Stock First?"
+    }
   },
   {
     "file": "2026-03-18-eu.md",
     "htmlFile": "2026-03-18-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-on conditions. S&P +0.25%, NDQ +0.51%, 36% of tracked names positive, led by RDDT, DUOL, GOOG.",
+    "title": "EU/Nordic Morning — 2026-03-18",
+    "summary": "Quiet session; S&P +0.25%, no dominant catalyst — tape drifting.",
     "date": "2026-03-18",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Quiet session; S&P +0.25%, no dominant catalyst — tape drifting.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +548,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **RDDT (+3.09%)**, **DUOL (+2.36%)**, **GOOG (+1.64%)**, **AMZN (+1.63%)**",
+        "- Monitor laggards for hidden weakness: **LMT (-1.37%)**, **BA (-1.24%)**, **NFLX (-0.88%)**, **META (-0.76%)**",
+        "- Confirm whether index move (S&P +0.25%, NDQ +0.51%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +764,16 @@
         "changeValue": -0.15046380885453203,
         "changeAbs": -0.15046380885453203
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "RDDT": "Why Reddit (RDDT) Stock Is Up Today",
+      "DUOL": "Duolingo (DUOL) Stock Gains 3% Amid Market Rally Following Disastrous 2026 Opening",
+      "GOOG": "Alphabet Inc. (GOOG) outperforms broader market: What you need to know"
+    }
   }
 ]

@@ -2,36 +2,14 @@
   {
     "file": "2026-03-27-us-open.md",
     "htmlFile": "2026-03-27-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-off conditions. S&P -0.55%, NDQ -0.78%, 10% of tracked names positive, led by NFLX, AAPL, NOVO-B.CO.",
+    "title": "US Open +15m — 2026-03-27",
+    "summary": "Index-led selling (S&P -0.55%) with 10% of names positive.",
     "date": "2026-03-27",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Index-led selling (S&P -0.55%) with 10% of names positive.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **NFLX (+0.55%)**, **AAPL (+0.08%)**, **NOVO-B.CO (-0.12%)**, **TM (-0.39%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-3.63%)**, **META (-3.27%)**, **MA (-3.10%)**, **V (-3.05%)**",
+        "- Confirm whether index move (S&P -0.55%, NDQ -0.78%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": -0.04367240688826257,
         "changeAbs": -0.04367240688826257
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "RDDT": "Why Reddit Looks Massively Mispriced",
+      "META": "META Stock Just Had Its Worst Day in Nearly a Year. Here's What Happened.",
+      "MA": "Mastercard Deepens Blockchain And AI Push As Shares Face Recent Weakness"
+    }
   },
   {
     "file": "2026-03-27-pre-close.md",
     "htmlFile": "2026-03-27-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-off conditions. S&P -1.67%, NDQ -1.93%, 5% of tracked names positive, led by NFLX, AMD, NOVO-B.CO.",
+    "title": "US Pre-close — 2026-03-27",
+    "summary": "Index-led selling (S&P -1.67%) with 5% of names positive.",
     "date": "2026-03-27",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.67%) with 5% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **NFLX (+0.12%)**, **AMD (-0.87%)**, **NOVO-B.CO (-0.99%)**, **TM (-1.52%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-4.26%)**, **META (-3.99%)**, **AMZN (-3.95%)**, **MA (-3.30%)**",
+        "- Confirm whether index move (S&P -1.67%, NDQ -1.93%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +505,29 @@
         "changeValue": -0.3603635996364005,
         "changeAbs": -0.3603635996364005
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "RDDT": "When stock markets are rattled, even by war, it usually pays for investors to be...",
+      "META": "Meta Platforms Falls 3%: 3 Reasons the Platform Addiction Ruling Could Be Its Biggest Legal Threat...",
+      "AMZN": "Amazon Stock: The Key Risks To Watch Right Now"
+    }
   },
   {
     "file": "2026-03-27-eu.md",
     "htmlFile": "2026-03-27-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows risk-off conditions. S&P -1.74%, NDQ -2.38%, 31% of tracked names positive, led by ADBE.VI, NFLX, LMT.",
+    "title": "EU/Nordic Morning — 2026-03-27",
+    "summary": "Index-led selling (S&P -1.74%) with 31% of names positive.",
     "date": "2026-03-27",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.74%) with 31% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +548,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **ADBE.VI (+1.53%)**, **NFLX (+1.13%)**, **LMT (+0.50%)**, **V (+0.20%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-8.86%)**, **META (-7.96%)**, **AMD (-7.49%)**, **NVDA (-4.16%)**",
+        "- Avoid catching falling knives: META, AMD — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -1.74%, NDQ -2.38%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +765,16 @@
         "changeValue": 0.06902884519413277,
         "changeAbs": 0.06902884519413277
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "RDDT": "Reddit stock rises for third straight day: Ad partnership, board member buy drown out CEO’s stake cut",
+      "META": "META Stock Just Had Its Worst Day in Nearly a Year. Here's What Happened.",
+      "AMD": "Urban-gro, DraftKings, Sarepta Therapeutics, Destiny Tech100 and AMD: Why these 5 stocks are on investors' radars today"
+    }
   }
 ]

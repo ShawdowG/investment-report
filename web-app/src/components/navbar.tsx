@@ -2,10 +2,14 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+// Six-route IA contract per ADR-005. Order matches the brief §4.4.
 const NAV_LINKS = [
-  { href: "/", label: "Main" },
+  { href: "/", label: "Dashboard" },
   { href: "/reports", label: "Reports" },
-  { href: "/tracker", label: "Tracker" },
+  { href: "/watchlist", label: "Watchlist" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/tickers", label: "Tickers" },
+  { href: "/settings", label: "Settings" },
 ];
 
 interface NavbarProps {

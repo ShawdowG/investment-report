@@ -2,36 +2,14 @@
   {
     "file": "2026-04-10-us-open.md",
     "htmlFile": "2026-04-10-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-on conditions. S&P +0.11%, NDQ +0.35%, 42% of tracked names positive, led by AMD, NVDA, AMZN.",
+    "title": "US Open +15m — 2026-04-10",
+    "summary": "Quiet session; S&P +0.11%, no dominant catalyst — tape drifting.",
     "date": "2026-04-10",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Quiet session; S&P +0.11%, no dominant catalyst — tape drifting.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+4.55%)**, **NVDA (+2.79%)**, **AMZN (+2.25%)**, **AAPL (+0.38%)**",
+        "- Monitor laggards for hidden weakness: **ADBE.VI (-2.00%)**, **MA (-1.22%)**, **V (-1.01%)**, **BA (-0.81%)**",
+        "- Confirm whether index move (S&P +0.11%, NDQ +0.35%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": 0.06365878007387238,
         "changeAbs": 0.06365878007387238
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMD": "AMD Stock Is Soaring This Morning. Here's Why Investors Are Excited",
+      "NVDA": "NVIDIA Chips are Going to Space. Could the Stock Be Next?",
+      "AMZN": "Short-seller Andrew Left thinks Amazon just showed that it's the biggest threat to Nvidia's chip dominance"
+    }
   },
   {
     "file": "2026-04-10-pre-close.md",
     "htmlFile": "2026-04-10-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-on conditions. S&P -0.11%, NDQ +0.14%, 42% of tracked names positive, led by AMD, NVDA, AMZN.",
+    "title": "US Pre-close — 2026-04-10",
+    "summary": "Quiet session; S&P -0.11%, no dominant catalyst — tape drifting.",
     "date": "2026-04-10",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Quiet session; S&P -0.11%, no dominant catalyst — tape drifting.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+3.55%)**, **NVDA (+2.57%)**, **AMZN (+2.02%)**, **RDDT (+0.98%)**",
+        "- Monitor laggards for hidden weakness: **ADBE.VI (-2.00%)**, **LMT (-1.63%)**, **V (-1.27%)**, **BA (-1.10%)**",
+        "- Confirm whether index move (S&P -0.11%, NDQ +0.14%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +505,29 @@
         "changeValue": 0.07862688354455827,
         "changeAbs": 0.07862688354455827
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMD": "AMD Gains 4%, Broadcom Climbs 5%: The AI Chip Rally Has Two Very Different Winners Today",
+      "NVDA": "Nvidia stock on track to end week strong: Is the rut over?",
+      "AMZN": "Amazon CEO Andy Jassy Just Delivered Bad News for the Artificial Intelligence (AI) Bears"
+    }
   },
   {
     "file": "2026-04-10-eu.md",
     "htmlFile": "2026-04-10-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-on conditions. S&P +0.62%, NDQ +0.72%, 52% of tracked names positive, led by AMZN, NFLX, META.",
+    "title": "EU/Nordic Morning — 2026-04-10",
+    "summary": "Session dominated by idiosyncratic movers (AMZN) alongside broad index strength.",
     "date": "2026-04-10",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (AMZN) alongside broad index strength.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +548,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMZN (+5.60%)**, **NFLX (+2.68%)**, **META (+2.61%)**, **AMD (+2.08%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-4.57%)**, **ADBE.VI (-3.92%)**, **TM (-1.80%)**, **LMT (-0.74%)**",
+        "- Treat large-gap winners (AMZN) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P +0.62%, NDQ +0.72%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +765,16 @@
         "changeValue": -0.16924158714213888,
         "changeAbs": -0.16924158714213888
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMZN": "Amazon Gains 5% on Shareholder Letter, Globalstar Deal, $15 Billion AWS AI Revenue",
+      "RDDT": "Reddit (RDDT) shares skyrocket, what you need to know",
+      "ADBE.VI": "Stock Indexes Rebound Despite Rising Oil Prices"
+    }
   }
 ]

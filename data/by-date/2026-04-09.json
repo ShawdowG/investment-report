@@ -2,36 +2,14 @@
   {
     "file": "2026-04-09-us-open.md",
     "htmlFile": "2026-04-09-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-on conditions. S&P +0.60%, NDQ +0.61%, 57% of tracked names positive, led by AMZN, META, NFLX.",
+    "title": "US Open +15m — 2026-04-09",
+    "summary": "Session dominated by idiosyncratic movers (AMZN) alongside broad index strength.",
     "date": "2026-04-09",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (AMZN) alongside broad index strength.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMZN (+5.45%)**, **META (+3.94%)**, **NFLX (+1.80%)**, **AMD (+1.77%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-4.14%)**, **ADBE.VI (-3.76%)**, **TM (-1.59%)**, **DUOL (-1.57%)**",
+        "- Treat large-gap winners (AMZN) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P +0.60%, NDQ +0.61%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,40 +247,29 @@
         "changeValue": -0.2745129444948091,
         "changeAbs": -0.2745129444948091
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMZN": "Amazon’s stock could soar 50%, as this analyst says investors are looking at AI spending all wrong",
+      "RDDT": "Reddit stock appears to be another victim of social media addiction trial ruling as RDDT falls below 20-day moving average",
+      "META": "Meta Platforms Gains 4%: Strong Ad Revenue Growth and PayPal Partnership Put the Stock Back in Focus"
+    }
   },
   {
     "file": "2026-04-09-pre-close.md",
     "htmlFile": "2026-04-09-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-on conditions. S&P +0.62%, NDQ +0.72%, 55% of tracked names positive, led by AMZN, NFLX, META.",
+    "title": "US Pre-close — 2026-04-09",
+    "summary": "Session dominated by idiosyncratic movers (AMZN) alongside broad index strength.",
     "date": "2026-04-09",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (AMZN) alongside broad index strength.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -316,6 +290,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMZN (+5.60%)**, **NFLX (+2.68%)**, **META (+2.61%)**, **AMD (+2.08%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-4.57%)**, **TM (-1.80%)**, **LMT (-0.74%)**, **MA (-0.70%)**",
+        "- Treat large-gap winners (AMZN) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P +0.62%, NDQ +0.72%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -517,41 +498,29 @@
         "changeValue": -0.16924158714213888,
         "changeAbs": -0.16924158714213888
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMZN": "Amazon Gains 5% on Shareholder Letter, Globalstar Deal, $15 Billion AWS AI Revenue",
+      "RDDT": "The stock-market correction isn’t over yet. Here’s why the Iran cease-fire is actually a bad omen.",
+      "NFLX": "Netflix Q1 Earnings Preview: With The WBD Saga Over, Focus Shifts To Advertising & Live Sports"
+    }
   },
   {
     "file": "2026-04-09-eu.md",
     "htmlFile": "2026-04-09-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows risk-on conditions. S&P +2.51%, NDQ +2.90%, 84% of tracked names positive, led by META, TM, BABA.",
+    "title": "EU/Nordic Morning — 2026-04-09",
+    "summary": "Session dominated by idiosyncratic movers (META, TM) alongside broad index strength.",
     "date": "2026-04-09",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (META, TM) alongside broad index strength.",
+    "posture": "Fully pro-risk — hold longs, tighten stops only on extended names.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -572,6 +541,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **META (+6.50%)**, **TM (+5.57%)**, **BABA (+4.68%)**, **AMD (+4.64%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-5.43%)**, **TSLA (-0.98%)**, **ADBE.VI (-0.35%)**, **LMT (+0.13%)**",
+        "- Treat large-gap winners (META, TM) as isolated events — confirm catalyst before entering.",
+        "- Avoid catching falling knives: DUOL — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P +2.51%, NDQ +2.90%) is backed by broad participation or driven by just 2–3 names."
       ]
     },
     "movers": [
@@ -782,6 +758,16 @@
         "changeValue": 0.701265947006867,
         "changeAbs": 0.701265947006867
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "META": "Meta stock rockets 9% after unveiling new AI model 'Muse Spark'",
+      "TM": "This Underappreciated Stock Could Be Entering Its Next Growth Phase",
+      "DUOL": "Why Duolingo Stock Fell 24% in February"
+    }
   }
 ]

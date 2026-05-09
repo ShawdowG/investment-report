@@ -2,36 +2,14 @@
   {
     "file": "2026-03-13-us-open.md",
     "htmlFile": "2026-03-13-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-off conditions. S&P +0.00%, NDQ -0.32%, 36% of tracked names positive, led by DUOL, BA, BABA.",
+    "title": "US Open +15m — 2026-03-13",
+    "summary": "Quiet session; S&P +0.00%, no dominant catalyst — tape drifting.",
     "date": "2026-03-13",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Quiet session; S&P +0.00%, no dominant catalyst — tape drifting.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **DUOL (+2.71%)**, **BA (+1.11%)**, **BABA (+0.74%)**, **RDDT (+0.62%)**",
+        "- Monitor laggards for hidden weakness: **ADBE.VI (-6.81%)**, **TM (-2.11%)**, **AMD (-1.57%)**, **MSFT (-1.02%)**",
+        "- Avoid catching falling knives: ADBE.VI — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P +0.00%, NDQ -0.32%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +247,29 @@
         "changeValue": -0.1786878328142265,
         "changeAbs": -0.1786878328142265
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "ADBE.VI": "5 Things to Know Before the Stock Market Opens",
+      "DUOL": "Duolingo stock has imploded from $545 to $90: is it a bargain now?",
+      "TM": "Toyota Motor Corp."
+    }
   },
   {
     "file": "2026-03-13-pre-close.md",
     "htmlFile": "2026-03-13-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-off conditions. S&P -0.61%, NDQ -0.62%, 36% of tracked names positive, led by DUOL, BA, NFLX.",
+    "title": "US Pre-close — 2026-03-13",
+    "summary": "Index-led selling (S&P -0.61%) with 36% of names positive.",
     "date": "2026-03-13",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Index-led selling (S&P -0.61%) with 36% of names positive.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +290,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **DUOL (+3.66%)**, **BA (+2.51%)**, **NFLX (+1.06%)**, **BABA (+0.75%)**",
+        "- Monitor laggards for hidden weakness: **ADBE.VI (-7.58%)**, **META (-3.83%)**, **TM (-2.65%)**, **AAPL (-2.21%)**",
+        "- Avoid catching falling knives: ADBE.VI — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.61%, NDQ -0.62%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +507,29 @@
         "changeValue": -0.06083333333333485,
         "changeAbs": -0.06083333333333485
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "ADBE.VI": "Adobe to Pay $150 Million Settlement in Subscription Cancellation Lawsuit",
+      "META": "Meta Platforms: The Cheapest Amongst The Mag 7",
+      "DUOL": "Duolingo stock has imploded from $545 to $90: is it a bargain now?"
+    }
   },
   {
     "file": "2026-03-13-eu.md",
     "htmlFile": "2026-03-13-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows risk-off conditions. S&P -1.52%, NDQ -1.73%, 5% of tracked names positive, led by LMT, NFLX, MSFT.",
+    "title": "EU/Nordic Morning — 2026-03-13",
+    "summary": "Index-led selling (S&P -1.52%) with 5% of names positive.",
     "date": "2026-03-13",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.52%) with 5% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +550,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **LMT (+0.52%)**, **NFLX (-0.61%)**, **MSFT (-0.75%)**, **V (-0.80%)**",
+        "- Monitor laggards for hidden weakness: **BA (-4.36%)**, **DUOL (-3.94%)**, **RDDT (-3.55%)**, **AMD (-3.46%)**",
+        "- Confirm whether index move (S&P -1.52%, NDQ -1.73%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +766,16 @@
         "changeValue": -0.811580022469613,
         "changeAbs": -0.811580022469613
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "BA": "Stocks to Watch Tuesday Recap: Boeing, Exxon, Vertex, Kohl's",
+      "DUOL": "Carvana and Duolingo Shares Are Falling, What You Need To Know",
+      "RDDT": "Stock market today: Dow, S&P 500, Nasdaq futures slide after stocks sink to..."
+    }
   }
 ]

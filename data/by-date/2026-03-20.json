@@ -2,36 +2,14 @@
   {
     "file": "2026-03-20-us-open.md",
     "htmlFile": "2026-03-20-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows risk-off conditions. S&P -0.96%, NDQ -1.28%, 21% of tracked names positive, led by RDDT, MA, ADBE.VI.",
+    "title": "US Open +15m — 2026-03-20",
+    "summary": "Index-led selling (S&P -0.96%) with 21% of names positive.",
     "date": "2026-03-20",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -0.96%) with 21% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **RDDT (+3.05%)**, **MA (+0.37%)**, **ADBE.VI (+0.26%)**, **V (+0.10%)**",
+        "- Monitor laggards for hidden weakness: **BA (-1.75%)**, **NVDA (-1.63%)**, **MSFT (-1.56%)**, **TSLA (-1.53%)**",
+        "- Confirm whether index move (S&P -0.96%, NDQ -1.28%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": -0.255892659349513,
         "changeAbs": -0.255892659349513
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "RDDT": "Why Reddit Looks Massively Mispriced",
+      "BA": "Is Boeing Stock Ready For A Breakout?",
+      "NVDA": "Is NVIDIA Really a \"Value Stock\" at Under $200?"
+    }
   },
   {
     "file": "2026-03-20-pre-close.md",
     "htmlFile": "2026-03-20-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-off conditions. S&P -1.51%, NDQ -1.88%, 26% of tracked names positive, led by RDDT, MA, ADBE.VI.",
+    "title": "US Pre-close — 2026-03-20",
+    "summary": "Index-led selling (S&P -1.51%) with 26% of names positive.",
     "date": "2026-03-20",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.51%) with 26% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **RDDT (+1.25%)**, **MA (+1.05%)**, **ADBE.VI (+0.88%)**, **V (+0.64%)**",
+        "- Monitor laggards for hidden weakness: **NVDA (-3.28%)**, **TSLA (-3.24%)**, **BA (-3.01%)**, **GOOG (-2.27%)**",
+        "- Confirm whether index move (S&P -1.51%, NDQ -1.88%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +505,29 @@
         "changeValue": -0.5487657328461211,
         "changeAbs": -0.5487657328461211
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "NVDA": "Is NVIDIA Really a \"Value Stock\" at Under $200?",
+      "TSLA": "Is Tesla stock headed for a fall? AI hype is masking two years of falling EV sales.",
+      "BA": "Boeing stock price eyes a 11% surge as fresh tailwinds emerge"
+    }
   },
   {
     "file": "2026-03-20-eu.md",
     "htmlFile": "2026-03-20-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows risk-off / defensive rotation conditions. S&P -0.27%, NDQ -0.29%, 15% of tracked names positive, led by AMD, MA, V.",
+    "title": "EU/Nordic Morning — 2026-03-20",
+    "summary": "Quiet session; S&P -0.27%, no dominant catalyst — tape drifting.",
     "date": "2026-03-20",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off / defensive rotation",
+    "mainDriver": "Quiet session; S&P -0.27%, no dominant catalyst — tape drifting.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +548,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+2.91%)**, **MA (+0.55%)**, **V (+0.23%)**, **ADBE.VI (-0.00%)**",
+        "- Monitor laggards for hidden weakness: **BABA (-7.09%)**, **RDDT (-3.27%)**, **TSLA (-3.18%)**, **NFLX (-3.13%)**",
+        "- Avoid catching falling knives: BABA — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.27%, NDQ -0.29%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +765,16 @@
         "changeValue": -0.37076254923745466,
         "changeAbs": -0.37076254923745466
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off / defensive rotation — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "BABA": "Alibaba Stock Tumbles After Weak Q3 Earnings, Sparking AI Spending Fears",
+      "RDDT": "Why Reddit Looks Massively Mispriced",
+      "TSLA": "Is Tesla stock headed for a fall? AI hype is masking two years of falling EV sales."
+    }
   }
 ]

@@ -2,36 +2,14 @@
   {
     "file": "2026-03-19-us-open.md",
     "htmlFile": "2026-03-19-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows risk-off conditions. S&P -0.79%, NDQ -0.96%, 10% of tracked names positive, led by MA, ADBE.VI, GOOG.",
+    "title": "US Open +15m — 2026-03-19",
+    "summary": "Index-led selling (S&P -0.79%) with 10% of names positive.",
     "date": "2026-03-19",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -0.79%) with 10% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **MA (+0.26%)**, **ADBE.VI (+0.07%)**, **GOOG (+0.00%)**, **META (+0.00%)**",
+        "- Monitor laggards for hidden weakness: **BABA (-7.29%)**, **BA (-3.87%)**, **RDDT (-3.59%)**, **TSLA (-2.82%)**",
+        "- Avoid catching falling knives: BABA — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.79%, NDQ -0.96%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +247,29 @@
         "changeValue": 0,
         "changeAbs": 0
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "BABA": "Alibaba (BABA) Stock Falls as Profits Drop 66% Amid AI Infrastructure Push",
+      "BA": "Chicago Judge Certifies Boeing Shareholder Class Over 737 MAX Safety",
+      "RDDT": "The Stock Market Is Sending a Major Warning. Here's What Investors Should Know Right Now."
+    }
   },
   {
     "file": "2026-03-19-pre-close.md",
     "htmlFile": "2026-03-19-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-off conditions. S&P -0.27%, NDQ -0.29%, 15% of tracked names positive, led by AMD, MA, V.",
+    "title": "US Pre-close — 2026-03-19",
+    "summary": "Quiet session; S&P -0.27%, no dominant catalyst — tape drifting.",
     "date": "2026-03-19",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Quiet session; S&P -0.27%, no dominant catalyst — tape drifting.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +290,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+2.91%)**, **MA (+0.55%)**, **V (+0.23%)**, **ADBE.VI (-0.00%)**",
+        "- Monitor laggards for hidden weakness: **BABA (-7.09%)**, **RDDT (-3.27%)**, **TSLA (-3.18%)**, **NFLX (-3.13%)**",
+        "- Avoid catching falling knives: BABA — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.27%, NDQ -0.29%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +507,29 @@
         "changeValue": -0.37076254923745466,
         "changeAbs": -0.37076254923745466
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "BABA": "Tesla, Alibaba among market cap stock movers on Thursday By Investing.com",
+      "RDDT": "Reddit (RDDT) Valuation Check After Mixed Return Profile And Conflicting Fair Value Estimates",
+      "TSLA": "Tesla has 'lots of irons in the fire' — but its stock is unusually calm"
+    }
   },
   {
     "file": "2026-03-19-eu.md",
     "htmlFile": "2026-03-19-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows risk-off conditions. S&P -1.36%, NDQ -1.43%, 15% of tracked names positive, led by AMD, LMT, NFLX.",
+    "title": "EU/Nordic Morning — 2026-03-19",
+    "summary": "Index-led selling (S&P -1.36%) with 15% of names positive.",
     "date": "2026-03-19",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.36%) with 15% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +550,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+1.60%)**, **LMT (+0.94%)**, **NFLX (+0.36%)**, **NVDA (-0.84%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-4.13%)**, **MA (-3.57%)**, **ADBE.VI (-3.23%)**, **V (-3.06%)**",
+        "- Confirm whether index move (S&P -1.36%, NDQ -1.43%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +766,16 @@
         "changeValue": -0.9799640841457133,
         "changeAbs": -0.9799640841457133
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Skillsoft vs. Duolingo: Which EdTech Stock Is a Smarter Bet Today?",
+      "MA": "Mastercard (MA) Secures $1.8B BVNK Acquisition to Dominate Stablecoin Infrastructure",
+      "ADBE.VI": "Adobe Stock needed a change. Why a new CEO doesn’t appear to be the answer."
+    }
   }
 ]

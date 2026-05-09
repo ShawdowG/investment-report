@@ -2,36 +2,14 @@
   {
     "file": "2026-03-06-us-open.md",
     "htmlFile": "2026-03-06-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows risk-off conditions. S&P -1.20%, NDQ -1.04%, 15% of tracked names positive, led by LMT, BABA, BA.",
+    "title": "US Open +15m — 2026-03-06",
+    "summary": "Index-led selling (S&P -1.20%) with 15% of names positive.",
     "date": "2026-03-06",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.20%) with 15% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **LMT (+1.75%)**, **BABA (+0.90%)**, **BA (+0.44%)**, **MSFT (+0.02%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-3.39%)**, **META (-2.69%)**, **TSLA (-2.02%)**, **ADBE.VI (-1.79%)**",
+        "- Confirm whether index move (S&P -1.20%, NDQ -1.04%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": -0.6094839496139741,
         "changeAbs": -0.6094839496139741
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "RDDT": "Stock market today: Dow, S&P 500, Nasdaq plummet after jobs report surprise as...",
+      "META": "Bank of America resets Meta stock forecast on deal with AMD",
+      "TSLA": "Tesla stock slips. It's still on pace to snap a two-week losing streak."
+    }
   },
   {
     "file": "2026-03-06-pre-close.md",
     "htmlFile": "2026-03-06-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-off conditions. S&P -1.33%, NDQ -1.49%, 31% of tracked names positive, led by BA, LMT, BABA.",
+    "title": "US Pre-close — 2026-03-06",
+    "summary": "Index-led selling (S&P -1.33%) with 31% of names positive.",
     "date": "2026-03-06",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -1.33%) with 31% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **BA (+3.81%)**, **LMT (+2.00%)**, **BABA (+0.56%)**, **DUOL (+0.41%)**",
+        "- Monitor laggards for hidden weakness: **AMD (-3.52%)**, **RDDT (-3.25%)**, **NVDA (-3.16%)**, **META (-2.59%)**",
+        "- Confirm whether index move (S&P -1.33%, NDQ -1.49%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +505,29 @@
         "changeValue": -0.49626861136432865,
         "changeAbs": -0.49626861136432865
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "BA": "Price Over Earnings Overview: Boeing",
+      "AMD": "AMD stock sinks 17% after earnings. Here's why",
+      "RDDT": "Reddit Profit Milestone Sparks Questions On Valuation And AI Upside"
+    }
   },
   {
     "file": "2026-03-06-eu.md",
     "htmlFile": "2026-03-06-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-off conditions. S&P -0.56%, NDQ -0.29%, 42% of tracked names positive, led by DUOL, ADBE.VI, NOVO-B.CO.",
+    "title": "EU/Nordic Morning — 2026-03-06",
+    "summary": "Session dominated by idiosyncratic movers (DUOL) alongside soft index backdrop.",
     "date": "2026-03-06",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Session dominated by idiosyncratic movers (DUOL) alongside soft index backdrop.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +548,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **DUOL (+5.58%)**, **ADBE.VI (+3.16%)**, **NOVO-B.CO (+1.48%)**, **MSFT (+1.35%)**",
+        "- Monitor laggards for hidden weakness: **TM (-4.87%)**, **BA (-2.31%)**, **BABA (-2.19%)**, **RDDT (-2.00%)**",
+        "- Treat large-gap winners (DUOL) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P -0.56%, NDQ -0.29%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +765,16 @@
         "changeValue": 0.569802916830902,
         "changeAbs": 0.569802916830902
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Duolingo Stock Is Falling Off a Cliff, Continuing a Dramatic Collapse. You Can't Just Blame That 'AI First' Memo",
+      "TM": "Assessing Whether Toyota Industries (TSE:6201) Shares Look Stretched After Strong Recent Returns",
+      "ADBE.VI": "Adobe Q1 FY 2026 Preview: The SaaS Selloff Is Overdone, Trading At 10x P/FCF Is A Strong Buy"
+    }
   }
 ]

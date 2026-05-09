@@ -2,36 +2,14 @@
   {
     "file": "2026-03-05-us-open.md",
     "htmlFile": "2026-03-05-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-off conditions. S&P +0.00%, NDQ -0.52%, 26% of tracked names positive, led by DUOL, ADBE.VI, MSFT.",
+    "title": "US Open +15m — 2026-03-05",
+    "summary": "Quiet session; S&P +0.00%, no dominant catalyst — tape drifting.",
     "date": "2026-03-05",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Quiet session; S&P +0.00%, no dominant catalyst — tape drifting.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **DUOL (+4.21%)**, **ADBE.VI (+2.80%)**, **MSFT (+0.35%)**, **RDDT (+0.24%)**",
+        "- Monitor laggards for hidden weakness: **TM (-4.93%)**, **BABA (-2.55%)**, **BA (-2.31%)**, **LMT (-1.47%)**",
+        "- Confirm whether index move (S&P +0.00%, NDQ -0.52%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": 0.06544075072377353,
         "changeAbs": 0.06544075072377353
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "TM": "Toyota Motor (TM) Shares Climb After Elliott Accepts Revised Toyota Industries Tender Offer",
+      "DUOL": "Why Is Duolingo Stock Sinking Friday?",
+      "ADBE.VI": "Adobe's stock is at a multiyear low, but the pummeling may not be done yet"
+    }
   },
   {
     "file": "2026-03-05-pre-close.md",
     "htmlFile": "2026-03-05-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-off conditions. S&P -0.88%, NDQ -0.71%, 26% of tracked names positive, led by DUOL, NOVO-B.CO, AMZN.",
+    "title": "US Pre-close — 2026-03-05",
+    "summary": "Session dominated by idiosyncratic movers (DUOL) alongside soft index backdrop.",
     "date": "2026-03-05",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Session dominated by idiosyncratic movers (DUOL) alongside soft index backdrop.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **DUOL (+6.28%)**, **NOVO-B.CO (+1.21%)**, **AMZN (+1.05%)**, **MSFT (+0.97%)**",
+        "- Monitor laggards for hidden weakness: **TM (-5.05%)**, **BABA (-2.63%)**, **BA (-2.41%)**, **AMD (-1.93%)**",
+        "- Treat large-gap winners (DUOL) as isolated events — confirm catalyst before entering.",
+        "- Avoid catching falling knives: TM — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.88%, NDQ -0.71%) is backed by broad participation or driven by just 2–3 names."
       ]
     },
     "movers": [
@@ -527,41 +506,29 @@
         "changeValue": 0.46589961466258245,
         "changeAbs": 0.46589961466258245
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Duolingo Stock Is Falling Off a Cliff, Continuing a Dramatic Collapse. You Can't Just Blame That 'AI First' Memo",
+      "TM": "Toyota Industries Resets Record Date Amid Tender Offer and Possible Take-Private Move",
+      "BABA": "These Stocks Are Today’s Movers: Broadcom, Trade Desk, Berkshire Hathaway, Riget..."
+    }
   },
   {
     "file": "2026-03-05-eu.md",
     "htmlFile": "2026-03-05-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-on conditions. S&P +0.78%, NDQ +1.51%, 63% of tracked names positive, led by AMD, NOVO-B.CO, AMZN.",
+    "title": "EU/Nordic Morning — 2026-03-05",
+    "summary": "Session dominated by idiosyncratic movers (AMD, NOVO-B.CO) alongside broad index strength.",
     "date": "2026-03-05",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (AMD, NOVO-B.CO) alongside broad index strength.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +549,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+5.82%)**, **NOVO-B.CO (+5.02%)**, **AMZN (+3.88%)**, **TSLA (+3.44%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-5.35%)**, **BABA (-1.71%)**, **LMT (-0.50%)**, **AAPL (-0.47%)**",
+        "- Treat large-gap winners (AMD, NOVO-B.CO) as isolated events — confirm catalyst before entering.",
+        "- Avoid catching falling knives: DUOL — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P +0.78%, NDQ +1.51%) is backed by broad participation or driven by just 2–3 names."
       ]
     },
     "movers": [
@@ -792,6 +766,16 @@
         "changeValue": 1.8403161302609021,
         "changeAbs": 1.8403161302609021
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMD": "Why Is AMD (AMD) Stock Soaring Today",
+      "DUOL": "Duolingo: Heading To The Unknown - Avoid",
+      "NOVO-B.CO": "Novo Nordisk's new diabetes drug outshines Ozempic: Is the stock a buy?"
+    }
   }
 ]

@@ -2,36 +2,14 @@
   {
     "file": "2026-03-02-us-open.md",
     "htmlFile": "2026-03-02-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-off conditions. S&P -0.36%, NDQ -0.38%, 36% of tracked names positive, led by NVDA, LMT, MSFT.",
+    "title": "US Open +15m — 2026-03-02",
+    "summary": "Quiet session; S&P -0.36%, no dominant catalyst — tape drifting.",
     "date": "2026-03-02",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Quiet session; S&P -0.36%, no dominant catalyst — tape drifting.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **NVDA (+2.19%)**, **LMT (+2.16%)**, **MSFT (+1.60%)**, **META (+0.60%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-3.52%)**, **AMD (-2.96%)**, **BABA (-2.64%)**, **GOOG (-2.32%)**",
+        "- Confirm whether index move (S&P -0.36%, NDQ -0.38%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +246,29 @@
         "changeValue": -0.4343545123431838,
         "changeAbs": -0.4343545123431838
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Duolingo Stock Plummets Even as User Growth Soars. Time to Buy?",
+      "AMD": "This Penny Stock Is Getting a Major Boost From AMD Today. Should You Buy In?",
+      "BABA": "Is Alibaba (BABA) Offering Value After Recent Share Price Weakness?"
+    }
   },
   {
     "file": "2026-03-02-pre-close.md",
     "htmlFile": "2026-03-02-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-on conditions. S&P -0.00%, NDQ +0.06%, 57% of tracked names positive, led by NVDA, LMT, NFLX.",
+    "title": "US Pre-close — 2026-03-02",
+    "summary": "Quiet session; S&P -0.00%, no dominant catalyst — tape drifting.",
     "date": "2026-03-02",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Quiet session; S&P -0.00%, no dominant catalyst — tape drifting.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +289,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **NVDA (+2.84%)**, **LMT (+2.50%)**, **NFLX (+1.49%)**, **MSFT (+1.19%)**",
+        "- Monitor laggards for hidden weakness: **GOOG (-1.87%)**, **BABA (-1.35%)**, **AMD (-1.15%)**, **DUOL (-0.91%)**",
+        "- Confirm whether index move (S&P -0.00%, NDQ +0.06%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +505,29 @@
         "changeValue": 0.25469606674612066,
         "changeAbs": 0.25469606674612066
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "NVDA": "Nvidia's stock opens lower despite the upbeat report",
+      "LMT": "Lockheed Martin stock rises on Iran conflict, Nvidia invests $2B",
+      "GOOG": "Why Did Alphabet Stock Drop Today?"
+    }
   },
   {
     "file": "2026-03-02-eu.md",
     "htmlFile": "2026-03-02-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-off conditions. S&P -0.43%, NDQ -0.30%, 36% of tracked names positive, led by NFLX, LMT, GOOG.",
+    "title": "EU/Nordic Morning — 2026-03-02",
+    "summary": "Session dominated by idiosyncratic movers (NFLX) alongside soft index backdrop.",
     "date": "2026-03-02",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Session dominated by idiosyncratic movers (NFLX) alongside soft index backdrop.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +548,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **NFLX (+13.77%)**, **LMT (+2.56%)**, **GOOG (+1.39%)**, **ADBE.VI (+1.30%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-14.01%)**, **NVDA (-4.16%)**, **RDDT (-3.60%)**, **AAPL (-3.21%)**",
+        "- Treat large-gap winners (NFLX) as isolated events — confirm catalyst before entering.",
+        "- Avoid catching falling knives: DUOL — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.43%, NDQ -0.30%) is backed by broad participation or driven by just 2–3 names."
       ]
     },
     "movers": [
@@ -792,6 +765,16 @@
         "changeValue": -0.16928679055750706,
         "changeAbs": -0.16928679055750706
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Duolingo Stock Plummets Even as User Growth Soars. Time to Buy?",
+      "NFLX": "Why Netflix Stock Climbed Today",
+      "NVDA": "AI 'Doomsday' Fears Are Rising. Here's What They Really Mean For Nvidia Stock"
+    }
   }
 ]
