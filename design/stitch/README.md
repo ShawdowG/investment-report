@@ -16,8 +16,9 @@ Last updated: 2026-05-10. Re-verify against `docs/specs/STATUS.md` and `git log`
 | Fonts via `next/font/google` | ✅ shipped | `web-app/src/app/layout.tsx` |
 | Core ui primitives (Card variants, StatusBadge, RegimeDot, PriorityBadge, Tag, Sentiment, SectionHeader) | ✅ shipped | `web-app/src/components/ui/` |
 | Layout shell (AppShell, Sidebar, TopBar) | ✅ shipped | `web-app/src/components/layout/` — `navbar.tsx` removed; mobile drawer is follow-up |
-| Composition primitives (TickerCell, MoverRow, DataTable wrapper) | 🟡 pending | `web-app/src/components/ui/` |
-| Per-route feature components (Dashboard, Watchlist, Ticker, Portfolio re-skin) | 🟡 pending | `web-app/src/components/<area>/` |
+| Composition primitives (TickerCell, MoverRow) | ✅ shipped | `web-app/src/components/ui/` (commit `6557da4`); IconButton + DataTable wrapper deferred |
+| Per-route feature components — Dashboard | 🟡 partial | `LatestReportCard` + `TopMoversCard` shipped (`web-app/src/components/dashboard/`); rest of dashboard kept analytical depth from previous components |
+| Per-route feature components — Watchlist / Ticker / Portfolio | 🟡 pending | re-skin pending; ticker + portfolio also need SPEC-007 / SPEC-008 |
 | Light-mode redesign | ⚠ not in Stitch handoff | see §7 |
 
 SPEC-011 row in `docs/specs/STATUS.md` reflects this. Owner is `claude-code` since 2026-05-10.
