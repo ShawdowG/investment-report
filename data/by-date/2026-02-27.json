@@ -2,36 +2,14 @@
   {
     "file": "2026-02-27-pre-close.md",
     "htmlFile": "2026-02-27-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-off conditions. S&P -0.43%, NDQ -0.30%, 36% of tracked names positive, led by NFLX, LMT, GOOG.",
+    "title": "US Pre-close — 2026-02-27",
+    "summary": "Session dominated by idiosyncratic movers (NFLX) alongside soft index backdrop.",
     "date": "2026-02-27",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Session dominated by idiosyncratic movers (NFLX) alongside soft index backdrop.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **NFLX (+13.77%)**, **LMT (+2.56%)**, **GOOG (+1.39%)**, **ADBE.VI (+1.30%)**",
+        "- Monitor laggards for hidden weakness: **DUOL (-14.01%)**, **NVDA (-4.16%)**, **RDDT (-3.60%)**, **AAPL (-3.21%)**",
+        "- Treat large-gap winners (NFLX) as isolated events — confirm catalyst before entering.",
+        "- Avoid catching falling knives: DUOL — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.43%, NDQ -0.30%) is backed by broad participation or driven by just 2–3 names."
       ]
     },
     "movers": [
@@ -262,6 +247,16 @@
         "changeValue": -0.16928679055750706,
         "changeAbs": -0.16928679055750706
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "DUOL": "Duolingo Hit $1 Billion in Revenue, but Its Stock Is Still Getting Crushed for 2 Big Reasons",
+      "NFLX": "Stock Market Today, Feb. 27: Netflix Surges After Dropping Warner Bros. Bid and Securing Breakup Fee",
+      "NVDA": "Nvidia's stock falls despite blowout earnings. What Wall Street is saying."
+    }
   }
 ]

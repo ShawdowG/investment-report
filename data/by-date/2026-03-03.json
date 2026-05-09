@@ -2,36 +2,14 @@
   {
     "file": "2026-03-03-us-open.md",
     "htmlFile": "2026-03-03-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows risk-off conditions. S&P -2.29%, NDQ -2.50%, 5% of tracked names positive, led by ADBE.VI, AAPL, RDDT.",
+    "title": "US Open +15m — 2026-03-03",
+    "summary": "Index-led selling (S&P -2.29%) with 5% of names positive.",
     "date": "2026-03-03",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -2.29%) with 5% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **ADBE.VI (+0.70%)**, **AAPL (+0.00%)**, **RDDT (+0.00%)**, **MA (-0.70%)**",
+        "- Monitor laggards for hidden weakness: **TM (-6.82%)**, **BABA (-6.06%)**, **AMD (-4.57%)**, **NOVO-B.CO (-4.45%)**",
+        "- Avoid catching falling knives: BABA, TM — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -2.29%, NDQ -2.50%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +247,29 @@
         "changeValue": -1.6803349031920476,
         "changeAbs": -1.6803349031920476
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "TM": "Why Toyota Motor Stock Tapped the Brakes Today",
+      "BABA": "Signal Says Alibaba Stock Could Bounce Off Bullish Trendline",
+      "AMD": "AMD Stock Jumped Today. CEO Lisa Su Doesn't Think AI Will 'Replace Everything'"
+    }
   },
   {
     "file": "2026-03-03-pre-close.md",
     "htmlFile": "2026-03-03-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-off conditions. S&P -0.86%, NDQ -1.01%, 31% of tracked names positive, led by ADBE.VI, MSFT, DUOL.",
+    "title": "US Pre-close — 2026-03-03",
+    "summary": "Index-led selling (S&P -0.86%) with 31% of names positive.",
     "date": "2026-03-03",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-off",
+    "mainDriver": "Index-led selling (S&P -0.86%) with 31% of names positive.",
+    "posture": "Defensive — reduce gross, protect capital, no new longs until tape stabilizes.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +290,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **ADBE.VI (+3.55%)**, **MSFT (+1.21%)**, **DUOL (+0.43%)**, **NFLX (+0.36%)**",
+        "- Monitor laggards for hidden weakness: **BABA (-4.76%)**, **TM (-4.72%)**, **AMD (-3.51%)**, **NOVO-B.CO (-2.87%)**",
+        "- Confirm whether index move (S&P -0.86%, NDQ -1.01%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +506,29 @@
         "changeValue": -1.0835262019973229,
         "changeAbs": -1.0835262019973229
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "BABA": "Alibaba stock rises 28% in 6 months: Hold tight or time to let go?",
+      "TM": "Meet Toyota, the Monster EV Stock That Continues to Soar",
+      "ADBE.VI": "Heightened AI Competition Fuels Analyst Skepticism on Adobe (ADBE)"
+    }
   },
   {
     "file": "2026-03-03-eu.md",
     "htmlFile": "2026-03-03-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-on conditions. S&P +0.04%, NDQ +0.13%, 68% of tracked names positive, led by LMT, NVDA, MSFT.",
+    "title": "EU/Nordic Morning — 2026-03-03",
+    "summary": "Quiet session; S&P +0.04%, no dominant catalyst — tape drifting.",
     "date": "2026-03-03",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-on",
+    "mainDriver": "Quiet session; S&P +0.04%, no dominant catalyst — tape drifting.",
+    "posture": "Slightly pro-risk with discipline — add on strength confirmation, avoid over-sizing.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +549,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **LMT (+3.37%)**, **NVDA (+2.99%)**, **MSFT (+1.48%)**, **BA (+0.97%)**",
+        "- Monitor laggards for hidden weakness: **GOOG (-1.63%)**, **BABA (-1.08%)**, **AMD (-0.79%)**, **AMZN (-0.77%)**",
+        "- Confirm whether index move (S&P +0.04%, NDQ +0.13%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +765,16 @@
         "changeValue": 0.3108281265496373,
         "changeAbs": 0.3108281265496373
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is mild risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "LMT": "Why Lockheed Martin & Palantir Technologies Should Be in Your Portfolio Right Now",
+      "NVDA": "Better Semiconductor Stock: Nvidia vs. TSMC",
+      "GOOG": "Is Alphabet's 100-Year Bond A Buy Or Sell Signal For Google's Stock?"
+    }
   }
 ]

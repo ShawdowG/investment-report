@@ -37,6 +37,24 @@ export interface ReportItem {
   regime: string;
   summary: string;
   tickers: string[];
+  // SPEC-002 finish: structured payload emitted by scripts/build-index.js.
+  // All optional so older index entries remain valid.
+  mainDriver?: string;
+  posture?: string;
+  sections?: {
+    gamma?: string[];
+    alpha?: string[];
+    beta?: string[];
+    pulse?: string[];      // legacy: sourced from Section 0, usually empty
+    checklist?: string[];  // current: sourced from Section 5 Unified Action Checklist
+  };
+  movers?: MoverEntry[];
+  discussion?: {
+    agreement: string;
+    disagreement: string;
+    resolution: string;
+  };
+  catalysts?: Record<string, string>;
 }
 
 export interface SearchIndex {
@@ -52,6 +70,17 @@ export interface Mover {
   price: number;
   changePct: number;
   changeAbs: number;
+}
+
+/** Raw mover entry as emitted by scripts/build-index.js. Adapter normalises to Mover. */
+export interface MoverEntry {
+  ticker: string;
+  name?: string;
+  price?: string | number;
+  pct?: number | null;
+  change?: string | number | null;
+  changeValue?: number | null;
+  changeAbs?: number | null;
 }
 
 export interface NewsRow {

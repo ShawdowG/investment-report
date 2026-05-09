@@ -2,36 +2,14 @@
   {
     "file": "2026-02-24-us-open.md",
     "htmlFile": "2026-02-24-us-open.html",
-    "title": "US Open +15m",
-    "summary": "Indices opened slightly positive, but dispersion remains high with notable single-name downside in DUOL/MA/RDDT/V.",
+    "title": "US Open +15m — 2026-02-24",
+    "summary": "Index-level stability (+0.24% S&P, +0.23% NDQ) versus sharp idiosyncratic declines in payments and high-beta names.",
     "date": "2026-02-24",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "Mixed / selective risk-on",
+    "mainDriver": "Index-level stability (+0.24% S&P, +0.23% NDQ) versus sharp idiosyncratic declines in payments and high-beta names.",
+    "posture": "Barbell — keep core quality exposure, avoid chasing weak tape in broken leaders until intraday structure improves.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Monitor top gainers for continuation quality: **AAPL (+1.02%)**, **LMT (+0.86%)**.",
+        "- Track stress cluster: **DUOL (-5.53%)**, **MA (-4.68%)**, **RDDT (-4.00%)**, **V (-3.92%)**, **ADBE.VI (-2.94%)**.",
+        "- Require catalyst validation before acting on outsized movers (DUOL/MA/V/RDDT/ADBE proxies flagged).",
+        "- Keep gross exposure neutral-to-slightly-risk-on unless indices lose opening range.",
+        "- Reassess at +60m: breadth, leadership persistence, and whether downside outliers stabilize."
       ]
     },
     "movers": [
@@ -262,41 +247,25 @@
         "changeValue": -0.06160256410256437,
         "changeAbs": -0.06160256410256437
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Tape is mixed, not cleanly bullish; risk should be added selectively.",
+      "disagreement": "One view favors buying index strength immediately; the other prefers waiting for first 30–60 min confirmation.",
+      "resolution": "Use staged entries only after opening-range confirmation and no further breadth deterioration."
+    },
+    "catalysts": {}
   },
   {
     "file": "2026-02-24-pre-close.md",
     "htmlFile": "2026-02-24-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "Indices and most single names are green into the final hour, led by ADBE/DUOL/TSLA/BA while gold and BTC lag.",
+    "title": "US Pre-close — 2026-02-24",
+    "summary": "Late-session equity bid (SPX +0.72%, NDQ +0.96%) with leadership expanding beyond megacaps into software, aerospace, and selected high-beta names.",
     "date": "2026-02-24",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "Broad risk-on with cyclical catch-up",
+    "mainDriver": "Late-session equity bid (SPX +0.72%, NDQ +0.96%) with leadership expanding beyond megacaps into software, aerospace, and selected high-beta names.",
+    "posture": "Stay constructive but avoid chasing; prioritize names with confirmed catalysts and keep stops tight into the close.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +286,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Confirm close-hold behavior in top movers: **ADBE (+3.84%)**, **DUOL (+2.97%)**, **TSLA (+2.34%)**, **BA (+2.33%)**, **NFLX (+1.91%)**.",
+        "- Keep an eye on macro divergence: **Gold (-1.40%)** and **BTC (-0.40%)** versus equity strength.",
+        "- Prioritize entries in names holding VWAP/late-day support; avoid initiating on exhaustion spikes.",
+        "- Reduce position size where catalyst clarity is missing despite large % moves.",
+        "- Pre-plan next session watchlist from today’s leaders plus any failed late breakouts into the close."
       ]
     },
     "movers": [
@@ -527,41 +503,25 @@
         "changeValue": 0.10396629101425958,
         "changeAbs": 0.10396629101425958
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Tape is risk-on and broad enough to maintain constructive positioning into close.",
+      "disagreement": "One side wants aggressive overnight adds; the other prefers lighter carry after a strong late push.",
+      "resolution": "Keep moderate long bias, but cap overnight size in names that moved >2% without independently verified news."
+    },
+    "catalysts": {}
   },
   {
     "file": "2026-02-24-eu.md",
     "htmlFile": "2026-02-24-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "Risk-off tone; biggest movers DUOL, MA.",
+    "title": "EU/Nordic Morning — 2026-02-24",
+    "summary": "Breadth remains weak with larger downside in high-beta names and payment rails.",
     "date": "2026-02-24",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "Risk-off",
+    "mainDriver": "Breadth remains weak with larger downside in high-beta names and payment rails.",
+    "posture": "Defensive / selective adds only on confirmation",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -578,6 +538,9 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "No checklist generated."
       ]
     },
     "movers": [
@@ -788,6 +751,12 @@
         "changeValue": -0.5586218436264048,
         "changeAbs": -0.5586218436264048
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "",
+      "disagreement": "",
+      "resolution": ""
+    },
+    "catalysts": {}
   }
 ]

@@ -2,36 +2,14 @@
   {
     "file": "2026-04-23-us-open.md",
     "htmlFile": "2026-04-23-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows mild risk-off conditions. S&P -0.11%, NDQ -0.05%, 26% of tracked names positive, led by AMD, BA, AMZN.",
+    "title": "US Open +15m — 2026-04-23",
+    "summary": "Quiet session; S&P -0.11%, no dominant catalyst — tape drifting.",
     "date": "2026-04-23",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Quiet session; S&P -0.11%, no dominant catalyst — tape drifting.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+1.47%)**, **BA (+1.01%)**, **AMZN (+0.48%)**, **GOOG (+0.24%)**",
+        "- Monitor laggards for hidden weakness: **ADBE.VI (-7.15%)**, **DUOL (-5.81%)**, **LMT (-4.86%)**, **RDDT (-4.82%)**",
+        "- Avoid catching falling knives: DUOL, ADBE.VI — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.11%, NDQ -0.05%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +247,29 @@
         "changeValue": -0.5755871308231022,
         "changeAbs": -0.5755871308231022
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "ADBE.VI": "T-Mobile reportedly in merger talks, Adobe's $25B stock buyback",
+      "DUOL": "Duolingo, Inc. (DUOL) stock dips while market gains: Key facts",
+      "LMT": "Lockheed stock slips as profit drops, cash burn overshadows demand boom"
+    }
   },
   {
     "file": "2026-04-23-pre-close.md",
     "htmlFile": "2026-04-23-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows mild risk-off conditions. S&P -0.41%, NDQ -0.57%, 15% of tracked names positive, led by BA, AMD, AAPL.",
+    "title": "US Pre-close — 2026-04-23",
+    "summary": "Index-led selling (S&P -0.41%) with 15% of names positive.",
     "date": "2026-04-23",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Index-led selling (S&P -0.41%) with 15% of names positive.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +290,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **BA (+1.24%)**, **AMD (+0.62%)**, **AAPL (+0.10%)**, **GOOG (+0.01%)**",
+        "- Monitor laggards for hidden weakness: **RDDT (-6.91%)**, **ADBE.VI (-6.63%)**, **DUOL (-4.96%)**, **LMT (-4.62%)**",
+        "- Avoid catching falling knives: ADBE.VI, RDDT — wait for a full session of base-building before re-entry.",
+        "- Confirm whether index move (S&P -0.41%, NDQ -0.57%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +507,29 @@
         "changeValue": -0.6303201544872437,
         "changeAbs": -0.6303201544872437
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "RDDT": "Reddit, Inc. Class A",
+      "ADBE.VI": "Is Adobe Inc. (ADBE) A Good Stock To Buy Now?",
+      "DUOL": "Duolingo, Inc. (DUOL) Stock Dips While Market Gains: Key Facts"
+    }
   },
   {
     "file": "2026-04-23-eu.md",
     "htmlFile": "2026-04-23-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows risk-on conditions. S&P +1.05%, NDQ +1.73%, 78% of tracked names positive, led by AMD, BA, RDDT.",
+    "title": "EU/Nordic Morning — 2026-04-23",
+    "summary": "Session dominated by idiosyncratic movers (AMD, BA) alongside broad index strength.",
     "date": "2026-04-23",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (AMD, BA) alongside broad index strength.",
+    "posture": "Fully pro-risk — hold longs, tighten stops only on extended names.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +550,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **AMD (+6.67%)**, **BA (+5.53%)**, **RDDT (+4.78%)**, **ADBE.VI (+3.54%)**",
+        "- Monitor laggards for hidden weakness: **LMT (-2.89%)**, **TM (-1.74%)**, **NOVO-B.CO (-0.68%)**, **MA (-0.23%)**",
+        "- Treat large-gap winners (AMD, BA) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P +1.05%, NDQ +1.73%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +767,16 @@
         "changeValue": -0.26804269029400274,
         "changeAbs": -0.26804269029400274
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "AMD": "AMD's Equity-As-A-Service, CPU Supercycle In Agentic AI Era, And ASIC Killer",
+      "BA": "Boeing stock analysis and earnings preview: Will it pop or crash?",
+      "RDDT": "Why Reddit (RDDT) Stock Is Trading Up Today"
+    }
   }
 ]

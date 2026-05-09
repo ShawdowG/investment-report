@@ -2,36 +2,14 @@
   {
     "file": "2026-03-31-us-open.md",
     "htmlFile": "2026-03-31-us-open.html",
-    "title": "US Open +15m",
-    "summary": "US Open +15m shows risk-on conditions. S&P +1.42%, NDQ +1.60%, 89% of tracked names positive, led by DUOL, RDDT, META.",
+    "title": "US Open +15m — 2026-03-31",
+    "summary": "Session dominated by idiosyncratic movers (DUOL, RDDT) alongside broad index strength.",
     "date": "2026-03-31",
     "slot": "us-open",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (DUOL, RDDT) alongside broad index strength.",
+    "posture": "Fully pro-risk — hold longs, tighten stops only on extended names.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -52,6 +30,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **DUOL (+6.51%)**, **RDDT (+6.06%)**, **META (+4.04%)**, **NVDA (+3.11%)**",
+        "- Monitor laggards for hidden weakness: **TM (-0.53%)**, **V (-0.21%)**, **MA (+0.22%)**, **ADBE.VI (+0.51%)**",
+        "- Treat large-gap winners (DUOL, RDDT) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P +1.42%, NDQ +1.60%) is backed by broad participation or driven by just 2–3 names.",
+        "- Reassess gross exposure after the 30-minute opening range sets — do not trade the first 5 minutes."
       ]
     },
     "movers": [
@@ -262,41 +247,29 @@
         "changeValue": 0.5434134331298068,
         "changeAbs": 0.5434134331298068
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "DUOL": "Assessing Duolingo (DUOL) Valuation After A Steep One Year Share Price Decline",
+      "RDDT": "Reddit (RDDT) Stock Plummets 10% Following Major Executive Share Sales",
+      "META": "Meta’s $280 Billion Tailspin Sparks ‘Tobacco Moment’ Questions"
+    }
   },
   {
     "file": "2026-03-31-pre-close.md",
     "htmlFile": "2026-03-31-pre-close.html",
-    "title": "US Pre-close",
-    "summary": "US Pre-close shows risk-on conditions. S&P +2.91%, NDQ +3.43%, 100% of tracked names positive, led by RDDT, META, NVDA.",
+    "title": "US Pre-close — 2026-03-31",
+    "summary": "Session dominated by idiosyncratic movers (GOOG, NVDA) alongside broad index strength.",
     "date": "2026-03-31",
     "slot": "pre-close",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "risk-on",
+    "mainDriver": "Session dominated by idiosyncratic movers (GOOG, NVDA) alongside broad index strength.",
+    "posture": "Fully pro-risk — hold longs, tighten stops only on extended names.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -317,6 +290,13 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **RDDT (+8.47%)**, **META (+6.67%)**, **NVDA (+5.59%)**, **BA (+5.19%)**",
+        "- Monitor laggards for hidden weakness: **ADBE.VI (+0.81%)**, **V (+0.90%)**, **LMT (+0.97%)**, **MA (+1.15%)**",
+        "- Treat large-gap winners (GOOG, NVDA) as isolated events — confirm catalyst before entering.",
+        "- Confirm whether index move (S&P +2.91%, NDQ +3.43%) is backed by broad participation or driven by just 2–3 names.",
+        "- Pre-close: avoid adding new positions in the last 30 minutes — let today's price discovery complete."
       ]
     },
     "movers": [
@@ -527,41 +507,31 @@
         "changeValue": 1.4609660072978699,
         "changeAbs": 1.4609660072978699
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Regime is risk-on — both strategic and tactical views agree that the bias is constructive and positions should stay risk-on.",
+      "disagreement": "Strategic view prefers holding existing exposure for multi-day follow-through; tactical view is cautious about adding at current levels without a clean pullback entry.",
+      "resolution": "Hold current positions with discipline; add only on intraday dips to support levels. Do not chase extended names."
+    },
+    "catalysts": {
+      "RDDT": "Stock market today: Dow soars 1,000 points, S&P 500 and Nasdaq surge in upbeat...",
+      "META": "META Stock Just Had Its Worst Day in Nearly a Year. Here's What Happened.",
+      "NVDA": "Marvell Technology Soars on Nvidia's $2B Investment. Should You Buy MRVL Stock Here, Too?",
+      "BA": "the boeing co. - BA",
+      "GOOG": "Is Alphabet Inc. (GOOGL) one of the Best Goldman Sachs AI Stocks: Top 12 Stocks to Buy?"
+    }
   },
   {
     "file": "2026-03-31-eu.md",
     "htmlFile": "2026-03-31-eu.html",
-    "title": "EU/Nordic Morning",
-    "summary": "EU/Nordic Morning shows mild risk-off conditions. S&P -0.39%, NDQ -0.78%, 42% of tracked names positive, led by ADBE.VI, META, MA.",
+    "title": "EU/Nordic Morning — 2026-03-31",
+    "summary": "Quiet session; S&P -0.39%, no dominant catalyst — tape drifting.",
     "date": "2026-03-31",
     "slot": "eu",
-    "tickers": [
-      "BTC-USD",
-      "GC=F",
-      "^GSPC",
-      "^NDQ",
-      "AAPL",
-      "TSLA",
-      "GOOG",
-      "NVDA",
-      "AMZN",
-      "MSFT",
-      "META",
-      "DUOL",
-      "ADBE.VI",
-      "AMD",
-      "BABA",
-      "LMT",
-      "BA",
-      "TM",
-      "V",
-      "MA",
-      "NFLX",
-      "RDDT",
-      "NOVO-B.CO"
-    ],
+    "tickers": [],
     "regime": "mild risk-off",
+    "mainDriver": "Quiet session; S&P -0.39%, no dominant catalyst — tape drifting.",
+    "posture": "Cautious — tilt defensively, trim beta, wait for stabilization signal.",
     "sections": {
       "gamma": [
         "Ticker | Price | Δ%",
@@ -582,6 +552,12 @@
       ],
       "pulse": [
         "Awaiting pulse update."
+      ],
+      "checklist": [
+        "- Watch upside leaders for continuation: **ADBE.VI (+2.68%)**, **META (+2.03%)**, **MA (+2.02%)**, **RDDT (+1.88%)**",
+        "- Monitor laggards for hidden weakness: **AMD (-2.95%)**, **LMT (-2.80%)**, **TM (-1.83%)**, **TSLA (-1.81%)**",
+        "- Confirm whether index move (S&P -0.39%, NDQ -0.78%) is backed by broad participation or driven by just 2–3 names.",
+        "- EU session: watch US futures for directional cue into the New York open."
       ]
     },
     "movers": [
@@ -792,6 +768,16 @@
         "changeValue": 0.5249522214560116,
         "changeAbs": 0.5249522214560116
       }
-    ]
+    ],
+    "discussion": {
+      "agreement": "Both views agree the tape is mild risk-off — no urgency to add risk. Capital preservation takes priority.",
+      "disagreement": "Strategic view sees this as a normal correction within a larger trend and argues against panic selling; tactical view notes breadth is weak enough to justify trimming gross exposure now.",
+      "resolution": "Trim highest-beta positions to reduce drawdown risk. Re-enter with smaller sizes once the tape shows two consecutive sessions of stabilization."
+    },
+    "catalysts": {
+      "AMD": "AMD stock sends valuation signal for first time in 3 years",
+      "LMT": "Susquehanna lifts price target on Lockheed Martin Corporation (LMT) to $740, keeps positive rating",
+      "ADBE.VI": "Adobe downgraded by William Blair on 'intense competition'"
+    }
   }
 ]

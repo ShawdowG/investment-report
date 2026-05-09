@@ -1,6 +1,6 @@
 export const dynamic = 'force-static';
 
-import { loadSearchIndex, loadReportMarkdown, parseFrontmatter, extractSection } from "@/lib/reports";
+import { loadSearchIndex } from "@/lib/reports";
 import { adaptMovers, deriveNewsFromMovers } from "@/lib/adapters";
 import { Navbar } from "@/components/navbar";
 import { HeaderBar } from "@/components/header-bar";
@@ -10,6 +10,8 @@ import { DiscussionPanel } from "@/components/discussion-panel";
 import { TickerTable } from "@/components/ticker-table";
 import { NewsMoversTable } from "@/components/news-movers-table";
 import { TacticalQuickPanel } from "@/components/tactical-quick-panel";
+
+const stripBullet = (line: string) => line.replace(/^[-•]\s*/, "").trim();
 
 export default function DashboardPage() {
   const index = loadSearchIndex();
@@ -26,43 +28,21 @@ export default function DashboardPage() {
     );
   }
 
-  const markdown = loadReportMarkdown(latest.date, latest.slot);
-  const { meta, body } = markdown
-    ? parseFrontmatter(markdown)
-    : { meta: {}, body: "" };
+  // SPEC-002 finish: read structured payload, do not re-parse markdown.
+  const alpha = (latest.sections?.alpha ?? []).map(stripBullet).filter(Boolean);
+  const beta = (latest.sections?.beta ?? []).map(stripBullet).filter(Boolean);
+  const checklist = (latest.sections?.checklist ?? latest.sections?.pulse ?? [])
+    .map(stripBullet)
+    .filter(Boolean);
+  const { agreement = "", disagreement = "", resolution = "" } =
+    latest.discussion ?? {};
 
-  // Extract sections from the markdown body
-  const alphaLines = extractSection(body, "## 2) ALPHA").filter(
-    (l) => l.trim().startsWith("- ")
-  );
-  const betaLines = extractSection(body, "## 3) BETA").filter(
-    (l) => l.trim().startsWith("- ")
-  );
-  const pulseLines = extractSection(body, "## 5) Unified Action Checklist").filter(
-    (l) => l.trim().startsWith("- ")
-  );
+  const movers = adaptMovers(latest.movers ?? []);
+  const newsRows = deriveNewsFromMovers(latest.movers ?? []);
 
-  const alpha = alphaLines.map((l) => l.replace(/^[-•]\s*/, "").trim());
-  const beta = betaLines.map((l) => l.replace(/^[-•]\s*/, "").trim());
-  const pulse = pulseLines.map((l) => l.replace(/^[-•]\s*/, "").trim());
+  const regime = latest.regime || "Neutral";
+  const summary = latest.summary || "";
 
-  // Discussion
-  const discussionLines = extractSection(body, "## 4) Agent Discussion");
-  const parseDiscussionField = (label: string) => {
-    const line = discussionLines.find((l) => l.includes(label));
-    return line ? line.replace(/.*\*\*[^*]+\*\*:\s*/, "").trim() : "";
-  };
-  const agreement = parseDiscussionField("Agreement");
-  const disagreement = parseDiscussionField("Disagreement");
-  const resolution = parseDiscussionField("Resolution");
-
-  // Movers — sourced from search index item (parsed from GAMMA table)
-  const rawMovers = (latest as unknown as { movers?: unknown[] }).movers ?? [];
-  const movers = adaptMovers(rawMovers);
-  const newsRows = deriveNewsFromMovers(rawMovers);
-
-  const regime = (meta.regime as string) || latest.regime || "Neutral";
-  const summary = (meta.summary as string) || latest.summary || "";
   return (
     <>
       <Navbar currentPath="/" />
@@ -70,8 +50,8 @@ export default function DashboardPage() {
         <HeaderBar date={latest.date} slot={latest.slot} />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <MarketPulse regime={regime} summary={summary} pulse={pulse} />
-          <TakeawayPanel checklist={pulse} />
+          <MarketPulse regime={regime} summary={summary} pulse={checklist} />
+          <TakeawayPanel checklist={checklist} />
         </div>
 
         <DiscussionPanel
