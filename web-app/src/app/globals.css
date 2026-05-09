@@ -4,10 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* ─── shadcn surface mappings ─────────────────────────────── */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -42,11 +41,136 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Investment-report palette */
+  /* Investment-report palette (legacy v2 compat) */
   --color-positive: #067647;
   --color-negative: #b42318;
   --color-divider: #f0f2f4;
   --color-muted-text: #555;
+
+  /* ─── Stitch design tokens (SPEC-011) ─────────────────────── */
+  /* Fonts — wired via next/font/google in layout.tsx */
+  --font-sans: var(--font-inter);
+  --font-h1: var(--font-manrope);
+  --font-h2: var(--font-manrope);
+  --font-body-main: var(--font-inter);
+  --font-body-compact: var(--font-inter);
+  --font-data-mono: var(--font-work-sans);
+  --font-label-caps: var(--font-work-sans);
+  --font-badge: var(--font-inter);
+
+  /* Type scale — Tailwind v4 multi-property text tokens */
+  --text-h1: 24px;
+  --text-h1--line-height: 32px;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: 20px;
+  --text-h2--line-height: 28px;
+  --text-h2--font-weight: 600;
+
+  --text-body-main: 16px;
+  --text-body-main--line-height: 24px;
+  --text-body-main--font-weight: 400;
+
+  --text-body-compact: 14px;
+  --text-body-compact--line-height: 20px;
+  --text-body-compact--font-weight: 400;
+
+  --text-data-mono: 14px;
+  --text-data-mono--line-height: 20px;
+  --text-data-mono--letter-spacing: 0.01em;
+  --text-data-mono--font-weight: 500;
+
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 16px;
+  --text-label-caps--letter-spacing: 0.05em;
+  --text-label-caps--font-weight: 600;
+
+  --text-badge: 11px;
+  --text-badge--line-height: 12px;
+  --text-badge--font-weight: 600;
+
+  /* Custom spacing tokens */
+  --spacing-gutter: 1.5rem;
+  --spacing-card-padding: 1.25rem;
+  --spacing-stack-gap: 1rem;
+  --spacing-table-row-height: 48px;
+  --spacing-container-max: 1280px;
+  --spacing-margin-mobile: 1rem;
+
+  /* Surfaces — Stitch dark palette, used directly via bg-{token} */
+  --color-surface: #1e293b;
+  --color-surface-variant: #32353c;
+  --color-surface-bright: #363941;
+  --color-surface-elevated: #334155;
+  --color-surface-dim: #10131a;
+  --color-surface-container: #1d2027;
+  --color-surface-container-low: #191b23;
+  --color-surface-container-lowest: #0b0e15;
+  --color-surface-container-high: #272a31;
+  --color-surface-container-highest: #32353c;
+
+  /* Text */
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-on-surface: #e1e2ec;
+  --color-on-surface-variant: #c2c6d6;
+  --color-on-background: #e1e2ec;
+
+  /* Borders + outlines */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-outline: #8c909f;
+  --color-outline-variant: #424754;
+
+  /* Primary / brand */
+  --color-primary-container: #4d8eff;
+  --color-on-primary: #002e6a;
+  --color-on-primary-container: #00285d;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #adc6ff;
+  --color-on-primary-fixed: #001a42;
+  --color-on-primary-fixed-variant: #004395;
+  --color-surface-tint: #adc6ff;
+  --color-inverse-primary: #005ac2;
+
+  /* Secondary */
+  --color-secondary-container: #00a572;
+  --color-secondary-fixed: #6ffbbe;
+  --color-secondary-fixed-dim: #4edea3;
+  --color-on-secondary: #003824;
+  --color-on-secondary-container: #00311f;
+  --color-on-secondary-fixed: #002113;
+  --color-on-secondary-fixed-variant: #005236;
+
+  /* Tertiary */
+  --color-tertiary: #ffb786;
+  --color-tertiary-container: #df7412;
+  --color-tertiary-fixed: #ffdcc6;
+  --color-tertiary-fixed-dim: #ffb786;
+  --color-on-tertiary: #502400;
+  --color-on-tertiary-container: #461f00;
+  --color-on-tertiary-fixed: #311400;
+  --color-on-tertiary-fixed-variant: #723600;
+
+  /* Errors */
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  /* Inverse */
+  --color-inverse-surface: #e1e2ec;
+  --color-inverse-on-surface: #2e3038;
+
+  /* Regime indicators */
+  --color-regime-risk-on: #10b981;
+  --color-regime-risk-off: #ef4444;
+  --color-regime-neutral: #f59e0b;
+
+  /* Status indicators (watchlist / portfolio) */
+  --color-status-own: #10b981;
+  --color-status-watching: #6366f1;
+  --color-status-avoid: #64748b;
 }
 
 :root {
@@ -84,38 +208,43 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/*
+ * .dark — bridge shadcn semantic tokens to Stitch palette.
+ * Light mode keeps the previous shadcn defaults; Stitch is dark-only
+ * in the handoff, so light is intentionally not redesigned.
+ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #adc6ff;
+  --primary-foreground: #002e6a;
+  --secondary: #32353c;
+  --secondary-foreground: #f8fafc;
+  --muted: #32353c;
+  --muted-foreground: #94a3b8;
+  --accent: #363941;
+  --accent-foreground: #f8fafc;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #adc6ff;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #adc6ff;
+  --sidebar-primary-foreground: #002e6a;
+  --sidebar-accent: #363941;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #adc6ff;
 }
 
 @layer base {
