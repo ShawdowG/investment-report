@@ -54,6 +54,28 @@ export function removeFromWatchlist(rawSymbol: string): WatchlistItem[] {
   return sortItems(updated);
 }
 
+export function addManyToWatchlist(
+  rawSymbols: string[],
+): { added: number; items: WatchlistItem[] } {
+  const items = readItems();
+  const existing = new Set(items.map((i) => i.symbol));
+  const additions: WatchlistItem[] = [];
+  const now = new Date().toISOString();
+  for (const raw of rawSymbols) {
+    const symbol = normalizeSymbol(raw);
+    if (!symbol) continue;
+    if (existing.has(symbol)) continue;
+    existing.add(symbol);
+    additions.push({ symbol, addedAt: now });
+  }
+  if (additions.length === 0) {
+    return { added: 0, items: sortItems(items) };
+  }
+  const updated = [...items, ...additions];
+  writeJson(STORAGE_KEY, updated);
+  return { added: additions.length, items: sortItems(updated) };
+}
+
 export function clearWatchlist(): void {
   removeKey(STORAGE_KEY);
 }
