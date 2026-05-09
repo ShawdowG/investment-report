@@ -1,0 +1,336 @@
+<!-- Master Watchlist -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Master Watchlist - Investment Cockpit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#005236",
+                        "text-primary": "#F8FAFC",
+                        "surface": "#1E293B",
+                        "surface-container": "#1d2027",
+                        "on-primary-fixed": "#001a42",
+                        "regime-risk-off": "#EF4444",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-surface": "#e1e2ec",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "surface-dim": "#10131a",
+                        "secondary-fixed": "#6ffbbe",
+                        "regime-neutral": "#F59E0B",
+                        "inverse-surface": "#e1e2ec",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#32353c",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-container": "#00311f",
+                        "regime-risk-on": "#10B981",
+                        "status-avoid": "#64748B",
+                        "primary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#004395",
+                        "inverse-primary": "#005ac2",
+                        "on-secondary": "#003824",
+                        "inverse-on-surface": "#2e3038",
+                        "secondary": "#4edea3",
+                        "surface-container-high": "#272a31",
+                        "surface-bright": "#363941",
+                        "background": "#0F172A",
+                        "tertiary-container": "#df7412",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary": "#502400",
+                        "on-tertiary-container": "#461f00",
+                        "status-watching": "#6366F1",
+                        "outline": "#8c909f",
+                        "tertiary": "#ffb786",
+                        "surface-container-lowest": "#0b0e15",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "on-background": "#e1e2ec",
+                        "secondary-fixed-dim": "#4edea3",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#00a572",
+                        "on-primary": "#002e6a",
+                        "text-secondary": "#94A3B8",
+                        "on-tertiary-fixed": "#311400",
+                        "surface-tint": "#adc6ff",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#32353c",
+                        "on-primary-container": "#00285d",
+                        "on-surface-variant": "#c2c6d6",
+                        "primary": "#adc6ff",
+                        "status-own": "#10B981",
+                        "tertiary-fixed": "#ffdcc6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-container-low": "#191b23",
+                        "surface-elevated": "#334155",
+                        "outline-variant": "#424754"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "1.5rem",
+                        "table-row-height": "48px",
+                        "card-padding": "1.25rem",
+                        "stack-gap": "1rem",
+                        "container-max": "1280px",
+                        "margin-mobile": "1rem"
+                    },
+                    "fontFamily": {
+                        "badge": ["Inter"],
+                        "body-main": ["Inter"],
+                        "body-compact": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "data-mono": ["Work Sans"],
+                        "label-caps": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "badge": ["11px", { "lineHeight": "12px", "fontWeight": "600" }],
+                        "body-main": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-compact": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h1": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary min-h-screen flex font-body-main text-body-main">
+<!-- SideNavBar -->
+<aside class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md text-primary dark:text-primary font-body-compact text-body-compact h-screen w-64 fixed left-0 top-0 border-r border-border-subtle shadow-sm transition-transform duration-200 ease-in-out flex flex-col h-full py-6 px-4 hidden md:flex z-50">
+<div class="mb-8 px-4">
+<h1 class="font-h2 text-h2 text-text-primary">Portfolio Manager</h1>
+<p class="text-text-secondary mt-1">High-Signal Insights</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 hover:bg-surface-bright/50 transition-all cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<span class="font-bold">Watchlist</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span>Portfolio</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">show_chart</span>
+<span>Tickers</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary font-body-main text-body-main w-full h-16 border-b border-border-subtle flex justify-between items-center px-gutter sticky top-0 z-40 md:hidden">
+<div class="font-h1 text-h1 text-primary">Investment Cockpit</div>
+<div class="flex gap-4">
+<button class="hover:bg-surface-variant transition-colors cursor-pointer active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined text-text-primary">search</span>
+</button>
+<button class="hover:bg-surface-variant transition-colors cursor-pointer active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined text-text-primary">notifications</span>
+</button>
+<button class="hover:bg-surface-variant transition-colors cursor-pointer active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined text-text-primary">account_circle</span>
+</button>
+</div>
+</header>
+<header class="bg-background dark:bg-background text-primary dark:text-primary font-body-main text-body-main w-full h-16 border-b border-border-subtle flex justify-between items-center px-gutter sticky top-0 z-40 hidden md:flex">
+<div class="flex items-center gap-4">
+<div class="relative text-text-secondary focus-within:text-primary">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2">search</span>
+<input class="bg-surface border border-border-subtle rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 transition-all placeholder:text-text-secondary/50 text-text-primary" placeholder="Search tickers, tags, or notes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-variant transition-colors cursor-pointer active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined text-text-primary">notifications</span>
+</button>
+<button class="hover:bg-surface-variant transition-colors cursor-pointer active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined text-text-primary">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-gutter lg:p-8 max-w-container-max mx-auto w-full flex-1 flex flex-col gap-stack-gap">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+<div>
+<h2 class="font-h1 text-h1 text-text-primary">Master Watchlist</h2>
+<p class="text-text-secondary mt-1">Tracking 142 signals across 3 active regimes.</p>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-border-subtle rounded-lg hover:bg-surface-variant transition-colors text-text-primary text-sm font-medium">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Filter
+                    </button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg hover:bg-surface-tint transition-colors text-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-sm">content_paste</span>
+                        Paste / Import
+                    </button>
+</div>
+</div>
+<!-- Bento Layout Container -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+<!-- Main Table Area -->
+<div class="lg:col-span-4 bg-surface border border-border-subtle rounded-xl overflow-hidden flex flex-col">
+<div class="p-card-padding border-b border-border-subtle flex justify-between items-center bg-surface-dim/50">
+<h3 class="font-h2 text-h2 text-text-primary">Active Signals</h3>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded text-xs text-text-secondary">Sorted by: Priority</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-surface-dim">
+<th class="px-card-padding py-3 font-label-caps text-label-caps text-text-secondary uppercase">Ticker</th>
+<th class="px-card-padding py-3 font-label-caps text-label-caps text-text-secondary uppercase">Status</th>
+<th class="px-card-padding py-3 font-label-caps text-label-caps text-text-secondary uppercase">Priority</th>
+<th class="px-card-padding py-3 font-label-caps text-label-caps text-text-secondary uppercase">Last Px</th>
+<th class="px-card-padding py-3 font-label-caps text-label-caps text-text-secondary uppercase hidden md:table-cell">Tags</th>
+<th class="px-card-padding py-3 font-label-caps text-label-caps text-text-secondary uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright/30 transition-colors h-table-row-height group">
+<td class="px-card-padding py-3 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-text-primary">NVDA</span>
+<span class="text-xs text-text-secondary">NVIDIA Corp</span>
+</div>
+</div>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-status-own/10 text-status-own border border-status-own/20">Own</span>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-badge text-badge text-error">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">keyboard_double_arrow_up</span>
+                                            High
+                                        </span>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="font-data-mono text-data-mono text-text-primary">$128.45</span>
+</td>
+<td class="px-card-padding py-3 hidden md:table-cell">
+<div class="flex gap-1 flex-wrap">
+<span class="px-2 py-0.5 bg-surface-variant rounded text-xs text-text-secondary border border-border-subtle">AI</span>
+<span class="px-2 py-0.5 bg-surface-variant rounded text-xs text-text-secondary border border-border-subtle">Semi</span>
+</div>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap text-right">
+<button class="text-text-secondary hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright/30 transition-colors h-table-row-height group">
+<td class="px-card-padding py-3 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-text-primary">PLTR</span>
+<span class="text-xs text-text-secondary">Palantir Tech</span>
+</div>
+</div>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-status-watching/10 text-status-watching border border-status-watching/20">Watching</span>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-badge text-badge text-regime-neutral">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">drag_handle</span>
+                                            Med
+                                        </span>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="font-data-mono text-data-mono text-text-primary">$24.12</span>
+</td>
+<td class="px-card-padding py-3 hidden md:table-cell">
+<div class="flex gap-1 flex-wrap">
+<span class="px-2 py-0.5 bg-surface-variant rounded text-xs text-text-secondary border border-border-subtle">Software</span>
+<span class="px-2 py-0.5 bg-surface-variant rounded text-xs text-text-secondary border border-border-subtle">Defense</span>
+</div>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap text-right">
+<button class="text-text-secondary hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright/30 transition-colors h-table-row-height group">
+<td class="px-card-padding py-3 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-text-primary">JPM</span>
+<span class="text-xs text-text-secondary">JPMorgan Chase</span>
+</div>
+</div>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-status-avoid/10 text-status-avoid border border-status-avoid/20">Research</span>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-badge text-badge text-text-secondary">
+<span class="material-symbols-outlined text-[14px]">keyboard_arrow_down</span>
+                                            Low
+                                        </span>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap">
+<span class="font-data-mono text-data-mono text-text-primary">$198.76</span>
+</td>
+<td class="px-card-padding py-3 hidden md:table-cell">
+<div class="flex gap-1 flex-wrap">
+<span class="px-2 py-0.5 bg-surface-variant rounded text-xs text-text-secondary border border-border-subtle">Dividend</span>
+<span class="px-2 py-0.5 bg-surface-variant rounded text-xs text-text-secondary border border-border-subtle">Financials</span>
+</div>
+</td>
+<td class="px-card-padding py-3 whitespace-nowrap text-right">
+<button class="text-text-secondary hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

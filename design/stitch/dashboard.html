@@ -1,0 +1,409 @@
+<!-- Investment Cockpit Dashboard -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Investment Cockpit - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005236",
+                    "text-primary": "#F8FAFC",
+                    "surface": "#1E293B",
+                    "surface-container": "#1d2027",
+                    "on-primary-fixed": "#001a42",
+                    "regime-risk-off": "#EF4444",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "on-surface": "#e1e2ec",
+                    "border-subtle": "rgba(255, 255, 255, 0.08)",
+                    "surface-dim": "#10131a",
+                    "secondary-fixed": "#6ffbbe",
+                    "regime-neutral": "#F59E0B",
+                    "inverse-surface": "#e1e2ec",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#32353c",
+                    "on-secondary-fixed": "#002113",
+                    "on-secondary-container": "#00311f",
+                    "regime-risk-on": "#10B981",
+                    "status-avoid": "#64748B",
+                    "primary-container": "#4d8eff",
+                    "on-primary-fixed-variant": "#004395",
+                    "inverse-primary": "#005ac2",
+                    "on-secondary": "#003824",
+                    "inverse-on-surface": "#2e3038",
+                    "secondary": "#4edea3",
+                    "surface-container-high": "#272a31",
+                    "surface-bright": "#363941",
+                    "background": "#0F172A",
+                    "tertiary-container": "#df7412",
+                    "primary-fixed": "#d8e2ff",
+                    "on-tertiary": "#502400",
+                    "on-tertiary-container": "#461f00",
+                    "status-watching": "#6366F1",
+                    "outline": "#8c909f",
+                    "tertiary": "#ffb786",
+                    "surface-container-lowest": "#0b0e15",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "on-background": "#e1e2ec",
+                    "secondary-fixed-dim": "#4edea3",
+                    "error": "#ffb4ab",
+                    "secondary-container": "#00a572",
+                    "on-primary": "#002e6a",
+                    "text-secondary": "#94A3B8",
+                    "on-tertiary-fixed": "#311400",
+                    "surface-tint": "#adc6ff",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#32353c",
+                    "on-primary-container": "#00285d",
+                    "on-surface-variant": "#c2c6d6",
+                    "primary": "#adc6ff",
+                    "status-own": "#10B981",
+                    "tertiary-fixed": "#ffdcc6",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container-low": "#191b23",
+                    "surface-elevated": "#334155",
+                    "outline-variant": "#424754"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "1.5rem",
+                    "table-row-height": "48px",
+                    "card-padding": "1.25rem",
+                    "stack-gap": "1rem",
+                    "container-max": "1280px",
+                    "margin-mobile": "1rem"
+            },
+            "fontFamily": {
+                    "badge": [
+                            "Inter"
+                    ],
+                    "body-main": [
+                            "Inter"
+                    ],
+                    "body-compact": [
+                            "Inter"
+                    ],
+                    "h1": [
+                            "Manrope"
+                    ],
+                    "h2": [
+                            "Manrope"
+                    ],
+                    "data-mono": [
+                            "Work Sans"
+                    ],
+                    "label-caps": [
+                            "Work Sans"
+                    ]
+            },
+            "fontSize": {
+                    "badge": [
+                            "11px",
+                            {
+                                    "lineHeight": "12px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-main": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-compact": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h1": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "h2": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-mono": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body-main antialiased min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-r border-border-subtle shadow-sm transition-transform duration-200 ease-in-out py-6 px-4 z-50">
+<div class="mb-8 px-4">
+<h1 class="font-h2 text-h2 text-text-primary">Portfolio Manager</h1>
+<p class="font-body-compact text-body-compact text-text-secondary mt-1">High-Signal Insights</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 hover:bg-surface-bright/50 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body-main text-body-main font-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-main text-body-main">Reports</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-body-main text-body-main">Watchlist</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-main text-body-main">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">show_chart</span>
+<span class="font-body-main text-body-main">Tickers</span>
+</a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 hover:bg-surface-bright/50 transition-all rounded-lg mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-main text-body-main">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full h-16 border-b border-border-subtle bg-background dark:bg-background flex justify-between items-center px-gutter sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<div class="md:hidden flex items-center">
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="font-h1 text-h1 text-primary md:hidden">Investment Cockpit</div>
+<div class="hidden md:flex items-center bg-surface-variant rounded-full px-4 py-2 w-64 border border-border-subtle">
+<span class="material-symbols-outlined text-text-secondary mr-2 text-sm">search</span>
+<input class="bg-transparent border-none text-body-compact text-text-primary focus:ring-0 p-0 w-full placeholder-text-secondary outline-none" placeholder="Search tickers, reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-margin-mobile md:p-gutter flex-1 w-full max-w-container-max mx-auto overflow-y-auto">
+<div class="mb-8">
+<h2 class="font-h1 text-h1 text-text-primary mb-2">Morning Briefing</h2>
+<p class="font-body-main text-body-main text-text-secondary">October 24, 2023 • Pre-Market</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-stack-gap">
+<!-- Main Report Summary Card (Span 8) -->
+<div class="md:col-span-8 bg-surface border border-border-subtle rounded-xl p-card-padding flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="inline-block px-2 py-1 bg-surface-variant text-text-secondary font-label-caps text-label-caps rounded mb-3">LATEST REPORT</span>
+<h3 class="font-h2 text-h2 text-text-primary">Yield Curves Invert Further Amid Tech Weakness</h3>
+</div>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors flex items-center gap-1 font-body-compact text-body-compact">
+                            Read Full
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<p class="font-body-main text-body-main text-text-secondary mb-6 flex-1">
+                        Markets are reflecting a cautious tone this morning as tech sector earnings guidance disappointed across the board. The inversion in the 2s10s curve deepened overnight, signaling growing expectations of economic friction. Sector rotation into defensive staples and utilities is accelerating.
+                    </p>
+<!-- Regime Indicators -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-border-subtle">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-text-secondary mb-1">MARKET REGIME</span>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-regime-risk-off"></div>
+<span class="font-body-compact text-body-compact text-text-primary">Mild Risk-Off</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-text-secondary mb-1">MAIN DRIVER</span>
+<span class="font-body-compact text-body-compact text-text-primary">Tech Earnings Weakness</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-text-secondary mb-1">OUR POSTURE</span>
+<span class="font-body-compact text-body-compact text-text-primary">Cautious / Defensive</span>
+</div>
+</div>
+</div>
+<!-- Top Movers Card (Span 4) -->
+<div class="md:col-span-4 bg-surface border border-border-subtle rounded-xl p-card-padding flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h2 text-h2 text-text-primary">Top Movers</h3>
+<span class="material-symbols-outlined text-text-secondary">trending_up</span>
+</div>
+<div class="flex flex-col gap-4 flex-1">
+<!-- Ticker Row 1 -->
+<div class="flex justify-between items-center p-3 bg-surface-variant/50 rounded-lg border border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-elevated flex items-center justify-center font-label-caps text-label-caps text-text-primary">NV</div>
+<div>
+<div class="font-data-mono text-data-mono text-text-primary">NVDA</div>
+<div class="font-body-compact text-body-compact text-text-secondary text-[11px]">NVIDIA Corp</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-text-primary">$423.50</div>
+<div class="font-data-mono text-data-mono text-status-own text-xs">+3.1%</div>
+</div>
+</div>
+<!-- Ticker Row 2 -->
+<div class="flex justify-between items-center p-3 bg-surface-variant/50 rounded-lg border border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-elevated flex items-center justify-center font-label-caps text-label-caps text-text-primary">TS</div>
+<div>
+<div class="font-data-mono text-data-mono text-text-primary">TSLA</div>
+<div class="font-body-compact text-body-compact text-text-secondary text-[11px]">Tesla Inc</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-text-primary">$212.80</div>
+<div class="font-data-mono text-data-mono text-regime-risk-off text-xs">-4.2%</div>
+</div>
+</div>
+<!-- Ticker Row 3 -->
+<div class="flex justify-between items-center p-3 bg-surface-variant/50 rounded-lg border border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-elevated flex items-center justify-center font-label-caps text-label-caps text-text-primary">AA</div>
+<div>
+<div class="font-data-mono text-data-mono text-text-primary">AAPL</div>
+<div class="font-body-compact text-body-compact text-text-secondary text-[11px]">Apple Inc</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-text-primary">$171.20</div>
+<div class="font-data-mono text-data-mono text-regime-risk-off text-xs">-1.8%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Watchlist Impact Card (Span 12) -->
+<div class="md:col-span-12 bg-surface border border-border-subtle rounded-xl p-card-padding mt-4">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-h2 text-h2 text-text-primary">Watchlist Impact</h3>
+<p class="font-body-compact text-body-compact text-text-secondary mt-1">Tickers in your lists affected by today's regime</p>
+</div>
+<button class="px-4 py-2 bg-transparent border border-border-subtle text-text-primary rounded-lg font-body-compact text-body-compact hover:bg-surface-variant transition-colors">
+                            View All
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle">
+<th class="py-3 px-2 font-label-caps text-label-caps text-text-secondary font-medium w-1/4">TICKER</th>
+<th class="py-3 px-2 font-label-caps text-label-caps text-text-secondary font-medium w-1/4">LIST STATUS</th>
+<th class="py-3 px-2 font-label-caps text-label-caps text-text-secondary font-medium w-1/3">IMPACT CATALYST</th>
+<th class="py-3 px-2 font-label-caps text-label-caps text-text-secondary font-medium text-right w-1/6">SENTIMENT</th>
+</tr>
+</thead>
+<tbody class="font-body-compact text-body-compact text-text-primary">
+<tr class="border-b border-border-subtle hover:bg-surface-variant/30 transition-colors h-table-row-height">
+<td class="py-2 px-2">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-data-mono">MSFT</span>
+<span class="text-text-secondary text-xs">Microsoft</span>
+</div>
+</td>
+<td class="py-2 px-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-badge text-badge bg-surface-elevated text-text-primary border border-border-subtle">Research</span>
+</td>
+<td class="py-2 px-2 text-text-secondary truncate max-w-[200px]">Cloud growth deceleration fears</td>
+<td class="py-2 px-2 text-right">
+<span class="inline-flex items-center gap-1 text-regime-risk-off font-data-mono text-data-mono text-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> Negative
+                                        </span>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-variant/30 transition-colors h-table-row-height">
+<td class="py-2 px-2">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-data-mono">PG</span>
+<span class="text-text-secondary text-xs">Procter &amp; Gamble</span>
+</div>
+</td>
+<td class="py-2 px-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-badge text-badge bg-status-own/20 text-status-own border border-status-own/30">Own</span>
+</td>
+<td class="py-2 px-2 text-text-secondary truncate max-w-[200px]">Defensive rotation target</td>
+<td class="py-2 px-2 text-right">
+<span class="inline-flex items-center gap-1 text-status-own font-data-mono text-data-mono text-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> Positive
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors h-table-row-height">
+<td class="py-2 px-2">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-data-mono">AMD</span>
+<span class="text-text-secondary text-xs">Advanced Micro Dev</span>
+</div>
+</td>
+<td class="py-2 px-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-badge text-badge bg-status-watching/20 text-status-watching border border-status-watching/30">Watchlist</span>
+</td>
+<td class="py-2 px-2 text-text-secondary truncate max-w-[200px]">Sympathy weakness with NVDA</td>
+<td class="py-2 px-2 text-right">
+<span class="inline-flex items-center gap-1 text-regime-risk-off font-data-mono text-data-mono text-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> Negative
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,289 @@
+<!-- Ticker Detail: NVDA -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NVDA - Investment Cockpit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700&amp;family=Work+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#005236",
+                        "text-primary": "#F8FAFC",
+                        "surface": "#1E293B",
+                        "surface-container": "#1d2027",
+                        "on-primary-fixed": "#001a42",
+                        "regime-risk-off": "#EF4444",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-surface": "#e1e2ec",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "surface-dim": "#10131a",
+                        "secondary-fixed": "#6ffbbe",
+                        "regime-neutral": "#F59E0B",
+                        "inverse-surface": "#e1e2ec",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#32353c",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-container": "#00311f",
+                        "regime-risk-on": "#10B981",
+                        "status-avoid": "#64748B",
+                        "primary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#004395",
+                        "inverse-primary": "#005ac2",
+                        "on-secondary": "#003824",
+                        "inverse-on-surface": "#2e3038",
+                        "secondary": "#4edea3",
+                        "surface-container-high": "#272a31",
+                        "surface-bright": "#363941",
+                        "background": "#0F172A",
+                        "tertiary-container": "#df7412",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary": "#502400",
+                        "on-tertiary-container": "#461f00",
+                        "status-watching": "#6366F1",
+                        "outline": "#8c909f",
+                        "tertiary": "#ffb786",
+                        "surface-container-lowest": "#0b0e15",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "on-background": "#e1e2ec",
+                        "secondary-fixed-dim": "#4edea3",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#00a572",
+                        "on-primary": "#002e6a",
+                        "text-secondary": "#94A3B8",
+                        "on-tertiary-fixed": "#311400",
+                        "surface-tint": "#adc6ff",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#32353c",
+                        "on-primary-container": "#00285d",
+                        "on-surface-variant": "#c2c6d6",
+                        "primary": "#adc6ff",
+                        "status-own": "#10B981",
+                        "tertiary-fixed": "#ffdcc6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-container-low": "#191b23",
+                        "surface-elevated": "#334155",
+                        "outline-variant": "#424754"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "1.5rem",
+                        "table-row-height": "48px",
+                        "card-padding": "1.25rem",
+                        "stack-gap": "1rem",
+                        "container-max": "1280px",
+                        "margin-mobile": "1rem"
+                    },
+                    fontFamily: {
+                        "badge": ["Inter"],
+                        "body-main": ["Inter"],
+                        "body-compact": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "data-mono": ["Work Sans"],
+                        "label-caps": ["Work Sans"]
+                    },
+                    fontSize: {
+                        "badge": ["11px", { "lineHeight": "12px", "fontWeight": "600" }],
+                        "body-main": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-compact": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h1": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background dark:bg-background text-text-primary font-body-main flex h-screen overflow-hidden">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-r border-border-subtle shadow-sm z-50 py-6 px-4 transition-transform duration-200 ease-in-out">
+<div class="mb-8 px-4">
+<h1 class="font-h2 text-h2 text-text-primary">Portfolio Manager</h1>
+<p class="font-label-caps text-label-caps text-text-secondary mt-1">High-Signal Insights</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 rounded-lg hover:bg-surface-bright/50 transition-all font-body-compact text-body-compact" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 rounded-lg hover:bg-surface-bright/50 transition-all font-body-compact text-body-compact" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Reports
+            </a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 rounded-lg hover:bg-surface-bright/50 transition-all font-body-compact text-body-compact" href="#">
+<span class="material-symbols-outlined">visibility</span>
+                Watchlist
+            </a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 rounded-lg hover:bg-surface-bright/50 transition-all font-body-compact text-body-compact" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+                Portfolio
+            </a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 font-body-compact text-body-compact" href="#">
+<span class="material-symbols-outlined">show_chart</span>
+                Tickers
+            </a>
+<a class="flex items-center gap-3 text-text-secondary px-4 py-3 rounded-lg hover:bg-surface-bright/50 transition-all font-body-compact text-body-compact" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-0 md:ml-64 h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-gutter w-full sticky top-0 z-40 bg-background dark:bg-background h-16 border-b border-border-subtle">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary md:hidden cursor-pointer">menu</span>
+<div class="flex items-center bg-surface-variant/50 border border-border-subtle rounded px-3 py-1.5 focus-within:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-text-secondary text-sm mr-2">search</span>
+<input class="bg-transparent border-none outline-none text-body-compact font-body-compact text-text-primary placeholder:text-text-secondary focus:ring-0 w-48" placeholder="Search tickers..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary hover:text-text-primary transition-colors cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-text-secondary hover:text-text-primary transition-colors cursor-pointer">account_circle</span>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 overflow-y-auto p-gutter lg:p-8">
+<div class="max-w-container-max mx-auto flex flex-col gap-stack-gap">
+<!-- Ticker Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pb-4 border-b border-border-subtle/50">
+<div>
+<div class="flex items-baseline gap-3 mb-2">
+<h1 class="font-h1 text-h1 text-text-primary tracking-tight">NVDA</h1>
+<span class="font-h2 text-h2 text-text-secondary font-normal">NVIDIA Corporation</span>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-2">
+<span class="font-badge text-badge px-2 py-1 rounded bg-status-own/10 text-status-own border border-status-own/20 uppercase tracking-wider">Own</span>
+<span class="font-badge text-badge px-2 py-1 rounded bg-tertiary-container/20 text-tertiary border border-tertiary-container/30 uppercase tracking-wider">High Priority</span>
+<span class="font-badge text-badge px-2 py-1 rounded bg-surface-variant text-text-secondary border border-border-subtle">AI</span>
+<span class="font-badge text-badge px-2 py-1 rounded bg-surface-variant text-text-secondary border border-border-subtle">Semiconductor</span>
+</div>
+</div>
+<div class="text-left md:text-right">
+<div class="font-data-mono text-[36px] font-semibold text-text-primary leading-none tracking-tight">$894.52</div>
+<div class="font-data-mono text-data-mono text-regime-risk-on flex items-center md:justify-end gap-1 mt-2">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+                            +24.15 (+2.77%)
+                        </div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap mt-2">
+<!-- Left Column (Main Analysis) -->
+<div class="lg:col-span-8 flex flex-col gap-stack-gap">
+<!-- Latest Insight Card -->
+<div class="bg-surface border border-border-subtle rounded-lg p-card-padding relative overflow-hidden group">
+<div class="absolute left-0 top-0 w-1 h-full bg-primary/80"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-h2 text-h2 text-text-primary">Latest Intelligence Summary</h2>
+<p class="font-body-compact text-body-compact text-text-secondary mt-1">Institutional Flow &amp; Supply Chain Analysis</p>
+</div>
+<span class="font-label-caps text-label-caps text-text-secondary bg-surface-variant px-2 py-1 rounded">Just Now</span>
+</div>
+<div class="font-body-main text-body-main text-text-primary/90 leading-relaxed">
+                                Strong buy-side accumulation continues ahead of upcoming earnings. Channel checks indicate Hopper architecture demand remains unfulfilled through Q3, pushing the broader Blackwell transition slightly further out, but Average Selling Prices (ASPs) are holding significantly higher than street estimates. Maintain current overweight posture; pullbacks below the $850 technical support level represent tactical entry points for long-term holds.
+                            </div>
+</div>
+<!-- Historical Mentions Table -->
+<div class="bg-surface border border-border-subtle rounded-lg p-card-padding flex-1">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-h2 text-h2 text-text-primary">Report Mentions History</h2>
+<button class="text-text-secondary hover:text-text-primary font-body-compact text-body-compact flex items-center gap-1 transition-colors">
+                                    View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle font-label-caps text-label-caps text-text-secondary">
+<th class="py-3 font-normal">Date</th>
+<th class="py-3 font-normal">Report Title</th>
+<th class="py-3 font-normal">Context Sentiment</th>
+<th class="py-3 font-normal text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-compact text-body-compact text-text-primary">
+<tr class="border-b border-border-subtle/50 hover:bg-surface-variant/30 transition-colors h-[48px] group">
+<td class="py-2 font-data-mono text-text-secondary">May 12</td>
+<td class="py-2 font-medium">Macro Weekly: Tech Rotation Strategy</td>
+<td class="py-2"><span class="text-regime-risk-on font-medium">Bullish</span></td>
+<td class="py-2 text-right"><span class="material-symbols-outlined text-text-secondary group-hover:text-primary cursor-pointer text-[20px] transition-colors">description</span></td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-variant/30 transition-colors h-[48px] group">
+<td class="py-2 font-data-mono text-text-secondary">May 05</td>
+<td class="py-2 font-medium">Earnings Preview: Semiconductor Sector</td>
+<td class="py-2"><span class="text-regime-neutral font-medium">Neutral</span></td>
+<td class="py-2 text-right"><span class="material-symbols-outlined text-text-secondary group-hover:text-primary cursor-pointer text-[20px] transition-colors">description</span></td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-variant/30 transition-colors h-[48px] group">
+<td class="py-2 font-data-mono text-text-secondary">Apr 28</td>
+<td class="py-2 font-medium">Supply Chain Flash Note</td>
+<td class="py-2"><span class="text-regime-risk-on font-medium">Strong Buy</span></td>
+<td class="py-2 text-right"><span class="material-symbols-outlined text-text-secondary group-hover:text-primary cursor-pointer text-[20px] transition-colors">description</span></td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors h-[48px] group">
+<td class="py-2 font-data-mono text-text-secondary">Apr 15</td>
+<td class="py-2 font-medium">Q1 AI Capex Monitor</td>
+<td class="py-2"><span class="text-regime-risk-on font-medium">Bullish</span></td>
+<td class="py-2 text-right"><span class="material-symbols-outlined text-text-secondary group-hover:text-primary cursor-pointer text-[20px] transition-colors">description</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column (Notes & Actions) -->
+<div class="lg:col-span-4 flex flex-col gap-stack-gap">
+<!-- Personal Notes Widget -->
+<div class="bg-surface border border-border-subtle rounded-lg p-card-padding flex flex-col h-full">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-h2 text-h2 text-text-primary">Personal Notes</h2>
+<button class="text-text-secondary hover:text-primary transition-colors" title="Edit Notes">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="flex-1 bg-surface-container-low border border-border-subtle/50 rounded-lg p-4 font-body-compact text-body-compact text-text-secondary min-h-[250px] overflow-y-auto">
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+<span>Watching $850 support level closely as a potential add zone if broader market corrects.</span>
+</li>
+<li class="flex gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-regime-neutral mt-1.5 flex-shrink-0"></span>
+<span>Need to review AMD earnings read-through next week before NVDA reports. Look for datacenter growth metrics.</span>
+</li>
+<li class="flex gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mt-1.5 flex-shrink-0"></span>
+<span>Consider trimming 10% of position if it rapidly approaches $980-$1000 pre-earnings to manage overall portfolio sizing risk.</span>
+</li>
+</ul>
+</div>
+<button class="mt-4 w-full bg-surface-variant hover:bg-surface-bright text-text-primary font-body-compact text-body-compact py-2.5 rounded border border-border-subtle transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span> Add New Note
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
