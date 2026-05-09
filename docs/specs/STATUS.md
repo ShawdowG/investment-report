@@ -5,7 +5,7 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | Spec | Scope | Owner | Status | Blocked by | PR / Commit | Last update |
 |---|---|---|---|---|---|---|
 | SPEC-001 | Shell + navigation | codex-agent | ✅ done | - | 982ecc7 | 2026-05-07 |
-| SPEC-002 | Static report indexes (`latest`, `reports-lite`, `by-date`, `by-ticker`) | codex-agent | ✅ done | - | 99f6eea | 2026-05-07 |
+| SPEC-002 | Static report indexes — structured payload (mainDriver, posture, discussion, catalysts, checklist) | claude-code | ✅ done | - | 99f6eea, abd102c | 2026-05-09 |
 | SPEC-003 | Dashboard v3 cards + compare latest/previous | codex-agent | 🟡 in_progress | none |  | 2026-05-07 |
 | SPEC-004 | Watchlist local store (CRUD) | unassigned | ⬜ todo | none | - | - |
 | SPEC-005 | Paste/import ticker parser + preview | unassigned | ⬜ todo | none | - | - |
