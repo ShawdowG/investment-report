@@ -323,14 +323,19 @@ These primitives are referenced in the source HTML but **not yet shipped**. Feat
 
 **Pending follow-up:** mobile drawer for the sidebar. Current behaviour: desktop sidebar visible md+, mobile menu button is a no-op stub. Drawer is a small extension — toggleable state + slide-in panel.
 
-### 6.2 Composition primitives (`web-app/src/components/ui/`)
+### 6.2 Composition primitives (`web-app/src/components/ui/`) — partially shipped 2026-05-10
 
-| Component | Responsibility |
+| Component | Status |
 |---|---|
-| `TickerCell` | `compact` / `with-letters` variants. Reused in tables and movers list. `with-letters` adds an 8x8 letter tile (`bg-surface-elevated`, font-label-caps) |
-| `MoverRow` | Composition of TickerCell + price + delta% (sign-colored via `text-regime-risk-on/off`). Used in Top Movers |
-| `IconButton` | Circular hover bg, icon-only. Existing `Button` with `size="icon"` is close — add the surface-variant hover bg variant |
-| `DataTable` | Headless table primitive; consumers pass column defs and rows. Header style: `font-label-caps uppercase text-text-secondary`. Row: `h-table-row-height divide-y divide-border-subtle hover:bg-surface-variant/30`. Existing shadcn `Table` is OK for now; this would just standardise header / row classes |
+| `TickerCell` | ✅ shipped. `compact` / `withLetters` variants. `withLetters` adds 8×8 letter tile from first 2 chars of symbol on `bg-surface-elevated` |
+| `MoverRow` | ✅ shipped. TickerCell (withLetters) + price (`$nnn.nn` formatting if number, passthrough if string) + sign-colored delta % |
+| `IconButton` | 🟡 pending — existing `Button` with `size="icon"` is close. Need a surface-variant hover bg variant |
+| `DataTable` wrapper | ⚠ deferred — existing shadcn `Table` is sufficient when paired with the convention below. Adding a wrapper didn't pay for itself |
+
+**Stitch table convention** (use the existing `@/components/ui/table` primitives):
+- `<TableHead>` content: `font-label-caps text-label-caps text-text-secondary uppercase`
+- `<TableRow>`: already includes `hover:bg-muted/50` (which is `bg-surface-variant` in dark mode via the `.dark` token bridge), so no override needed
+- For 48px row height, add `h-table-row-height` to `<TableRow>` when needed
 
 ### 6.3 Feature components (per route, `web-app/src/components/<area>/`)
 
