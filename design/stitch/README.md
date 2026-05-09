@@ -15,7 +15,7 @@ Last updated: 2026-05-10. Re-verify against `docs/specs/STATUS.md` and `git log`
 | Token lift into Tailwind v4 `@theme` | ✅ shipped | `web-app/src/app/globals.css` (commit `ff8c2e3`) |
 | Fonts via `next/font/google` | ✅ shipped | `web-app/src/app/layout.tsx` |
 | Core ui primitives (Card variants, StatusBadge, RegimeDot, PriorityBadge, Tag, Sentiment, SectionHeader) | ✅ shipped | `web-app/src/components/ui/` |
-| Layout shell (AppShell, Sidebar, TopBar) | 🟡 pending | replaces `web-app/src/components/navbar.tsx` |
+| Layout shell (AppShell, Sidebar, TopBar) | ✅ shipped | `web-app/src/components/layout/` — `navbar.tsx` removed; mobile drawer is follow-up |
 | Composition primitives (TickerCell, MoverRow, DataTable wrapper) | 🟡 pending | `web-app/src/components/ui/` |
 | Per-route feature components (Dashboard, Watchlist, Ticker, Portfolio re-skin) | 🟡 pending | `web-app/src/components/<area>/` |
 | Light-mode redesign | ⚠ not in Stitch handoff | see §7 |
@@ -311,15 +311,17 @@ Recipes for assembling the source mockups from the shipped primitives. When a pa
 
 These primitives are referenced in the source HTML but **not yet shipped**. Feature components should not block on them — implement features against §4 primitives first, then upgrade when these land.
 
-### 6.1 Layout (`web-app/src/components/layout/`)
+### 6.1 Layout (`web-app/src/components/layout/`) — ✅ shipped 2026-05-10
 
-| Component | Responsibility |
+| Component | Status |
 |---|---|
-| `AppShell` | Side nav (md+) + sticky top bar + scrollable main; mobile collapses sidebar to drawer |
-| `Sidebar` | 6 fixed nav items (Dashboard / Reports / Watchlist / Portfolio / Tickers / Settings), active highlight via `bg-primary-container text-on-primary-container`, Settings pinned to bottom on tall screens |
-| `TopBar` | Search input (md+), notifications + account icons; mobile shows brand text instead of search |
+| `AppShell` | ✅ wraps Sidebar + TopBar + main content |
+| `Sidebar` | ✅ 6 routes, active highlight via `usePathname()`, Settings pinned bottom |
+| `TopBar` | ✅ search (visual-only until SPEC-007), notifications + account icons + ThemeToggle |
 
-The current `web-app/src/components/navbar.tsx` is a thin top-only nav. `AppShell` will replace it.
+`navbar.tsx` removed. All 8 page routes use `<AppShell>{content}</AppShell>` — no `currentPath` prop drilling.
+
+**Pending follow-up:** mobile drawer for the sidebar. Current behaviour: desktop sidebar visible md+, mobile menu button is a no-op stub. Drawer is a small extension — toggleable state + slide-in panel.
 
 ### 6.2 Composition primitives (`web-app/src/components/ui/`)
 

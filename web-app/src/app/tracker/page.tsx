@@ -1,7 +1,7 @@
 export const dynamic = 'force-static';
 
 import { loadSearchIndex } from "@/lib/reports";
-import { Navbar } from "@/components/navbar";
+import { AppShell } from "@/components/layout/app-shell";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -56,9 +56,8 @@ export default function TrackerPage() {
   const tickerFreq = buildTickerFrequency(items);
 
   return (
-    <>
-      <Navbar currentPath="/tracker" />
-      <main className="mx-auto max-w-6xl px-4 py-6 space-y-6">
+    <AppShell>
+      <div className="space-y-6">
         <div>
           <h1 className="text-xl font-semibold">Tracker</h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -142,7 +141,7 @@ export default function TrackerPage() {
             </Table>
           </CardContent>
         </Card>
-      </main>
-    </>
+      </div>
+    </AppShell>
   );
 }

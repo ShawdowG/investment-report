@@ -2,7 +2,7 @@ export const dynamic = 'force-static';
 
 import { loadSearchIndex } from "@/lib/reports";
 import { adaptMovers, deriveNewsFromMovers } from "@/lib/adapters";
-import { Navbar } from "@/components/navbar";
+import { AppShell } from "@/components/layout/app-shell";
 import { HeaderBar } from "@/components/header-bar";
 import { MarketPulse } from "@/components/market-pulse";
 import { TakeawayPanel } from "@/components/takeaway-panel";
@@ -20,12 +20,9 @@ export default function DashboardPage() {
 
   if (!latest) {
     return (
-      <>
-        <Navbar currentPath="/" />
-        <main className="mx-auto max-w-6xl px-4 py-8">
-          <p className="text-muted-foreground">No reports available yet.</p>
-        </main>
-      </>
+      <AppShell>
+        <p className="text-muted-foreground">No reports available yet.</p>
+      </AppShell>
     );
   }
 
@@ -45,9 +42,8 @@ export default function DashboardPage() {
   const summary = latest.summary || "";
 
   return (
-    <>
-      <Navbar currentPath="/" />
-      <main className="mx-auto max-w-6xl px-4 py-8 space-y-6">
+    <AppShell>
+      <div className="space-y-6">
         <HeaderBar date={latest.date} slot={latest.slot} />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -70,7 +66,7 @@ export default function DashboardPage() {
         <NewsMoversTable rows={newsRows} />
 
         <WatchlistImpactCard latest={latest} />
-      </main>
-    </>
+      </div>
+    </AppShell>
   );
 }

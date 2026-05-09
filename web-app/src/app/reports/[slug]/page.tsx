@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { loadSearchIndex, loadReportMarkdown, parseFrontmatter, extractSection } from "@/lib/reports";
 import { adaptMovers, deriveNewsFromMovers } from "@/lib/adapters";
-import { Navbar } from "@/components/navbar";
+import { AppShell } from "@/components/layout/app-shell";
 import { HeaderBar } from "@/components/header-bar";
 import { MarketPulse } from "@/components/market-pulse";
 import { TakeawayPanel } from "@/components/takeaway-panel";
@@ -107,9 +107,8 @@ export default async function ReportPage({ params }: PageProps) {
     .lines.join("\n");
 
   return (
-    <>
-      <Navbar currentPath="/reports" />
-      <main className="mx-auto max-w-6xl px-4 py-8 space-y-6">
+    <AppShell>
+      <div className="space-y-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-muted-foreground">
           <Link href="/reports" className="hover:text-foreground">
@@ -155,7 +154,7 @@ export default async function ReportPage({ params }: PageProps) {
         <div className="rounded-lg border border-border bg-card p-4">
           <MdRenderer markdown={bodyWithoutGamma} />
         </div>
-      </main>
-    </>
+      </div>
+    </AppShell>
   );
 }
