@@ -24,3 +24,8 @@
 - **Decision:** Seks toppnivå ruter holdes stabile: Dashboard, Reports, Watchlist, Portfolio, Tickers, Settings.
 - **Why:** Gir konsistent IA mens features bygges inkrementelt.
 - **Tradeoff:** Noen sider starter som placeholders.
+
+## ADR-006 — v3 frontend canonicalised on `web-app/` (Next.js); `web-next/` archived
+- **Decision:** `web-app/` (Next.js App Router + TypeScript + Tailwind) is the single canonical frontend for v3. `web-next/` (Astro mirror) and its two CI workflows (`web-next-preview.yml`, `web-next-production.yml`) are removed on 2026-05-09.
+- **Why:** Two parallel implementations of the same components were diverging. Brief §21.1 recommends Next.js. v3 features (watchlist CRUD, paste/import, ticker notes, latest-vs-previous compare) are React-app patterns rather than static-content-with-islands.
+- **Tradeoff:** Lose Astro's lighter static output. The migration scripts in `scripts/` (`parity-check.js`, `post-cutover-verify.js`, `visual-regression-snapshot.js`, `monitor-health.js`) still reference web-next paths and are now no-ops; cleaning them is a follow-up chore.
