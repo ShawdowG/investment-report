@@ -15,9 +15,10 @@ Last updated: 2026-05-10. Re-verify against `docs/specs/STATUS.md` and `git log`
 | Token lift into Tailwind v4 `@theme` | ✅ shipped | `web-app/src/app/globals.css` (commit `ff8c2e3`) |
 | Fonts via `next/font/google` | ✅ shipped | `web-app/src/app/layout.tsx` |
 | Core ui primitives (Card variants, StatusBadge, RegimeDot, PriorityBadge, Tag, Sentiment, SectionHeader) | ✅ shipped | `web-app/src/components/ui/` |
-| Layout shell (AppShell, Sidebar, TopBar) | 🟡 pending | replaces `web-app/src/components/navbar.tsx` |
-| Composition primitives (TickerCell, MoverRow, DataTable wrapper) | 🟡 pending | `web-app/src/components/ui/` |
-| Per-route feature components (Dashboard, Watchlist, Ticker, Portfolio re-skin) | 🟡 pending | `web-app/src/components/<area>/` |
+| Layout shell (AppShell, Sidebar, TopBar) | ✅ shipped | `web-app/src/components/layout/` — `navbar.tsx` removed; mobile drawer is follow-up |
+| Composition primitives (TickerCell, MoverRow) | ✅ shipped | `web-app/src/components/ui/` (commit `6557da4`); IconButton + DataTable wrapper deferred |
+| Per-route feature components — Dashboard | 🟡 partial | `LatestReportCard` + `TopMoversCard` shipped (`web-app/src/components/dashboard/`); rest of dashboard kept analytical depth from previous components |
+| Per-route feature components — Watchlist / Ticker / Portfolio | 🟡 pending | re-skin pending; ticker + portfolio also need SPEC-007 / SPEC-008 |
 | Light-mode redesign | ⚠ not in Stitch handoff | see §7 |
 
 SPEC-011 row in `docs/specs/STATUS.md` reflects this. Owner is `claude-code` since 2026-05-10.
@@ -311,24 +312,31 @@ Recipes for assembling the source mockups from the shipped primitives. When a pa
 
 These primitives are referenced in the source HTML but **not yet shipped**. Feature components should not block on them — implement features against §4 primitives first, then upgrade when these land.
 
-### 6.1 Layout (`web-app/src/components/layout/`)
+### 6.1 Layout (`web-app/src/components/layout/`) — ✅ shipped 2026-05-10
 
-| Component | Responsibility |
+| Component | Status |
 |---|---|
-| `AppShell` | Side nav (md+) + sticky top bar + scrollable main; mobile collapses sidebar to drawer |
-| `Sidebar` | 6 fixed nav items (Dashboard / Reports / Watchlist / Portfolio / Tickers / Settings), active highlight via `bg-primary-container text-on-primary-container`, Settings pinned to bottom on tall screens |
-| `TopBar` | Search input (md+), notifications + account icons; mobile shows brand text instead of search |
+| `AppShell` | ✅ wraps Sidebar + TopBar + main content |
+| `Sidebar` | ✅ 6 routes, active highlight via `usePathname()`, Settings pinned bottom |
+| `TopBar` | ✅ search (visual-only until SPEC-007), notifications + account icons + ThemeToggle |
 
-The current `web-app/src/components/navbar.tsx` is a thin top-only nav. `AppShell` will replace it.
+`navbar.tsx` removed. All 8 page routes use `<AppShell>{content}</AppShell>` — no `currentPath` prop drilling.
 
-### 6.2 Composition primitives (`web-app/src/components/ui/`)
+**Pending follow-up:** mobile drawer for the sidebar. Current behaviour: desktop sidebar visible md+, mobile menu button is a no-op stub. Drawer is a small extension — toggleable state + slide-in panel.
 
-| Component | Responsibility |
+### 6.2 Composition primitives (`web-app/src/components/ui/`) — partially shipped 2026-05-10
+
+| Component | Status |
 |---|---|
-| `TickerCell` | `compact` / `with-letters` variants. Reused in tables and movers list. `with-letters` adds an 8x8 letter tile (`bg-surface-elevated`, font-label-caps) |
-| `MoverRow` | Composition of TickerCell + price + delta% (sign-colored via `text-regime-risk-on/off`). Used in Top Movers |
-| `IconButton` | Circular hover bg, icon-only. Existing `Button` with `size="icon"` is close — add the surface-variant hover bg variant |
-| `DataTable` | Headless table primitive; consumers pass column defs and rows. Header style: `font-label-caps uppercase text-text-secondary`. Row: `h-table-row-height divide-y divide-border-subtle hover:bg-surface-variant/30`. Existing shadcn `Table` is OK for now; this would just standardise header / row classes |
+| `TickerCell` | ✅ shipped. `compact` / `withLetters` variants. `withLetters` adds 8×8 letter tile from first 2 chars of symbol on `bg-surface-elevated` |
+| `MoverRow` | ✅ shipped. TickerCell (withLetters) + price (`$nnn.nn` formatting if number, passthrough if string) + sign-colored delta % |
+| `IconButton` | 🟡 pending — existing `Button` with `size="icon"` is close. Need a surface-variant hover bg variant |
+| `DataTable` wrapper | ⚠ deferred — existing shadcn `Table` is sufficient when paired with the convention below. Adding a wrapper didn't pay for itself |
+
+**Stitch table convention** (use the existing `@/components/ui/table` primitives):
+- `<TableHead>` content: `font-label-caps text-label-caps text-text-secondary uppercase`
+- `<TableRow>`: already includes `hover:bg-muted/50` (which is `bg-surface-variant` in dark mode via the `.dark` token bridge), so no override needed
+- For 48px row height, add `h-table-row-height` to `<TableRow>` when needed
 
 ### 6.3 Feature components (per route, `web-app/src/components/<area>/`)
 

@@ -10,12 +10,13 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-004 | Watchlist local store (CRUD on `/watchlist`, localStorage key `watchlist_items`) | claude-code | ✅ done | - | 8479a92 | 2026-05-10 |
 | SPEC-005 | Paste/import ticker parser + preview (inline import section on `/watchlist`) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
 | SPEC-006 | Watchlist impact vs latest report (high/medium/missing buckets on dashboard) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
-| SPEC-007 | Ticker detail page + search | unassigned | ⬜ todo | SPEC-002 | - | - |
-| SPEC-008 | Portfolio local store + dashboard impact | unassigned | ⬜ todo | SPEC-004 + SPEC-006 | - | - |
-| SPEC-009 | Notes/journal local-first | unassigned | ⬜ todo | SPEC-007 | - | - |
-| SPEC-010 | News source abstraction/scoring | unassigned | ⬜ todo | none | - | - |
-| SPEC-011 | Stitch design integration (token mapping + layout alignment) | claude-code | 🟡 in_progress | none | _step 1+primitives in flight_ | 2026-05-10 |
+| SPEC-007 | Ticker detail page + symbol search (`/ticker/[symbol]`, /tickers grid, TopBar search wiring) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-008 | Portfolio local store (`localStorage["portfolio_positions"]`) + dashboard impact card | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-009 | Notes/journal local-first (Personal Notes widget on `/ticker/[symbol]`) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-010 | News adapter abstraction + confidence scoring (CatalystAdapter wraps `latest.json#catalysts`; LatestIntelligenceCard on `/ticker/[symbol]`) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-011 | Stitch design integration (tokens + primitives + layout shell + dashboard re-skin + mobile drawer + watchlist re-skin via SPEC-013) | claude-code | ✅ done | - | step 1-4 + drawer shipped | 2026-05-10 |
 | SPEC-012 | Supabase-ready schema draft | unassigned | ⬜ todo | none | - | - |
+| SPEC-013 | Watchlist storage shape extension (status / priority / tags fields) — Brief Task 4.3 | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 
 ## Status Legend
 - ⬜ todo
