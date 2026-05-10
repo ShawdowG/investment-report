@@ -6,7 +6,11 @@ import { Bell, Menu, Search, User } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
 
-export function TopBar() {
+interface TopBarProps {
+  onOpenMobileNav?: () => void;
+}
+
+export function TopBar({ onOpenMobileNav }: TopBarProps = {}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
@@ -23,6 +27,7 @@ export function TopBar() {
       <div className="flex items-center gap-3">
         <button
           type="button"
+          onClick={onOpenMobileNav}
           className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
           aria-label="Open navigation"
         >

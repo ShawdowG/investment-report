@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AddSymbolForm } from "./add-symbol-form";
+import { AddSymbolForm, type AddSymbolFormSubmit } from "./add-symbol-form";
 import { ImportSection } from "./import-section";
 import { WatchlistTable } from "./watchlist-table";
 import type { WatchlistItem } from "@/lib/domain/watchlist";
@@ -21,8 +21,8 @@ export function WatchlistView() {
     setReady(true);
   }, []);
 
-  function handleAdd(symbol: string) {
-    setItems(addToWatchlist(symbol));
+  function handleAdd(input: AddSymbolFormSubmit) {
+    setItems(addToWatchlist(input));
   }
 
   function handleRemove(symbol: string) {

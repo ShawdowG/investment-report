@@ -14,8 +14,9 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-008 | Portfolio local store (`localStorage["portfolio_positions"]`) + dashboard impact card | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-009 | Notes/journal local-first (Personal Notes widget on `/ticker/[symbol]`) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-010 | News adapter abstraction + confidence scoring (CatalystAdapter wraps `latest.json#catalysts`; LatestIntelligenceCard on `/ticker/[symbol]`) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
-| SPEC-011 | Stitch design integration (tokens + primitives + layout shell + per-route features) | claude-code | 🟡 in_progress | none | step 1+2 done; comp primitives + per-route features pending | 2026-05-10 |
+| SPEC-011 | Stitch design integration (tokens + primitives + layout shell + dashboard re-skin + mobile drawer + watchlist re-skin via SPEC-013) | claude-code | ✅ done | - | step 1-4 + drawer shipped | 2026-05-10 |
 | SPEC-012 | Supabase-ready schema draft | unassigned | ⬜ todo | none | - | - |
+| SPEC-013 | Watchlist storage shape extension (status / priority / tags fields) — Brief Task 4.3 | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 
 ## Status Legend
 - ⬜ todo
