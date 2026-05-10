@@ -6,6 +6,7 @@ import type {
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { TickerNote } from "@/lib/domain/ticker-note";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
+import type { Strategy } from "@/lib/domain/strategy";
 
 /**
  * Future-Supabase contract for the 3 client-side stores. Today's localStorage
@@ -66,5 +67,25 @@ export interface ResearchRepository {
   get(id: string): ResearchDispatch | null;
   create(input: DispatchInput): ResearchDispatch;
   update(id: string, patch: Partial<DispatchInput>): ResearchDispatch | null;
+  remove(id: string): void;
+}
+
+// Distribute Omit across the Strategy union so each variant keeps its
+// type-specific fields (shortPeriod, period, buyPrice, etc.) — plain
+// Omit<Strategy, ...> would collapse to the intersection and lose them.
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
+  ? Omit<T, K>
+  : never;
+
+export type StrategyInputContract = DistributiveOmit<
+  Strategy,
+  "id" | "createdAt" | "updatedAt"
+>;
+
+export interface StrategyRepository {
+  list(): Strategy[];
+  get(id: string): Strategy | null;
+  create(input: StrategyInputContract): Strategy;
+  update(id: string, patch: Partial<StrategyInputContract>): Strategy | null;
   remove(id: string): void;
 }

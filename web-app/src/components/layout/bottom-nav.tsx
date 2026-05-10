@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  ChartCandlestick,
   Eye,
   LayoutDashboard,
   LineChart,
   NotebookPen,
-  Settings,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -19,13 +19,15 @@ interface NavItem {
   Icon: LucideIcon;
 }
 
+// Settings omitted on mobile (desktop sidebar only) so Strategies fits as a
+// 6th cell. Both routes still reachable via direct URL.
 const NAV: NavItem[] = [
   { href: "/", label: "Home", Icon: LayoutDashboard },
   { href: "/watchlist", label: "Watch", Icon: Eye },
   { href: "/portfolio", label: "Folio", Icon: Wallet },
   { href: "/research", label: "Research", Icon: NotebookPen },
+  { href: "/strategies", label: "Strats", Icon: ChartCandlestick },
   { href: "/tickers", label: "Tickers", Icon: LineChart },
-  { href: "/settings", label: "Settings", Icon: Settings },
 ];
 
 function isActiveHref(pathname: string, href: string): boolean {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  ChartCandlestick,
   Eye,
   LayoutDashboard,
   LineChart,
@@ -24,6 +25,7 @@ const NAV: NavItem[] = [
   { href: "/research", label: "Research", Icon: NotebookPen },
   { href: "/watchlist", label: "Watchlist", Icon: Eye },
   { href: "/portfolio", label: "Portfolio", Icon: Wallet },
+  { href: "/strategies", label: "Strategies", Icon: ChartCandlestick },
   { href: "/tickers", label: "Tickers", Icon: LineChart },
 ];
 
