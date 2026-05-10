@@ -15,60 +15,20 @@ import json
 import argparse
 from datetime import datetime, timezone
 
+from pathlib import Path
+
+# Make scripts/ importable so _tickers.py loads regardless of cwd.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 try:
     import yfinance as yf
 except ImportError:
     print("ERROR: yfinance not installed. Run: pip install yfinance", file=sys.stderr)
     sys.exit(1)
 
-# ---------------------------------------------------------------------------
-# Watchlist — edit this to add/remove tickers
-# Use Yahoo Finance symbols (US market preferred for consistency)
-# ---------------------------------------------------------------------------
-WATCHLIST = [
-    "BTC-USD", "GC=F",           # Crypto + Commodities
-    "^GSPC", "^NDX",             # Indices (S&P 500, Nasdaq 100)
-    "AAPL", "TSLA", "GOOG", "NVDA", "AMZN", "MSFT", "META",  # Mega-caps
-    "DUOL", "ADBE", "AMD", "BABA",  # Growth/Tech
-    "LMT", "BA", "TM",           # Industrials
-    "V", "MA",                   # Financials
-    "NFLX", "RDDT",              # Media/Social
-    "NVO",                       # Healthcare (Novo Nordisk ADR)
-]
-
-# Macro indicators — fetched separately, not as movers
-MACRO_SYMBOLS = {
-    "VIX":   "^VIX",
-    "DXY":   "DX-Y.NYB",
-    "US10Y": "^TNX",
-}
-
-# Human-readable names (fallback to symbol if not listed)
-NAMES = {
-    "BTC-USD": "Bitcoin",
-    "GC=F":    "Gold",
-    "^GSPC":   "S&P 500",
-    "^NDX":    "Nasdaq 100",
-    "AAPL":    "Apple",
-    "TSLA":    "Tesla",
-    "GOOG":    "Alphabet",
-    "NVDA":    "NVIDIA",
-    "AMZN":    "Amazon",
-    "MSFT":    "Microsoft",
-    "META":    "Meta",
-    "DUOL":    "Duolingo",
-    "ADBE":    "Adobe",
-    "AMD":     "AMD",
-    "BABA":    "Alibaba",
-    "LMT":     "Lockheed Martin",
-    "BA":      "Boeing",
-    "TM":      "Toyota",
-    "V":       "Visa",
-    "MA":      "Mastercard",
-    "NFLX":    "Netflix",
-    "RDDT":    "Reddit",
-    "NVO":     "Novo Nordisk",
-}
+# Canonical ticker list lives in scripts/_tickers.py — single source of truth
+# shared with fetch-quotes.py.
+from _tickers import MACRO as MACRO_SYMBOLS, NAMES, TICKERS as WATCHLIST  # noqa: E402
 
 def fetch_ticker(symbol):
     """Fetch price data for a single symbol. Returns dict or None on failure."""
@@ -165,7 +125,7 @@ def main():
 
     fetched = len(prices)
     total = len(WATCHLIST)
-    print(f"\nSnapshot written → {out_path}  ({fetched}/{total} tickers, {len(macro)} macro)")
+    print(f"\nSnapshot written -> {out_path}  ({fetched}/{total} tickers, {len(macro)} macro)")
     if fetched < total:
         missing = [s for s in WATCHLIST if s not in prices]
         print(f"Missing: {', '.join(missing)}")
