@@ -12,6 +12,7 @@ import { TacticalQuickPanel } from "@/components/tactical-quick-panel";
 import { WatchlistImpactCard } from "@/components/dashboard/watchlist-impact-card";
 import { LatestReportCard } from "@/components/dashboard/latest-report-card";
 import { TopMoversCard } from "@/components/dashboard/top-movers-card";
+import { PortfolioImpactCard } from "@/components/dashboard/portfolio-impact-card";
 
 const stripBullet = (line: string) => line.replace(/^[-•]\s*/, "").trim();
 
@@ -77,6 +78,8 @@ export default function DashboardPage() {
         <NewsMoversTable rows={newsRows} />
 
         <WatchlistImpactCard latest={latest} />
+
+        <PortfolioImpactCard latest={latest} />
       </div>
     </AppShell>
   );

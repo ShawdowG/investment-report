@@ -11,7 +11,7 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-005 | Paste/import ticker parser + preview (inline import section on `/watchlist`) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
 | SPEC-006 | Watchlist impact vs latest report (high/medium/missing buckets on dashboard) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
 | SPEC-007 | Ticker detail page + symbol search (`/ticker/[symbol]`, /tickers grid, TopBar search wiring) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
-| SPEC-008 | Portfolio local store + dashboard impact | unassigned | ⬜ todo | SPEC-004 + SPEC-006 | - | - |
+| SPEC-008 | Portfolio local store (`localStorage["portfolio_positions"]`) + dashboard impact card | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-009 | Notes/journal local-first | unassigned | ⬜ todo | SPEC-007 | - | - |
 | SPEC-010 | News source abstraction/scoring | unassigned | ⬜ todo | none | - | - |
 | SPEC-011 | Stitch design integration (tokens + primitives + layout shell + per-route features) | claude-code | 🟡 in_progress | none | step 1+2 done; comp primitives + per-route features pending | 2026-05-10 |
