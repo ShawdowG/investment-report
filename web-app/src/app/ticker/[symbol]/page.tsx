@@ -6,6 +6,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { TickerHeader } from "@/components/ticker/ticker-header";
 import { ReportMentionsTable } from "@/components/ticker/report-mentions-table";
 import { PersonalNotesWidget } from "@/components/ticker/personal-notes-widget";
+import { LatestIntelligenceCard } from "@/components/ticker/latest-intelligence-card";
 import {
   listAvailableTickers,
   loadByTicker,
@@ -80,6 +81,7 @@ export default async function TickerDetailPage({ params }: PageProps) {
     <AppShell>
       <div className="space-y-6">
         <TickerHeader symbol={upper} name={friendlyName} />
+        <LatestIntelligenceCard symbol={upper} />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap">
           <section className="lg:col-span-8 space-y-3">
             <h2 className="font-h2 text-h2 text-text-primary">Report Mentions</h2>
