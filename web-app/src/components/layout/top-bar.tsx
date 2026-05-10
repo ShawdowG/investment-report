@@ -2,14 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { Bell, Menu, Search, User } from "lucide-react";
+import { Bell, Search, User } from "lucide-react";
 import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
 
-interface TopBarProps {
-  onOpenMobileNav?: () => void;
-}
-
-export function TopBar({ onOpenMobileNav }: TopBarProps = {}) {
+export function TopBar() {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
@@ -23,16 +19,10 @@ export function TopBar({ onOpenMobileNav }: TopBarProps = {}) {
 
   return (
     <header className="w-full h-16 border-b border-border-subtle bg-background flex justify-between items-center px-margin-mobile md:px-gutter sticky top-0 z-40">
-      <div className="flex items-center gap-3">
-        <button
-          type="button"
-          onClick={onOpenMobileNav}
-          className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
-          aria-label="Open navigation"
-        >
-          <Menu className="size-5" />
-        </button>
-        <div className="md:hidden font-h2 text-h2 text-text-primary">Investment Report</div>
+      <div className="flex items-center gap-3 flex-1 md:flex-none">
+        <div className="md:hidden font-h2 text-h2 text-text-primary">
+          Investment Report
+        </div>
         <form
           onSubmit={handleSubmit}
           className="hidden md:flex items-center bg-surface-variant rounded-full px-4 py-2 w-72 border border-border-subtle focus-within:border-primary/60 transition-colors"
@@ -53,6 +43,14 @@ export function TopBar({ onOpenMobileNav }: TopBarProps = {}) {
         </form>
       </div>
       <div className="flex items-center gap-1.5">
+        <button
+          type="button"
+          aria-label="Search"
+          onClick={() => router.push("/tickers")}
+          className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
+        >
+          <Search className="size-5" />
+        </button>
         <button
           type="button"
           aria-label="Notifications"
