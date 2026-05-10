@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { AppShell } from "@/components/layout/app-shell";
 import { TickerHeader } from "@/components/ticker/ticker-header";
 import { ReportMentionsTable } from "@/components/ticker/report-mentions-table";
+import { PersonalNotesWidget } from "@/components/ticker/personal-notes-widget";
 import {
   listAvailableTickers,
   loadByTicker,
@@ -79,14 +80,19 @@ export default async function TickerDetailPage({ params }: PageProps) {
     <AppShell>
       <div className="space-y-6">
         <TickerHeader symbol={upper} name={friendlyName} />
-        <section className="space-y-3">
-          <h2 className="font-h2 text-h2 text-text-primary">Report Mentions</h2>
-          <p className="font-body-compact text-body-compact text-text-secondary">
-            Reverse-chronological history of {items.length} mention
-            {items.length === 1 ? "" : "s"} across reports.
-          </p>
-          <ReportMentionsTable symbol={upper} items={items} limit={10} />
-        </section>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap">
+          <section className="lg:col-span-8 space-y-3">
+            <h2 className="font-h2 text-h2 text-text-primary">Report Mentions</h2>
+            <p className="font-body-compact text-body-compact text-text-secondary">
+              Reverse-chronological history of {items.length} mention
+              {items.length === 1 ? "" : "s"} across reports.
+            </p>
+            <ReportMentionsTable symbol={upper} items={items} limit={10} />
+          </section>
+          <aside className="lg:col-span-4">
+            <PersonalNotesWidget symbol={upper} />
+          </aside>
+        </div>
       </div>
     </AppShell>
   );
