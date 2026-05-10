@@ -18,7 +18,8 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-012 | Supabase-ready schema draft | unassigned | ⬜ todo | none | - | - |
 | SPEC-013 | Watchlist storage shape extension (status / priority / tags fields) — Brief Task 4.3 | claude-code | ✅ done | - | 84306d9 | 2026-05-10 |
 | SPEC-014 | Daily quote pipeline (`scripts/fetch-quotes.py` + `data/quotes/SYMBOL.json` shape) — v4 cockpit foundation | claude-code | ✅ done | - | 526955b | 2026-05-10 |
-| SPEC-015 | Ticker detail with Recharts price chart + quote summary on `/ticker/[symbol]` | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-015 | Ticker detail with Recharts price chart + quote summary on `/ticker/[symbol]` | claude-code | ✅ done | - | 1aa4b09 | 2026-05-10 |
+| SPEC-017 | Watchlist with quote-driven Last Px + Day Δ columns (also fixes SPEC-013 watchlist-table that never landed) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 
 ## Status Legend
 - ⬜ todo

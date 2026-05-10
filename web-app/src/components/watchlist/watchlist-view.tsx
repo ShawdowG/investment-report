@@ -5,6 +5,7 @@ import { AddSymbolForm, type AddSymbolFormSubmit } from "./add-symbol-form";
 import { ImportSection } from "./import-section";
 import { WatchlistTable } from "./watchlist-table";
 import type { WatchlistItem } from "@/lib/domain/watchlist";
+import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import {
   addManyToWatchlist,
   addToWatchlist,
@@ -12,7 +13,11 @@ import {
   removeFromWatchlist,
 } from "@/lib/storage/watchlist-store";
 
-export function WatchlistView() {
+interface WatchlistViewProps {
+  snapshots?: QuoteSnapshotMap;
+}
+
+export function WatchlistView({ snapshots = {} }: WatchlistViewProps = {}) {
   const [items, setItems] = useState<WatchlistItem[]>([]);
   const [ready, setReady] = useState(false);
 
@@ -37,7 +42,7 @@ export function WatchlistView() {
 
   if (!ready) {
     return (
-      <div className="rounded-lg border border-border/50 bg-card p-6 text-sm text-muted-foreground">
+      <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
         Loading watchlist…
       </div>
     );
@@ -47,10 +52,11 @@ export function WatchlistView() {
     <div className="space-y-4">
       <AddSymbolForm onAdd={handleAdd} />
       <ImportSection onSave={handleSaveMany} />
-      <WatchlistTable items={items} onRemove={handleRemove} />
+      <WatchlistTable items={items} onRemove={handleRemove} snapshots={snapshots} />
       <p className="text-xs text-muted-foreground">
         {items.length} symbol{items.length === 1 ? "" : "s"} — stored locally
         under <code className="rounded bg-muted px-1 py-0.5 text-[10px]">watchlist_items</code>.
+        Prices reflect last close (~24h delay).
       </p>
     </div>
   );
