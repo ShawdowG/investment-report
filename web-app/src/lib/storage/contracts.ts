@@ -5,6 +5,7 @@ import type {
 } from "@/lib/domain/watchlist";
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { TickerNote } from "@/lib/domain/ticker-note";
+import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
 
 /**
  * Future-Supabase contract for the 3 client-side stores. Today's localStorage
@@ -52,4 +53,18 @@ export interface NotesRepository {
   list(symbol: string): TickerNote[];
   add(symbol: string, body: string): TickerNote[];
   remove(symbol: string, id: string): TickerNote[];
+}
+
+export interface DispatchInput {
+  title: string;
+  body: string;
+  ticker?: string;
+}
+
+export interface ResearchRepository {
+  list(): ResearchDispatch[];
+  get(id: string): ResearchDispatch | null;
+  create(input: DispatchInput): ResearchDispatch;
+  update(id: string, patch: Partial<DispatchInput>): ResearchDispatch | null;
+  remove(id: string): void;
 }

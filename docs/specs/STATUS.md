@@ -12,7 +12,8 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-006 | Watchlist impact vs latest report (high/medium/missing buckets on dashboard) | claude-code | ✅ done | - | cd188b8 | 2026-05-10 |
 | SPEC-007 | Ticker detail page + symbol search (`/ticker/[symbol]`, /tickers grid, TopBar search wiring) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-008 | Portfolio local store (`localStorage["portfolio_positions"]`) + dashboard impact card | claude-code | ✅ done | - | 5697971 | 2026-05-10 |
-| SPEC-016 | Repository abstraction — typed contracts + conformance assertions for the 3 stores | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-016 | Repository abstraction — typed contracts + conformance assertions for the 3 stores | claude-code | ✅ done | - | 5b4008b | 2026-05-10 |
+| SPEC-019 | Research dispatches — `/research` route + localStorage CRUD + sidebar nav rename | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-018 | Portfolio real P&L (replaces avg-price proxy with last-close from quote snapshots) | claude-code | ✅ done | - | 4f905f3 | 2026-05-10 |
 | SPEC-009 | Notes/journal local-first (Personal Notes widget on `/ticker/[symbol]`) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 | SPEC-010 | News adapter abstraction + confidence scoring (CatalystAdapter wraps `latest.json#catalysts`; LatestIntelligenceCard on `/ticker/[symbol]`) | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
