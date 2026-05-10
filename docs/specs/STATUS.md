@@ -17,7 +17,8 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-011 | Stitch design integration (tokens + primitives + layout shell + dashboard re-skin + mobile drawer + watchlist re-skin via SPEC-013) | claude-code | ✅ done | - | step 1-4 + drawer shipped | 2026-05-10 |
 | SPEC-012 | Supabase-ready schema draft | unassigned | ⬜ todo | none | - | - |
 | SPEC-013 | Watchlist storage shape extension (status / priority / tags fields) — Brief Task 4.3 | claude-code | ✅ done | - | 84306d9 | 2026-05-10 |
-| SPEC-014 | Daily quote pipeline (`scripts/fetch-quotes.py` + `data/quotes/SYMBOL.json` shape) — v4 cockpit foundation | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
+| SPEC-014 | Daily quote pipeline (`scripts/fetch-quotes.py` + `data/quotes/SYMBOL.json` shape) — v4 cockpit foundation | claude-code | ✅ done | - | 526955b | 2026-05-10 |
+| SPEC-015 | Ticker detail with Recharts price chart + quote summary on `/ticker/[symbol]` | claude-code | ✅ done | - | _pending commit_ | 2026-05-10 |
 
 ## Status Legend
 - ⬜ todo
