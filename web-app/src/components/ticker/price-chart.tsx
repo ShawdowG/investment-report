@@ -96,14 +96,34 @@ export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
     );
   }
 
-  const isUp = slice[slice.length - 1].close >= slice[0].close;
+  const firstClose = slice[0].close;
+  const lastClose = slice[slice.length - 1].close;
+  const isUp = lastClose >= firstClose;
   const color = isUp ? RISK_ON : RISK_OFF;
+  const rangePct =
+    firstClose === 0 ? null : ((lastClose - firstClose) / firstClose) * 100;
+  const rangeAbs = lastClose - firstClose;
+  const deltaColorClass = isUp ? "text-regime-risk-on" : "text-regime-risk-off";
 
   const data = slice.map((b) => ({ date: b.date, close: b.close }));
 
   return (
     <div className="space-y-3">
-      <div className="flex justify-end gap-1">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-baseline gap-2">
+          <span className={cn("font-data-mono text-data-mono", deltaColorClass)}>
+            {rangePct !== null
+              ? `${rangePct > 0 ? "+" : ""}${rangePct.toFixed(2)}%`
+              : "—"}
+          </span>
+          <span className={cn("font-body-compact text-body-compact", deltaColorClass)}>
+            {`(${rangeAbs > 0 ? "+" : ""}${fmtMoney(rangeAbs, currency)})`}
+          </span>
+          <span className="font-label-caps text-label-caps text-text-secondary uppercase">
+            {range.label} change
+          </span>
+        </div>
+        <div className="flex gap-1 flex-wrap justify-end">
         {RANGES.map((r, i) => (
           <button
             key={r.label}
@@ -119,6 +139,7 @@ export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
             {r.label}
           </button>
         ))}
+        </div>
       </div>
       <div className="rounded-lg border border-border-subtle bg-surface p-2">
         <ResponsiveContainer width="100%" height={280}>
