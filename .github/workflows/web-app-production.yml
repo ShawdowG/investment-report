@@ -5,8 +5,7 @@ on:
     branches: [main]
     paths:
       - "web-app/**"
-      - "data/search-index.json"
-      - "reports/daily/**"
+      - "data/quotes/**"
   workflow_dispatch:
 
 jobs:
