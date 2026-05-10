@@ -4,6 +4,7 @@ import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/stitch";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
+import { MarkdownBody } from "./markdown-body";
 
 interface DispatchViewProps {
   dispatch: ResearchDispatch;
@@ -66,9 +67,7 @@ export function DispatchView({ dispatch, onBack, onEdit, onDelete }: DispatchVie
       </header>
       <div className="rounded-lg border border-border-subtle bg-surface p-card-padding">
         {dispatch.body ? (
-          <pre className="whitespace-pre-wrap break-words font-body-main text-body-main text-text-primary leading-relaxed">
-            {dispatch.body}
-          </pre>
+          <MarkdownBody source={dispatch.body} />
         ) : (
           <p className="font-body-compact text-body-compact text-text-secondary">
             (No body)

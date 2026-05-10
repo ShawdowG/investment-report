@@ -255,3 +255,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Markdown body styles for research dispatches (and future surfaces). */
+@layer components {
+  .markdown-body {
+    @apply font-body-main text-body-main text-text-primary leading-relaxed;
+  }
+  .markdown-body h1 { @apply font-h1 text-h1 mt-4 mb-2; }
+  .markdown-body h2 { @apply font-h2 text-h2 mt-3 mb-2; }
+  .markdown-body h3 { @apply font-body-main text-body-main font-semibold mt-3 mb-1; }
+  .markdown-body p { @apply my-2; }
+  .markdown-body ul { @apply my-2 pl-5 list-disc; }
+  .markdown-body ol { @apply my-2 pl-5 list-decimal; }
+  .markdown-body li { @apply my-1; }
+  .markdown-body strong { @apply text-text-primary font-semibold; }
+  .markdown-body em { @apply italic; }
+  .markdown-body code { @apply font-data-mono bg-surface-variant px-1 py-0.5 rounded text-[0.9em]; }
+  .markdown-body pre { @apply font-data-mono bg-surface-variant p-3 rounded my-2 overflow-x-auto; }
+  .markdown-body pre code { @apply bg-transparent p-0; }
+  .markdown-body a { @apply text-primary underline hover:text-primary-fixed-dim; }
+  .markdown-body blockquote { @apply border-l-2 border-border-subtle pl-3 my-2 italic text-text-secondary; }
+  .markdown-body hr { @apply border-border-subtle my-4; }
+}

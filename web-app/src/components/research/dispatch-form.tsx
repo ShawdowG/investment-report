@@ -66,14 +66,14 @@ export function DispatchForm({
           />
         </Field>
       </div>
-      <Field label="Body" htmlFor="dispatch-body">
+      <Field label="Body (markdown supported)" htmlFor="dispatch-body">
         <textarea
           id="dispatch-body"
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          placeholder="Write your research, market view, or post-mortem here…"
-          rows={12}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
+          placeholder="Write your research, market view, or post-mortem here…&#10;&#10;Markdown: # heading, **bold**, *italic*, - bullet, `code`"
+          rows={14}
+          className="w-full rounded-md border border-input bg-background px-3 py-2 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
         />
       </Field>
       {error ? <p className="text-xs text-destructive">{error}</p> : null}

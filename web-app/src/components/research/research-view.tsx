@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { DispatchForm } from "./dispatch-form";
 import { DispatchList } from "./dispatch-list";
 import { DispatchView } from "./dispatch-view";
@@ -20,9 +21,14 @@ type Mode =
   | { kind: "edit"; id: string };
 
 export function ResearchView() {
+  const searchParams = useSearchParams();
+  const initialId = searchParams?.get("id") ?? null;
+
   const [items, setItems] = useState<ResearchDispatch[]>([]);
   const [ready, setReady] = useState(false);
-  const [mode, setMode] = useState<Mode>({ kind: "list" });
+  const [mode, setMode] = useState<Mode>(() =>
+    initialId ? { kind: "view", id: initialId } : { kind: "list" },
+  );
 
   useEffect(() => {
     setItems(getDispatches());

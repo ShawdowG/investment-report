@@ -6,6 +6,7 @@ import { TickerHeader } from "@/components/ticker/ticker-header";
 import { PersonalNotesWidget } from "@/components/ticker/personal-notes-widget";
 import { PriceChart } from "@/components/ticker/price-chart";
 import { QuoteSummary } from "@/components/ticker/quote-summary";
+import { TickerDispatches } from "@/components/ticker/ticker-dispatches";
 import { listQuoteSymbols, loadQuote } from "@/lib/quotes/load-quote";
 
 interface PageProps {
@@ -86,8 +87,8 @@ export default async function TickerDetailPage({ params }: PageProps) {
         <QuoteSummary series={series} />
         <PriceChart daily={series.daily} currency={series.meta.currency ?? "USD"} />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap">
-          <section className="lg:col-span-8 space-y-3">
-            {/* Reserved for future research/analysis content (SPEC-019). */}
+          <section className="lg:col-span-8 space-y-stack-gap">
+            <TickerDispatches symbol={upper} />
           </section>
           <aside className="lg:col-span-4">
             <PersonalNotesWidget symbol={upper} />
