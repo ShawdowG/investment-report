@@ -2,61 +2,48 @@
 
 Inkrementell leveringsrekkefølge. Sjekk `STATUS.md` for live-status før du henter neste oppgave.
 
-## Current focus (2026-05-10, end of day)
+## Current focus (2026-05-10, late evening)
 
-P0 + Stitch foundation er ferdig. Tre spor å velge fra som "next":
+P0 + P1 + Stitch foundation er ferdig. Eneste åpne core-spec er **SPEC-012 (Supabase schema draft)** — no-runtime-dep, ikke blokkerende.
 
-**Spor A — finish Stitch (SPEC-011 step 4 + follow-ups):**
-1. **Watchlist re-skin** for å matche Stitch `watchlist.html`. Krever Brief Task 4.3 (status / priority / tags i `WatchlistItem`) først — separate mini-spec for storage-shape utvidelse, ellers blir re-skin bare visuell.
-2. **Mobile sidebar drawer** — slide-in panel for narrow viewports. Liten, isolert.
-3. **Ticker detail re-skin + Portfolio re-skin** — avhenger av at SPEC-007 og SPEC-008 lander først.
+Andre åpne tråder:
+- **codex-agent SPEC-003** Dashboard latest/previous compare — eier andre agent.
+- **Light-mode palette** (ADR-007 follow-up) — Stitch er dark-only; bestem om light mode skal designes eller togglen droppes.
+- **migration/ folder cleanup** — historisk web-next migrasjons-doc; safe å slette.
+- **Per-row inline edit på watchlist** (SPEC-013 follow-up) — kan komme senere; remove + re-add fungerer som workaround.
 
-**Spor B — P1 user value:**
-4. **SPEC-007** Ticker detail page (`/ticker/[symbol]`) + symbol search. Konsumerer `data/by-ticker/SYMBOL.json`. Låser opp search-input i TopBar (currently visual-only).
-5. **SPEC-008** Portfolio local store + dashboard impact card. Samme mønster som SPEC-004/006 men for owned positions.
-6. **SPEC-009** Notes/journal per ticker — depends on SPEC-007.
-
-**Spor C — Infra:**
-7. **SPEC-010** News adapter abstraction.
-8. **SPEC-012** Supabase schema draft (no runtime dep).
-
-Anbefalt sekvens: SPEC-007 (gir søk + ticker detail = stor brukervekt) → mobile drawer (lille, polish) → SPEC-008 (low-friction når 007 lander) → watchlist re-skin (etter at storage-utvidelses-spec lander).
-
-## P0 — Core product shell and data
+## P0 — Core product shell and data — ✅ done
 1. ✅ SPEC-001 Shell + 6-route navigation (`5d6552d`)
 2. ✅ SPEC-002 Static report indexes — strukturert payload (`abd102c`)
-3. 🟡 SPEC-003 Dashboard v3 (latest/previous compare) — owner codex-agent
+3. 🟡 SPEC-003 Dashboard latest/previous compare — owner codex-agent
 4. ✅ SPEC-004 Watchlist local store (`8479a92`)
 5. ✅ SPEC-005 Paste/import ticker parser (`167e06a`)
-6. ✅ SPEC-006 Watchlist impact vs latest report (`cd188b8`)
+6. ✅ SPEC-006 Watchlist impact card on dashboard (`cd188b8`)
 
-## P1 — User value expansion
-7. ⬜ SPEC-007 Ticker detail page + symbol search (depends on SPEC-002)
-8. ⬜ SPEC-008 Portfolio holdings local store + impact card (depends on SPEC-004 + SPEC-006)
-9. ⬜ SPEC-009 Notes/journal per ticker (depends on SPEC-007)
+## P1 — User value expansion — ✅ done
+7. ✅ SPEC-007 Ticker detail page + symbol search (`39c8472`)
+8. ✅ SPEC-008 Portfolio local store + dashboard impact card (`5697971`)
+9. ✅ SPEC-009 Notes/journal per ticker on `/ticker/[symbol]` (`52693e9`)
 
 ## P2 — Infra and future sync
-10. ⬜ SPEC-010 News adapter abstraction + confidence scoring
-11. 🟡 SPEC-011 Stitch design integration:
-    - step 1 tokens + core primitives ✅ (`ff8c2e3`)
-    - step 2 layout shell ✅ (`718ec34`)
-    - step 3 composition primitives (TickerCell, MoverRow) ✅ (`6557da4`); IconButton + DataTable deferred
-    - step 4 per-route re-skin: Dashboard top bento ✅ (`5d799ec`); Watchlist + Ticker + Portfolio pending
-    - mobile sidebar drawer ⬜
-    - Owner claude-code
-12. ⬜ SPEC-012 Supabase schema draft + optional sync plan (no runtime dep)
+10. ✅ SPEC-010 News adapter abstraction + LatestIntelligenceCard (`f0ce28d`)
+11. ✅ SPEC-011 Stitch design integration — full lift (`ff8c2e3`, `718ec34`, `6557da4`, `5d799ec`, `84306d9`)
+12. ⬜ SPEC-012 Supabase schema draft + optional sync plan (no runtime dep) — **next**
+13. ✅ SPEC-013 Watchlist storage shape extension (status / priority / tags) — Brief Task 4.3 (`84306d9`)
 
-## Pending mini-specs (no formal doc yet)
-- **Watchlist storage shape extension** (Brief Task 4.3): add `status`, `priority`, `tags?` fields to `WatchlistItem`. Required before watchlist re-skin matches Stitch.
-- **Light-mode palette** (ADR-007 follow-up): Stitch is dark-only. Either drop the toggle or design a light palette.
-- **migration/ folder cleanup**: historical web-next migration docs/baselines, kept post-ADR-006. Safe to delete when convenient.
+## Pending mini-specs / follow-ups (no formal doc yet)
+- **Light-mode palette decision** (ADR-007 follow-up): Stitch is dark-only — drop the toggle or design a light variant.
+- **Watchlist per-row inline edit** (SPEC-013 follow-up): currently remove+re-add to change metadata; inline dropdowns would be polish.
+- **Real-time / live ticker price** (SPEC-008 follow-up): dollar P&L estimate uses avg price as proxy. Needs external quote integration.
+- **migration/ folder cleanup**: historical web-next migration docs, safe to delete post-ADR-006.
+- **Yahoo / Google Finance news adapter** (SPEC-010 follow-up): contract exists, needs concrete integration spec.
 
 ## Execution rules
 - Én feature/spec per logisk commit; én spec per branch når praktisk (på `v3-revamp` har vi flere specs samlet — det er OK når de leveres som separate commits).
 - AC må være testbar før implementasjon.
 - Ingen merge uten lint/typecheck/test/build (der relevant).
 - Oppdater `STATUS.md` i samme commit som spec-arbeidet.
-- For Stitch-relaterte komponenter: les `design/stitch/README.md` §3-5 før du skriver ny UI — bruk eksisterende primitives (Card, StatusBadge, RegimeDot, PriorityBadge, Tag, Sentiment, SectionHeader, TickerCell, MoverRow) heller enn å hardkode.
+- For Stitch-relaterte komponenter: les `design/stitch/README.md` §3-5 før du skriver ny UI — bruk eksisterende primitives heller enn å hardkode.
 
 ## Status legend
 - ⬜ todo
