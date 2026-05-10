@@ -170,3 +170,16 @@ export function addManyToWatchlist(
 export function clearWatchlist(): void {
   removeKey(STORAGE_KEY);
 }
+
+// SPEC-016: compile-time check that this store satisfies the future-Supabase
+// contract. Failing TS errors here mean a method drifted; update both sides.
+import type { WatchlistRepository } from "./contracts";
+const _conforms: WatchlistRepository = {
+  list: getWatchlist,
+  add: addToWatchlist,
+  remove: removeFromWatchlist,
+  update: updateWatchlistItem,
+  addMany: addManyToWatchlist,
+  clear: clearWatchlist,
+};
+void _conforms;
