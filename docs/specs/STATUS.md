@@ -23,7 +23,7 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-017 | Watchlist with quote-driven Last Px + Day Δ columns (also fixes SPEC-013 watchlist-table that never landed) | claude-code | ✅ done | - | 814fe17 | 2026-05-10 |
 | SPEC-018 | Portfolio real P&L (replaces avg-price proxy with last-close from quote snapshots) | claude-code | ✅ done | - | 4f905f3 | 2026-05-10 |
 | SPEC-019 | Research dispatches — `/research` route + localStorage CRUD + sidebar nav rename | claude-code | ✅ done | - | 5a5bc1c | 2026-05-10 |
-| SPEC-020 | Strategy definition + backtest engine | unassigned | ⬜ todo | SPEC-014 | - | - |
+| SPEC-020 | Strategy definition + multi-ticker backtest engine + `/strategies` route (4 strategy types, equity curve viz) | claude-code | ✅ done | - | b041aeb | 2026-05-10 |
 | SPEC-021 | Mobile-first IA — bottom-nav pattern below md, MobileDrawer retired | claude-code | ✅ done | - | 4f10034 | 2026-05-10 |
 | SPEC-022 | Sunset reports — drop report pipeline + scripts + dead components, rebuild dashboard with quote-driven cards | claude-code | ✅ done | - | 21595c2 | 2026-05-10 |
 
