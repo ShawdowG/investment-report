@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChart3,
+  ChartCandlestick,
   Eye,
   LayoutDashboard,
   LineChart,
+  NotebookPen,
   Settings,
   Wallet,
   type LucideIcon,
@@ -21,9 +22,10 @@ interface NavItem {
 
 const NAV: NavItem[] = [
   { href: "/", label: "Dashboard", Icon: LayoutDashboard },
-  { href: "/reports", label: "Reports", Icon: BarChart3 },
+  { href: "/research", label: "Research", Icon: NotebookPen },
   { href: "/watchlist", label: "Watchlist", Icon: Eye },
   { href: "/portfolio", label: "Portfolio", Icon: Wallet },
+  { href: "/strategies", label: "Strategies", Icon: ChartCandlestick },
   { href: "/tickers", label: "Tickers", Icon: LineChart },
 ];
 

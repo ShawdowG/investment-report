@@ -1,24 +1,20 @@
 export const dynamic = "force-static";
 
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { AppShell } from "@/components/layout/app-shell";
 import { TickerHeader } from "@/components/ticker/ticker-header";
-import { ReportMentionsTable } from "@/components/ticker/report-mentions-table";
 import { PersonalNotesWidget } from "@/components/ticker/personal-notes-widget";
-import { LatestIntelligenceCard } from "@/components/ticker/latest-intelligence-card";
-import {
-  listAvailableTickers,
-  loadByTicker,
-  suggestSymbols,
-} from "@/lib/reports/load-by-ticker";
+import { PriceChart } from "@/components/ticker/price-chart";
+import { QuoteSummary } from "@/components/ticker/quote-summary";
+import { TickerDispatches } from "@/components/ticker/ticker-dispatches";
+import { listQuoteSymbols, loadQuote } from "@/lib/quotes/load-quote";
 
 interface PageProps {
   params: Promise<{ symbol: string }>;
 }
 
 export async function generateStaticParams() {
-  return listAvailableTickers().map((symbol) => ({ symbol }));
+  return listQuoteSymbols().map((symbol) => ({ symbol }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -26,19 +22,31 @@ export async function generateMetadata({ params }: PageProps) {
   return { title: `${symbol.toUpperCase()} — Investment Report` };
 }
 
+function suggestSymbols(query: string, limit = 3): string[] {
+  if (!query) return [];
+  const upper = query.toUpperCase();
+  const all = listQuoteSymbols();
+  const direct = all.filter((s) => s.startsWith(upper));
+  if (direct.length >= limit) return direct.slice(0, limit);
+  const substring = all.filter((s) => s.includes(upper) && !direct.includes(s));
+  return [...direct, ...substring].slice(0, limit);
+}
+
 export default async function TickerDetailPage({ params }: PageProps) {
   const { symbol: rawSymbol } = await params;
   const symbol = decodeURIComponent(rawSymbol);
-  const items = loadByTicker(symbol);
+  const upper = symbol.toUpperCase();
 
-  if (items === null) {
+  const series = loadQuote(symbol);
+
+  if (!series) {
     const suggestions = suggestSymbols(symbol, 3);
     return (
       <AppShell>
         <div className="space-y-4">
           <h1 className="font-h1 text-h1 text-text-primary">Ticker not found</h1>
           <p className="font-body-compact text-body-compact text-text-secondary">
-            No report data for{" "}
+            No quote data for{" "}
             <code className="font-data-mono text-text-primary">{symbol}</code>.
           </p>
           {suggestions.length > 0 ? (
@@ -70,26 +78,17 @@ export default async function TickerDetailPage({ params }: PageProps) {
     );
   }
 
-  if (items.length === 0) notFound();
-
-  const upper = symbol.toUpperCase();
-  const latestMention = items[0];
-  const friendlyName =
-    latestMention.movers?.find((m) => m.ticker?.toUpperCase() === upper)?.name;
+  const friendlyName = series.meta.name;
 
   return (
     <AppShell>
       <div className="space-y-6">
         <TickerHeader symbol={upper} name={friendlyName} />
-        <LatestIntelligenceCard symbol={upper} />
+        <QuoteSummary series={series} />
+        <PriceChart daily={series.daily} currency={series.meta.currency ?? "USD"} />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap">
-          <section className="lg:col-span-8 space-y-3">
-            <h2 className="font-h2 text-h2 text-text-primary">Report Mentions</h2>
-            <p className="font-body-compact text-body-compact text-text-secondary">
-              Reverse-chronological history of {items.length} mention
-              {items.length === 1 ? "" : "s"} across reports.
-            </p>
-            <ReportMentionsTable symbol={upper} items={items} limit={10} />
+          <section className="lg:col-span-8 space-y-stack-gap">
+            <TickerDispatches symbol={upper} />
           </section>
           <aside className="lg:col-span-4">
             <PersonalNotesWidget symbol={upper} />

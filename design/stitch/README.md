@@ -19,7 +19,7 @@ Last updated: 2026-05-10. Re-verify against `docs/specs/STATUS.md` and `git log`
 | Composition primitives (TickerCell, MoverRow) | ✅ shipped | `web-app/src/components/ui/` (commit `6557da4`); IconButton + DataTable wrapper deferred |
 | Per-route feature components — Dashboard | 🟡 partial | `LatestReportCard` + `TopMoversCard` shipped (`web-app/src/components/dashboard/`); rest of dashboard kept analytical depth from previous components |
 | Per-route feature components — Watchlist / Ticker / Portfolio | 🟡 pending | re-skin pending; ticker + portfolio also need SPEC-007 / SPEC-008 |
-| Light-mode redesign | ⚠ not in Stitch handoff | see §7 |
+| Light-mode redesign | ✅ resolved by dark-only lock | ThemeProvider has `forcedTheme="dark"`; toggle removed from TopBar (2026-05-10 evening) |
 
 SPEC-011 row in `docs/specs/STATUS.md` reflects this. Owner is `claude-code` since 2026-05-10.
 

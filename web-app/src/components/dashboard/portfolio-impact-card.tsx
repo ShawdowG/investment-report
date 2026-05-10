@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { SectionHeader, Sentiment, Tag } from "@/components/ui/stitch";
+import { SectionHeader, Tag } from "@/components/ui/stitch";
 import {
   Table,
   TableBody,
@@ -15,25 +15,44 @@ import {
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import { getPortfolio } from "@/lib/storage/portfolio-store";
 import {
-  getPortfolioImpact,
-  type PortfolioImpact,
-} from "@/lib/reports/portfolio-impact";
-import type { ReportItem } from "@/types/reports";
+  getPortfolioPnL,
+  type PortfolioPnL,
+} from "@/lib/quotes/portfolio-pnl";
+import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 
 interface PortfolioImpactCardProps {
-  latest: ReportItem | null;
+  snapshots: QuoteSnapshotMap;
 }
 
-const fmtMoney = (n: number): string => {
+function fmtMoney(n: number, currency = "USD"): string {
   const sign = n > 0 ? "+" : n < 0 ? "−" : "";
+  const symbol = currency === "USD" ? "$" : "";
   const abs = Math.abs(n).toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
-  return `${sign}$${abs}`;
-};
+  return `${sign}${symbol}${abs}`;
+}
 
-export function PortfolioImpactCard({ latest }: PortfolioImpactCardProps) {
+function fmtMoneyPlain(n: number, currency = "USD"): string {
+  const symbol = currency === "USD" ? "$" : "";
+  return `${symbol}${n.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+function fmtPct(n: number): string {
+  return `${n > 0 ? "+" : ""}${n.toFixed(2)}%`;
+}
+
+function pnlColorClass(n: number): string {
+  if (n > 0) return "text-regime-risk-on";
+  if (n < 0) return "text-regime-risk-off";
+  return "text-text-secondary";
+}
+
+export function PortfolioImpactCard({ snapshots }: PortfolioImpactCardProps) {
   const [positions, setPositions] = useState<PortfolioPosition[]>([]);
   const [ready, setReady] = useState(false);
 
@@ -42,17 +61,17 @@ export function PortfolioImpactCard({ latest }: PortfolioImpactCardProps) {
     setReady(true);
   }, []);
 
-  const impact: PortfolioImpact = ready
-    ? getPortfolioImpact(latest, positions)
-    : { rows: [], missing: [], totalDollarDelta: 0 };
+  const pnl: PortfolioPnL = ready
+    ? getPortfolioPnL(positions, snapshots)
+    : { rows: [], missing: [], totalCurrentValue: 0, totalCostBasis: 0, totalPnL: 0, totalPnLPct: 0, totalDayPnL: 0 };
 
   return (
     <Card className="p-card-padding gap-4">
       <SectionHeader
-        title="Portfolio Impact"
-        caption="Estimated dollar effect of today's report on owned positions"
+        title="Portfolio P&L"
+        caption="Real-price valuation using last-close from the daily quote feed"
       />
-      <Body ready={ready} positions={positions} impact={impact} />
+      <Body ready={ready} positions={positions} pnl={pnl} />
     </Card>
   );
 }
@@ -60,11 +79,11 @@ export function PortfolioImpactCard({ latest }: PortfolioImpactCardProps) {
 function Body({
   ready,
   positions,
-  impact,
+  pnl,
 }: {
   ready: boolean;
   positions: PortfolioPosition[];
-  impact: PortfolioImpact;
+  pnl: PortfolioPnL;
 }) {
   if (!ready) {
     return <p className="text-sm text-muted-foreground">Loading portfolio…</p>;
@@ -77,20 +96,20 @@ function Body({
         <Link href="/portfolio" className="text-primary hover:underline">
           /portfolio
         </Link>{" "}
-        to see dollar impact here.
+        to see real P&L here.
       </p>
     );
   }
 
-  if (impact.rows.length === 0) {
+  if (pnl.rows.length === 0) {
     return (
       <div className="space-y-2">
         <p className="text-sm text-muted-foreground">
-          None of your positions appear in today&apos;s report movers.
+          None of your positions have quote data yet.
         </p>
-        {impact.missing.length > 0 ? (
+        {pnl.missing.length > 0 ? (
           <div className="flex flex-wrap gap-1">
-            {impact.missing.map((s) => (
+            {pnl.missing.map((s) => (
               <Tag key={s} className="font-data-mono">
                 {s}
               </Tag>
@@ -103,78 +122,102 @@ function Body({
 
   return (
     <div className="space-y-3">
-      <div className="rounded-lg border border-border-subtle">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pb-3 border-b border-border-subtle">
+        <Stat
+          label="Current value"
+          value={fmtMoneyPlain(pnl.totalCurrentValue)}
+        />
+        <Stat label="Cost basis" value={fmtMoneyPlain(pnl.totalCostBasis)} muted />
+        <Stat
+          label="Total P&L"
+          value={`${fmtMoney(pnl.totalPnL)} (${fmtPct(pnl.totalPnLPct)})`}
+          colorClass={pnlColorClass(pnl.totalPnL)}
+        />
+        <Stat
+          label="Day P&L"
+          value={fmtMoney(pnl.totalDayPnL)}
+          colorClass={pnlColorClass(pnl.totalDayPnL)}
+        />
+      </div>
+      <div className="rounded-lg border border-border-subtle overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase">
                 Symbol
               </TableHead>
-              <TableHead className="hidden md:table-cell font-label-caps text-label-caps text-text-secondary uppercase text-right">
+              <TableHead className="hidden md:table-cell text-right font-label-caps text-label-caps text-text-secondary uppercase">
                 Qty
               </TableHead>
-              <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right">
-                Move
+              <TableHead className="hidden md:table-cell text-right font-label-caps text-label-caps text-text-secondary uppercase">
+                Last
               </TableHead>
-              <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right">
-                Δ$
+              <TableHead className="text-right font-label-caps text-label-caps text-text-secondary uppercase">
+                Value
+              </TableHead>
+              <TableHead className="text-right font-label-caps text-label-caps text-text-secondary uppercase">
+                Total P&L
+              </TableHead>
+              <TableHead className="text-right font-label-caps text-label-caps text-text-secondary uppercase">
+                Day P&L
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {impact.rows.map((row) => {
-              const sentiment =
-                row.pct > 0 ? "bullish" : row.pct < 0 ? "bearish" : "neutral";
-              const pctText = `${row.pct > 0 ? "+" : ""}${row.pct.toFixed(2)}%`;
-              return (
-                <TableRow key={row.symbol}>
-                  <TableCell className="font-data-mono text-data-mono">
-                    {row.symbol}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell text-right font-data-mono text-data-mono text-text-secondary">
-                    {row.quantity}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Sentiment sentiment={sentiment} label={pctText} />
-                  </TableCell>
-                  <TableCell
-                    className={`text-right font-data-mono text-data-mono ${
-                      row.dollarDelta > 0
-                        ? "text-regime-risk-on"
-                        : row.dollarDelta < 0
-                          ? "text-regime-risk-off"
-                          : "text-text-secondary"
-                    }`}
-                  >
-                    {fmtMoney(row.dollarDelta)}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+            {pnl.rows.map((row) => (
+              <TableRow key={row.symbol}>
+                <TableCell className="font-data-mono text-data-mono">
+                  {row.symbol}
+                </TableCell>
+                <TableCell className="hidden md:table-cell text-right font-data-mono text-data-mono text-text-secondary">
+                  {row.quantity}
+                </TableCell>
+                <TableCell className="hidden md:table-cell text-right font-data-mono text-data-mono text-text-secondary">
+                  {fmtMoneyPlain(row.lastClose, row.currency)}
+                </TableCell>
+                <TableCell className="text-right font-data-mono text-data-mono text-text-primary">
+                  {fmtMoneyPlain(row.currentValue, row.currency)}
+                </TableCell>
+                <TableCell className={`text-right font-data-mono text-data-mono ${pnlColorClass(row.totalPnL)}`}>
+                  <div>{fmtMoney(row.totalPnL, row.currency)}</div>
+                  <div className="text-[11px]">{fmtPct(row.totalPnLPct)}</div>
+                </TableCell>
+                <TableCell className={`text-right font-data-mono text-data-mono ${pnlColorClass(row.dayPnL ?? 0)}`}>
+                  {row.dayPnL !== null ? fmtMoney(row.dayPnL, row.currency) : "—"}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
-      <div className="flex justify-between font-body-compact text-body-compact">
-        <span className="text-text-secondary">
-          {impact.missing.length > 0
-            ? `${impact.missing.length} position${impact.missing.length === 1 ? "" : "s"} not in report`
-            : ""}
-        </span>
-        <span
-          className={`font-data-mono ${
-            impact.totalDollarDelta > 0
-              ? "text-regime-risk-on"
-              : impact.totalDollarDelta < 0
-                ? "text-regime-risk-off"
-                : "text-text-primary"
-          }`}
-        >
-          Total {fmtMoney(impact.totalDollarDelta)}
-        </span>
+      {pnl.missing.length > 0 ? (
+        <p className="text-xs text-muted-foreground">
+          {pnl.missing.length} position{pnl.missing.length === 1 ? "" : "s"} not in quote universe: {pnl.missing.join(", ")}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  colorClass,
+  muted,
+}: {
+  label: string;
+  value: string;
+  colorClass?: string;
+  muted?: boolean;
+}) {
+  return (
+    <div className="space-y-0.5">
+      <div className="font-label-caps text-label-caps text-text-secondary uppercase">{label}</div>
+      <div
+        className={`font-data-mono text-data-mono ${colorClass ?? (muted ? "text-text-secondary" : "text-text-primary")}`}
+      >
+        {value}
       </div>
-      <p className="text-[11px] text-muted-foreground">
-        Δ$ estimated as quantity × avg price × pct. Refines when live quote integration lands.
-      </p>
     </div>
   );
 }

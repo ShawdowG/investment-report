@@ -87,3 +87,12 @@ export function deleteNote(rawSymbol: string, id: string): TickerNote[] {
   writeJson(STORAGE_KEY, all);
   return sortNewestFirst(updated);
 }
+
+// SPEC-016: compile-time conformance check vs the contract.
+import type { NotesRepository } from "./contracts";
+const _conforms: NotesRepository = {
+  list: getNotes,
+  add: addNote,
+  remove: deleteNote,
+};
+void _conforms;

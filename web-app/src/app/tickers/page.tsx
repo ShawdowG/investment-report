@@ -2,14 +2,14 @@ export const dynamic = "force-static";
 
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
-import { listAvailableTickers } from "@/lib/reports/load-by-ticker";
+import { listQuoteSymbols } from "@/lib/quotes/load-quote";
 
 export const metadata = {
   title: "Tickers — Investment Report",
 };
 
 export default function TickersPage() {
-  const symbols = listAvailableTickers();
+  const symbols = listQuoteSymbols();
 
   return (
     <AppShell>
@@ -17,8 +17,8 @@ export default function TickersPage() {
         <header className="space-y-1">
           <h1 className="font-h1 text-h1 text-text-primary">Tickers</h1>
           <p className="font-body-compact text-body-compact text-text-secondary">
-            {symbols.length} symbol{symbols.length === 1 ? "" : "s"} indexed across reports.
-            Click a symbol to see its full mention history.
+            {symbols.length} symbol{symbols.length === 1 ? "" : "s"} in the quote universe.
+            Click one to see its price chart + history.
           </p>
         </header>
         {symbols.length === 0 ? (
@@ -27,7 +27,7 @@ export default function TickersPage() {
           </div>
         ) : (
           <div className="flex flex-wrap gap-2">
-            {symbols.map((symbol) => (
+            {symbols.map((symbol: string) => (
               <Link
                 key={symbol}
                 href={`/ticker/${encodeURIComponent(symbol)}`}

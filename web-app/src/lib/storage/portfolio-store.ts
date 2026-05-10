@@ -72,3 +72,13 @@ export function removePosition(rawSymbol: string): PortfolioPosition[] {
 export function clearPortfolio(): void {
   removeKey(STORAGE_KEY);
 }
+
+// SPEC-016: compile-time conformance check vs the contract.
+import type { PortfolioRepository } from "./contracts";
+const _conforms: PortfolioRepository = {
+  list: getPortfolio,
+  add: addPosition,
+  remove: removePosition,
+  clear: clearPortfolio,
+};
+void _conforms;

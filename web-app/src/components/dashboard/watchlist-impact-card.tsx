@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { SectionHeader, Sentiment, Tag } from "@/components/ui/stitch";
+import { SectionHeader, Tag } from "@/components/ui/stitch";
 import {
   Table,
   TableBody,
@@ -13,145 +14,221 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getWatchlist } from "@/lib/storage/watchlist-store";
-import {
-  getWatchlistImpact,
-  type ImpactRow,
-  type WatchlistImpact,
-} from "@/lib/reports/watchlist-impact";
-import type { ReportItem } from "@/types/reports";
+import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
+import { cn } from "@/lib/utils";
 
 interface WatchlistImpactCardProps {
-  latest: ReportItem | null;
+  snapshots: QuoteSnapshotMap;
+  /** Threshold for "high attention" classification, default 3%. */
+  highThresholdPct?: number;
 }
 
-export function WatchlistImpactCard({ latest }: WatchlistImpactCardProps) {
+interface ImpactRow {
+  symbol: string;
+  name?: string;
+  pct: number;
+  level: "high" | "medium";
+}
+
+function fmtMoney(n: number, currency = "USD"): string {
+  const symbol = currency === "USD" ? "$" : "";
+  return `${symbol}${n.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+function buildImpact(
+  symbols: string[],
+  snapshots: QuoteSnapshotMap,
+  highThreshold: number,
+): { high: ImpactRow[]; medium: ImpactRow[]; missing: string[] } {
+  const high: ImpactRow[] = [];
+  const medium: ImpactRow[] = [];
+  const missing: string[] = [];
+  for (const symbol of symbols) {
+    const snap = snapshots[symbol];
+    if (!snap || snap.dayDelta === null) {
+      missing.push(symbol);
+      continue;
+    }
+    const row: ImpactRow = {
+      symbol,
+      name: snap.name,
+      pct: snap.dayDelta.pct,
+      level: Math.abs(snap.dayDelta.pct) >= highThreshold ? "high" : "medium",
+    };
+    if (row.level === "high") high.push(row);
+    else medium.push(row);
+  }
+  high.sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct));
+  medium.sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct));
+  return { high, medium, missing };
+}
+
+export function WatchlistImpactCard({
+  snapshots,
+  highThresholdPct = 3,
+}: WatchlistImpactCardProps) {
   const [symbols, setSymbols] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setSymbols(getWatchlist().map((item) => item.symbol));
+    setSymbols(getWatchlist().map((i) => i.symbol));
     setReady(true);
   }, []);
-
-  const impact: WatchlistImpact = ready
-    ? getWatchlistImpact(latest, symbols)
-    : { high: [], medium: [], missing: [] };
 
   return (
     <Card className="p-card-padding gap-4">
       <SectionHeader
         title="Watchlist Impact"
-        caption="How today's report affects symbols you follow"
+        caption={`Day deltas for symbols you follow (high ≥ ±${highThresholdPct}%)`}
       />
-      <WatchlistImpactBody ready={ready} symbols={symbols} impact={impact} />
+      <Body
+        ready={ready}
+        symbols={symbols}
+        snapshots={snapshots}
+        highThresholdPct={highThresholdPct}
+      />
     </Card>
   );
 }
 
-interface BodyProps {
+function Body({
+  ready,
+  symbols,
+  snapshots,
+  highThresholdPct,
+}: {
   ready: boolean;
   symbols: string[];
-  impact: WatchlistImpact;
-}
-
-function WatchlistImpactBody({ ready, symbols, impact }: BodyProps) {
+  snapshots: QuoteSnapshotMap;
+  highThresholdPct: number;
+}) {
   if (!ready) {
-    return (
-      <p className="text-sm text-muted-foreground">Loading watchlist…</p>
-    );
+    return <p className="text-sm text-muted-foreground">Loading watchlist…</p>;
   }
-
   if (symbols.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
-        Add symbols in{" "}
+        Add symbols on{" "}
         <Link href="/watchlist" className="text-primary hover:underline">
           /watchlist
         </Link>{" "}
-        to see how this report affects them.
+        to see day deltas here.
       </p>
     );
   }
 
-  const { high, medium, missing } = impact;
+  const { high, medium, missing } = buildImpact(symbols, snapshots, highThresholdPct);
 
   if (high.length === 0 && medium.length === 0) {
     return (
       <div className="space-y-2">
         <p className="text-sm text-muted-foreground">
-          None of your watched symbols appear in today&apos;s report.
+          No quote data for any of your watched symbols.
         </p>
-        {missing.length > 0 ? <MissingList missing={missing} /> : null}
+        {missing.length > 0 ? (
+          <div className="flex flex-wrap gap-1">
+            {missing.map((s) => (
+              <Tag key={s} className="font-data-mono">
+                {s}
+              </Tag>
+            ))}
+          </div>
+        ) : null}
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      {high.length > 0 ? (
-        <ImpactBucket title="High attention" rows={high} />
+      {high.length > 0 ? <Bucket title={`High attention (${high.length})`} rows={high} snapshots={snapshots} /> : null}
+      {medium.length > 0 ? <Bucket title={`Medium attention (${medium.length})`} rows={medium} snapshots={snapshots} /> : null}
+      {missing.length > 0 ? (
+        <div className="space-y-1.5">
+          <p className="font-label-caps text-label-caps text-text-secondary uppercase">
+            No quote data ({missing.length})
+          </p>
+          <div className="flex flex-wrap gap-1">
+            {missing.map((s) => (
+              <Tag key={s} className="font-data-mono">
+                {s}
+              </Tag>
+            ))}
+          </div>
+        </div>
       ) : null}
-      {medium.length > 0 ? (
-        <ImpactBucket title="Medium attention" rows={medium} />
-      ) : null}
-      {missing.length > 0 ? <MissingList missing={missing} /> : null}
     </div>
   );
 }
 
-function ImpactBucket({ title, rows }: { title: string; rows: ImpactRow[] }) {
+function Bucket({
+  title,
+  rows,
+  snapshots,
+}: {
+  title: string;
+  rows: ImpactRow[];
+  snapshots: QuoteSnapshotMap;
+}) {
   return (
     <div className="space-y-2">
-      <h3 className="font-label-caps text-label-caps text-text-secondary uppercase">
-        {title} ({rows.length})
-      </h3>
+      <h3 className="font-label-caps text-label-caps text-text-secondary uppercase">{title}</h3>
       <div className="rounded-lg border border-border-subtle">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Symbol</TableHead>
-              <TableHead className="hidden md:table-cell">Name</TableHead>
-              <TableHead className="text-right">Move</TableHead>
+              <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase">
+                Symbol
+              </TableHead>
+              <TableHead className="hidden md:table-cell font-label-caps text-label-caps text-text-secondary uppercase">
+                Name
+              </TableHead>
+              <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right">
+                Last
+              </TableHead>
+              <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right">
+                Day Δ
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.map((row) => {
-              const sentiment =
-                row.pct > 0 ? "bullish" : row.pct < 0 ? "bearish" : "neutral";
-              const formatted = `${row.pct > 0 ? "+" : ""}${row.pct.toFixed(2)}%`;
+              const snap = snapshots[row.symbol];
+              const colorClass =
+                row.pct > 0
+                  ? "text-regime-risk-on"
+                  : row.pct < 0
+                    ? "text-regime-risk-off"
+                    : "text-text-secondary";
               return (
                 <TableRow key={row.symbol}>
-                  <TableCell className="font-data-mono text-data-mono">
-                    {row.symbol}
+                  <TableCell>
+                    <Link
+                      href={`/ticker/${encodeURIComponent(row.symbol)}`}
+                      className="font-data-mono text-data-mono text-text-primary hover:text-primary transition-colors"
+                    >
+                      {row.symbol}
+                    </Link>
                   </TableCell>
-                  <TableCell className="hidden md:table-cell text-sm text-muted-foreground">
+                  <TableCell className="hidden md:table-cell text-sm text-muted-foreground truncate max-w-[200px]">
                     {row.name ?? ""}
                   </TableCell>
-                  <TableCell className="text-right">
-                    <Sentiment sentiment={sentiment} label={formatted} />
+                  <TableCell className="text-right font-data-mono text-data-mono text-text-primary">
+                    {snap ? fmtMoney(snap.lastClose, snap.currency) : "—"}
+                  </TableCell>
+                  <TableCell className={cn("text-right font-data-mono text-data-mono", colorClass)}>
+                    <span className="inline-flex items-center gap-1 justify-end">
+                      {row.pct > 0 ? <ArrowUp className="size-3" /> : row.pct < 0 ? <ArrowDown className="size-3" /> : null}
+                      {`${row.pct > 0 ? "+" : ""}${row.pct.toFixed(2)}%`}
+                    </span>
                   </TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
-      </div>
-    </div>
-  );
-}
-
-function MissingList({ missing }: { missing: string[] }) {
-  return (
-    <div className="space-y-1.5">
-      <p className="font-label-caps text-label-caps text-text-secondary uppercase">
-        Not in this report ({missing.length})
-      </p>
-      <div className="flex flex-wrap gap-1">
-        {missing.map((symbol) => (
-          <Tag key={symbol} className="font-data-mono">
-            {symbol}
-          </Tag>
-        ))}
       </div>
     </div>
   );

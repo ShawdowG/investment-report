@@ -3,15 +3,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "fetch": "python scripts/fetch-snapshot.py",
-    "generate": "node scripts/generate-report.js",
-    "build-index": "node scripts/build-index.js",
-    "validate": "node scripts/validate-reports.js && node scripts/validate-schema.js",
-    "report": "npm run fetch && npm run generate && npm run build-index",
-    "test:stitch": "node scripts/test-stitch-connection.js"
+    "fetch:quotes": "python scripts/fetch-quotes.py"
   },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0",
-    "dotenv": "^16.4.7"
-  }
+  "dependencies": {}
 }
