@@ -13,12 +13,14 @@ import { WatchlistImpactCard } from "@/components/dashboard/watchlist-impact-car
 import { LatestReportCard } from "@/components/dashboard/latest-report-card";
 import { TopMoversCard } from "@/components/dashboard/top-movers-card";
 import { PortfolioImpactCard } from "@/components/dashboard/portfolio-impact-card";
+import { loadAllQuoteSnapshots } from "@/lib/quotes/snapshots";
 
 const stripBullet = (line: string) => line.replace(/^[-•]\s*/, "").trim();
 
 export default function DashboardPage() {
   const index = loadSearchIndex();
   const latest = index.items[0];
+  const snapshots = loadAllQuoteSnapshots();
 
   if (!latest) {
     return (
@@ -79,7 +81,7 @@ export default function DashboardPage() {
 
         <WatchlistImpactCard latest={latest} />
 
-        <PortfolioImpactCard latest={latest} />
+        <PortfolioImpactCard snapshots={snapshots} />
       </div>
     </AppShell>
   );
