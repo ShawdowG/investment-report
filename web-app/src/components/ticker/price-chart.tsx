@@ -18,6 +18,11 @@ const RISK_OFF = "#ef4444";
 
 interface RangeOption {
   label: string;
+  /**
+   * Trading bars to slice from the end. Special values:
+   *   -1 = year-to-date (custom slice)
+   *   -2 = full series available
+   */
   bars: number;
 }
 
@@ -27,6 +32,9 @@ const RANGES: RangeOption[] = [
   { label: "6M", bars: 132 },
   { label: "YTD", bars: -1 },
   { label: "1Y", bars: 252 },
+  { label: "3Y", bars: 756 },
+  { label: "5Y", bars: 1260 },
+  { label: "ALL", bars: -2 },
 ];
 
 interface PriceChartProps {
@@ -68,11 +76,17 @@ function PriceTooltip({ active, payload, currency }: TooltipRenderProps & { curr
   );
 }
 
+function sliceForRange(daily: QuoteBar[], range: RangeOption): QuoteBar[] {
+  if (range.bars === -1) return ytdSlice(daily);
+  if (range.bars === -2) return daily;
+  return daily.slice(-range.bars);
+}
+
 export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
+  // Default to 1Y on first render — same as Google Finance.
   const [rangeIdx, setRangeIdx] = useState(4);
   const range = RANGES[rangeIdx];
-  const slice =
-    range.bars === -1 ? ytdSlice(daily) : daily.slice(-range.bars);
+  const slice = sliceForRange(daily, range);
 
   if (slice.length < 2) {
     return (

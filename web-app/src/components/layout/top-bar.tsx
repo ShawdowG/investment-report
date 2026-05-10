@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Bell, Menu, Search, User } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
 
 interface TopBarProps {
@@ -68,7 +67,6 @@ export function TopBar({ onOpenMobileNav }: TopBarProps = {}) {
         >
           <User className="size-5" />
         </button>
-        <ThemeToggle />
       </div>
     </header>
   );
