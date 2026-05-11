@@ -2,15 +2,15 @@
 
 Inkrementell leveringsrekkefølge. Sjekk `STATUS.md` for live-status før du henter neste oppgave.
 
-## Current focus (2026-05-10, late evening)
+## Current focus (2026-05-11)
 
-P0 + P1 + Stitch foundation er ferdig. Eneste åpne core-spec er **SPEC-012 (Supabase schema draft)** — no-runtime-dep, ikke blokkerende.
+P0 + P1 + P2 + v4 cockpit (SPEC-014–022) er ferdig. SPEC-003 og SPEC-010 sunset under SPEC-022. Eneste åpne core-spec er **SPEC-012 (Supabase schema draft)** — no-runtime-dep, ikke blokkerende.
 
-Andre åpne tråder:
-- **codex-agent SPEC-003** Dashboard latest/previous compare — eier andre agent.
-- **Light-mode palette** (ADR-007 follow-up) — Stitch er dark-only; bestem om light mode skal designes eller togglen droppes.
-- **migration/ folder cleanup** — historisk web-next migrasjons-doc; safe å slette.
-- **Per-row inline edit på watchlist** (SPEC-013 follow-up) — kan komme senere; remove + re-add fungerer som workaround.
+Åpne tråder (queued for pickup):
+- **SPEC-012 Supabase schema draft** — skriv `docs/specs/012-supabase-schema.md` (tables for watchlist, portfolio, notes, quotes, research, strategies). No runtime code.
+- **Watchlist per-row inline edit** (SPEC-013 follow-up) — inline dropdowns for status / priority / tags på `/watchlist`.
+- **Light-mode palette** (ADR-007 follow-up) — design light variant for Stitch tokens + wire opp theme toggle. Bekreftet 2026-05-11: skal designes, ikke droppes.
+- **migration/ folder cleanup** — 9 historiske web-next-filer, safe å slette per ADR-006.
 
 ## P0 — Core product shell and data — ✅ done
 1. ✅ SPEC-001 Shell + 6-route navigation (`5d6552d`)
@@ -32,11 +32,13 @@ Andre åpne tråder:
 13. ✅ SPEC-013 Watchlist storage shape extension (status / priority / tags) — Brief Task 4.3 (`84306d9`)
 
 ## Pending mini-specs / follow-ups (no formal doc yet)
-- **Light-mode palette decision** (ADR-007 follow-up): Stitch is dark-only — drop the toggle or design a light variant.
-- **Watchlist per-row inline edit** (SPEC-013 follow-up): currently remove+re-add to change metadata; inline dropdowns would be polish.
-- **Real-time / live ticker price** (SPEC-008 follow-up): dollar P&L estimate uses avg price as proxy. Needs external quote integration.
-- **migration/ folder cleanup**: historical web-next migration docs, safe to delete post-ADR-006.
-- **Yahoo / Google Finance news adapter** (SPEC-010 follow-up): contract exists, needs concrete integration spec.
+- **Light-mode palette** (ADR-007 follow-up): design light variant — confirmed 2026-05-11.
+- **Watchlist per-row inline edit** (SPEC-013 follow-up): inline dropdowns instead of remove+re-add.
+- **migration/ folder cleanup**: 9 historical web-next files, safe to delete post-ADR-006.
+- **Real-time / live ticker price** (SPEC-008 follow-up): now partly covered by SPEC-014 quote pipeline (daily close). Intraday/live would still need external integration.
+
+## Obsolete / superseded
+- ~~**Yahoo / Google Finance news adapter** (SPEC-010 follow-up)~~ — SPEC-010 sunset under SPEC-022 (2026-05-10). News surface removed from app.
 
 ## Execution rules
 - Én feature/spec per logisk commit; én spec per branch når praktisk (på `v3-revamp` har vi flere specs samlet — det er OK når de leveres som separate commits).
