@@ -41,6 +41,7 @@ import { ScenariosEditor } from "@/components/research/scenarios-editor";
 import { ThesisChecklists } from "@/components/research/thesis-checklists";
 import { ThesisNotes } from "@/components/research/thesis-notes";
 import { ThesisView } from "@/components/research/thesis-view";
+import { ThesisImportPanel } from "@/components/research/thesis-import-panel";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -307,6 +308,114 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       }
       setError("Couldn't copy to clipboard — try selecting and copying manually.");
     }
+  }
+
+  // SPEC-025 W9.B — synthesize a Thesis snapshot of the live form state so
+  // the import panel can render a per-field diff against what the user is
+  // currently editing (not the last-saved version).
+  const liveThesis: Thesis = useMemo(() => {
+    const now = new Date().toISOString();
+    const base: Thesis = existing
+      ? { ...existing }
+      : {
+          symbol: upper,
+          createdAt: now,
+          updatedAt: now,
+          thesisPoints: [],
+          concerns: {},
+          questions: [],
+          classifiedPoints: [],
+          tradeLevels: [],
+          fundamentals: {},
+          marketPosition: {},
+          coreDrivers: [],
+          optionalDrivers: [],
+          valuation: {},
+          scenarios: defaultScenarios(),
+          currentLight: "yellow",
+          greenChecks: emptyChecks(GREEN_CHECK_COUNT),
+          yellowChecks: emptyChecks(YELLOW_CHECK_COUNT),
+          redChecks: emptyChecks(RED_CHECK_COUNT),
+          trimSellChecks: emptyChecks(TRIM_SELL_CHECK_COUNT),
+          notes: [],
+        };
+    return {
+      ...base,
+      thesisPoints: linesToList(form.thesisPointsRaw),
+      concerns,
+      questions: linesToList(questionsRaw),
+      classifiedPoints,
+      fundamentals,
+      marketPosition,
+      coreDrivers: linesToList(coreDriversRaw),
+      optionalDrivers: linesToList(optionalDriversRaw),
+      valuation,
+      scenarios,
+      currentLight: light,
+      greenChecks,
+      yellowChecks,
+      redChecks,
+      trimSellChecks,
+      notes,
+      analysisNotes: analysisNotes || undefined,
+    };
+  }, [
+    existing,
+    upper,
+    form.thesisPointsRaw,
+    concerns,
+    questionsRaw,
+    classifiedPoints,
+    fundamentals,
+    marketPosition,
+    coreDriversRaw,
+    optionalDriversRaw,
+    valuation,
+    scenarios,
+    light,
+    greenChecks,
+    yellowChecks,
+    redChecks,
+    trimSellChecks,
+    notes,
+    analysisNotes,
+  ]);
+
+  /**
+   * Apply a parsed-fragment patch back into form state. The panel hands us a
+   * `Partial<Thesis>` describing fields the user accepted; we translate that
+   * back into the granular state hooks that drive the form. The user still
+   * has to hit "Save thesis" to persist — this is consistent with the rest
+   * of the form's edit-then-submit flow.
+   */
+  function handleImportApply(patch: Partial<Thesis>) {
+    if (patch.thesisPoints !== undefined) {
+      const merged = Array.from(
+        new Set([...linesToList(form.thesisPointsRaw), ...patch.thesisPoints]),
+      );
+      setForm((f) => ({ ...f, thesisPointsRaw: merged.join("\n") }));
+    }
+    if (patch.concerns) setConcerns((c) => ({ ...c, ...patch.concerns }));
+    if (patch.fundamentals) setFundamentals((f) => ({ ...f, ...patch.fundamentals }));
+    if (patch.marketPosition)
+      setMarketPosition((m) => ({ ...m, ...patch.marketPosition }));
+    if (patch.valuation) setValuation((v) => ({ ...v, ...patch.valuation }));
+    if (patch.scenarios) setScenarios(patch.scenarios);
+    if (patch.greenChecks) setGreenChecks(patch.greenChecks);
+    if (patch.yellowChecks) setYellowChecks(patch.yellowChecks);
+    if (patch.redChecks) setRedChecks(patch.redChecks);
+    if (patch.trimSellChecks) setTrimSellChecks(patch.trimSellChecks);
+    if (patch.classifiedPoints) setClassifiedPoints(patch.classifiedPoints);
+    if (patch.coreDrivers) setCoreDriversRaw(patch.coreDrivers.join("\n"));
+    if (patch.optionalDrivers) setOptionalDriversRaw(patch.optionalDrivers.join("\n"));
+    if (patch.questions) {
+      const merged = Array.from(
+        new Set([...linesToList(questionsRaw), ...patch.questions]),
+      );
+      setQuestionsRaw(merged.join("\n"));
+    }
+    if (patch.analysisNotes !== undefined) setAnalysisNotes(patch.analysisNotes);
+    if (patch.notes) setNotes(patch.notes);
   }
 
 
@@ -836,7 +945,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           </DeepDiveSection>
           <DeepDiveSection
             title="Analysis notes (§10)"
-            caption="Free-form markdown blob — the ChatGPT round-trip target (W9 will parse this back to structured fields)."
+            caption="Free-form markdown blob — the ChatGPT round-trip target. Use the import panel below to push structured fields back automatically."
           >
             <TextAreaField
               label="Markdown"
@@ -845,6 +954,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
               rows={10}
             />
           </DeepDiveSection>
+          <ThesisImportPanel thesis={liveThesis} onApply={handleImportApply} />
         </Card>
       ) : null}
 
