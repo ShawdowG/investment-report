@@ -49,6 +49,7 @@ import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
 import { QuarterlyReviewForm } from "./quarterly-review-form";
 import { QuarterlyReviewTimeline } from "./quarterly-review-timeline";
+import { buildChatGPTPrompt } from "@/lib/research/thesis-markdown";
 
 interface ThesisFormProps {
   symbol: string;
@@ -213,6 +214,8 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   // SPEC-023 W8.F — quarterly review modal state.
   const [reviewFormOpen, setReviewFormOpen] = useState(false);
   const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
+  // SPEC-023 W8.G — Copy-to-ChatGPT pulse.
+  const [copiedAt, setCopiedAt] = useState<number | null>(null);
 
   // Initial hydration from localStorage + cross-store prefill.
   useEffect(() => {
@@ -266,6 +269,33 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     const handle = setTimeout(() => setSavedAt(null), 1500);
     return () => clearTimeout(handle);
   }, [savedAt]);
+
+  // Copy-to-ChatGPT pulse auto-dismiss (slightly longer — the user is on their
+  // way to ChatGPT and benefits from a still-visible confirmation).
+  useEffect(() => {
+    if (copiedAt === null) return;
+    const handle = setTimeout(() => setCopiedAt(null), 2500);
+    return () => clearTimeout(handle);
+  }, [copiedAt]);
+
+  async function handleCopyToChatGPT() {
+    if (!existing) return;
+    const prompt = buildChatGPTPrompt(existing);
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(prompt);
+      } else {
+        throw new Error("Clipboard API unavailable");
+      }
+      setCopiedAt(Date.now());
+      setError(null);
+    } catch (err) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error("[thesis] copy failed", err);
+      }
+      setError("Couldn't copy to clipboard — try selecting and copying manually.");
+    }
+  }
 
 
   const tradeLevels = useMemo(() => buildTradeLevels(form), [form]);
@@ -479,7 +509,15 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
             Deep dive →
           </button>
         </div>
-        {savedAt !== null ? (
+        {copiedAt !== null ? (
+          <span
+            role="status"
+            aria-live="polite"
+            className="font-label-caps text-label-caps uppercase text-regime-risk-on animate-pulse"
+          >
+            Copied — paste into ChatGPT
+          </span>
+        ) : savedAt !== null ? (
           <span
             role="status"
             aria-live="polite"
@@ -884,7 +922,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
         </p>
       ) : null}
 
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           {existing ? (
             <Button
@@ -899,9 +937,21 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
             </Button>
           ) : null}
         </div>
-        <Button type="submit" size="sm">
-          {existing ? "Save thesis" : "Create thesis"}
-        </Button>
+        <div className="flex items-center gap-2">
+          {existing ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handleCopyToChatGPT}
+            >
+              Copy to ChatGPT
+            </Button>
+          ) : null}
+          <Button type="submit" size="sm">
+            {existing ? "Save thesis" : "Create thesis"}
+          </Button>
+        </div>
       </div>
 
       {existing ? (
