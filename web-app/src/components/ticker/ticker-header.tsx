@@ -5,10 +5,11 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type FormEvent,
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { MoreVertical, Plus } from "lucide-react";
+import { Briefcase, MoreVertical, Plus } from "lucide-react";
 import { BadgeSelect, PriorityBadge, StatusBadge } from "@/components/ui/stitch";
 import { cn } from "@/lib/utils";
 import type {
@@ -16,12 +17,17 @@ import type {
   WatchlistPriority,
   WatchlistStatus,
 } from "@/lib/domain/watchlist";
+import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import {
   addToWatchlist,
   getWatchlist,
   removeFromWatchlist,
   updateWatchlistItem,
 } from "@/lib/storage/watchlist-store";
+import {
+  addPosition,
+  getPortfolio,
+} from "@/lib/storage/portfolio-store";
 
 interface TickerHeaderProps {
   symbol: string;
@@ -46,16 +52,23 @@ const PRIORITY_OPTIONS: { value: WatchlistPriority; label: string }[] = [
 
 export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
   const [entry, setEntry] = useState<WatchlistItem | null>(null);
+  const [position, setPosition] = useState<PortfolioPosition | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const found = getWatchlist().find((item) => item.symbol === symbol) ?? null;
     setEntry(found);
+    const pos = getPortfolio().find((p) => p.symbol === symbol) ?? null;
+    setPosition(pos);
     setReady(true);
   }, [symbol]);
 
   function syncFromList(next: WatchlistItem[]) {
     setEntry(next.find((i) => i.symbol === symbol) ?? null);
+  }
+
+  function syncPortfolio(next: PortfolioPosition[]) {
+    setPosition(next.find((p) => p.symbol === symbol) ?? null);
   }
 
   function handleAdd() {
@@ -116,6 +129,13 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
                 Add to watchlist
               </button>
             )
+          ) : null}
+          {ready ? (
+            <PortfolioQuickAction
+              symbol={symbol}
+              position={position}
+              onSaved={syncPortfolio}
+            />
           ) : null}
           {(tags ?? []).map((tag) => (
             <span
@@ -257,5 +277,189 @@ function MenuLabel({ children }: { children: ReactNode }) {
     <div className="px-3 pt-1.5 pb-1 font-label-caps text-label-caps text-text-secondary uppercase">
       {children}
     </div>
+  );
+}
+
+interface PortfolioQuickActionProps {
+  symbol: string;
+  position: PortfolioPosition | null;
+  onSaved: (next: PortfolioPosition[]) => void;
+}
+
+function fmtQtyChip(qty: number): string {
+  return qty.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 4,
+  });
+}
+
+function PortfolioQuickAction({ symbol, position, onSaved }: PortfolioQuickActionProps) {
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const [qty, setQty] = useState("");
+  const [avg, setAvg] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    const rect = triggerRef.current?.getBoundingClientRect();
+    if (rect) setPos({ top: rect.bottom + 4, left: rect.left });
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    setQty(position ? String(position.quantity) : "");
+    setAvg(position ? String(position.avgPrice) : "");
+    setError(null);
+  }, [open, position]);
+
+  useEffect(() => {
+    if (!open) return;
+    function onDocDown(e: MouseEvent) {
+      const t = e.target as Node;
+      if (triggerRef.current?.contains(t) || popoverRef.current?.contains(t)) return;
+      setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    function onScroll() {
+      setOpen(false);
+    }
+    document.addEventListener("mousedown", onDocDown);
+    document.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      document.removeEventListener("mousedown", onDocDown);
+      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [open]);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const q = Number.parseFloat(qty);
+    const p = Number.parseFloat(avg);
+    if (!Number.isFinite(q) || q <= 0) {
+      setError("Quantity must be > 0");
+      return;
+    }
+    if (!Number.isFinite(p) || p <= 0) {
+      setError("Avg price must be > 0");
+      return;
+    }
+    const next = addPosition({ symbol, quantity: q, avgPrice: p });
+    onSaved(next);
+    setOpen(false);
+  }
+
+  const inPortfolio = position !== null;
+  const triggerLabel = inPortfolio
+    ? `Edit ${symbol} position (${fmtQtyChip(position.quantity)} @ ${position.avgPrice})`
+    : `Add ${symbol} to portfolio`;
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-label={triggerLabel}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className="inline-flex items-center gap-1 px-2 py-0.5 rounded font-badge text-badge border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
+      >
+        <Briefcase aria-hidden="true" className="size-3.5" />
+        {inPortfolio ? (
+          <span className="font-data-mono">
+            {fmtQtyChip(position.quantity)} sh
+          </span>
+        ) : (
+          <span>Add to portfolio</span>
+        )}
+      </button>
+      {open && pos && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              ref={popoverRef}
+              role="dialog"
+              aria-label={`${inPortfolio ? "Edit" : "Add"} portfolio position for ${symbol}`}
+              style={{ position: "fixed", top: pos.top, left: pos.left, zIndex: 100, minWidth: 240 }}
+              className="rounded-md border border-border-subtle bg-surface p-3 shadow-lg"
+            >
+              <form onSubmit={handleSubmit} className="space-y-2">
+                <div className="space-y-1">
+                  <label
+                    htmlFor={`portfolio-qty-${symbol}`}
+                    className="block font-label-caps text-label-caps text-text-secondary uppercase"
+                  >
+                    Quantity
+                  </label>
+                  <input
+                    id={`portfolio-qty-${symbol}`}
+                    type="number"
+                    inputMode="decimal"
+                    step="any"
+                    min="0"
+                    value={qty}
+                    onChange={(e) => {
+                      setQty(e.target.value);
+                      if (error) setError(null);
+                    }}
+                    placeholder="0"
+                    autoFocus
+                    className="w-full rounded-md border border-border-subtle bg-surface-variant px-2 py-1 font-data-mono text-data-mono text-text-primary outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor={`portfolio-avg-${symbol}`}
+                    className="block font-label-caps text-label-caps text-text-secondary uppercase"
+                  >
+                    Avg price
+                  </label>
+                  <input
+                    id={`portfolio-avg-${symbol}`}
+                    type="number"
+                    inputMode="decimal"
+                    step="any"
+                    min="0"
+                    value={avg}
+                    onChange={(e) => {
+                      setAvg(e.target.value);
+                      if (error) setError(null);
+                    }}
+                    placeholder="0.00"
+                    className="w-full rounded-md border border-border-subtle bg-surface-variant px-2 py-1 font-data-mono text-data-mono text-text-primary outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                  />
+                </div>
+                {error ? (
+                  <p className="font-body-compact text-body-compact text-destructive">{error}</p>
+                ) : null}
+                <div className="flex justify-end gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="px-2 py-1 rounded font-body-compact text-body-compact text-text-secondary hover:text-text-primary transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-2 py-1 rounded font-body-compact text-body-compact bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+                  >
+                    {inPortfolio ? "Save" : "Add"}
+                  </button>
+                </div>
+              </form>
+            </div>,
+            document.body,
+          )
+        : null}
+    </>
   );
 }
