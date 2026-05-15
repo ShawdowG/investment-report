@@ -166,14 +166,19 @@ function Results({
   return (
     <div className="space-y-4">
       {errors.length > 0 ? (
-        <Card className="p-card-padding gap-2">
-          <div className="font-label-caps text-label-caps text-text-secondary uppercase">
-            Notes
+        <div
+          role="alert"
+          className="rounded p-3 bg-regime-risk-off/10 border border-regime-risk-off/30 text-regime-risk-off space-y-1"
+        >
+          <div className="font-label-caps text-label-caps uppercase">
+            Backtest issues
           </div>
           {errors.map((e, i) => (
-            <p key={i} className="text-xs text-text-secondary">{e}</p>
+            <p key={i} className="font-body-compact text-body-compact">
+              {e}
+            </p>
           ))}
-        </Card>
+        </div>
       ) : null}
 
       <Card className="p-card-padding gap-4">
