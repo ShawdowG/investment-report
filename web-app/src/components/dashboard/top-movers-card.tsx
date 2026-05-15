@@ -6,31 +6,48 @@ import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 
 interface TopMoversCardProps {
   snapshots: QuoteSnapshotMap;
-  /** Excluded symbols (typically indices and macro). */
-  exclude?: string[];
-  /** Number of winners + losers to show. Default 4 each. */
+  /** Total number of rows to show, sorted by |day Δ%| desc. */
   limit?: number;
+  /** Symbols to drop from the pool (typically the index/macro set). */
+  exclude?: string[];
+  /** If provided, only these symbols are considered. */
+  includeOnly?: string[];
+  /** Caption hint about which pool we're drawing from. */
+  sourceLabel?: "universe" | "watchlist";
   className?: string;
 }
 
-const DEFAULT_EXCLUDE = ["^GSPC", "^NDX", "GC=F", "BTC-USD"];
-
 export function TopMoversCard({
   snapshots,
-  exclude = DEFAULT_EXCLUDE,
-  limit = 4,
+  limit = 8,
+  exclude = [],
+  includeOnly,
+  sourceLabel = "universe",
   className,
 }: TopMoversCardProps) {
+  const excludeSet = new Set(exclude);
+  const includeSet = includeOnly ? new Set(includeOnly) : null;
+
   const ranked = Object.values(snapshots)
-    .filter((s) => !exclude.includes(s.symbol) && s.dayDelta !== null)
+    .filter((s) => {
+      if (s.dayDelta === null) return false;
+      if (excludeSet.has(s.symbol)) return false;
+      if (includeSet && !includeSet.has(s.symbol)) return false;
+      return true;
+    })
     .sort((a, b) => Math.abs(b.dayDelta!.pct) - Math.abs(a.dayDelta!.pct))
-    .slice(0, limit * 2);
+    .slice(0, limit);
+
+  const caption =
+    sourceLabel === "watchlist"
+      ? `Largest absolute day moves in your watchlist`
+      : `Largest absolute day moves outside indices`;
 
   return (
     <Card className={`p-card-padding gap-4 ${className ?? ""}`}>
       <SectionHeader
         title="Top Movers"
-        caption="Largest absolute day moves outside indices"
+        caption={caption}
         action={<TrendingUp className="size-5 text-text-secondary" aria-hidden="true" />}
       />
       {ranked.length === 0 ? (

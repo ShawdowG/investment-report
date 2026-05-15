@@ -7,6 +7,7 @@ export interface QuoteSnapshot {
   dayDelta: Delta | null;
   currency: string;
   name?: string;
+  sector?: string;
   asOf: string;
 }
 
@@ -33,6 +34,7 @@ export function loadAllQuoteSnapshots(): QuoteSnapshotMap {
       dayDelta: dayDelta(series.daily),
       currency: series.meta.currency ?? "USD",
       name: series.meta.name,
+      sector: series.meta.sector,
       asOf: last.date,
     };
   }

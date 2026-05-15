@@ -1,6 +1,7 @@
 export const dynamic = "force-static";
 
 import { AppShell } from "@/components/layout/app-shell";
+import { DashboardSettingsPanel } from "@/components/settings/dashboard-settings-panel";
 import { SettingsActions } from "@/components/settings/settings-actions";
 
 export default function SettingsPage() {
@@ -13,6 +14,7 @@ export default function SettingsPage() {
             Local data utilities and app preferences.
           </p>
         </header>
+        <DashboardSettingsPanel />
         <SettingsActions />
       </div>
     </AppShell>

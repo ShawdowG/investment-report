@@ -15,7 +15,7 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-009 | Notes/journal local-first (Personal Notes widget on `/ticker/[symbol]`) | claude-code | ✅ done | - | 52693e9 | 2026-05-10 |
 | SPEC-010 | News adapter abstraction (sunset under SPEC-022 along with reports) | claude-code | ⛔ obsolete | - | f0ce28d | 2026-05-10 |
 | SPEC-011 | Stitch design integration (tokens + primitives + layout shell + dashboard re-skin + mobile drawer) | claude-code | ✅ done | - | step 1-4 + drawer shipped | 2026-05-10 |
-| SPEC-012 | Supabase-ready schema draft | unassigned | ⬜ todo | none | - | - |
+| SPEC-012 | Supabase-ready schema draft (DDL + RLS + sync plan, no runtime dep) | claude-code | ✅ done | - | pending commit | 2026-05-15 |
 | SPEC-013 | Watchlist storage shape extension (status / priority / tags fields) | claude-code | ✅ done | - | 84306d9 | 2026-05-10 |
 | SPEC-014 | Daily quote pipeline (`scripts/fetch-quotes.py` + `data/quotes/SYMBOL.json` shape) — v4 cockpit foundation | claude-code | ✅ done | - | 526955b | 2026-05-10 |
 | SPEC-015 | Ticker detail with Recharts price chart + quote summary on `/ticker/[symbol]` | claude-code | ✅ done | - | 1aa4b09 | 2026-05-10 |

@@ -60,24 +60,24 @@ export function BacktestChart({ curve, initial }: BacktestChartProps) {
         <LineChart data={curve} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <CartesianGrid
             strokeDasharray="3 3"
-            stroke="rgba(255,255,255,0.06)"
+            stroke="var(--color-border-subtle)"
             vertical={false}
           />
           <XAxis
             dataKey="date"
-            stroke="#94a3b8"
+            stroke="var(--color-text-secondary)"
             fontSize={11}
             tickFormatter={(value: string) => value.slice(0, 7)}
             minTickGap={50}
           />
           <YAxis
-            stroke="#94a3b8"
+            stroke="var(--color-text-secondary)"
             fontSize={11}
             tickFormatter={(value: number) => fmtDollar(value)}
             width={70}
             domain={["auto", "auto"]}
           />
-          <Tooltip content={<EquityTooltip />} cursor={{ stroke: "rgba(255,255,255,0.15)" }} />
+          <Tooltip content={<EquityTooltip />} cursor={{ stroke: "var(--color-outline-variant)" }} />
           <Line
             type="monotone"
             dataKey="equity"

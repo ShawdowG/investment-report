@@ -3,13 +3,18 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 /**
- * v4 cockpit is dark-only per ADR-007 (Stitch handoff is dark-only).
- * `forcedTheme` overrides system preference and any persisted user choice
- * so the app always renders against the Stitch palette.
+ * Theme toggle landed 2026-05-15. Default is dark (the original Stitch
+ * palette); light mode is the ADR-007 follow-up palette. System preference
+ * is respected via `enableSystem`.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemesProvider attribute="class" forcedTheme="dark" enableSystem={false}>
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
+    >
       {children}
     </NextThemesProvider>
   );

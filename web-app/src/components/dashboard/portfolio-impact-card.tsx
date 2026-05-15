@@ -19,9 +19,15 @@ import {
   type PortfolioPnL,
 } from "@/lib/quotes/portfolio-pnl";
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
+import type { CompactDailyMap } from "@/lib/quotes/compact-daily";
+import { buildEquityCurve } from "@/lib/quotes/portfolio-equity";
+import { PortfolioEquityChart } from "./portfolio-equity-chart";
 
 interface PortfolioImpactCardProps {
   snapshots: QuoteSnapshotMap;
+  compactDaily?: CompactDailyMap;
+  equityChartCollapsed?: boolean;
+  onToggleEquityChart?: () => void;
 }
 
 function fmtMoney(n: number, currency = "USD"): string {
@@ -52,7 +58,23 @@ function pnlColorClass(n: number): string {
   return "text-text-secondary";
 }
 
-export function PortfolioImpactCard({ snapshots }: PortfolioImpactCardProps) {
+const EMPTY_PNL: PortfolioPnL = {
+  rows: [],
+  missing: [],
+  totalCurrentValue: 0,
+  totalCostBasis: 0,
+  totalPnL: 0,
+  totalPnLPct: 0,
+  totalDayPnL: 0,
+  totalDayPnLPct: null,
+};
+
+export function PortfolioImpactCard({
+  snapshots,
+  compactDaily,
+  equityChartCollapsed = true,
+  onToggleEquityChart,
+}: PortfolioImpactCardProps) {
   const [positions, setPositions] = useState<PortfolioPosition[]>([]);
   const [ready, setReady] = useState(false);
 
@@ -63,7 +85,12 @@ export function PortfolioImpactCard({ snapshots }: PortfolioImpactCardProps) {
 
   const pnl: PortfolioPnL = ready
     ? getPortfolioPnL(positions, snapshots)
-    : { rows: [], missing: [], totalCurrentValue: 0, totalCostBasis: 0, totalPnL: 0, totalPnLPct: 0, totalDayPnL: 0 };
+    : EMPTY_PNL;
+
+  const curve =
+    ready && compactDaily
+      ? buildEquityCurve(positions, compactDaily)
+      : null;
 
   return (
     <Card className="p-card-padding gap-4">
@@ -72,6 +99,15 @@ export function PortfolioImpactCard({ snapshots }: PortfolioImpactCardProps) {
         caption="Real-price valuation using last-close from the daily quote feed"
       />
       <Body ready={ready} positions={positions} pnl={pnl} />
+      {ready && positions.length > 0 && curve && curve.points.length > 0 && onToggleEquityChart ? (
+        <div className="pt-2 border-t border-border-subtle">
+          <PortfolioEquityChart
+            curve={curve}
+            collapsed={equityChartCollapsed}
+            onToggleCollapsed={onToggleEquityChart}
+          />
+        </div>
+      ) : null}
     </Card>
   );
 }
@@ -120,6 +156,11 @@ function Body({
     );
   }
 
+  const dayPnLLabel =
+    pnl.totalDayPnLPct !== null
+      ? `${fmtMoney(pnl.totalDayPnL)} (${fmtPct(pnl.totalDayPnLPct)})`
+      : fmtMoney(pnl.totalDayPnL);
+
   return (
     <div className="space-y-3">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pb-3 border-b border-border-subtle">
@@ -135,7 +176,7 @@ function Body({
         />
         <Stat
           label="Day P&L"
-          value={fmtMoney(pnl.totalDayPnL)}
+          value={dayPnLLabel}
           colorClass={pnlColorClass(pnl.totalDayPnL)}
         />
       </div>
@@ -183,7 +224,16 @@ function Body({
                   <div className="text-[11px]">{fmtPct(row.totalPnLPct)}</div>
                 </TableCell>
                 <TableCell className={`text-right font-data-mono text-data-mono ${pnlColorClass(row.dayPnL ?? 0)}`}>
-                  {row.dayPnL !== null ? fmtMoney(row.dayPnL, row.currency) : "—"}
+                  {row.dayPnL !== null ? (
+                    <>
+                      <div>{fmtMoney(row.dayPnL, row.currency)}</div>
+                      {row.dayPnLPct !== null ? (
+                        <div className="text-[11px]">{fmtPct(row.dayPnLPct)}</div>
+                      ) : null}
+                    </>
+                  ) : (
+                    "—"
+                  )}
                 </TableCell>
               </TableRow>
             ))}

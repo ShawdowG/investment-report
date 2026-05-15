@@ -23,6 +23,7 @@ export interface PortfolioPnL {
   totalPnL: number;
   totalPnLPct: number;
   totalDayPnL: number;
+  totalDayPnLPct: number | null;
 }
 
 /**
@@ -72,6 +73,14 @@ export function getPortfolioPnL(
   const totalPnL = totalCurrentValue - totalCostBasis;
   const totalPnLPct = totalCostBasis === 0 ? 0 : (totalPnL / totalCostBasis) * 100;
   const totalDayPnL = rows.reduce((acc, r) => acc + (r.dayPnL ?? 0), 0);
+  // Day % relative to yesterday's portfolio value (today's value minus today's gain).
+  // Only positions with a day delta contribute; others would muddy the denominator.
+  const yesterdayValue = rows.reduce(
+    (acc, r) => acc + (r.dayPnL !== null ? r.currentValue - r.dayPnL : 0),
+    0,
+  );
+  const totalDayPnLPct =
+    yesterdayValue > 0 ? (totalDayPnL / yesterdayValue) * 100 : null;
 
   return {
     rows,
@@ -81,5 +90,6 @@ export function getPortfolioPnL(
     totalPnL,
     totalPnLPct,
     totalDayPnL,
+    totalDayPnLPct,
   };
 }
