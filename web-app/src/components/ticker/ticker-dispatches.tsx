@@ -30,8 +30,10 @@ export function TickerDispatches({ symbol }: TickerDispatchesProps) {
     setReady(true);
   }, [symbol]);
 
-  const caption = ready && items.length > 0
-    ? `${items.length} writeup${items.length === 1 ? "" : "s"} mentioning ${symbol}`
+  const caption = ready
+    ? items.length === 0
+      ? `No dispatches mentioning ${symbol} yet — write one in /research`
+      : `${items.length} writeup${items.length === 1 ? "" : "s"} mentioning ${symbol}`
     : undefined;
 
   return (
