@@ -2,6 +2,7 @@ export const dynamic = "force-static";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { DashboardSettingsPanel } from "@/components/settings/dashboard-settings-panel";
+import { ResearchFilesSettings } from "@/components/settings/research-files-settings";
 import { SettingsActions } from "@/components/settings/settings-actions";
 import { listQuoteSymbols } from "@/lib/quotes/load-quote";
 
@@ -18,6 +19,7 @@ export default function SettingsPage() {
           </p>
         </header>
         <DashboardSettingsPanel knownSymbols={knownSymbols} />
+        <ResearchFilesSettings />
         <SettingsActions />
       </div>
     </AppShell>
