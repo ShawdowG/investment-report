@@ -8,22 +8,11 @@ import {
   ytdDelta,
   type Delta,
 } from "@/lib/quotes/quote-utils";
+import { fmtMoney, fmtPct } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
 
 interface QuoteSummaryProps {
   series: QuoteSeries;
-}
-
-function fmtMoney(n: number, currency = "USD"): string {
-  const symbol = currency === "USD" ? "$" : "";
-  return `${symbol}${n.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
-}
-
-function fmtPct(n: number): string {
-  return `${n > 0 ? "+" : ""}${n.toFixed(2)}%`;
 }
 
 function deltaClass(d: Delta | null): string {
