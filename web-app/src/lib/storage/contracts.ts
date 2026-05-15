@@ -7,6 +7,7 @@ import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { TickerNote } from "@/lib/domain/ticker-note";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
 import type { Strategy } from "@/lib/domain/strategy";
+import type { Thesis } from "@/lib/domain/thesis";
 
 /**
  * Future-Supabase contract for the 3 client-side stores. Today's localStorage
@@ -93,4 +94,11 @@ export interface StrategyRepository {
   create(input: StrategyInputContract): Strategy;
   update(id: string, patch: Partial<StrategyInputContract>): Strategy | null;
   remove(id: string): void;
+}
+
+export interface ThesisRepository {
+  list(): Record<string, Thesis>;
+  get(symbol: string): Thesis | null;
+  upsert(thesis: Thesis): Thesis;
+  remove(symbol: string): void;
 }
