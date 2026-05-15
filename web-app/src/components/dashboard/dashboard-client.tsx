@@ -36,6 +36,22 @@ export function DashboardClient({
     setMounted(true);
   }, []);
 
+  // Cross-tab sync: settings exported/imported on /settings or edits made in
+  // another tab fire `storage` events on this tab. e.key === null means the
+  // whole storage was cleared (e.g. the "Clear all" button on /settings).
+  useEffect(() => {
+    function onStorage(e: StorageEvent) {
+      if (e.key === null || e.key === "dashboard_settings") {
+        setSettings(getDashboardSettings());
+      }
+      if (e.key === null || e.key === "watchlist_items") {
+        setWatchlistSymbols(getWatchlist().map((w) => w.symbol));
+      }
+    }
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
   // Days between asOf and now; null when asOf is unknown. Computed on the
   // client so SSR + client render agree until hydration sets `mounted`.
   const ageDays = useMemo<number | null>(() => {
