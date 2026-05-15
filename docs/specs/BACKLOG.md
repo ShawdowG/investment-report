@@ -2,15 +2,22 @@
 
 Inkrementell leveringsrekkefølge. Sjekk `STATUS.md` for live-status før du henter neste oppgave.
 
-## Current focus (2026-05-11)
+## Current focus (2026-05-15)
 
-P0 + P1 + P2 + v4 cockpit (SPEC-014–022) er ferdig. SPEC-003 og SPEC-010 sunset under SPEC-022. Eneste åpne core-spec er **SPEC-012 (Supabase schema draft)** — no-runtime-dep, ikke blokkerende.
+P0 + P1 + P2 + v4 cockpit (SPEC-014–022) er ferdig. SPEC-003 og SPEC-010 sunset under SPEC-022. SPEC-012 levert som spec-doc. Alle formelle specs er nå avsluttet — produktet er i "polish + extend" -fase.
 
-Åpne tråder (queued for pickup):
-- **SPEC-012 Supabase schema draft** — skriv `docs/specs/012-supabase-schema.md` (tables for watchlist, portfolio, notes, quotes, research, strategies). No runtime code.
-- **Watchlist per-row inline edit** (SPEC-013 follow-up) — inline dropdowns for status / priority / tags på `/watchlist`.
-- **Light-mode palette** (ADR-007 follow-up) — design light variant for Stitch tokens + wire opp theme toggle. Bekreftet 2026-05-11: skal designes, ikke droppes.
-- **migration/ folder cleanup** — 9 historiske web-next-filer, safe å slette per ADR-006.
+Åpne tråder:
+- **Real-time / live ticker price** (SPEC-008 follow-up) — krever ekstern API-integrasjon; ikke prioritert.
+- **v2 static root cleanup** (`index.html`, `today.html`, `reports.html`, `assets/`) — krever klassifiserings-godkjenning.
+
+Shipped 2026-05-15:
+- **Watchlist per-row inline edit** (SPEC-013 follow-up) — native-select overlay på Status/Priority badges, click-to-edit tekstinput for Tags.
+- **SPEC-012 Supabase schema draft** — `docs/specs/012-supabase-schema.md` med DDL + RLS + sync-plan for 6 tabeller. Docs-only.
+- **Light-mode palette** (ADR-007 follow-up) — Stitch-tokens nå variabel-indirekte; light og dark palette i `:root`/`.dark`. ThemeProvider mister `forcedTheme="dark"`, ny `ThemeToggle` i TopBar (Sun/Moon icon).
+- **migration/ folder cleanup** — 9 historiske web-next-filer slettet per ADR-006.
+- **Native form-control theming** — `color-scheme: light|dark` på `:root`/`.dark` for å hjelpe native form controls følge temaet. Chrome's `<select>` popup ignorerer hintet → erstattet med custom `BadgeSelect`-dropdown (portal + click-outside + Escape + scroll-to-close) i watchlist-tabellen.
+- **Collapsible sidebar** — AppShell client-komponent med `sidebar_collapsed` i localStorage; sidebar krymper til icon-only (`w-16`); toggle via PanelLeft-ikon i bunnen av sidebaren.
+- **Watchlist filter chips** — `WatchlistFilters` komponent med Status (radio), Tags (multi), Sector (multi). AND-kombinert. Sector hentes fra `QuoteSnapshot.sector` (tilføyd fra `meta.sector`). Empty state for "filter matcher ingenting".
 
 ## P0 — Core product shell and data — ✅ done
 1. ✅ SPEC-001 Shell + 6-route navigation (`5d6552d`)
@@ -32,10 +39,12 @@ P0 + P1 + P2 + v4 cockpit (SPEC-014–022) er ferdig. SPEC-003 og SPEC-010 sunse
 13. ✅ SPEC-013 Watchlist storage shape extension (status / priority / tags) — Brief Task 4.3 (`84306d9`)
 
 ## Pending mini-specs / follow-ups (no formal doc yet)
-- **Light-mode palette** (ADR-007 follow-up): design light variant — confirmed 2026-05-11.
-- **Watchlist per-row inline edit** (SPEC-013 follow-up): inline dropdowns instead of remove+re-add.
-- **migration/ folder cleanup**: 9 historical web-next files, safe to delete post-ADR-006.
 - **Real-time / live ticker price** (SPEC-008 follow-up): now partly covered by SPEC-014 quote pipeline (daily close). Intraday/live would still need external integration.
+
+## Shipped follow-ups
+- **Watchlist per-row inline edit** (SPEC-013 follow-up, 2026-05-15): native-select overlay på Status/Priority + click-to-edit tags input. Bruker eksisterende `updateWatchlistItem` fra storage. Ingen nye deps.
+- **Light-mode palette** (ADR-007 follow-up, 2026-05-15): Stitch-tokens nå variabel-indirekte via `--st-*` i `:root` (light) og `.dark`. Light palette: hvite surfaces, slate-900 tekst, blå/grønn/rød med mer kontrast. ThemeProvider mister `forcedTheme="dark"`, `enableSystem` aktivert. Ny `ThemeToggle` (Sun/Moon) i TopBar bytter via `next-themes`. Recharts `stroke` hardkodete farger oppgradert til CSS-var.
+- **migration/ folder cleanup** (2026-05-15): slettet 9 web-next-era filer (COMPONENT_MAPPING, PREVIEW_DEPLOY, REQUIREMENTS, ROLLBACK_PLAYBOOK, SCHEMA, TASKBOARD, examples/, visual-regression/) per ADR-006. Ingen kode referete dem.
 
 ## Obsolete / superseded
 - ~~**Yahoo / Google Finance news adapter** (SPEC-010 follow-up)~~ — SPEC-010 sunset under SPEC-022 (2026-05-10). News surface removed from app.
