@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
@@ -47,6 +47,8 @@ import { getPortfolio } from "@/lib/storage/portfolio-store";
 import { getWatchlist } from "@/lib/storage/watchlist-store";
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
+import { QuarterlyReviewForm } from "./quarterly-review-form";
+import { QuarterlyReviewTimeline } from "./quarterly-review-timeline";
 
 interface ThesisFormProps {
   symbol: string;
@@ -208,6 +210,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // SPEC-023 W8.F — quarterly review modal state.
+  const [reviewFormOpen, setReviewFormOpen] = useState(false);
+  const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
 
   // Initial hydration from localStorage + cross-store prefill.
   useEffect(() => {
@@ -261,6 +266,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     const handle = setTimeout(() => setSavedAt(null), 1500);
     return () => clearTimeout(handle);
   }, [savedAt]);
+
 
   const tradeLevels = useMemo(() => buildTradeLevels(form), [form]);
   const maxPos = parseNumber(form.maxPositionSize);
@@ -897,6 +903,43 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           {existing ? "Save thesis" : "Create thesis"}
         </Button>
       </div>
+
+      {existing ? (
+        <div className="space-y-3 pt-2">
+          <QuarterlyReviewTimeline
+            thesisSymbol={upper}
+            refreshKey={reviewRefreshKey}
+          />
+          {!reviewFormOpen ? (
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setReviewFormOpen(true)}
+              >
+                <Plus className="size-4 mr-1" aria-hidden="true" />
+                Quarterly review
+              </Button>
+            </div>
+          ) : (
+            <QuarterlyReviewForm
+              thesis={existing}
+              thesisSymbol={upper}
+              onSaved={(review) => {
+                setReviewFormOpen(false);
+                setReviewRefreshKey((k) => k + 1);
+                // Pull the latest thesis (light may have been bumped by the review save).
+                const refreshed = getThesis(upper);
+                if (refreshed) setExisting(refreshed);
+                // Suppress unused-var warning for the saved review id.
+                void review;
+              }}
+              onCancel={() => setReviewFormOpen(false)}
+            />
+          )}
+        </div>
+      ) : null}
 
       <ConfirmDialog
         open={confirmDelete}
