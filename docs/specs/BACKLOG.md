@@ -125,6 +125,47 @@ Structured stock research framework mirroring `docs/research-framework.md`. New 
 
 **Sequencing inside W8:** W8.A first; W8.B/C/D follow on the same form (semi-sequential). W8.E/F/G/H/I parallelizable once W8.A lands.
 
+**SPEC-023 scope additions (2026-05-16, folded into existing W8 tasks):**
+- W8.A also includes: quick-start mode (3-field minimum view), pre-fill from existing data (current price, watchlist status → plannedAction, portfolio position → avgEntryPrice/positionSize), sticky live-context header (price + day Δ + sparkline), position-size calculator.
+- W8.C also includes: scenario fan strip viz + scenario reference lines on PriceChart (dotted, distinct from solid trade-plan lines).
+- W8.F also includes: previous-thesis values shown alongside QuarterlyReview fields for side-by-side diffing; saving review updates `currentLight`.
+- New W8.J: Theses overview tab on `/research` (sorted by light, stale theses tagged "review me"). Files: `web-app/src/components/research/theses-overview.tsx` (new), `web-app/src/app/research/page.tsx`. Effort M, P1.
+- New W8.K: Read mode vs edit mode toggle. Files: `web-app/src/components/research/thesis-view.tsx` (new — read mode renderer), `web-app/src/components/research/thesis-form.tsx`. Effort M, P2.
+- New W8.L: Notes subsection (multiple markdown notes per thesis). Files: `web-app/src/components/research/thesis-notes.tsx` (new), `web-app/src/components/research/thesis-form.tsx`, `web-app/src/lib/domain/thesis.ts` (add ResearchNote). Effort M, P1.
+
+### W9 — SPEC-025 ChatGPT response import (depends on SPEC-023 W8.A)
+
+Smart paste-back: parses ChatGPT markdown response into structured Thesis fields with diff preview, unmatched content lands in analysisNotes / a new note. See `docs/specs/025-chatgpt-response-import.md`.
+
+| # | Task | Files | Effort | Priority |
+|---|---|---|---|---|
+| W9.A | Parser + unit tests | `web-app/src/lib/research/thesis-import.ts` (new), tests | M | P1 |
+| W9.B | Import UI inside thesis form with diff preview | `web-app/src/components/research/thesis-import-panel.tsx` (new), `web-app/src/components/research/thesis-form.tsx` | M | P1 |
+| W9.C | Unmatched-content routing (append to `analysisNotes` or new ResearchNote) | `web-app/src/components/research/thesis-import-panel.tsx` | S | P2 |
+
+### W10 — SPEC-026 Thesis monitoring loop (depends on SPEC-023 W8.E for trade levels)
+
+Light trajectory + TopBar alert badge + per-zone `lastCrossedAt` + browser notifications opt-in. See `docs/specs/026-thesis-monitoring.md`.
+
+| # | Task | Files | Effort | Priority |
+|---|---|---|---|---|
+| W10.A | `lastCrossedAt` field on TradeLevel + dashboard update logic + chart visual indicator | `web-app/src/lib/domain/thesis.ts`, `web-app/src/components/dashboard/crossed-zones-card.tsx`, `web-app/src/components/charts/sentiment-area-chart.tsx` | M | P1 |
+| W10.B | `buildAlerts` helper + alerts drawer + TopBar badge | `web-app/src/lib/research/alerts.ts` (new), `web-app/src/components/layout/alerts-drawer.tsx` (new), `web-app/src/components/layout/top-bar.tsx` | M | P1 |
+| W10.C | Light trajectory chart on the thesis page (depends on W8.F quarterly reviews) | `web-app/src/components/research/light-trajectory.tsx` (new), uses recharts | M | P2 |
+| W10.D | Browser notifications opt-in: settings toggle, permission flow, delivery on next open | `web-app/src/components/settings/dashboard-settings-panel.tsx`, `web-app/src/lib/research/notifications.ts` (new) | M | P2 |
+
+### W11 — SPEC-027 Research workspace files (depends on SPEC-023 W8.A; new dep `idb`)
+
+Per-thesis file attachments (PDF/image/text) via IndexedDB, drag-drop, inline preview. See `docs/specs/027-research-workspace-files.md`.
+
+| # | Task | Files | Effort | Priority |
+|---|---|---|---|---|
+| W11.A | `idb` dep, IndexedDB store, repository contract | `web-app/package.json`, `web-app/src/lib/domain/research-file.ts` (new), `web-app/src/lib/storage/research-files-store.ts` (new), `web-app/src/lib/storage/contracts.ts` | M | P1 |
+| W11.B | Upload / list / delete UI on the thesis page (no preview yet) | `web-app/src/components/research/files-section.tsx` (new), `web-app/src/components/research/file-dropzone.tsx` (new), `web-app/src/components/research/thesis-form.tsx` | M | P1 |
+| W11.C | Inline previews per kind (PDF iframe sandboxed, image, text/markdown) | `web-app/src/components/research/file-preview.tsx` (new) | M | P2 |
+| W11.D | Section anchors + caption editing | `web-app/src/components/research/files-section.tsx` | S | P3 |
+| W11.E | Settings card: usage display + wipe-all | `web-app/src/components/settings/research-files-settings.tsx` (new), `web-app/src/app/settings/page.tsx` | S | P3 |
+
 ### Carry-overs from earlier dashboard polish
 
 | # | Task | Files | Effort | Priority |
@@ -153,6 +194,9 @@ W7 ─── concurrent with everything else
 - W1.2 + W3 (formatter migration) all consume `lib/utils/format.ts` from W0.2 — land W0.2 first.
 - After W0.1, W2.2 should be the first consumer to validate the contract before W3.4 and W5.1 pile on.
 - **W8** is its own feature spec, mostly orthogonal to W1–W7. W8.E touches `dashboard-client.tsx` (new `CrossedZonesCard` mount) and `sentiment-area-chart.tsx` (adds `referenceLines` prop) — coordinate with anyone touching those files. W8.H lightly edits `watchlist-table.tsx`, `portfolio-table.tsx`, `ticker-header.tsx` — these collide with W2.4 (sortable watchlist columns) and W5.1 (Add-to-watchlist popover); sequence W8.H after those land.
+- **W9 → W11** all depend on **W8.A** being merged first (Thesis domain + store + minimal form). After W8.A: W9 (parser + UI), W10.A (lastCrossedAt + chart), and W11.A (IndexedDB store) can all run in parallel — they touch disjoint files.
+- **W10.A** modifies `sentiment-area-chart.tsx` to support a "recently crossed" thicker line; conflicts with W8.E if both edit the chart's `referenceLines` prop. Land W8.E first, then W10.A extends it.
+- **W11** is the only workstream that adds a runtime dep (`idb`). Coordinator should land its `package.json` bump in W11.A alone before W11.B starts.
 
 ### Åpne tråder fra før (carry forward)
 - **Real-time / live ticker price** (SPEC-008 follow-up) — krever ekstern API-integrasjon; ikke prioritert.

@@ -18,12 +18,21 @@ Three concrete gaps:
 - New domain types `Thesis` (one per symbol) and `QuarterlyReview` (many per thesis).
 - New localStorage stores for both.
 - Structured form covering framework sections §1, §2, §4, §5, §6, §7, §8 — collapsible sections so the user can fill in stages.
+- **Quick-start mode** — on new thesis, only three blocks visible (ticker + 3-sentence belief textarea + 3 add levels + max position). Deeper sections sit behind a "Deep dive →" toggle.
+- **Pre-fill from existing data** — current price (always), avgEntryPrice + positionSize from portfolio if held, plannedAction defaulted from watchlist status, §4 fundamentals partially seeded from `QuoteMeta` (P/E, market cap, dividend yield) with a `(source: yfinance, YYYY-MM-DD)` annotation.
+- **Sticky live-context header** — current price, day Δ%, 52w range, mini sparkline; always visible while editing.
+- **Position-size calculator** — under the Trade plan block: "If all 3 adds trigger you'd be at X shares / $Y / Z% of max"; warning color when it would exceed max.
 - Trade plan zones: `tradeLevels: { kind: "add"|"trim"|"sell", price, note?, level? }[]` editable from the form.
 - Visualisation:
-  - Horizontal lines on `/ticker/[symbol]` PriceChart for each level (color-coded green/amber/red).
+  - Horizontal **solid** lines on `/ticker/[symbol]` PriceChart for each `tradeLevel` (color-coded green/amber/red).
+  - Horizontal **dotted** lines on the same chart for each `scenario.priceTarget` (so they don't get confused with trade levels).
+  - **Scenario fan strip** below the scenarios editor — horizontal axis with 5 markers, current price highlighted; "EV: $X" pill computed from probabilities.
   - Dashboard "crossed zone" card listing symbols where today's close is within ±X% of any level on a current thesis.
 - "Active thesis" indicators on `/watchlist` (light dot) and `/portfolio` (📖 link).
-- Quarterly review form covering §9.
+- Quarterly review form covering §9 — with previous-thesis values shown in muted text next to each field for side-by-side diffing. Saving a review updates the thesis's `currentLight`.
+- **Theses overview tab** on `/research` — sorted by light (red first), shows symbol + light + plannedAction + last-update age + crossed-zone status. Stale theses (`updatedAt > 90 days`) get a "review me" pill.
+- **Read mode vs edit mode** — view mode is default after first save (clean typographic rendering); "Edit" button toggles to the form.
+- **Notes** — `notes: ResearchNote[]` attached to the thesis. Each note has `{ id, title, body (markdown), createdAt, updatedAt? }`. Form section with add/edit/delete and inline markdown rendering. Use cases: ChatGPT responses pasted back, scratch observations, transcribed bullet points. Stored in localStorage as part of the Thesis (small, text-only). File-level attachments (PDFs, images) are SPEC-027 — Notes here are text-only.
 - "Copy to ChatGPT" button that emits a markdown blob built from structured fields + the §10 prompt.
 - Reference panel: §3 source hierarchy and §6 valuation metrics as collapsible help blocks inside `/research`.
 
@@ -32,6 +41,8 @@ Three concrete gaps:
 - Versioned thesis history (one canonical per symbol — confirmed). If the user wants audit trail later, that's a follow-up.
 - Pulling fundamentals from yfinance API beyond what `QuoteMeta` already exposes (`peRatio`, `dividendYield`, `marketCap`, `sector`, `industry`). Other figures stay user-entered.
 - Direct ChatGPT API integration. Copy-to-clipboard is the boundary.
+- **Smart parsing of ChatGPT response back into structured thesis fields** — see SPEC-025 (split out 2026-05-15).
+- **Light trajectory chart, TopBar alert badge, browser notifications, per-zone "last crossed at"** — see SPEC-026 (split out 2026-05-15).
 - Multi-user / sharing semantics — local-first per ADR-002.
 - Earnings calendar / event reminders (separate feature).
 - Automating "review me" reminders. The "stale thesis" tag is a passive UI flag, not a notification.
@@ -156,7 +167,18 @@ export interface Thesis {
   trimSellChecks: boolean[]; // length = 6
 
   // §10 Round-trip
-  analysisNotes?: string;   // markdown the user pastes back from ChatGPT
+  analysisNotes?: string;   // markdown the user pastes back from ChatGPT (legacy free-form field)
+
+  // Attached notes — multiple markdown notes (ChatGPT responses, scratch, transcripts)
+  notes: ResearchNote[];
+}
+
+export interface ResearchNote {
+  id: string;
+  title: string;
+  body: string;             // markdown
+  createdAt: string;
+  updatedAt?: string;
 }
 ```
 

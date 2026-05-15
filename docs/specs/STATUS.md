@@ -26,7 +26,10 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-020 | Strategy definition + multi-ticker backtest engine + `/strategies` route (4 strategy types, equity curve viz) | claude-code | ✅ done | - | b041aeb | 2026-05-10 |
 | SPEC-021 | Mobile-first IA — bottom-nav pattern below md, MobileDrawer retired | claude-code | ✅ done | - | 4f10034 | 2026-05-10 |
 | SPEC-022 | Sunset reports — drop report pipeline + scripts + dead components, rebuild dashboard with quote-driven cards | claude-code | ✅ done | - | 21595c2 | 2026-05-10 |
-| SPEC-023 | Thesis system — structured stock research + trade-plan zones + quarterly review (per `docs/research-framework.md`) | unassigned | ⬜ todo | none | - | 2026-05-15 |
+| SPEC-023 | Thesis system — structured stock research + trade-plan zones + quarterly review (per `docs/research-framework.md`) + Notes | unassigned | ⬜ todo | none | - | 2026-05-16 |
+| SPEC-025 | ChatGPT response import — heuristic parser folds LLM markdown back into structured thesis fields with diff preview | unassigned | ⬜ todo | SPEC-023 W8.A | - | 2026-05-16 |
+| SPEC-026 | Thesis monitoring loop — light trajectory chart + TopBar alert badge + crossed-zone `lastCrossedAt` + browser notifications opt-in | unassigned | ⬜ todo | SPEC-023 W8.E | - | 2026-05-16 |
+| SPEC-027 | Research workspace files — IndexedDB-backed PDF/image attachments per thesis, drag-drop, inline preview | unassigned | ⬜ todo | SPEC-023 W8.A | - | 2026-05-16 |
 
 ## Status Legend
 - ⬜ todo
