@@ -70,7 +70,7 @@ export function SymbolPicker({ available, selected, onChange }: SymbolPickerProp
           autoComplete="off"
           autoCapitalize="characters"
           spellCheck={false}
-          className="flex-1 rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="flex-1 rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-primary/60"
         />
         <Button type="submit" size="sm" variant="outline">
           <Plus className="size-4" aria-hidden="true" />

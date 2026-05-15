@@ -130,7 +130,7 @@ export function StrategyView({
 
       {running ? (
         <Card className="p-card-padding">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-text-secondary">
             <Play className="inline size-4 mr-1" /> Running backtest…
           </p>
         </Card>

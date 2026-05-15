@@ -151,7 +151,7 @@ export function StrategyForm({
             setError(null);
           }}
           placeholder="MA50/200 cross on mega-caps"
-          className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-primary/60"
         />
       </Field>
 
@@ -228,7 +228,7 @@ export function StrategyForm({
           <select
             value={sizing}
             onChange={(e) => setSizing(e.target.value as "equal-weight" | "fixed-dollar")}
-            className="w-full rounded-md border border-input bg-background px-2 py-1.5 text-sm"
+            className="w-full rounded-md border border-border-subtle bg-surface px-2 py-1.5 text-sm text-text-primary"
           >
             <option value="equal-weight">Equal weight</option>
             <option value="fixed-dollar">Fixed $ per ticker</option>
@@ -248,7 +248,7 @@ export function StrategyForm({
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-primary/60"
           />
         </Field>
         <Field label="End date (optional)" htmlFor="end">
@@ -257,7 +257,7 @@ export function StrategyForm({
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-primary/60"
           />
         </Field>
       </div>
@@ -289,7 +289,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="block text-xs font-medium text-muted-foreground">
+      <label htmlFor={htmlFor} className="block text-xs font-medium text-text-secondary">
         {label}
       </label>
       {children}
@@ -314,7 +314,7 @@ function NumberInput({
       step="any"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+      className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-primary/60"
     />
   );
 }
