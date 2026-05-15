@@ -20,6 +20,14 @@ import type {
   Thesis,
   TradeLevel,
 } from "@/lib/domain/thesis";
+import {
+  GREEN_CHECK_COUNT,
+  RED_CHECK_COUNT,
+  TRIM_SELL_CHECK_COUNT,
+  YELLOW_CHECK_COUNT,
+  defaultScenarios,
+  emptyChecks,
+} from "@/lib/domain/thesis";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -195,6 +203,18 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           questions: [],
           classifiedPoints: [],
           tradeLevels,
+          fundamentals: {},
+          marketPosition: {},
+          coreDrivers: [],
+          optionalDrivers: [],
+          valuation: {},
+          scenarios: defaultScenarios(),
+          currentLight: "yellow",
+          greenChecks: emptyChecks(GREEN_CHECK_COUNT),
+          yellowChecks: emptyChecks(YELLOW_CHECK_COUNT),
+          redChecks: emptyChecks(RED_CHECK_COUNT),
+          trimSellChecks: emptyChecks(TRIM_SELL_CHECK_COUNT),
+          notes: [],
         };
 
     if (maxPos !== undefined) next.maxPositionSize = maxPos;
