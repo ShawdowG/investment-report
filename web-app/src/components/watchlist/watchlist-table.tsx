@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { ArrowDown, ArrowUp, ChevronDown, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ArrowUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PriorityBadge, StatusBadge, Tag } from "@/components/ui/stitch";
+import {
+  BadgeSelect,
+  PriorityBadge,
+  StatusBadge,
+  Tag,
+} from "@/components/ui/stitch";
 import {
   Table,
   TableBody,
@@ -57,110 +61,6 @@ function parseTagInput(raw: string): string[] {
     .split(",")
     .map((t) => t.trim().slice(0, 20))
     .filter((t) => t.length > 0);
-}
-
-interface BadgeSelectProps<T extends string> {
-  value: T;
-  options: { value: T; label: string }[];
-  onSelect: (next: T) => void;
-  ariaLabel: string;
-  children: React.ReactNode;
-}
-
-function BadgeSelect<T extends string>({
-  value,
-  options,
-  onSelect,
-  ariaLabel,
-  children,
-}: BadgeSelectProps<T>) {
-  const [open, setOpen] = useState(false);
-  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-
-  useLayoutEffect(() => {
-    if (!open) return;
-    const rect = triggerRef.current?.getBoundingClientRect();
-    if (rect) setPos({ top: rect.bottom + 4, left: rect.left });
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    function onDocDown(e: MouseEvent) {
-      const t = e.target as Node;
-      if (triggerRef.current?.contains(t) || menuRef.current?.contains(t)) return;
-      setOpen(false);
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    function onScroll() {
-      setOpen(false);
-    }
-    document.addEventListener("mousedown", onDocDown);
-    document.addEventListener("keydown", onKey);
-    window.addEventListener("scroll", onScroll, true);
-    window.addEventListener("resize", onScroll);
-    return () => {
-      document.removeEventListener("mousedown", onDocDown);
-      document.removeEventListener("keydown", onKey);
-      window.removeEventListener("scroll", onScroll, true);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [open]);
-
-  return (
-    <>
-      <button
-        ref={triggerRef}
-        type="button"
-        aria-label={ariaLabel}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center gap-1 cursor-pointer rounded"
-      >
-        {children}
-        <ChevronDown aria-hidden="true" className="size-3 text-text-secondary" />
-      </button>
-      {open && pos && typeof document !== "undefined"
-        ? createPortal(
-            <div
-              ref={menuRef}
-              role="listbox"
-              style={{ position: "fixed", top: pos.top, left: pos.left, zIndex: 100 }}
-              className="min-w-[8rem] rounded-md border border-border-subtle bg-surface py-1 shadow-lg"
-            >
-              {options.map((opt) => {
-                const selected = opt.value === value;
-                return (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    role="option"
-                    aria-selected={selected}
-                    onClick={() => {
-                      onSelect(opt.value);
-                      setOpen(false);
-                    }}
-                    className={cn(
-                      "block w-full text-left px-3 py-1.5 font-body-compact text-body-compact transition-colors",
-                      selected
-                        ? "bg-primary-container/20 text-text-primary font-semibold"
-                        : "text-text-secondary hover:bg-surface-bright/70 hover:text-text-primary",
-                    )}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>,
-            document.body,
-          )
-        : null}
-    </>
-  );
 }
 
 interface StatusEditCellProps {

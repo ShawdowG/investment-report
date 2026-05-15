@@ -8,3 +8,4 @@ export { Sentiment, sentimentVariants } from "./sentiment";
 export { SectionHeader } from "./section-header";
 export { TickerCell, tickerCellVariants } from "./ticker-cell";
 export { MoverRow } from "./mover-row";
+export { BadgeSelect, type BadgeSelectOption } from "./badge-select";
