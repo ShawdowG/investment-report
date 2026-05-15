@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { DispatchForm } from "./dispatch-form";
 import { DispatchList } from "./dispatch-list";
 import { DispatchView } from "./dispatch-view";
@@ -24,8 +26,19 @@ const STORAGE_ERROR_MESSAGE =
   "Failed to save dispatch — your browser storage may be full";
 
 export function ResearchView() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const initialId = searchParams?.get("id") ?? null;
+
+  function handleNewThesis() {
+    const raw = typeof window !== "undefined"
+      ? window.prompt("Enter ticker to start a thesis (e.g. NVDA):")
+      : null;
+    if (raw === null) return;
+    const symbol = raw.trim().toUpperCase();
+    if (!symbol) return;
+    router.push(`/research/thesis/${encodeURIComponent(symbol)}`);
+  }
 
   const [items, setItems] = useState<ResearchDispatch[]>([]);
   const [ready, setReady] = useState(false);
@@ -173,9 +186,25 @@ export function ResearchView() {
     body = <DispatchList items={items} onSelect={handleSelect} onNew={handleNew} />;
   }
 
+  // Quick entry-point to the SPEC-023 thesis flow. Theses list/overview is W8.J.
+  const showThesisEntry = mode.kind === "list";
+
   return (
     <div className="space-y-3">
       {statusBanner}
+      {showThesisEntry ? (
+        <div className="flex justify-end">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={handleNewThesis}
+          >
+            <BookOpen className="size-4 mr-1" aria-hidden="true" />
+            New thesis
+          </Button>
+        </div>
+      ) : null}
       {body}
     </div>
   );
