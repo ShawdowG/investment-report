@@ -16,6 +16,9 @@ import {
   upsertThesis,
 } from "@/lib/storage/thesis-store";
 import type {
+  ClassifiedPointType,
+  ClassifiedThesisPoint,
+  Concerns,
   FundamentalsSnapshot,
   Light,
   MarketPositionNotes,
@@ -69,6 +72,20 @@ const PLANNED_ACTION_LABEL: Record<PlannedAction, string> = {
   trim: "Trim",
   sell: "Sell",
   watch: "Watch",
+};
+
+const CLASSIFIED_POINT_OPTIONS: BadgeSelectOption<ClassifiedPointType>[] = [
+  { value: "core", label: "Core" },
+  { value: "optional", label: "Optional" },
+  { value: "valuation", label: "Valuation" },
+  { value: "risk", label: "Risk" },
+];
+
+const CLASSIFIED_POINT_LABEL: Record<ClassifiedPointType, string> = {
+  core: "Core",
+  optional: "Optional",
+  valuation: "Valuation",
+  risk: "Risk",
 };
 
 interface FormState {
@@ -183,6 +200,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [coreDriversRaw, setCoreDriversRaw] = useState<string>("");
   const [optionalDriversRaw, setOptionalDriversRaw] = useState<string>("");
   const [valuation, setValuation] = useState<ValuationNotes>({});
+  const [classifiedPoints, setClassifiedPoints] = useState<ClassifiedThesisPoint[]>([]);
+  const [concerns, setConcerns] = useState<Concerns>({});
+  const [questionsRaw, setQuestionsRaw] = useState<string>("");
+  const [analysisNotes, setAnalysisNotes] = useState<string>("");
   const [mode, setMode] = useState<Mode>("quick");
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -206,6 +227,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setCoreDriversRaw(stored.coreDrivers.join("\n"));
       setOptionalDriversRaw(stored.optionalDrivers.join("\n"));
       setValuation(stored.valuation);
+      setClassifiedPoints(stored.classifiedPoints);
+      setConcerns(stored.concerns);
+      setQuestionsRaw(stored.questions.join("\n"));
+      setAnalysisNotes(stored.analysisNotes ?? "");
     } else {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
@@ -222,6 +247,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setCoreDriversRaw("");
       setOptionalDriversRaw("");
       setValuation({});
+      setClassifiedPoints([]);
+      setConcerns({});
+      setQuestionsRaw("");
+      setAnalysisNotes("");
     }
     setHydrated(true);
   }, [upper, snapshots]);
@@ -255,8 +284,14 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     const cleanFundamentals = compactStrings(fundamentals);
     const cleanMarketPosition = compactStrings(marketPosition);
     const cleanValuation = compactStrings(valuation);
+    const cleanConcerns = compactStrings(concerns);
     const coreDrivers = linesToList(coreDriversRaw);
     const optionalDrivers = linesToList(optionalDriversRaw);
+    const questions = linesToList(questionsRaw);
+    const cleanClassifiedPoints = classifiedPoints.filter(
+      (p) => p.point.trim().length > 0,
+    );
+    const trimmedAnalysisNotes = analysisNotes.trim();
 
     const next: Thesis = existing
       ? {
@@ -275,6 +310,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           coreDrivers,
           optionalDrivers,
           valuation: cleanValuation,
+          classifiedPoints: cleanClassifiedPoints,
+          concerns: cleanConcerns,
+          questions,
           updatedAt: now,
         }
       : {
@@ -282,9 +320,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           createdAt: now,
           updatedAt: now,
           thesisPoints,
-          concerns: {},
-          questions: [],
-          classifiedPoints: [],
+          concerns: cleanConcerns,
+          questions,
+          classifiedPoints: cleanClassifiedPoints,
           tradeLevels,
           fundamentals: cleanFundamentals,
           marketPosition: cleanMarketPosition,
@@ -304,6 +342,8 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     else delete next.maxPositionSize;
     if (form.plannedAction) next.plannedAction = form.plannedAction;
     else delete next.plannedAction;
+    if (trimmedAnalysisNotes) next.analysisNotes = analysisNotes;
+    else delete next.analysisNotes;
 
     // First-save: capture the prefill values that no longer have a home in the
     // quick-start form (price-at-creation, avgEntry/positionSize from portfolio).
@@ -335,6 +375,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setCoreDriversRaw(saved.coreDrivers.join("\n"));
       setOptionalDriversRaw(saved.optionalDrivers.join("\n"));
       setValuation(saved.valuation);
+      setClassifiedPoints(saved.classifiedPoints);
+      setConcerns(saved.concerns);
+      setQuestionsRaw(saved.questions.join("\n"));
+      setAnalysisNotes(saved.analysisNotes ?? "");
       setSavedAt(Date.now());
       setError(null);
     } catch (err) {
@@ -364,6 +408,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setCoreDriversRaw("");
       setOptionalDriversRaw("");
       setValuation({});
+      setClassifiedPoints([]);
+      setConcerns({});
+      setQuestionsRaw("");
+      setAnalysisNotes("");
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
@@ -442,6 +490,60 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
             title="Deep dive"
             caption="Optional sections mirroring the framework §4–§8. Save anytime — every field is optional."
           />
+          <DeepDiveSection
+            title="Classification (§2)"
+            caption="Group thesis points by type. Core drivers must justify valuation; optional ones improve upside."
+          >
+            <ClassifiedPointsEditor
+              points={classifiedPoints}
+              onChange={setClassifiedPoints}
+              symbol={upper}
+            />
+          </DeepDiveSection>
+          <DeepDiveSection
+            title="Concerns (§1)"
+            caption="What might break the thesis? Leave blanks where you have nothing to log."
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <TextAreaField
+                label="Valuation"
+                value={concerns.valuation ?? ""}
+                onChange={(v) => setConcerns((c) => ({ ...c, valuation: v }))}
+              />
+              <TextAreaField
+                label="Competition"
+                value={concerns.competition ?? ""}
+                onChange={(v) => setConcerns((c) => ({ ...c, competition: v }))}
+              />
+              <TextAreaField
+                label="Macro"
+                value={concerns.macro ?? ""}
+                onChange={(v) => setConcerns((c) => ({ ...c, macro: v }))}
+              />
+              <TextAreaField
+                label="Execution"
+                value={concerns.execution ?? ""}
+                onChange={(v) => setConcerns((c) => ({ ...c, execution: v }))}
+              />
+            </div>
+            <TextAreaField
+              label="Other"
+              value={concerns.other ?? ""}
+              onChange={(v) => setConcerns((c) => ({ ...c, other: v }))}
+              rows={3}
+            />
+          </DeepDiveSection>
+          <DeepDiveSection
+            title="Questions (§1)"
+            caption="One question per line — the things you want answered before adding or trimming."
+          >
+            <TextAreaField
+              label="Open questions"
+              value={questionsRaw}
+              onChange={setQuestionsRaw}
+              rows={6}
+            />
+          </DeepDiveSection>
           <DeepDiveSection
             title="Fundamentals (§4)"
             caption="Quarterly check on the seven framework rows — leave any blank."
@@ -625,6 +727,17 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           </DeepDiveSection>
           <DeepDiveSection title="Notes" caption="Multiple markdown notes — paste ChatGPT responses, log observations, transcribe calls.">
             <ThesisNotes notes={notes} onChange={setNotes} />
+          </DeepDiveSection>
+          <DeepDiveSection
+            title="Analysis notes (§10)"
+            caption="Free-form markdown blob — the ChatGPT round-trip target (W9 will parse this back to structured fields)."
+          >
+            <TextAreaField
+              label="Markdown"
+              value={analysisNotes}
+              onChange={setAnalysisNotes}
+              rows={10}
+            />
           </DeepDiveSection>
         </Card>
       ) : null}
@@ -814,6 +927,94 @@ function Field({
         {label}
       </label>
       {children}
+    </div>
+  );
+}
+
+/**
+ * Editable list of classified thesis points (§2). Each row has free-text input
+ * for the point, a BadgeSelect for the type (core / optional / valuation /
+ * risk), and a `needsProof` checkbox.
+ */
+function ClassifiedPointsEditor({
+  points,
+  onChange,
+  symbol,
+}: {
+  points: ClassifiedThesisPoint[];
+  onChange: (next: ClassifiedThesisPoint[]) => void;
+  symbol: string;
+}) {
+  function update(idx: number, patch: Partial<ClassifiedThesisPoint>) {
+    onChange(points.map((p, i) => (i === idx ? { ...p, ...patch } : p)));
+  }
+  function add() {
+    onChange([
+      ...points,
+      { point: "", type: "core", needsProof: false },
+    ]);
+  }
+  function remove(idx: number) {
+    onChange(points.filter((_, i) => i !== idx));
+  }
+
+  return (
+    <div className="space-y-2">
+      {points.length === 0 ? (
+        <p className="font-body-compact text-body-compact text-text-secondary">
+          No classified points yet — add one to separate core drivers from
+          optional upside.
+        </p>
+      ) : null}
+      {points.map((p, idx) => (
+        <div
+          key={idx}
+          className="flex flex-col gap-2 rounded-md border border-border-subtle bg-surface p-2 sm:flex-row sm:items-start"
+        >
+          <textarea
+            aria-label={`Thesis point ${idx + 1}`}
+            value={p.point}
+            onChange={(e) => update(idx, { point: e.target.value })}
+            rows={2}
+            placeholder="Asia is underpenetrated"
+            className="flex-1 rounded-md border border-border-subtle bg-surface-elevated px-2 py-1 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          />
+          <div className="flex shrink-0 items-center gap-2">
+            <BadgeSelect<ClassifiedPointType>
+              value={p.type}
+              options={CLASSIFIED_POINT_OPTIONS}
+              onSelect={(next) => update(idx, { type: next })}
+              ariaLabel={`Type for ${symbol} thesis point ${idx + 1}`}
+            >
+              <span className="inline-flex items-center rounded-md border border-border-subtle bg-surface-variant px-2 py-1 font-body-compact text-body-compact text-text-primary">
+                {CLASSIFIED_POINT_LABEL[p.type]}
+              </span>
+            </BadgeSelect>
+            <label className="inline-flex items-center gap-1 font-body-compact text-body-compact text-text-secondary">
+              <input
+                type="checkbox"
+                checked={p.needsProof}
+                onChange={(e) => update(idx, { needsProof: e.target.checked })}
+                className="size-4 rounded border-border-subtle bg-surface-elevated accent-primary"
+              />
+              Needs proof
+            </label>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => remove(idx)}
+              className="text-text-secondary hover:text-destructive"
+            >
+              <Trash2 className="size-4" aria-hidden="true" />
+              <span className="sr-only">Remove point</span>
+            </Button>
+          </div>
+        </div>
+      ))}
+      <Button type="button" variant="outline" size="sm" onClick={add}>
+        + Add point
+      </Button>
     </div>
   );
 }
