@@ -811,6 +811,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
             value={form.thesisPointsRaw}
             onChange={(e) => update("thesisPointsRaw", e.target.value)}
             rows={6}
+            aria-required="true"
             placeholder={"- Asia is underpenetrated\n- Pricing power is intact\n- Optional games upside"}
             className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-2 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
           />
