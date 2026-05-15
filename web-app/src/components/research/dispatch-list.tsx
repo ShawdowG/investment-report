@@ -4,20 +4,12 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/stitch";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
+import { fmtDate } from "@/lib/utils/format";
 
 interface DispatchListProps {
   items: ResearchDispatch[];
   onSelect: (id: string) => void;
   onNew: () => void;
-}
-
-function fmtDate(iso: string): string {
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
 }
 
 export function DispatchList({ items, onSelect, onNew }: DispatchListProps) {
