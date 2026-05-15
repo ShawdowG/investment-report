@@ -26,6 +26,7 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-020 | Strategy definition + multi-ticker backtest engine + `/strategies` route (4 strategy types, equity curve viz) | claude-code | ✅ done | - | b041aeb | 2026-05-10 |
 | SPEC-021 | Mobile-first IA — bottom-nav pattern below md, MobileDrawer retired | claude-code | ✅ done | - | 4f10034 | 2026-05-10 |
 | SPEC-022 | Sunset reports — drop report pipeline + scripts + dead components, rebuild dashboard with quote-driven cards | claude-code | ✅ done | - | 21595c2 | 2026-05-10 |
+| SPEC-023 | Thesis system — structured stock research + trade-plan zones + quarterly review (per `docs/research-framework.md`) | unassigned | ⬜ todo | none | - | 2026-05-15 |
 
 ## Status Legend
 - ⬜ todo

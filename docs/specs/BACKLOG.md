@@ -107,6 +107,24 @@ These should land before W1–W7 to maximize reuse and avoid conflicts.
 | W7.5 | Confirmation dialog on "Reset to defaults" (depends W0.4) | `web-app/src/components/settings/dashboard-settings-panel.tsx` | S | P3 |
 | W7.6 | Replace Checkbox hardcoded "Enabled/Disabled" with setting-specific labels | `web-app/src/components/settings/dashboard-settings-panel.tsx` | S | P2 |
 
+### W8 — SPEC-023 Thesis system (new feature spec)
+
+Structured stock research framework mirroring `docs/research-framework.md`. New `Thesis` (one per symbol) + `QuarterlyReview` (many per thesis) types. Trade plan zones visualised on `/ticker` price chart + dashboard "crossed zone" card. Active thesis indicators on `/watchlist` and `/portfolio`. "Copy to ChatGPT" markdown emitter. See `docs/specs/023-thesis-system.md` for full spec, AC, and risks.
+
+| # | Task | Files | Effort | Priority |
+|---|---|---|---|---|
+| W8.A | Domain types + stores + minimal form (§1 + §2) + `/research/thesis/[symbol]` route | `web-app/src/lib/domain/thesis.ts` (new), `web-app/src/lib/storage/thesis-store.ts` (new), `web-app/src/lib/storage/contracts.ts`, `web-app/src/components/research/thesis-form.tsx` (new), `web-app/src/app/research/thesis/[symbol]/page.tsx` (new) | L | P1 |
+| W8.B | §4 Fundamentals + §5 Market position + §6 Valuation editors | `web-app/src/components/research/thesis-form.tsx` (sections), `web-app/src/lib/domain/thesis.ts` | M | P1 |
+| W8.C | §7 Scenarios editor (5 rows + expected-value calc) | `web-app/src/components/research/scenarios-editor.tsx` (new), `web-app/src/components/research/thesis-form.tsx` | M | P1 |
+| W8.D | §8 Light + checklists | `web-app/src/components/research/thesis-checklists.tsx` (new), `web-app/src/components/research/thesis-form.tsx` | M | P1 |
+| W8.E | Trade-plan zones: PriceChart `referenceLines`, dashboard `CrossedZonesCard`, `lib/quotes/zones.ts` helper | `web-app/src/components/charts/sentiment-area-chart.tsx`, `web-app/src/components/dashboard/crossed-zones-card.tsx` (new), `web-app/src/lib/quotes/zones.ts` (new), `web-app/src/components/dashboard/dashboard-client.tsx` | M | P1 |
+| W8.F | `QuarterlyReview` type + store + form + timeline | `web-app/src/lib/domain/quarterly-review.ts` (new), `web-app/src/lib/storage/quarterly-review-store.ts` (new), `web-app/src/components/research/quarterly-review-form.tsx` (new) | M | P2 |
+| W8.G | "Copy to ChatGPT" markdown emitter + button | `web-app/src/lib/research/thesis-markdown.ts` (new), `web-app/src/components/research/thesis-form.tsx` (button) | S | P2 |
+| W8.H | Active-thesis indicators on watchlist / portfolio / ticker | `web-app/src/components/watchlist/watchlist-table.tsx`, `web-app/src/components/portfolio/portfolio-table.tsx`, `web-app/src/components/ticker/ticker-header.tsx` | S | P2 |
+| W8.I | Reference panel: §3 source hierarchy + §6 valuation methods as collapsible help | `web-app/src/components/research/research-help.tsx` (new), `web-app/src/app/research/page.tsx` | S | P3 |
+
+**Sequencing inside W8:** W8.A first; W8.B/C/D follow on the same form (semi-sequential). W8.E/F/G/H/I parallelizable once W8.A lands.
+
 ### Carry-overs from earlier dashboard polish
 
 | # | Task | Files | Effort | Priority |
@@ -134,6 +152,7 @@ W7 ─── concurrent with everything else
 - W6.2 promotes `Chip` from `watchlist-filters.tsx`; if W2.5 (filter focus ring) is in-flight, do W6.2 first or both touch the post-promotion file.
 - W1.2 + W3 (formatter migration) all consume `lib/utils/format.ts` from W0.2 — land W0.2 first.
 - After W0.1, W2.2 should be the first consumer to validate the contract before W3.4 and W5.1 pile on.
+- **W8** is its own feature spec, mostly orthogonal to W1–W7. W8.E touches `dashboard-client.tsx` (new `CrossedZonesCard` mount) and `sentiment-area-chart.tsx` (adds `referenceLines` prop) — coordinate with anyone touching those files. W8.H lightly edits `watchlist-table.tsx`, `portfolio-table.tsx`, `ticker-header.tsx` — these collide with W2.4 (sortable watchlist columns) and W5.1 (Add-to-watchlist popover); sequence W8.H after those land.
 
 ### Åpne tråder fra før (carry forward)
 - **Real-time / live ticker price** (SPEC-008 follow-up) — krever ekstern API-integrasjon; ikke prioritert.
