@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AddPositionForm } from "./add-position-form";
-import { PortfolioTable } from "./portfolio-table";
+import { PortfolioTable, type PortfolioUpdatePatch } from "./portfolio-table";
 import { PortfolioEquityChart } from "./portfolio-equity-chart";
 import { Tag } from "@/components/ui/stitch";
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
@@ -10,6 +10,7 @@ import {
   addPosition,
   getPortfolio,
   removePosition,
+  updatePosition,
 } from "@/lib/storage/portfolio-store";
 import {
   getPortfolioPnL,
@@ -71,6 +72,10 @@ export function PortfolioView({ snapshots, compactDaily }: PortfolioViewProps) {
     setPositions(removePosition(symbol));
   }
 
+  function handleUpdate(symbol: string, patch: PortfolioUpdatePatch) {
+    setPositions(updatePosition(symbol, patch));
+  }
+
   if (!ready) {
     return (
       <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
@@ -112,6 +117,7 @@ export function PortfolioView({ snapshots, compactDaily }: PortfolioViewProps) {
       <PortfolioTable
         positions={positions}
         onRemove={handleRemove}
+        onUpdate={handleUpdate}
         pnlRows={hasPositions ? pnl.rows : undefined}
       />
 

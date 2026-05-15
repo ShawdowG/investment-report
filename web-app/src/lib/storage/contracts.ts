@@ -43,10 +43,15 @@ export interface AddPortfolioInput {
   platform?: string;
 }
 
+export type PortfolioPatch = Partial<
+  Pick<PortfolioPosition, "quantity" | "avgPrice" | "platform">
+>;
+
 export interface PortfolioRepository {
   list(): PortfolioPosition[];
   add(input: AddPortfolioInput): PortfolioPosition[];
   remove(symbol: string): PortfolioPosition[];
+  update(symbol: string, patch: PortfolioPatch): PortfolioPosition[];
   clear(): void;
 }
 

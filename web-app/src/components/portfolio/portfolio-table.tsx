@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +15,14 @@ import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { PortfolioPnLRow } from "@/lib/quotes/portfolio-pnl";
 import { fmtMoney, fmtMoneySigned, fmtPct } from "@/lib/utils/format";
 
+export type PortfolioUpdatePatch = Partial<
+  Pick<PortfolioPosition, "quantity" | "avgPrice">
+>;
+
 interface PortfolioTableProps {
   positions: PortfolioPosition[];
   onRemove: (symbol: string) => void;
+  onUpdate?: (symbol: string, patch: PortfolioUpdatePatch) => void;
   /** When provided, renders the full P&L columns. Rows without a matching
    *  snapshot still render cost-basis but show "—" for live values. */
   pnlRows?: PortfolioPnLRow[];
@@ -28,9 +34,92 @@ function pnlColorClass(n: number): string {
   return "text-text-secondary";
 }
 
+interface NumericEditCellProps {
+  symbol: string;
+  field: "quantity" | "avgPrice";
+  value: number;
+  display: string;
+  ariaLabel: string;
+  onUpdate: (symbol: string, patch: PortfolioUpdatePatch) => void;
+  className?: string;
+}
+
+function NumericEditCell({
+  symbol,
+  field,
+  value,
+  display,
+  ariaLabel,
+  onUpdate,
+  className,
+}: NumericEditCellProps) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (editing) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    }
+  }, [editing]);
+
+  function commit() {
+    const next = Number(draft);
+    if (Number.isFinite(next) && next > 0 && next !== value) {
+      onUpdate(symbol, { [field]: next } as PortfolioUpdatePatch);
+    }
+    setEditing(false);
+  }
+
+  function cancel() {
+    setEditing(false);
+  }
+
+  if (editing) {
+    return (
+      <input
+        ref={inputRef}
+        type="number"
+        inputMode="decimal"
+        step="any"
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            commit();
+          } else if (e.key === "Escape") {
+            e.preventDefault();
+            cancel();
+          }
+        }}
+        aria-label={ariaLabel}
+        className={`w-full rounded border border-border-subtle bg-surface-elevated px-2 py-0.5 text-right font-data-mono text-data-mono text-text-primary outline-none focus:border-text-primary ${className ?? ""}`}
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        setDraft(String(value));
+        setEditing(true);
+      }}
+      aria-label={`Edit ${ariaLabel}`}
+      className={`w-full rounded text-right hover:opacity-80 ${className ?? ""}`}
+    >
+      {display}
+    </button>
+  );
+}
+
 export function PortfolioTable({
   positions,
   onRemove,
+  onUpdate,
   pnlRows,
 }: PortfolioTableProps) {
   if (positions.length === 0) {
@@ -45,6 +134,7 @@ export function PortfolioTable({
     (pnlRows ?? []).map((r) => [r.symbol, r]),
   );
   const hasPnL = pnlRows !== undefined;
+  const editable = onUpdate !== undefined;
 
   return (
     <div className="rounded-lg border border-border-subtle bg-surface overflow-x-auto">
@@ -93,10 +183,32 @@ export function PortfolioTable({
                   {p.symbol}
                 </TableCell>
                 <TableCell className="text-right font-data-mono text-data-mono text-text-primary">
-                  {p.quantity}
+                  {editable && onUpdate ? (
+                    <NumericEditCell
+                      symbol={p.symbol}
+                      field="quantity"
+                      value={p.quantity}
+                      display={String(p.quantity)}
+                      ariaLabel={`Quantity for ${p.symbol}`}
+                      onUpdate={onUpdate}
+                    />
+                  ) : (
+                    p.quantity
+                  )}
                 </TableCell>
                 <TableCell className="text-right font-data-mono text-data-mono text-text-secondary">
-                  {fmtMoney(p.avgPrice)}
+                  {editable && onUpdate ? (
+                    <NumericEditCell
+                      symbol={p.symbol}
+                      field="avgPrice"
+                      value={p.avgPrice}
+                      display={fmtMoney(p.avgPrice)}
+                      ariaLabel={`Average price for ${p.symbol}`}
+                      onUpdate={onUpdate}
+                    />
+                  ) : (
+                    fmtMoney(p.avgPrice)
+                  )}
                 </TableCell>
                 <TableCell className="text-right font-data-mono text-data-mono text-text-primary">
                   {fmtMoney(p.quantity * p.avgPrice)}
