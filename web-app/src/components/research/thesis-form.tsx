@@ -40,6 +40,7 @@ import {
 import { ScenariosEditor } from "@/components/research/scenarios-editor";
 import { ThesisChecklists } from "@/components/research/thesis-checklists";
 import { ThesisNotes } from "@/components/research/thesis-notes";
+import { ThesisView } from "@/components/research/thesis-view";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -57,6 +58,7 @@ interface ThesisFormProps {
 }
 
 type Mode = "quick" | "deep";
+type ViewMode = "view" | "edit";
 
 const STORAGE_ERROR_MESSAGE =
   "Failed to save thesis — your browser storage may be full";
@@ -208,6 +210,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [questionsRaw, setQuestionsRaw] = useState<string>("");
   const [analysisNotes, setAnalysisNotes] = useState<string>("");
   const [mode, setMode] = useState<Mode>("quick");
+  // SPEC-023 W8.K — once a thesis has been saved (i.e. `getThesis(symbol)`
+  // returned a record on mount) the user lands on a clean read-only view and
+  // must opt into editing. Brand-new theses (no stored record) jump straight
+  // to the form so the first-save flow is uninterrupted.
+  const [viewMode, setViewMode] = useState<ViewMode>("edit");
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -239,6 +246,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setConcerns(stored.concerns);
       setQuestionsRaw(stored.questions.join("\n"));
       setAnalysisNotes(stored.analysisNotes ?? "");
+      // Existing thesis → default to clean read mode; user clicks "Edit" to
+      // re-enter the form. Detected purely by getThesis() returning a record.
+      setViewMode("view");
     } else {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
@@ -259,6 +269,8 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setConcerns({});
       setQuestionsRaw("");
       setAnalysisNotes("");
+      // No stored thesis → start in edit mode so the first-save flow is direct.
+      setViewMode("edit");
     }
     setHydrated(true);
   }, [upper, snapshots]);
@@ -417,6 +429,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setAnalysisNotes(saved.analysisNotes ?? "");
       setSavedAt(Date.now());
       setError(null);
+      // SPEC-023 W8.K — flip to read mode after a successful save so the user
+      // immediately sees the clean rendered thesis. They can click "Edit" to
+      // come back.
+      setViewMode("view");
     } catch (err) {
       if (process.env.NODE_ENV !== "production") {
         console.error("[thesis] save failed", err);
@@ -451,6 +467,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
+      // After deletion the symbol has no stored thesis again — same starting
+      // state as a brand-new thesis flow.
+      setViewMode("edit");
     } catch (err) {
       if (process.env.NODE_ENV !== "production") {
         console.error("[thesis] delete failed", err);
@@ -464,6 +483,49 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     return (
       <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
         Loading thesis…
+      </div>
+    );
+  }
+
+  // SPEC-023 W8.K — show clean read mode for a saved thesis. The quarterly
+  // review timeline still belongs underneath so the user can add a review
+  // without flipping back into edit mode.
+  if (viewMode === "view" && existing) {
+    return (
+      <div className="space-y-4">
+        <ThesisView thesis={existing} onEdit={() => setViewMode("edit")} />
+        <div className="space-y-3 pt-2">
+          <QuarterlyReviewTimeline
+            thesisSymbol={upper}
+            refreshKey={reviewRefreshKey}
+          />
+          {!reviewFormOpen ? (
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setReviewFormOpen(true)}
+              >
+                <Plus className="size-4 mr-1" aria-hidden="true" />
+                Quarterly review
+              </Button>
+            </div>
+          ) : (
+            <QuarterlyReviewForm
+              thesis={existing}
+              thesisSymbol={upper}
+              onSaved={(review) => {
+                setReviewFormOpen(false);
+                setReviewRefreshKey((k) => k + 1);
+                const refreshed = getThesis(upper);
+                if (refreshed) setExisting(refreshed);
+                void review;
+              }}
+              onCancel={() => setReviewFormOpen(false)}
+            />
+          )}
+        </div>
       </div>
     );
   }
