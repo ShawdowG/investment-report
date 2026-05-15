@@ -7,27 +7,45 @@ interface AddPositionFormProps {
   onAdd: (input: { symbol: string; quantity: number; avgPrice: number }) => void;
 }
 
+type FieldKey = "symbol" | "quantity" | "avgPrice";
+
+interface FormError {
+  field: FieldKey;
+  message: string;
+}
+
+// Stable IDs keep aria-describedby targets predictable for screen readers and
+// our component test (only the error matching the current field renders).
+const ERROR_IDS: Record<FieldKey, string> = {
+  symbol: "pos-symbol-error",
+  quantity: "pos-qty-error",
+  avgPrice: "pos-price-error",
+};
+
 export function AddPositionForm({ onAdd }: AddPositionFormProps) {
   const [symbol, setSymbol] = useState("");
   const [quantity, setQuantity] = useState("");
   const [avgPrice, setAvgPrice] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<FormError | null>(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmed = symbol.trim();
     const qty = Number(quantity);
     const price = Number(avgPrice);
+    // Explicit numeric validation in the submit handler replaces the prior
+    // `min="0"` attribute workaround — browsers stop at the HTML level, but we
+    // need a consistent in-handler check that surfaces an aria-described error.
     if (!trimmed) {
-      setError("Enter a ticker symbol.");
+      setError({ field: "symbol", message: "Enter a ticker symbol." });
       return;
     }
-    if (!(qty > 0)) {
-      setError("Quantity must be greater than 0.");
+    if (!Number.isFinite(qty) || !(qty > 0)) {
+      setError({ field: "quantity", message: "Quantity must be greater than 0." });
       return;
     }
-    if (!(price > 0)) {
-      setError("Average price must be greater than 0.");
+    if (!Number.isFinite(price) || !(price > 0)) {
+      setError({ field: "avgPrice", message: "Average price must be greater than 0." });
       return;
     }
     onAdd({ symbol: trimmed, quantity: qty, avgPrice: price });
@@ -37,8 +55,12 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
     setError(null);
   }
 
+  function clearError() {
+    if (error) setError(null);
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-3" noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_120px_140px_auto] gap-2 items-end">
         <Field label="Symbol" htmlFor="pos-symbol">
           <input
@@ -47,12 +69,17 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
             value={symbol}
             onChange={(e) => {
               setSymbol(e.target.value);
-              if (error) setError(null);
+              clearError();
             }}
             placeholder="NVDA"
             autoComplete="off"
             autoCapitalize="characters"
             spellCheck={false}
+            aria-required="true"
+            aria-invalid={error?.field === "symbol" || undefined}
+            aria-describedby={
+              error?.field === "symbol" ? ERROR_IDS.symbol : undefined
+            }
             className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
@@ -62,13 +89,17 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
             type="number"
             inputMode="decimal"
             step="any"
-            min="0"
             value={quantity}
             onChange={(e) => {
               setQuantity(e.target.value);
-              if (error) setError(null);
+              clearError();
             }}
             placeholder="100"
+            aria-required="true"
+            aria-invalid={error?.field === "quantity" || undefined}
+            aria-describedby={
+              error?.field === "quantity" ? ERROR_IDS.quantity : undefined
+            }
             className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
@@ -78,13 +109,17 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
             type="number"
             inputMode="decimal"
             step="any"
-            min="0"
             value={avgPrice}
             onChange={(e) => {
               setAvgPrice(e.target.value);
-              if (error) setError(null);
+              clearError();
             }}
             placeholder="850.00"
+            aria-required="true"
+            aria-invalid={error?.field === "avgPrice" || undefined}
+            aria-describedby={
+              error?.field === "avgPrice" ? ERROR_IDS.avgPrice : undefined
+            }
             className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
@@ -92,7 +127,15 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
           Add position
         </Button>
       </div>
-      {error ? <p className="text-xs text-regime-risk-off">{error}</p> : null}
+      {error ? (
+        <p
+          id={ERROR_IDS[error.field]}
+          role="alert"
+          className="text-xs text-regime-risk-off"
+        >
+          {error.message}
+        </p>
+      ) : null}
     </form>
   );
 }
