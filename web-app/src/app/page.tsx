@@ -8,8 +8,12 @@ import { loadAllQuoteSnapshots } from "@/lib/quotes/snapshots";
 export default function DashboardPage() {
   const snapshots = loadAllQuoteSnapshots();
   const compactDaily = loadCompactDaily();
-  const sample = Object.values(snapshots)[0];
-  const asOf = sample?.asOf ?? "—";
+  // Most recent bar across the universe — treating one ticker's asOf as the
+  // dashboard's "as of" was misleading when symbols pull at different times.
+  let asOf = "—";
+  for (const snap of Object.values(snapshots)) {
+    if (snap.asOf && snap.asOf > asOf) asOf = snap.asOf;
+  }
 
   return (
     <AppShell>

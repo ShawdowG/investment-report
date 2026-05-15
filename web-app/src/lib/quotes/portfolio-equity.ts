@@ -12,6 +12,8 @@ export interface EquityCurve {
   costBasis: number;
   /** Positions excluded because no quote series was available. */
   missing: string[];
+  /** First date emitted — determined by the latest "first bar" across positions. */
+  startDate?: string;
 }
 
 /**
@@ -26,7 +28,11 @@ export function buildEquityCurve(
   positions: PortfolioPosition[],
   compactDaily: CompactDailyMap,
 ): EquityCurve {
-  const tracks = [];
+  const tracks: {
+    position: PortfolioPosition;
+    map: Map<string, number>;
+    firstDate: string;
+  }[] = [];
   const missing: string[] = [];
   for (const position of positions) {
     const series = compactDaily[position.symbol];
@@ -36,7 +42,7 @@ export function buildEquityCurve(
     }
     const map = new Map<string, number>();
     for (const bar of series) map.set(bar.date, bar.close);
-    tracks.push({ position, map });
+    tracks.push({ position, map, firstDate: series[0].date });
   }
 
   const costBasis = tracks.reduce(
@@ -48,8 +54,19 @@ export function buildEquityCurve(
     return { points: [], costBasis: 0, missing };
   }
 
+  // Trim start to the latest first-date across all tracks so every emitted
+  // point is computed against the full portfolio. Without this the curve
+  // jumps up when a newly-listed symbol's history comes online, which makes
+  // the range delta % misleading.
+  let startDate = tracks[0].firstDate;
+  for (const t of tracks) if (t.firstDate > startDate) startDate = t.firstDate;
+
   const dateSet = new Set<string>();
-  for (const t of tracks) for (const date of t.map.keys()) dateSet.add(date);
+  for (const t of tracks) {
+    for (const date of t.map.keys()) {
+      if (date >= startDate) dateSet.add(date);
+    }
+  }
   const dates = Array.from(dateSet).sort();
 
   const lastClose = new Map<string, number>();
@@ -72,10 +89,12 @@ export function buildEquityCurve(
         }
       }
     }
-    if (contributorCount > 0) {
+    // After the start-date trim every track is guaranteed to have established
+    // a last-close, so we only emit a point when all tracks contribute.
+    if (contributorCount === tracks.length) {
       points.push({ date, value, pnl: value - costBasis });
     }
   }
 
-  return { points, costBasis, missing };
+  return { points, costBasis, missing, startDate };
 }

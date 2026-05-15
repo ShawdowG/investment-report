@@ -5,7 +5,13 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { RangeDeltaHeader } from "@/components/charts/range-delta-header";
 import { RangePills } from "@/components/charts/range-pills";
 import { SentimentAreaChart } from "@/components/charts/sentiment-area-chart";
-import { RANGES, sliceForRange } from "@/lib/quotes/chart-ranges";
+import { RANGES, sliceForRange, type RangeOption } from "@/lib/quotes/chart-ranges";
+
+// compact-daily ships ~3y of history, so longer ranges would silently truncate.
+// Subset matches the actually-available window. PriceChart still gets full RANGES.
+const EQUITY_RANGES: RangeOption[] = RANGES.filter((r) =>
+  ["1M", "3M", "6M", "YTD", "1Y", "3Y"].includes(r.label),
+);
 import type { EquityCurve } from "@/lib/quotes/portfolio-equity";
 import { cn } from "@/lib/utils";
 
@@ -48,7 +54,7 @@ export function PortfolioEquityChart({
   const [rangeIdx, setRangeIdx] = useState(2); // default 6M
   const [view, setView] = useState<ViewKey>("value");
 
-  const range = RANGES[rangeIdx];
+  const range = EQUITY_RANGES[rangeIdx];
   const sliced = useMemo(
     () => sliceForRange(curve.points, range),
     [curve.points, range],
@@ -103,7 +109,7 @@ export function PortfolioEquityChart({
                       ))}
                     </div>
                     <RangePills
-                      ranges={RANGES}
+                      ranges={EQUITY_RANGES}
                       selectedIdx={rangeIdx}
                       onSelect={setRangeIdx}
                     />

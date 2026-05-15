@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IndexPulseRow } from "./index-pulse-row";
 import { PortfolioImpactCard } from "./portfolio-impact-card";
 import { TopMoversCard } from "./top-movers-card";
@@ -27,11 +27,27 @@ export function DashboardClient({
 }: DashboardClientProps) {
   const [settings, setSettings] = useState(DEFAULT_DASHBOARD_SETTINGS);
   const [watchlistSymbols, setWatchlistSymbols] = useState<string[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setSettings(getDashboardSettings());
     setWatchlistSymbols(getWatchlist().map((w) => w.symbol));
+    setMounted(true);
   }, []);
+
+  // Days between asOf and now; null when asOf is unknown. Computed on the
+  // client so SSR + client render agree until hydration sets `mounted`.
+  const ageDays = useMemo<number | null>(() => {
+    if (!mounted || asOf === "—") return null;
+    const parsed = new Date(asOf);
+    if (Number.isNaN(parsed.getTime())) return null;
+    const todayMs = Date.now();
+    const diff = Math.floor((todayMs - parsed.getTime()) / 86_400_000);
+    return diff;
+  }, [mounted, asOf]);
+
+  // Treat >3 calendar days as stale (covers weekends without a calendar lib).
+  const isStale = ageDays !== null && ageDays > 3;
 
   function handleToggleChartCollapsed() {
     setSettings((prev) => {
@@ -52,8 +68,19 @@ export function DashboardClient({
     <div className="space-y-6">
       <header className="space-y-1">
         <h1 className="font-h1 text-h1 text-text-primary">Dashboard</h1>
-        <p className="font-body-compact text-body-compact text-text-secondary">
-          Daily market snapshot · as of {asOf}
+        <p className="font-body-compact text-body-compact text-text-secondary flex flex-wrap items-center gap-2">
+          <span>Daily market snapshot · as of {asOf}</span>
+          {ageDays !== null && ageDays > 0 ? (
+            <span
+              className={
+                isStale
+                  ? "inline-flex items-center px-2 py-0.5 rounded text-xs bg-regime-neutral/10 text-regime-neutral border border-regime-neutral/20"
+                  : "text-xs text-text-secondary"
+              }
+            >
+              {isStale ? `${ageDays} days old — check quote pipeline` : `${ageDays}d ago`}
+            </span>
+          ) : null}
         </p>
       </header>
 
