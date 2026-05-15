@@ -30,35 +30,35 @@ export function TickerDispatches({ symbol }: TickerDispatchesProps) {
     setReady(true);
   }, [symbol]);
 
-  if (!ready) return null;
-  if (items.length === 0) return null;
+  const caption = ready && items.length > 0
+    ? `${items.length} writeup${items.length === 1 ? "" : "s"} mentioning ${symbol}`
+    : undefined;
 
   return (
     <Card className="p-card-padding gap-3">
-      <SectionHeader
-        title="Your dispatches"
-        caption={`${items.length} writeup${items.length === 1 ? "" : "s"} mentioning ${symbol}`}
-      />
-      <ul className="flex flex-col gap-2">
-        {items.map((d) => (
-          <li key={d.id}>
-            <Link
-              href={`/research?id=${encodeURIComponent(d.id)}`}
-              className="flex items-start justify-between gap-3 rounded-lg border border-border-subtle bg-surface-variant/30 px-3 py-2 hover:bg-surface-variant/60 transition-colors"
-            >
-              <div className="min-w-0 flex-1">
-                <div className="font-body-compact text-body-compact text-text-primary truncate">
-                  {d.title}
+      <SectionHeader title="Your dispatches" caption={caption} />
+      {ready && items.length > 0 ? (
+        <ul className="flex flex-col gap-2">
+          {items.map((d) => (
+            <li key={d.id}>
+              <Link
+                href={`/research?id=${encodeURIComponent(d.id)}`}
+                className="flex items-start justify-between gap-3 rounded-lg border border-border-subtle bg-surface-variant/30 px-3 py-2 hover:bg-surface-variant/60 transition-colors"
+              >
+                <div className="min-w-0 flex-1">
+                  <div className="font-body-compact text-body-compact text-text-primary truncate">
+                    {d.title}
+                  </div>
+                  <div className="font-label-caps text-label-caps text-text-secondary uppercase">
+                    {fmtDate(d.updatedAt ?? d.createdAt)}
+                  </div>
                 </div>
-                <div className="font-label-caps text-label-caps text-text-secondary uppercase">
-                  {fmtDate(d.updatedAt ?? d.createdAt)}
-                </div>
-              </div>
-              <ArrowRight className="size-4 text-text-secondary shrink-0 mt-0.5" aria-hidden="true" />
-            </Link>
-          </li>
-        ))}
-      </ul>
+                <ArrowRight className="size-4 text-text-secondary shrink-0 mt-0.5" aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </Card>
   );
 }

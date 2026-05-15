@@ -61,11 +61,7 @@ export function PersonalNotesWidget({ symbol }: PersonalNotesWidgetProps) {
     <Card className="p-card-padding gap-4">
       <SectionHeader title="Personal Notes" />
       <div className="rounded-lg bg-surface-container-low border border-border-subtle/50 p-4 min-h-[180px]">
-        {!ready ? (
-          <p className="font-body-compact text-body-compact text-text-secondary">
-            Loading notes…
-          </p>
-        ) : notes.length === 0 ? (
+        {!ready ? null : notes.length === 0 ? (
           <p className="font-body-compact text-body-compact text-text-secondary">
             No notes yet for {symbol}.
           </p>
