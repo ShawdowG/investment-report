@@ -2,6 +2,7 @@ export const dynamic = "force-static";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { ResearchView } from "@/components/research/research-view";
+import { ResearchHelp } from "@/components/research/research-help";
 
 export const metadata = {
   title: "Research — Investment Report",
@@ -19,6 +20,7 @@ export default function ResearchPage() {
           </p>
         </header>
         <ResearchView />
+        <ResearchHelp />
       </div>
     </AppShell>
   );
