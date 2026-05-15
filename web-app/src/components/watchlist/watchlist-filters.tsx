@@ -94,7 +94,7 @@ export function WatchlistFilters({
           <button
             type="button"
             onClick={onClear}
-            className="text-text-secondary hover:text-text-primary underline-offset-2 hover:underline"
+            className="rounded text-text-secondary hover:text-text-primary underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           >
             Clear filters
           </button>
@@ -137,6 +137,7 @@ function Chip({
       aria-pressed={active}
       className={cn(
         "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs border transition-colors",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
         active
           ? "bg-primary-container text-on-primary-container border-primary-container"
           : "bg-surface-variant text-text-secondary border-border-subtle hover:text-text-primary",
