@@ -68,11 +68,48 @@ export function BadgeSelect<T extends string>({
     setActiveIdx(selected >= 0 ? selected : 0);
   }, [open, options, value]);
 
-  // Position the menu under the trigger.
+  // Position the menu under the trigger, flipping above / aligning right when
+  // the menu would otherwise overflow the viewport. We first paint at an
+  // estimated height (so the listbox isn't visibly mis-placed for one frame),
+  // then re-measure the real offsetHeight after mount and refine if needed.
   useLayoutEffect(() => {
     if (!open) return;
     const rect = triggerRef.current?.getBoundingClientRect();
-    if (rect) setPos({ top: rect.bottom + 4, left: rect.left });
+    if (!rect) return;
+    const estHeight = options.length * 36 + 8;
+    const estWidth = 128; // matches `min-w-[8rem]` on the menu
+    let top = rect.bottom + 4;
+    if (top + estHeight > window.innerHeight) {
+      top = rect.top - estHeight - 4;
+    }
+    let left = rect.left;
+    if (left + estWidth > window.innerWidth) {
+      left = Math.max(0, window.innerWidth - estWidth - 4);
+    }
+    setPos({ top, left });
+  }, [open, options.length]);
+
+  // After the menu mounts we have an accurate offsetHeight/offsetWidth. Refine
+  // the position so the smart-flip is exact even when the estimate was off.
+  useLayoutEffect(() => {
+    if (!open) return;
+    const trigger = triggerRef.current;
+    const menu = menuRef.current;
+    if (!trigger || !menu) return;
+    const rect = trigger.getBoundingClientRect();
+    const h = menu.offsetHeight;
+    const w = menu.offsetWidth;
+    let top = rect.bottom + 4;
+    if (top + h > window.innerHeight) {
+      top = rect.top - h - 4;
+    }
+    let left = rect.left;
+    if (left + w > window.innerWidth) {
+      left = Math.max(0, window.innerWidth - w - 4);
+    }
+    setPos((prev) =>
+      prev && prev.top === top && prev.left === left ? prev : { top, left },
+    );
   }, [open]);
 
   // After open, focus the menu so keyboard events land there.
