@@ -111,7 +111,7 @@ export function PersonalNotesWidget({ symbol }: PersonalNotesWidgetProps) {
           }}
           placeholder={`Add a note about ${symbol}…`}
           rows={3}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="w-full rounded-md border border-border-subtle bg-surface px-3 py-2 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
         />
         {error ? <p className="text-xs text-destructive">{error}</p> : null}
         <div className="flex justify-end">
