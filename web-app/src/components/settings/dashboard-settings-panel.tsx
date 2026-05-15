@@ -228,6 +228,8 @@ export function DashboardSettingsPanel({
         <Checkbox
           id={excludeIndicesId}
           checked={settings.topMoversExcludeIndices}
+          onLabel="On — indices excluded"
+          offLabel="Off — indices included"
           onChange={(checked) => applyPatch({ topMoversExcludeIndices: checked })}
         />
       </Field>
@@ -265,6 +267,8 @@ export function DashboardSettingsPanel({
         <Checkbox
           id={equityChartCollapsedId}
           checked={settings.equityChartCollapsed}
+          onLabel="Collapsed"
+          offLabel="Expanded"
           onChange={(checked) => applyPatch({ equityChartCollapsed: checked })}
         />
       </Field>
@@ -342,10 +346,14 @@ function Radio({
 function Checkbox({
   id,
   checked,
+  onLabel,
+  offLabel,
   onChange,
 }: {
   id: string;
   checked: boolean;
+  onLabel: string;
+  offLabel: string;
   onChange: (next: boolean) => void;
 }) {
   return (
@@ -361,7 +369,7 @@ function Checkbox({
         htmlFor={id}
         className="font-body-compact text-body-compact text-text-secondary cursor-pointer"
       >
-        {checked ? "Enabled" : "Disabled"}
+        {checked ? onLabel : offLabel}
       </label>
     </span>
   );
