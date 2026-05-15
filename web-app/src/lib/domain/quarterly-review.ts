@@ -3,14 +3,10 @@
  * captures the framework §9 "quarterly thesis check" template after an
  * earnings report. Saving a review also bumps the parent thesis's
  * `currentLight` so the dashboard / watchlist indicators stay fresh.
- *
- * `Light` is defined here (rather than imported from `./thesis`) so W8.F can
- * ship before the W8.B-D batch extends the thesis domain type — see the
- * top-level note in `./thesis.ts`. When the thesis grows a `currentLight`
- * field it will use this same alias.
  */
 
-export type Light = "green" | "yellow" | "red";
+export { type Light } from "./thesis";
+import type { Light } from "./thesis";
 
 export interface QuarterlyReviewChanges {
   revenue?: string;
