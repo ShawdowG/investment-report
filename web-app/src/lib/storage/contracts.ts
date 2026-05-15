@@ -12,6 +12,7 @@ import type {
   QuarterlyReview,
   QuarterlyReviewInput,
 } from "@/lib/domain/quarterly-review";
+import type { ResearchFileMeta } from "@/lib/domain/research-file";
 
 /**
  * Future-Supabase contract for the 3 client-side stores. Today's localStorage
@@ -113,4 +114,26 @@ export interface QuarterlyReviewRepository {
   get(id: string): QuarterlyReview | null;
   create(input: QuarterlyReviewInput): QuarterlyReview;
   remove(id: string): void;
+}
+
+// SPEC-027: per-thesis file attachments live in IndexedDB. Async surface so a
+// Supabase Storage adapter can satisfy the same shape (SPEC-012 follow-up).
+export interface UploadResearchFileInput {
+  thesisSymbol: string;
+  file: File;
+  caption?: string;
+  sectionAnchor?: ResearchFileMeta["sectionAnchor"];
+}
+
+export interface ResearchFilesRepository {
+  list(thesisSymbol: string): Promise<ResearchFileMeta[]>;
+  get(id: string): Promise<{ meta: ResearchFileMeta; blob: Blob } | null>;
+  upload(input: UploadResearchFileInput): Promise<ResearchFileMeta>;
+  delete(id: string): Promise<void>;
+  rename(id: string, name: string): Promise<ResearchFileMeta>;
+  updateMeta(
+    id: string,
+    patch: Partial<Pick<ResearchFileMeta, "caption" | "sectionAnchor">>,
+  ): Promise<ResearchFileMeta>;
+  totalSize(thesisSymbol: string): Promise<number>;
 }

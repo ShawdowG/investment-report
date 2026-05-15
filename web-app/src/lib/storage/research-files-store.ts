@@ -259,3 +259,16 @@ export async function deleteAllFiles(): Promise<void> {
     tx.done,
   ]);
 }
+
+// SPEC-016 / SPEC-027: compile-time conformance check vs the contract.
+import type { ResearchFilesRepository } from "./contracts";
+const _conforms: ResearchFilesRepository = {
+  list: listFiles,
+  get: getFile,
+  upload: uploadFile,
+  delete: deleteFile,
+  rename: renameFile,
+  updateMeta,
+  totalSize: totalSizeForThesis,
+};
+void _conforms;
