@@ -2,7 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import type { Strategy, StrategyType } from "@/lib/domain/strategy";
+import {
+  DEFAULT_FIXED_AMOUNT,
+  DEFAULT_INITIAL_CAPITAL,
+  DEFAULT_MA_CROSS_PARAMS,
+  DEFAULT_RSI_PARAMS,
+  type Strategy,
+  type StrategyType,
+} from "@/lib/domain/strategy";
 import type { StrategyInputContract } from "@/lib/storage/contracts";
 import { SymbolPicker } from "./symbol-picker";
 
@@ -32,32 +39,48 @@ export function StrategyForm({
   const [type, setType] = useState<StrategyType>(initial?.type ?? "buy-hold");
   const [symbols, setSymbols] = useState<string[]>(initial?.symbols ?? []);
   const [initialCapital, setInitialCapital] = useState(
-    String(initial?.initialCapital ?? 100000),
+    String(initial?.initialCapital ?? DEFAULT_INITIAL_CAPITAL),
   );
   const [sizing, setSizing] = useState<"equal-weight" | "fixed-dollar">(
     initial?.positionSizing.type ?? "equal-weight",
   );
   const [fixedAmount, setFixedAmount] = useState(
-    String(initial?.positionSizing.fixedAmount ?? 10000),
+    String(initial?.positionSizing.fixedAmount ?? DEFAULT_FIXED_AMOUNT),
   );
   const [startDate, setStartDate] = useState(initial?.startDate ?? "");
   const [endDate, setEndDate] = useState(initial?.endDate ?? "");
 
   // Type-specific
   const [shortPeriod, setShortPeriod] = useState(
-    String(initial && initial.type === "ma-crossover" ? initial.shortPeriod : 50),
+    String(
+      initial && initial.type === "ma-crossover"
+        ? initial.shortPeriod
+        : DEFAULT_MA_CROSS_PARAMS.shortPeriod,
+    ),
   );
   const [longPeriod, setLongPeriod] = useState(
-    String(initial && initial.type === "ma-crossover" ? initial.longPeriod : 200),
+    String(
+      initial && initial.type === "ma-crossover"
+        ? initial.longPeriod
+        : DEFAULT_MA_CROSS_PARAMS.longPeriod,
+    ),
   );
   const [rsiPeriod, setRsiPeriod] = useState(
-    String(initial && initial.type === "rsi" ? initial.period : 14),
+    String(initial && initial.type === "rsi" ? initial.period : DEFAULT_RSI_PARAMS.period),
   );
   const [rsiBuy, setRsiBuy] = useState(
-    String(initial && initial.type === "rsi" ? initial.buyThreshold : 30),
+    String(
+      initial && initial.type === "rsi"
+        ? initial.buyThreshold
+        : DEFAULT_RSI_PARAMS.buyThreshold,
+    ),
   );
   const [rsiSell, setRsiSell] = useState(
-    String(initial && initial.type === "rsi" ? initial.sellThreshold : 70),
+    String(
+      initial && initial.type === "rsi"
+        ? initial.sellThreshold
+        : DEFAULT_RSI_PARAMS.sellThreshold,
+    ),
   );
   const [buyPrice, setBuyPrice] = useState(
     String(initial && initial.type === "price-threshold" ? initial.buyPrice : ""),
