@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -100,6 +100,17 @@ export function DashboardSettingsPanel({
     setUnknownIndexSymbols([]);
   }
 
+  // Stable ids so every label↔input pair has a matching htmlFor / id.
+  // Clicking a label focuses its input and screen readers announce the link.
+  const indexInputId = useId();
+  const topMoversLimitId = useId();
+  const watchlistThresholdId = useId();
+  const topMoversSourceName = useId();
+  const topMoversSourceUniverseId = useId();
+  const topMoversSourceWatchlistId = useId();
+  const excludeIndicesId = useId();
+  const equityChartCollapsedId = useId();
+
   if (!ready) {
     return (
       <Card className="p-card-padding gap-4">
@@ -120,9 +131,11 @@ export function DashboardSettingsPanel({
 
       <Field
         label="Index symbols"
+        htmlFor={indexInputId}
         hint="Comma-separated tickers shown in the top row. Examples: ^GSPC, ^NDX, BTC-USD, GC=F"
       >
         <input
+          id={indexInputId}
           type="text"
           value={indexDraft}
           onChange={(e) => setIndexDraft(e.target.value)}
@@ -169,7 +182,8 @@ export function DashboardSettingsPanel({
       >
         <div className="flex gap-3">
           <Radio
-            name="topMoversSource"
+            id={topMoversSourceUniverseId}
+            name={topMoversSourceName}
             checked={settings.topMoversSource === "universe"}
             label="Universe"
             onSelect={() =>
@@ -177,7 +191,8 @@ export function DashboardSettingsPanel({
             }
           />
           <Radio
-            name="topMoversSource"
+            id={topMoversSourceWatchlistId}
+            name={topMoversSourceName}
             checked={settings.topMoversSource === "watchlist"}
             label="Watchlist"
             onSelect={() =>
@@ -187,8 +202,13 @@ export function DashboardSettingsPanel({
         </div>
       </Field>
 
-      <Field label="Top movers limit" hint="How many rows the card shows.">
+      <Field
+        label="Top movers limit"
+        htmlFor={topMoversLimitId}
+        hint="How many rows the card shows."
+      >
         <input
+          id={topMoversLimitId}
           type="number"
           min={1}
           max={50}
@@ -206,6 +226,7 @@ export function DashboardSettingsPanel({
         hint="When on, the index symbols above are dropped from the movers pool."
       >
         <Checkbox
+          id={excludeIndicesId}
           checked={settings.topMoversExcludeIndices}
           onChange={(checked) => applyPatch({ topMoversExcludeIndices: checked })}
         />
@@ -213,10 +234,12 @@ export function DashboardSettingsPanel({
 
       <Field
         label="Watchlist high-attention threshold"
+        htmlFor={watchlistThresholdId}
         hint="Day Δ% bigger than this bumps a watchlist symbol into the 'High attention' bucket."
       >
         <div className="flex items-center gap-2">
           <input
+            id={watchlistThresholdId}
             type="number"
             min={0}
             max={100}
@@ -240,6 +263,7 @@ export function DashboardSettingsPanel({
         hint="The portfolio equity chart starts hidden so it doesn't dominate the page; toggle it open inline."
       >
         <Checkbox
+          id={equityChartCollapsedId}
           checked={settings.equityChartCollapsed}
           onChange={(checked) => applyPatch({ equityChartCollapsed: checked })}
         />
@@ -258,15 +282,20 @@ export function DashboardSettingsPanel({
 function Field({
   label,
   hint,
+  htmlFor,
   children,
 }: {
   label: string;
   hint?: string;
+  htmlFor?: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="space-y-1.5">
-      <label className="font-label-caps text-label-caps text-text-secondary uppercase block">
+      <label
+        htmlFor={htmlFor}
+        className="font-label-caps text-label-caps text-text-secondary uppercase block"
+      >
         {label}
       </label>
       {children}
@@ -278,50 +307,62 @@ function Field({
 }
 
 function Radio({
+  id,
   name,
   checked,
   label,
   onSelect,
 }: {
+  id: string;
   name: string;
   checked: boolean;
   label: string;
   onSelect: () => void;
 }) {
   return (
-    <label className="inline-flex items-center gap-2 cursor-pointer">
+    <span className="inline-flex items-center gap-2">
       <input
+        id={id}
         type="radio"
         name={name}
         checked={checked}
         onChange={onSelect}
-        className="accent-primary"
+        className="accent-primary cursor-pointer"
       />
-      <span className="font-body-compact text-body-compact text-text-primary">
+      <label
+        htmlFor={id}
+        className="font-body-compact text-body-compact text-text-primary cursor-pointer"
+      >
         {label}
-      </span>
-    </label>
+      </label>
+    </span>
   );
 }
 
 function Checkbox({
+  id,
   checked,
   onChange,
 }: {
+  id: string;
   checked: boolean;
   onChange: (next: boolean) => void;
 }) {
   return (
-    <label className="inline-flex items-center gap-2 cursor-pointer">
+    <span className="inline-flex items-center gap-2">
       <input
+        id={id}
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="accent-primary"
+        className="accent-primary cursor-pointer"
       />
-      <span className="font-body-compact text-body-compact text-text-secondary">
+      <label
+        htmlFor={id}
+        className="font-body-compact text-body-compact text-text-secondary cursor-pointer"
+      >
         {checked ? "Enabled" : "Disabled"}
-      </span>
-    </label>
+      </label>
+    </span>
   );
 }
