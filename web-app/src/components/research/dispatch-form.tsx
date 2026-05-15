@@ -11,6 +11,14 @@ interface DispatchFormProps {
   onCancel?: () => void;
 }
 
+// Allowed ticker characters: A-Z, 0-9, dot, hyphen, caret, equals.
+// Covers symbols like BRK.B, BTC-USD, ^GSPC, ES=F.
+const TICKER_ALLOWED = /^[A-Z0-9.\-^=]*$/;
+
+function normalizeTicker(raw: string): string {
+  return raw.trim().toUpperCase();
+}
+
 export function DispatchForm({
   initial,
   submitLabel = "Save",
@@ -21,6 +29,23 @@ export function DispatchForm({
   const [ticker, setTicker] = useState(initial?.ticker ?? "");
   const [body, setBody] = useState(initial?.body ?? "");
   const [error, setError] = useState<string | null>(null);
+  const [tickerError, setTickerError] = useState<string | null>(null);
+
+  function handleTickerBlur() {
+    const normalized = normalizeTicker(ticker);
+    if (normalized !== ticker) {
+      setTicker(normalized);
+    }
+    if (!normalized) {
+      setTickerError(null);
+      return;
+    }
+    if (!TICKER_ALLOWED.test(normalized)) {
+      setTickerError("Ticker may only contain letters, digits, and . - ^ =");
+    } else {
+      setTickerError(null);
+    }
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,10 +54,15 @@ export function DispatchForm({
       setError("Title is required.");
       return;
     }
+    const normalizedTicker = normalizeTicker(ticker);
+    if (normalizedTicker && !TICKER_ALLOWED.test(normalizedTicker)) {
+      setTickerError("Ticker may only contain letters, digits, and . - ^ =");
+      return;
+    }
     onSave({
       title: trimmedTitle,
       body,
-      ticker: ticker.trim() || undefined,
+      ticker: normalizedTicker || undefined,
     });
   }
 
@@ -57,13 +87,27 @@ export function DispatchForm({
             id="dispatch-ticker"
             type="text"
             value={ticker}
-            onChange={(e) => setTicker(e.target.value)}
+            onChange={(e) => {
+              setTicker(e.target.value);
+              if (tickerError) setTickerError(null);
+            }}
+            onBlur={handleTickerBlur}
             placeholder="NVDA"
             autoComplete="off"
             autoCapitalize="characters"
             spellCheck={false}
+            aria-invalid={tickerError ? true : undefined}
+            aria-describedby={tickerError ? "dispatch-ticker-error" : undefined}
             className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
+          {tickerError ? (
+            <p
+              id="dispatch-ticker-error"
+              className="font-body-compact text-body-compact text-regime-risk-off"
+            >
+              {tickerError}
+            </p>
+          ) : null}
         </Field>
       </div>
       <Field label="Body (markdown supported)" htmlFor="dispatch-body">
