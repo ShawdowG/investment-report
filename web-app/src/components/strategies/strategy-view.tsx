@@ -4,6 +4,7 @@ import { ArrowLeft, Pencil, Play, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { SectionHeader, Tag } from "@/components/ui/stitch";
 import {
   Table,
@@ -68,6 +69,7 @@ export function StrategyView({
 }: StrategyViewProps) {
   const [result, setResult] = useState<BacktestResult | null>(null);
   const [running, setRunning] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   useEffect(() => {
     setRunning(true);
@@ -96,9 +98,7 @@ export function StrategyView({
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => {
-              if (confirm("Delete this strategy?")) onDelete();
-            }}
+            onClick={() => setConfirmOpen(true)}
             className="text-text-secondary hover:text-destructive"
           >
             <Trash2 className="size-4 mr-1" aria-hidden="true" />
@@ -106,6 +106,20 @@ export function StrategyView({
           </Button>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Delete strategy?"
+        description={`Remove "${strategy.name}" from your saved strategies. This cannot be undone.`}
+        confirmLabel="Delete"
+        cancelLabel="Keep"
+        destructive
+        onConfirm={() => {
+          setConfirmOpen(false);
+          onDelete();
+        }}
+        onCancel={() => setConfirmOpen(false)}
+      />
 
       <header className="space-y-2">
         <h1 className="font-h1 text-h1 text-text-primary">{strategy.name}</h1>
