@@ -1,14 +1,15 @@
 "use client";
 
 /**
- * SPEC-027 W11.B — Per-thesis files section.
+ * SPEC-027 W11.B / W11.D — Per-thesis files section.
  *
  * Owns the file list state for a thesis (re-fetches via `listFiles()` after
  * every mutation) and renders the upload dropzone, the list, and the footer
  * usage bar. Each row supports rename-in-place, inline preview via
- * `<FilePreview>` (W11.C), open, download, and delete.
- *
- * Caption editing + section anchors land in W11.D on top of this component.
+ * `<FilePreview>` (W11.C), open, download, delete, caption editing
+ * (click-to-edit input), and a `BadgeSelect` for the per-file thesis-section
+ * anchor (W11.D). A small "Newest / By section" sort dropdown groups files
+ * by their section when the user wants the evidence-by-section view.
  */
 
 import { useCallback, useEffect, useState } from "react";
@@ -25,17 +26,24 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
-import { SectionHeader } from "@/components/ui/stitch";
+import {
+  BadgeSelect,
+  SectionHeader,
+  Tag,
+  type BadgeSelectOption,
+} from "@/components/ui/stitch";
 import {
   deleteFile,
   getFile,
   listFiles,
   renameFile,
   totalSizeForThesis,
+  updateMeta,
 } from "@/lib/storage/research-files-store";
 import type {
   ResearchFileKind,
   ResearchFileMeta,
+  ResearchFileSectionAnchor,
 } from "@/lib/domain/research-file";
 import { fmtDate } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
@@ -47,6 +55,46 @@ interface FilesSectionProps {
 }
 
 const MAX_THESIS_BYTES = 200 * 1024 * 1024; // mirror store cap; informational only
+
+const SECTION_ANCHOR_OPTIONS: BadgeSelectOption<ResearchFileSectionAnchor | "">[] = [
+  { value: "", label: "No section" },
+  { value: "fundamentals", label: "Fundamentals" },
+  { value: "marketPosition", label: "Market position" },
+  { value: "valuation", label: "Valuation" },
+  { value: "scenarios", label: "Scenarios" },
+  { value: "tradePlan", label: "Trade plan" },
+  { value: "general", label: "General" },
+];
+
+const SECTION_ANCHOR_LABEL: Record<ResearchFileSectionAnchor, string> = {
+  fundamentals: "Fundamentals",
+  marketPosition: "Market position",
+  valuation: "Valuation",
+  scenarios: "Scenarios",
+  tradePlan: "Trade plan",
+  general: "General",
+};
+
+const SECTION_ORDER: ResearchFileSectionAnchor[] = [
+  "fundamentals",
+  "marketPosition",
+  "valuation",
+  "scenarios",
+  "tradePlan",
+  "general",
+];
+
+type SortMode = "newest" | "bySection";
+
+const SORT_OPTIONS: BadgeSelectOption<SortMode>[] = [
+  { value: "newest", label: "Newest" },
+  { value: "bySection", label: "By section" },
+];
+
+const SORT_LABEL: Record<SortMode, string> = {
+  newest: "Newest",
+  bySection: "By section",
+};
 
 function formatSize(bytes: number): string {
   if (!Number.isFinite(bytes) || bytes < 0) return "0 B";
@@ -83,6 +131,7 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
   const [hydrated, setHydrated] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
   const [openPreviewId, setOpenPreviewId] = useState<string | null>(null);
+  const [sort, setSort] = useState<SortMode>("newest");
   const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
@@ -133,6 +182,18 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
     }
   }
 
+  async function handleUpdateMeta(
+    id: string,
+    patch: { caption?: string; sectionAnchor?: ResearchFileSectionAnchor },
+  ) {
+    try {
+      await updateMeta(id, patch);
+      await refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update file");
+    }
+  }
+
   /**
    * Open the file's blob in a new tab. Materialised on demand because we
    * don't keep blob URLs around for every row — that would leak memory and
@@ -174,11 +235,50 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
     ? files.find((f) => f.id === pendingDeleteId) ?? null
     : null;
 
+  const sortedFiles = sortFiles(files, sort);
+
+  function renderRow(meta: ResearchFileMeta) {
+    return (
+      <FileRow
+        key={meta.id}
+        meta={meta}
+        previewOpen={openPreviewId === meta.id}
+        onTogglePreview={() =>
+          setOpenPreviewId((current) =>
+            current === meta.id ? null : meta.id,
+          )
+        }
+        onRename={(name) => handleRename(meta.id, name)}
+        onOpen={() => handleOpen(meta)}
+        onDownload={() => handleDownload(meta)}
+        onRequestDelete={() => setPendingDeleteId(meta.id)}
+        onUpdateCaption={(caption) => handleUpdateMeta(meta.id, { caption })}
+        onUpdateSection={(sectionAnchor) =>
+          handleUpdateMeta(meta.id, { sectionAnchor })
+        }
+      />
+    );
+  }
+
   return (
     <div className="space-y-3">
       <SectionHeader
         title="Files"
         caption="Attach PDFs, screenshots, transcripts, or notes that back up this thesis. Stored locally in IndexedDB."
+        action={
+          files.length > 0 ? (
+            <BadgeSelect<SortMode>
+              value={sort}
+              options={SORT_OPTIONS}
+              onSelect={(next) => setSort(next)}
+              ariaLabel="Sort files"
+            >
+              <span className="inline-flex items-center rounded-md border border-border-subtle bg-surface-variant px-2 py-1 font-body-compact text-body-compact text-text-primary">
+                {SORT_LABEL[sort]}
+              </span>
+            </BadgeSelect>
+          ) : null
+        }
       />
 
       <FileDropzone
@@ -204,25 +304,19 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
         </p>
       ) : null}
 
-      {files.length > 0 ? (
-        <ul className="space-y-2">
-          {files.map((meta) => (
-            <FileRow
-              key={meta.id}
-              meta={meta}
-              previewOpen={openPreviewId === meta.id}
-              onTogglePreview={() =>
-                setOpenPreviewId((current) =>
-                  current === meta.id ? null : meta.id,
-                )
-              }
-              onRename={(name) => handleRename(meta.id, name)}
-              onOpen={() => handleOpen(meta)}
-              onDownload={() => handleDownload(meta)}
-              onRequestDelete={() => setPendingDeleteId(meta.id)}
-            />
+      {sort === "bySection" && files.length > 0 ? (
+        <div className="space-y-4">
+          {groupBySection(sortedFiles).map(([section, rows]) => (
+            <div key={section ?? "_none"} className="space-y-2">
+              <h4 className="font-label-caps text-label-caps uppercase text-text-secondary">
+                {section ? SECTION_ANCHOR_LABEL[section] : "Unassigned"}
+              </h4>
+              <ul className="space-y-2">{rows.map(renderRow)}</ul>
+            </div>
           ))}
-        </ul>
+        </div>
+      ) : files.length > 0 ? (
+        <ul className="space-y-2">{sortedFiles.map(renderRow)}</ul>
       ) : null}
 
       {files.length > 0 ? (
@@ -269,6 +363,37 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
   );
 }
 
+function sortFiles(files: ResearchFileMeta[], mode: SortMode): ResearchFileMeta[] {
+  if (mode === "newest") {
+    return [...files].sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
+  }
+  // bySection — keep newest within each bucket
+  return [...files].sort((a, b) => {
+    const aIdx = a.sectionAnchor ? SECTION_ORDER.indexOf(a.sectionAnchor) : 99;
+    const bIdx = b.sectionAnchor ? SECTION_ORDER.indexOf(b.sectionAnchor) : 99;
+    if (aIdx !== bIdx) return aIdx - bIdx;
+    return b.uploadedAt.localeCompare(a.uploadedAt);
+  });
+}
+
+function groupBySection(
+  files: ResearchFileMeta[],
+): [ResearchFileSectionAnchor | null, ResearchFileMeta[]][] {
+  const buckets = new Map<ResearchFileSectionAnchor | null, ResearchFileMeta[]>();
+  for (const f of files) {
+    const key = f.sectionAnchor ?? null;
+    const list = buckets.get(key) ?? [];
+    list.push(f);
+    buckets.set(key, list);
+  }
+  const out: [ResearchFileSectionAnchor | null, ResearchFileMeta[]][] = [];
+  for (const section of SECTION_ORDER) {
+    if (buckets.has(section)) out.push([section, buckets.get(section)!]);
+  }
+  if (buckets.has(null)) out.push([null, buckets.get(null)!]);
+  return out;
+}
+
 interface FileRowProps {
   meta: ResearchFileMeta;
   previewOpen: boolean;
@@ -277,6 +402,8 @@ interface FileRowProps {
   onOpen: () => void;
   onDownload: () => void;
   onRequestDelete: () => void;
+  onUpdateCaption: (caption: string) => void;
+  onUpdateSection: (section: ResearchFileSectionAnchor | undefined) => void;
 }
 
 function FileRow({
@@ -287,15 +414,22 @@ function FileRow({
   onOpen,
   onDownload,
   onRequestDelete,
+  onUpdateCaption,
+  onUpdateSection,
 }: FileRowProps) {
   const Icon = iconForKind(meta.kind);
   const [editingName, setEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState(meta.name);
+  const [editingCaption, setEditingCaption] = useState(false);
+  const [captionDraft, setCaptionDraft] = useState(meta.caption ?? "");
 
   // Re-sync local drafts when the meta changes from a refresh.
   useEffect(() => {
     setNameDraft(meta.name);
   }, [meta.name]);
+  useEffect(() => {
+    setCaptionDraft(meta.caption ?? "");
+  }, [meta.caption]);
 
   function commitName() {
     const trimmed = nameDraft.trim();
@@ -310,6 +444,20 @@ function FileRow({
   function cancelName() {
     setNameDraft(meta.name);
     setEditingName(false);
+  }
+
+  function commitCaption() {
+    const trimmed = captionDraft.trim();
+    if (trimmed === (meta.caption ?? "")) {
+      setEditingCaption(false);
+      return;
+    }
+    onUpdateCaption(trimmed);
+    setEditingCaption(false);
+  }
+  function cancelCaption() {
+    setCaptionDraft(meta.caption ?? "");
+    setEditingCaption(false);
   }
 
   return (
@@ -349,15 +497,62 @@ function FileRow({
             <span>{formatSize(meta.size)}</span>
             <span aria-hidden="true">·</span>
             <span>{fmtDate(meta.uploadedAt)}</span>
+            {meta.sectionAnchor ? (
+              <Tag>{SECTION_ANCHOR_LABEL[meta.sectionAnchor]}</Tag>
+            ) : null}
           </div>
-          {meta.caption ? (
-            <p className="font-body-compact text-body-compact text-text-primary">
-              {meta.caption}
-            </p>
-          ) : null}
+          {editingCaption ? (
+            <input
+              autoFocus
+              value={captionDraft}
+              onChange={(e) => setCaptionDraft(e.target.value)}
+              onBlur={commitCaption}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  commitCaption();
+                } else if (e.key === "Escape") {
+                  e.preventDefault();
+                  cancelCaption();
+                }
+              }}
+              placeholder="Caption — what does this file show?"
+              className="w-full rounded-md border border-border-subtle bg-surface px-2 py-1 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              aria-label="File caption"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setEditingCaption(true)}
+              className={cn(
+                "block w-full truncate text-left font-body-compact text-body-compact hover:underline",
+                meta.caption
+                  ? "text-text-primary"
+                  : "text-text-secondary italic",
+              )}
+              title="Click to edit caption"
+            >
+              {meta.caption || "Add caption"}
+            </button>
+          )}
         </div>
 
         <div className="flex shrink-0 items-center gap-1">
+          <BadgeSelect<ResearchFileSectionAnchor | "">
+            value={meta.sectionAnchor ?? ""}
+            options={SECTION_ANCHOR_OPTIONS}
+            onSelect={(next) =>
+              onUpdateSection(next === "" ? undefined : next)
+            }
+            ariaLabel={`Section anchor for ${meta.name}`}
+          >
+            <span className="inline-flex items-center rounded-md border border-border-subtle bg-surface-variant px-2 py-1 font-body-compact text-body-compact text-text-primary">
+              {meta.sectionAnchor
+                ? SECTION_ANCHOR_LABEL[meta.sectionAnchor]
+                : "Section"}
+            </span>
+          </BadgeSelect>
+
           <Button
             type="button"
             variant="ghost"
