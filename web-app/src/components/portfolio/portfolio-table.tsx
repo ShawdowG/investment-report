@@ -11,14 +11,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
+import { fmtMoney } from "@/lib/utils/format";
 
 interface PortfolioTableProps {
   positions: PortfolioPosition[];
   onRemove: (symbol: string) => void;
 }
-
-const fmtMoney = (n: number): string =>
-  `$${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 export function PortfolioTable({ positions, onRemove }: PortfolioTableProps) {
   if (positions.length === 0) {

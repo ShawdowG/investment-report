@@ -39,9 +39,9 @@ export function PortfolioView() {
     <div className="space-y-4">
       <AddPositionForm onAdd={handleAdd} />
       <PortfolioTable positions={positions} onRemove={handleRemove} />
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-text-secondary">
         Stored locally under{" "}
-        <code className="rounded bg-muted px-1 py-0.5 text-[10px]">portfolio_positions</code>.
+        <code className="rounded bg-surface-variant px-1 py-0.5 text-[10px]">portfolio_positions</code>.
         Dollar deltas on the dashboard are estimates — see SPEC-008 §8.
       </p>
     </div>

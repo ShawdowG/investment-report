@@ -53,7 +53,7 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
             autoComplete="off"
             autoCapitalize="characters"
             spellCheck={false}
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
         <Field label="Quantity" htmlFor="pos-qty">
@@ -69,7 +69,7 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
               if (error) setError(null);
             }}
             placeholder="100"
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
         <Field label="Avg price" htmlFor="pos-price">
@@ -85,14 +85,14 @@ export function AddPositionForm({ onAdd }: AddPositionFormProps) {
               if (error) setError(null);
             }}
             placeholder="850.00"
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
         <Button type="submit" size="sm" className="sm:self-end">
           Add position
         </Button>
       </div>
-      {error ? <p className="text-xs text-destructive">{error}</p> : null}
+      {error ? <p className="text-xs text-regime-risk-off">{error}</p> : null}
     </form>
   );
 }
@@ -108,7 +108,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="block text-xs font-medium text-muted-foreground">
+      <label htmlFor={htmlFor} className="block text-xs font-medium text-text-secondary">
         {label}
       </label>
       {children}
