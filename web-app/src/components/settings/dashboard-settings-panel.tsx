@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { SectionHeader } from "@/components/ui/stitch";
+import { SectionHeader, Tag } from "@/components/ui/stitch";
 import {
   DEFAULT_DASHBOARD_SETTINGS,
   type DashboardSettings,
@@ -15,6 +15,7 @@ import {
   resetDashboardSettings,
   updateDashboardSettings,
 } from "@/lib/storage/dashboard-settings-store";
+import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
 
 function parseSymbolList(raw: string): string[] {
   return raw
@@ -23,13 +24,47 @@ function parseSymbolList(raw: string): string[] {
     .filter((s) => s.length > 0);
 }
 
-export function DashboardSettingsPanel() {
+/**
+ * Validate a raw token list against the quote universe.
+ * - Each token is normalized (case, exchange prefix, etc.).
+ * - Tokens that normalize cleanly AND match a known symbol => valid.
+ * - Everything else is flagged as unknown — we keep the original spelling so
+ *   the user can see what they typed in the chip and remove it.
+ */
+function splitValidation(
+  tokens: string[],
+  known: Set<string>,
+): { valid: string[]; unknown: string[] } {
+  const valid: string[] = [];
+  const unknown: string[] = [];
+  const seen = new Set<string>();
+  for (const token of tokens) {
+    const normalized = normalizeSymbol(token);
+    if (normalized && known.has(normalized)) {
+      if (seen.has(normalized)) continue;
+      seen.add(normalized);
+      valid.push(normalized);
+    } else {
+      unknown.push(token);
+    }
+  }
+  return { valid, unknown };
+}
+
+export function DashboardSettingsPanel({
+  knownSymbols,
+}: {
+  knownSymbols: string[];
+}) {
+  const knownSet = useMemo(() => new Set(knownSymbols), [knownSymbols]);
+
   const [settings, setSettings] = useState<DashboardSettings>(
     DEFAULT_DASHBOARD_SETTINGS,
   );
   const [indexDraft, setIndexDraft] = useState(
     DEFAULT_DASHBOARD_SETTINGS.indexSymbols.join(", "),
   );
+  const [unknownIndexSymbols, setUnknownIndexSymbols] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -47,13 +82,22 @@ export function DashboardSettingsPanel() {
 
   function handleIndexBlur() {
     const parsed = parseSymbolList(indexDraft);
-    applyPatch({ indexSymbols: parsed });
+    const { valid, unknown } = splitValidation(parsed, knownSet);
+    setUnknownIndexSymbols(unknown);
+    applyPatch({ indexSymbols: valid });
+    // Rewrite the input so it only shows valid, saved symbols.
+    setIndexDraft(valid.join(", "));
+  }
+
+  function removeUnknown(symbol: string) {
+    setUnknownIndexSymbols((prev) => prev.filter((s) => s !== symbol));
   }
 
   function handleReset() {
     const next = resetDashboardSettings();
     setSettings(next);
     setIndexDraft(next.indexSymbols.join(", "));
+    setUnknownIndexSymbols([]);
   }
 
   if (!ready) {
@@ -91,6 +135,32 @@ export function DashboardSettingsPanel() {
           }}
           className="w-full rounded-md border border-border-subtle bg-surface-variant px-3 py-1.5 font-data-mono text-data-mono text-text-primary focus:outline-none focus:border-primary/60"
         />
+        {unknownIndexSymbols.length > 0 ? (
+          <div className="space-y-1 pt-1">
+            <div className="flex flex-wrap gap-1.5">
+              {unknownIndexSymbols.map((sym) => (
+                <Tag
+                  key={sym}
+                  className="border-regime-risk-off text-regime-risk-off bg-surface-variant gap-1 pr-1"
+                >
+                  <span className="font-data-mono">{sym}</span>
+                  <button
+                    type="button"
+                    aria-label={`Remove ${sym}`}
+                    onClick={() => removeUnknown(sym)}
+                    className="inline-flex items-center justify-center rounded hover:bg-surface-elevated text-regime-risk-off"
+                  >
+                    <X className="size-3" aria-hidden="true" />
+                  </button>
+                </Tag>
+              ))}
+            </div>
+            <p className="text-xs text-regime-risk-off">
+              {unknownIndexSymbols.length} unknown symbol
+              {unknownIndexSymbols.length === 1 ? "" : "s"} — not in the quote feed and won't render.
+            </p>
+          </div>
+        ) : null}
       </Field>
 
       <Field

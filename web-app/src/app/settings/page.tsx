@@ -3,8 +3,11 @@ export const dynamic = "force-static";
 import { AppShell } from "@/components/layout/app-shell";
 import { DashboardSettingsPanel } from "@/components/settings/dashboard-settings-panel";
 import { SettingsActions } from "@/components/settings/settings-actions";
+import { listQuoteSymbols } from "@/lib/quotes/load-quote";
 
 export default function SettingsPage() {
+  const knownSymbols = listQuoteSymbols();
+
   return (
     <AppShell>
       <div className="space-y-6">
@@ -14,7 +17,7 @@ export default function SettingsPage() {
             Local data utilities and app preferences.
           </p>
         </header>
-        <DashboardSettingsPanel />
+        <DashboardSettingsPanel knownSymbols={knownSymbols} />
         <SettingsActions />
       </div>
     </AppShell>
