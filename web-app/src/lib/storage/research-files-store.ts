@@ -270,5 +270,6 @@ const _conforms: ResearchFilesRepository = {
   rename: renameFile,
   updateMeta,
   totalSize: totalSizeForThesis,
+  deleteAll: deleteAllFiles,
 };
 void _conforms;

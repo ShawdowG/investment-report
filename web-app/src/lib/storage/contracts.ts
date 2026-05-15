@@ -136,4 +136,5 @@ export interface ResearchFilesRepository {
     patch: Partial<Pick<ResearchFileMeta, "caption" | "sectionAnchor">>,
   ): Promise<ResearchFileMeta>;
   totalSize(thesisSymbol: string): Promise<number>;
+  deleteAll(): Promise<void>;
 }
