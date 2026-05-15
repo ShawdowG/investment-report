@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { SectionHeader, Tag } from "@/components/ui/stitch";
 import {
   DEFAULT_DASHBOARD_SETTINGS,
@@ -66,6 +67,7 @@ export function DashboardSettingsPanel({
   );
   const [unknownIndexSymbols, setUnknownIndexSymbols] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
+  const [resetConfirmOpen, setResetConfirmOpen] = useState(false);
 
   // "Saved" pulse — opacity fade-in (200ms) → hold (1500ms) → fade-out (200ms).
   // Two-step state so we can transition both phases via CSS opacity.
@@ -123,11 +125,13 @@ export function DashboardSettingsPanel({
     setUnknownIndexSymbols((prev) => prev.filter((s) => s !== symbol));
   }
 
-  function handleReset() {
+  function performReset() {
     const next = resetDashboardSettings();
     setSettings(next);
     setIndexDraft(next.indexSymbols.join(", "));
     setUnknownIndexSymbols([]);
+    setResetConfirmOpen(false);
+    flashSaved();
   }
 
   // Stable ids so every label↔input pair has a matching htmlFor / id.
@@ -317,11 +321,25 @@ export function DashboardSettingsPanel({
       </Field>
 
       <div className="pt-2">
-        <Button type="button" variant="outline" onClick={handleReset}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => setResetConfirmOpen(true)}
+        >
           <RotateCcw className="size-4 mr-1" aria-hidden="true" />
           Reset to defaults
         </Button>
       </div>
+
+      <ConfirmDialog
+        open={resetConfirmOpen}
+        title="Reset dashboard preferences?"
+        description="This restores indexSymbols, top movers source, and all other dashboard settings to defaults. Your watchlist/portfolio/notes are not affected."
+        confirmLabel="Reset"
+        destructive
+        onConfirm={performReset}
+        onCancel={() => setResetConfirmOpen(false)}
+      />
     </Card>
   );
 }
