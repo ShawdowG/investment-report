@@ -21,6 +21,7 @@ export function SettingsActions() {
   const [statusKind, setStatusKind] = useState<StatusKind>("info");
 
   const [pendingImport, setPendingImport] = useState<ExportPayload | null>(null);
+  const [pendingClear, setPendingClear] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   function setBanner(kind: StatusKind, message: string) {
@@ -37,11 +38,12 @@ export function SettingsActions() {
   }
 
   function handleClear() {
-    const confirmed = window.confirm(
-      "Clear watchlist, portfolio, ticker notes, and research dispatches? This cannot be undone.",
-    );
-    if (!confirmed) return;
+    setPendingClear(true);
+  }
+
+  function confirmClear() {
     clearAllUserData();
+    setPendingClear(false);
     setBanner("warn", "All local user data cleared.");
   }
 
@@ -167,6 +169,16 @@ export function SettingsActions() {
         destructive
         onConfirm={confirmImport}
         onCancel={() => setPendingImport(null)}
+      />
+
+      <ConfirmDialog
+        open={pendingClear}
+        title="Clear all local data?"
+        description="This wipes watchlist, portfolio, ticker notes, and research dispatches from this browser. It cannot be undone."
+        confirmLabel="Clear all"
+        destructive
+        onConfirm={confirmClear}
+        onCancel={() => setPendingClear(false)}
       />
     </>
   );
