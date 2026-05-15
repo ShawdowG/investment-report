@@ -98,122 +98,193 @@
   --spacing-container-max: 1280px;
   --spacing-margin-mobile: 1rem;
 
-  /* Surfaces — Stitch dark palette, used directly via bg-{token} */
-  --color-surface: #1e293b;
-  --color-surface-variant: #32353c;
-  --color-surface-bright: #363941;
-  --color-surface-elevated: #334155;
-  --color-surface-dim: #10131a;
-  --color-surface-container: #1d2027;
-  --color-surface-container-low: #191b23;
-  --color-surface-container-lowest: #0b0e15;
-  --color-surface-container-high: #272a31;
-  --color-surface-container-highest: #32353c;
+  /* Stitch colors — variable-indirected so they flip per theme.
+     Concrete values live in :root (light) and .dark blocks below. */
+  --color-surface: var(--st-surface);
+  --color-surface-variant: var(--st-surface-variant);
+  --color-surface-bright: var(--st-surface-bright);
+  --color-surface-elevated: var(--st-surface-elevated);
+  --color-surface-dim: var(--st-surface-dim);
+  --color-surface-container: var(--st-surface-container);
+  --color-surface-container-low: var(--st-surface-container-low);
+  --color-surface-container-lowest: var(--st-surface-container-lowest);
+  --color-surface-container-high: var(--st-surface-container-high);
+  --color-surface-container-highest: var(--st-surface-container-highest);
 
-  /* Text */
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-on-surface: #e1e2ec;
-  --color-on-surface-variant: #c2c6d6;
-  --color-on-background: #e1e2ec;
+  --color-text-primary: var(--st-text-primary);
+  --color-text-secondary: var(--st-text-secondary);
+  --color-on-surface: var(--st-on-surface);
+  --color-on-surface-variant: var(--st-on-surface-variant);
+  --color-on-background: var(--st-on-background);
 
-  /* Borders + outlines */
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-outline: #8c909f;
-  --color-outline-variant: #424754;
+  --color-border-subtle: var(--st-border-subtle);
+  --color-outline: var(--st-outline);
+  --color-outline-variant: var(--st-outline-variant);
 
-  /* Primary / brand */
-  --color-primary-container: #4d8eff;
-  --color-on-primary: #002e6a;
-  --color-on-primary-container: #00285d;
-  --color-primary-fixed: #d8e2ff;
-  --color-primary-fixed-dim: #adc6ff;
-  --color-on-primary-fixed: #001a42;
-  --color-on-primary-fixed-variant: #004395;
-  --color-surface-tint: #adc6ff;
-  --color-inverse-primary: #005ac2;
+  --color-primary-container: var(--st-primary-container);
+  --color-on-primary: var(--st-on-primary);
+  --color-on-primary-container: var(--st-on-primary-container);
+  --color-primary-fixed: var(--st-primary-fixed);
+  --color-primary-fixed-dim: var(--st-primary-fixed-dim);
+  --color-on-primary-fixed: var(--st-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--st-on-primary-fixed-variant);
+  --color-surface-tint: var(--st-surface-tint);
+  --color-inverse-primary: var(--st-inverse-primary);
 
-  /* Secondary */
-  --color-secondary-container: #00a572;
-  --color-secondary-fixed: #6ffbbe;
-  --color-secondary-fixed-dim: #4edea3;
-  --color-on-secondary: #003824;
-  --color-on-secondary-container: #00311f;
-  --color-on-secondary-fixed: #002113;
-  --color-on-secondary-fixed-variant: #005236;
+  --color-secondary-container: var(--st-secondary-container);
+  --color-secondary-fixed: var(--st-secondary-fixed);
+  --color-secondary-fixed-dim: var(--st-secondary-fixed-dim);
+  --color-on-secondary: var(--st-on-secondary);
+  --color-on-secondary-container: var(--st-on-secondary-container);
+  --color-on-secondary-fixed: var(--st-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--st-on-secondary-fixed-variant);
 
-  /* Tertiary */
-  --color-tertiary: #ffb786;
-  --color-tertiary-container: #df7412;
-  --color-tertiary-fixed: #ffdcc6;
-  --color-tertiary-fixed-dim: #ffb786;
-  --color-on-tertiary: #502400;
-  --color-on-tertiary-container: #461f00;
-  --color-on-tertiary-fixed: #311400;
-  --color-on-tertiary-fixed-variant: #723600;
+  --color-tertiary: var(--st-tertiary);
+  --color-tertiary-container: var(--st-tertiary-container);
+  --color-tertiary-fixed: var(--st-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--st-tertiary-fixed-dim);
+  --color-on-tertiary: var(--st-on-tertiary);
+  --color-on-tertiary-container: var(--st-on-tertiary-container);
+  --color-on-tertiary-fixed: var(--st-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--st-on-tertiary-fixed-variant);
 
-  /* Errors */
-  --color-error: #ffb4ab;
-  --color-error-container: #93000a;
-  --color-on-error: #690005;
-  --color-on-error-container: #ffdad6;
+  --color-error: var(--st-error);
+  --color-error-container: var(--st-error-container);
+  --color-on-error: var(--st-on-error);
+  --color-on-error-container: var(--st-on-error-container);
 
-  /* Inverse */
-  --color-inverse-surface: #e1e2ec;
-  --color-inverse-on-surface: #2e3038;
+  --color-inverse-surface: var(--st-inverse-surface);
+  --color-inverse-on-surface: var(--st-inverse-on-surface);
 
-  /* Regime indicators */
-  --color-regime-risk-on: #10b981;
-  --color-regime-risk-off: #ef4444;
-  --color-regime-neutral: #f59e0b;
+  --color-regime-risk-on: var(--st-regime-risk-on);
+  --color-regime-risk-off: var(--st-regime-risk-off);
+  --color-regime-neutral: var(--st-regime-neutral);
 
-  /* Status indicators (watchlist / portfolio) */
-  --color-status-own: #10b981;
-  --color-status-watching: #6366f1;
-  --color-status-avoid: #64748b;
+  --color-status-own: var(--st-status-own);
+  --color-status-watching: var(--st-status-watching);
+  --color-status-avoid: var(--st-status-avoid);
 }
 
+/*
+ * :root — Light mode. Designed 2026-05-15 as ADR-007 follow-up.
+ * Slate-based neutrals with darker brand/regime colors for contrast on white.
+ */
 :root {
+  color-scheme: light;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+  --destructive: #b91c1c;
+  --border: rgba(15, 23, 42, 0.08);
+  --input: rgba(15, 23, 42, 0.08);
+  --ring: #2563eb;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: rgba(15, 23, 42, 0.08);
+  --sidebar-ring: #2563eb;
+
+  /* Stitch surfaces — light */
+  --st-surface: #ffffff;
+  --st-surface-variant: #f1f5f9;
+  --st-surface-bright: #ffffff;
+  --st-surface-elevated: #f8fafc;
+  --st-surface-dim: #f1f5f9;
+  --st-surface-container: #ffffff;
+  --st-surface-container-low: #f8fafc;
+  --st-surface-container-lowest: #f1f5f9;
+  --st-surface-container-high: #ffffff;
+  --st-surface-container-highest: #ffffff;
+
+  /* Text */
+  --st-text-primary: #0f172a;
+  --st-text-secondary: #64748b;
+  --st-on-surface: #1e293b;
+  --st-on-surface-variant: #475569;
+  --st-on-background: #1e293b;
+
+  /* Borders */
+  --st-border-subtle: rgba(15, 23, 42, 0.08);
+  --st-outline: #94a3b8;
+  --st-outline-variant: #cbd5e1;
+
+  /* Primary / brand */
+  --st-primary-container: #2563eb;
+  --st-on-primary: #ffffff;
+  --st-on-primary-container: #1e3a8a;
+  --st-primary-fixed: #dbeafe;
+  --st-primary-fixed-dim: #93c5fd;
+  --st-on-primary-fixed: #1e3a8a;
+  --st-on-primary-fixed-variant: #1d4ed8;
+  --st-surface-tint: #2563eb;
+  --st-inverse-primary: #93c5fd;
+
+  /* Secondary */
+  --st-secondary-container: #059669;
+  --st-secondary-fixed: #d1fae5;
+  --st-secondary-fixed-dim: #a7f3d0;
+  --st-on-secondary: #ffffff;
+  --st-on-secondary-container: #064e3b;
+  --st-on-secondary-fixed: #064e3b;
+  --st-on-secondary-fixed-variant: #047857;
+
+  /* Tertiary */
+  --st-tertiary: #ea580c;
+  --st-tertiary-container: #fed7aa;
+  --st-tertiary-fixed: #ffedd5;
+  --st-tertiary-fixed-dim: #fdba74;
+  --st-on-tertiary: #ffffff;
+  --st-on-tertiary-container: #7c2d12;
+  --st-on-tertiary-fixed: #7c2d12;
+  --st-on-tertiary-fixed-variant: #9a3412;
+
+  /* Error */
+  --st-error: #b91c1c;
+  --st-error-container: #fecaca;
+  --st-on-error: #ffffff;
+  --st-on-error-container: #7f1d1d;
+
+  /* Inverse */
+  --st-inverse-surface: #1e293b;
+  --st-inverse-on-surface: #f1f5f9;
+
+  /* Regime indicators (darker for contrast on white) */
+  --st-regime-risk-on: #047857;
+  --st-regime-risk-off: #b91c1c;
+  --st-regime-neutral: #b45309;
+
+  /* Status indicators */
+  --st-status-own: #047857;
+  --st-status-watching: #4338ca;
+  --st-status-avoid: #475569;
 }
 
 /*
  * .dark — bridge shadcn semantic tokens to Stitch palette.
- * Light mode keeps the previous shadcn defaults; Stitch is dark-only
- * in the handoff, so light is intentionally not redesigned.
+ * Preserves the SPEC-011 dark palette exactly as shipped 2026-05-10.
  */
 .dark {
+  color-scheme: dark;
   --background: #0f172a;
   --foreground: #f8fafc;
   --card: #1e293b;
@@ -245,6 +316,80 @@
   --sidebar-accent-foreground: #f8fafc;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #adc6ff;
+
+  /* Stitch surfaces — dark (unchanged from SPEC-011) */
+  --st-surface: #1e293b;
+  --st-surface-variant: #32353c;
+  --st-surface-bright: #363941;
+  --st-surface-elevated: #334155;
+  --st-surface-dim: #10131a;
+  --st-surface-container: #1d2027;
+  --st-surface-container-low: #191b23;
+  --st-surface-container-lowest: #0b0e15;
+  --st-surface-container-high: #272a31;
+  --st-surface-container-highest: #32353c;
+
+  /* Text */
+  --st-text-primary: #f8fafc;
+  --st-text-secondary: #94a3b8;
+  --st-on-surface: #e1e2ec;
+  --st-on-surface-variant: #c2c6d6;
+  --st-on-background: #e1e2ec;
+
+  /* Borders */
+  --st-border-subtle: rgba(255, 255, 255, 0.08);
+  --st-outline: #8c909f;
+  --st-outline-variant: #424754;
+
+  /* Primary / brand */
+  --st-primary-container: #4d8eff;
+  --st-on-primary: #002e6a;
+  --st-on-primary-container: #00285d;
+  --st-primary-fixed: #d8e2ff;
+  --st-primary-fixed-dim: #adc6ff;
+  --st-on-primary-fixed: #001a42;
+  --st-on-primary-fixed-variant: #004395;
+  --st-surface-tint: #adc6ff;
+  --st-inverse-primary: #005ac2;
+
+  /* Secondary */
+  --st-secondary-container: #00a572;
+  --st-secondary-fixed: #6ffbbe;
+  --st-secondary-fixed-dim: #4edea3;
+  --st-on-secondary: #003824;
+  --st-on-secondary-container: #00311f;
+  --st-on-secondary-fixed: #002113;
+  --st-on-secondary-fixed-variant: #005236;
+
+  /* Tertiary */
+  --st-tertiary: #ffb786;
+  --st-tertiary-container: #df7412;
+  --st-tertiary-fixed: #ffdcc6;
+  --st-tertiary-fixed-dim: #ffb786;
+  --st-on-tertiary: #502400;
+  --st-on-tertiary-container: #461f00;
+  --st-on-tertiary-fixed: #311400;
+  --st-on-tertiary-fixed-variant: #723600;
+
+  /* Error */
+  --st-error: #ffb4ab;
+  --st-error-container: #93000a;
+  --st-on-error: #690005;
+  --st-on-error-container: #ffdad6;
+
+  /* Inverse */
+  --st-inverse-surface: #e1e2ec;
+  --st-inverse-on-surface: #2e3038;
+
+  /* Regime indicators */
+  --st-regime-risk-on: #10b981;
+  --st-regime-risk-off: #ef4444;
+  --st-regime-neutral: #f59e0b;
+
+  /* Status indicators */
+  --st-status-own: #10b981;
+  --st-status-watching: #6366f1;
+  --st-status-avoid: #64748b;
 }
 
 @layer base {

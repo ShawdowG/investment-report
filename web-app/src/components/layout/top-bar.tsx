@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Bell, Search, User } from "lucide-react";
 import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
+import { ThemeToggle } from "./theme-toggle";
 
 export function TopBar() {
   const router = useRouter();
@@ -51,6 +52,7 @@ export function TopBar() {
         >
           <Search className="size-5" />
         </button>
+        <ThemeToggle />
         <button
           type="button"
           aria-label="Notifications"

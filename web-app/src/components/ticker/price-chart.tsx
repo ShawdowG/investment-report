@@ -152,18 +152,18 @@ export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
             </defs>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.06)"
+              stroke="var(--color-border-subtle)"
               vertical={false}
             />
             <XAxis
               dataKey="date"
-              stroke="#94a3b8"
+              stroke="var(--color-text-secondary)"
               fontSize={11}
               tickFormatter={(value: string) => value.slice(5)}
               minTickGap={40}
             />
             <YAxis
-              stroke="#94a3b8"
+              stroke="var(--color-text-secondary)"
               fontSize={11}
               domain={["auto", "auto"]}
               tickFormatter={(value: number) => fmtMoney(value, currency)}
@@ -171,7 +171,7 @@ export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
             />
             <Tooltip
               content={<PriceTooltip currency={currency} />}
-              cursor={{ stroke: "rgba(255,255,255,0.15)" }}
+              cursor={{ stroke: "var(--color-outline-variant)" }}
             />
             <Area
               type="monotone"
