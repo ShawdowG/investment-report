@@ -1,7 +1,7 @@
 "use client";
 
+import { Chip } from "@/components/ui/chip";
 import type { WatchlistStatus } from "@/lib/domain/watchlist";
-import { cn } from "@/lib/utils";
 
 export type StatusFilter = WatchlistStatus | "all";
 
@@ -121,29 +121,3 @@ function FilterRow({
   );
 }
 
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs border transition-colors",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
-        active
-          ? "bg-primary-container text-on-primary-container border-primary-container"
-          : "bg-surface-variant text-text-secondary border-border-subtle hover:text-text-primary",
-      )}
-    >
-      {children}
-    </button>
-  );
-}
