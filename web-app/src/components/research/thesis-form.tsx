@@ -17,6 +17,7 @@ import {
 } from "@/lib/storage/thesis-store";
 import type {
   PlannedAction,
+  Scenario,
   Thesis,
   TradeLevel,
 } from "@/lib/domain/thesis";
@@ -28,6 +29,7 @@ import {
   defaultScenarios,
   emptyChecks,
 } from "@/lib/domain/thesis";
+import { ScenariosEditor } from "@/components/research/scenarios-editor";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -142,6 +144,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [prefill, setPrefill] = useState<ThesisPrefill>({});
   const [hydrated, setHydrated] = useState(false);
   const [form, setForm] = useState<FormState>(emptyForm());
+  const [scenarios, setScenarios] = useState<Scenario[]>(() => defaultScenarios());
   const [mode, setMode] = useState<Mode>("quick");
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -153,10 +156,12 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     if (stored) {
       setExisting(stored);
       setForm(formFromThesis(stored));
+      setScenarios(stored.scenarios);
     } else {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
       setForm(formFromPrefill(prefilled));
+      setScenarios(defaultScenarios());
     }
     setHydrated(true);
   }, [upper, snapshots]);
@@ -192,6 +197,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           ...existing,
           thesisPoints,
           tradeLevels,
+          scenarios,
           updatedAt: now,
         }
       : {
@@ -208,7 +214,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           coreDrivers: [],
           optionalDrivers: [],
           valuation: {},
-          scenarios: defaultScenarios(),
+          scenarios,
           currentLight: "yellow",
           greenChecks: emptyChecks(GREEN_CHECK_COUNT),
           yellowChecks: emptyChecks(YELLOW_CHECK_COUNT),
@@ -240,6 +246,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       const saved = upsertThesis(next);
       setExisting(saved);
       setForm(formFromThesis(saved));
+      setScenarios(saved.scenarios);
       setSavedAt(Date.now());
       setError(null);
     } catch (err) {
@@ -257,6 +264,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
       setForm(formFromPrefill(prefilled));
+      setScenarios(defaultScenarios());
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
@@ -330,17 +338,19 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       </div>
 
       {mode === "deep" ? (
-        <Card className="p-card-padding gap-2">
+        <Card className="p-card-padding gap-3">
           <SectionHeader
             title="Deep dive"
-            caption="Coming soon — fundamentals, scenarios, valuation, light. (W8.B-L)"
+            caption="Optional sections mirroring the framework §4–§8. Save anytime — every field is optional."
           />
-          <p className="font-body-compact text-body-compact text-text-secondary">
-            The deep-dive sections of SPEC-023 (§4 fundamentals, §5 market position,
-            §6 valuation, §7 scenarios, §8 light / checklists, attached notes)
-            are reserved for the next batch of workstreams. For now, the
-            quick-start tab below is the entire form.
-          </p>
+          <DeepDiveSection title="Scenarios (§7)" caption="Five canonical scenarios with optional price targets + probabilities.">
+            <ScenariosEditor
+              scenarios={scenarios}
+              onChange={setScenarios}
+              currentPrice={snapshot?.lastClose}
+              currency={snapshot?.currency ?? "USD"}
+            />
+          </DeepDiveSection>
         </Card>
       ) : null}
 
@@ -530,5 +540,52 @@ function Field({
       </label>
       {children}
     </div>
+  );
+}
+
+/**
+ * Collapsible deep-dive subsection. Uses native <details>/<summary> so it
+ * doesn't fight the form's submit flow — the open state is purely visual and
+ * preserved across renders. `defaultOpen` controls whether the section renders
+ * expanded on first mount.
+ */
+function DeepDiveSection({
+  title,
+  caption,
+  defaultOpen = false,
+  children,
+}: {
+  title: string;
+  caption?: string;
+  defaultOpen?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <details
+      open={defaultOpen}
+      className="group rounded-md border border-border-subtle bg-surface-elevated"
+    >
+      <summary className="flex cursor-pointer items-start justify-between gap-3 px-3 py-2 list-none [&::-webkit-details-marker]:hidden">
+        <div className="space-y-0.5">
+          <span className="block font-label-caps text-label-caps uppercase text-text-primary">
+            {title}
+          </span>
+          {caption ? (
+            <span className="block font-body-compact text-body-compact text-text-secondary">
+              {caption}
+            </span>
+          ) : null}
+        </div>
+        <span
+          aria-hidden="true"
+          className="shrink-0 font-data-mono text-body-compact text-text-secondary group-open:rotate-90 transition-transform"
+        >
+          ▸
+        </span>
+      </summary>
+      <div className="px-3 pb-3 pt-1 space-y-3 border-t border-border-subtle">
+        {children}
+      </div>
+    </details>
   );
 }
