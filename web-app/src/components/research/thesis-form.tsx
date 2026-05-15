@@ -18,6 +18,7 @@ import {
 import type {
   Light,
   PlannedAction,
+  ResearchNote,
   Scenario,
   Thesis,
   TradeLevel,
@@ -32,6 +33,7 @@ import {
 } from "@/lib/domain/thesis";
 import { ScenariosEditor } from "@/components/research/scenarios-editor";
 import { ThesisChecklists } from "@/components/research/thesis-checklists";
+import { ThesisNotes } from "@/components/research/thesis-notes";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -152,6 +154,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [yellowChecks, setYellowChecks] = useState<boolean[]>(() => emptyChecks(YELLOW_CHECK_COUNT));
   const [redChecks, setRedChecks] = useState<boolean[]>(() => emptyChecks(RED_CHECK_COUNT));
   const [trimSellChecks, setTrimSellChecks] = useState<boolean[]>(() => emptyChecks(TRIM_SELL_CHECK_COUNT));
+  const [notes, setNotes] = useState<ResearchNote[]>([]);
   const [mode, setMode] = useState<Mode>("quick");
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -169,6 +172,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setYellowChecks(stored.yellowChecks);
       setRedChecks(stored.redChecks);
       setTrimSellChecks(stored.trimSellChecks);
+      setNotes(stored.notes);
     } else {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
@@ -179,6 +183,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setYellowChecks(emptyChecks(YELLOW_CHECK_COUNT));
       setRedChecks(emptyChecks(RED_CHECK_COUNT));
       setTrimSellChecks(emptyChecks(TRIM_SELL_CHECK_COUNT));
+      setNotes([]);
     }
     setHydrated(true);
   }, [upper, snapshots]);
@@ -220,6 +225,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           yellowChecks,
           redChecks,
           trimSellChecks,
+          notes,
           updatedAt: now,
         }
       : {
@@ -242,7 +248,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           yellowChecks,
           redChecks,
           trimSellChecks,
-          notes: [],
+          notes,
         };
 
     if (maxPos !== undefined) next.maxPositionSize = maxPos;
@@ -274,6 +280,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setYellowChecks(saved.yellowChecks);
       setRedChecks(saved.redChecks);
       setTrimSellChecks(saved.trimSellChecks);
+      setNotes(saved.notes);
       setSavedAt(Date.now());
       setError(null);
     } catch (err) {
@@ -297,6 +304,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setYellowChecks(emptyChecks(YELLOW_CHECK_COUNT));
       setRedChecks(emptyChecks(RED_CHECK_COUNT));
       setTrimSellChecks(emptyChecks(TRIM_SELL_CHECK_COUNT));
+      setNotes([]);
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
@@ -396,6 +404,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
               trimSellChecks={trimSellChecks}
               onTrimSellChange={setTrimSellChecks}
             />
+          </DeepDiveSection>
+          <DeepDiveSection title="Notes" caption="Multiple markdown notes — paste ChatGPT responses, log observations, transcribe calls.">
+            <ThesisNotes notes={notes} onChange={setNotes} />
           </DeepDiveSection>
         </Card>
       ) : null}
