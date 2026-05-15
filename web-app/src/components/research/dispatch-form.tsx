@@ -79,7 +79,7 @@ export function DispatchForm({
               if (error) setError(null);
             }}
             placeholder="Weekly market take, NVDA earnings post-mortem…"
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
         <Field label="Ticker (optional)" htmlFor="dispatch-ticker">
@@ -98,7 +98,7 @@ export function DispatchForm({
             spellCheck={false}
             aria-invalid={tickerError ? true : undefined}
             aria-describedby={tickerError ? "dispatch-ticker-error" : undefined}
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
           {tickerError ? (
             <p
@@ -117,7 +117,7 @@ export function DispatchForm({
           onChange={(e) => setBody(e.target.value)}
           placeholder="Write your research, market view, or post-mortem here…&#10;&#10;Markdown: # heading, **bold**, *italic*, - bullet, `code`"
           rows={14}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
+          className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-2 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
         />
       </Field>
       {error ? <p className="text-xs text-destructive">{error}</p> : null}
