@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import type { QuoteSnapshot } from "@/lib/quotes/snapshots";
@@ -40,6 +41,11 @@ export function ThesisLiveHeader({
   snapshot,
   compactDaily,
 }: ThesisLiveHeaderProps) {
+  // Defer the ResponsiveContainer until after hydration — otherwise it logs a
+  // recharts width(-1)/height(-1) warning during SSR/SSG.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const dayPct = snapshot?.dayDelta?.pct ?? null;
   const deltaClass =
     dayPct === null
@@ -102,7 +108,7 @@ export function ThesisLiveHeader({
           )}
         </div>
         <div className="hidden md:block flex-1 max-w-[10rem]">
-          {sparkBars.length >= 2 ? (
+          {mounted && sparkBars.length >= 2 ? (
             <div className="h-10" aria-hidden="true">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
