@@ -23,6 +23,7 @@ import type {
   Concerns,
   FundamentalsSnapshot,
   MarketPositionNotes,
+  ResearchNote,
   Scenario,
   ScenarioKind,
   Thesis,
@@ -322,11 +323,23 @@ function buildDiffRows(thesis: Thesis, fragment: ParsedThesisFragment): DiffRow[
 /* Component                                                          */
 /* ------------------------------------------------------------------ */
 
+function todayIsoDate(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function newNoteId(): string {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+  return `note-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
 export function ThesisImportPanel({ thesis, onApply }: ThesisImportPanelProps) {
   const [raw, setRaw] = useState<string>("");
   const [report, setReport] = useState<ImportReport | null>(null);
   const [skipped, setSkipped] = useState<Set<FieldId>>(() => new Set());
   const [accepted, setAccepted] = useState<Set<FieldId>>(() => new Set());
+  const [routeMsg, setRouteMsg] = useState<string | null>(null);
 
   const rows = useMemo<DiffRow[]>(() => {
     if (!report) return [];
@@ -344,6 +357,7 @@ export function ThesisImportPanel({ thesis, onApply }: ThesisImportPanelProps) {
     setReport(result);
     setSkipped(new Set());
     setAccepted(new Set());
+    setRouteMsg(null);
   }
 
   function handleAcceptRow(row: DiffRow) {
@@ -382,11 +396,39 @@ export function ThesisImportPanel({ thesis, onApply }: ThesisImportPanelProps) {
     });
   }
 
+  function handleAppendToNotes() {
+    if (!report?.unmatched) return;
+    const prev = thesis.analysisNotes?.trim() ?? "";
+    const next = prev
+      ? `${prev}\n\n---\n\n${report.unmatched}`
+      : report.unmatched;
+    onApply({ analysisNotes: next });
+    setRouteMsg("Appended unmatched content to analysis notes.");
+    // Clear unmatched and the textarea so the user can iterate.
+    setReport((r) => (r ? { ...r, unmatched: "" } : r));
+    setRaw("");
+  }
+
+  function handleMoveToNewNote() {
+    if (!report?.unmatched) return;
+    const note: ResearchNote = {
+      id: newNoteId(),
+      title: `ChatGPT extra (${todayIsoDate()})`,
+      body: report.unmatched,
+      createdAt: new Date().toISOString(),
+    };
+    onApply({ notes: [note, ...thesis.notes] });
+    setRouteMsg(`Moved unmatched content to new note "${note.title}".`);
+    setReport((r) => (r ? { ...r, unmatched: "" } : r));
+    setRaw("");
+  }
+
   function handleClear() {
     setRaw("");
     setReport(null);
     setSkipped(new Set());
     setAccepted(new Set());
+    setRouteMsg(null);
   }
 
   const pendingRows = rows.filter((r) => !accepted.has(r.id) && !skipped.has(r.id));
@@ -480,6 +522,11 @@ export function ThesisImportPanel({ thesis, onApply }: ThesisImportPanelProps) {
                   </Button>
                 </div>
               ) : null}
+              {routeMsg ? (
+                <p className="font-body-compact text-body-compact text-regime-risk-on">
+                  {routeMsg}
+                </p>
+              ) : null}
             </div>
 
             {rows.length > 0 ? (
@@ -558,11 +605,29 @@ export function ThesisImportPanel({ thesis, onApply }: ThesisImportPanelProps) {
               <div className="rounded-md border border-border-subtle bg-surface p-3 space-y-2">
                 <SectionHeader
                   title="Unmatched content"
-                  caption="Anything the parser couldn't classify. Routing UI lands in a follow-up commit."
+                  caption="Anything the parser couldn't classify — route it somewhere visible."
                 />
                 <pre className="whitespace-pre-wrap max-h-48 overflow-auto rounded border border-border-subtle bg-surface-variant px-2 py-1 font-data-mono text-data-mono text-text-secondary">
                   {report.unmatched}
                 </pre>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleAppendToNotes}
+                  >
+                    Append to analysis notes
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleMoveToNewNote}
+                  >
+                    Move to new note
+                  </Button>
+                </div>
               </div>
             ) : null}
           </div>
