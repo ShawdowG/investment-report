@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { CrossedZonesCard } from "./crossed-zones-card";
 import { IndexPulseRow } from "./index-pulse-row";
 import { PortfolioImpactCard } from "./portfolio-impact-card";
 import { TopMoversCard } from "./top-movers-card";
@@ -99,6 +100,11 @@ export function DashboardClient({
           highThresholdPct={settings.watchlistHighThresholdPct}
         />
       </div>
+
+      <CrossedZonesCard
+        snapshots={snapshots}
+        proximityPct={settings.thesisProximityPct ?? 2}
+      />
 
       <PortfolioImpactCard
         snapshots={snapshots}
