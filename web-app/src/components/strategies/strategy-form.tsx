@@ -81,6 +81,9 @@ export function StrategyForm({
     if (type === "price-threshold" && symbols.length !== 1) {
       return setError("Price threshold strategy supports exactly one symbol.");
     }
+    if (startDate && endDate && startDate > endDate) {
+      return setError("Start date must be on or before end date.");
+    }
 
     const positionSizing =
       sizing === "fixed-dollar"
