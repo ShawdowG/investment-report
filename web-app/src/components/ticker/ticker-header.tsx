@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import { Briefcase, MoreVertical, Plus } from "lucide-react";
 import { BadgeSelect, PriorityBadge, StatusBadge } from "@/components/ui/stitch";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,12 @@ import {
   addPosition,
   getPortfolio,
 } from "@/lib/storage/portfolio-store";
+import type { Light } from "@/lib/domain/quarterly-review";
+import {
+  getThesisLight,
+  LIGHT_ARIA,
+  LIGHT_DOT_CLASS,
+} from "@/lib/research/thesis-light";
 
 interface TickerHeaderProps {
   symbol: string;
@@ -53,6 +60,7 @@ const PRIORITY_OPTIONS: { value: WatchlistPriority; label: string }[] = [
 export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
   const [entry, setEntry] = useState<WatchlistItem | null>(null);
   const [position, setPosition] = useState<PortfolioPosition | null>(null);
+  const [thesisLight, setThesisLight] = useState<Light | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -60,6 +68,8 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
     setEntry(found);
     const pos = getPortfolio().find((p) => p.symbol === symbol) ?? null;
     setPosition(pos);
+    // SPEC-023 W8.H — show the active thesis pill if a thesis exists.
+    setThesisLight(getThesisLight(symbol));
     setReady(true);
   }, [symbol]);
 
@@ -100,6 +110,22 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
           ) : null}
         </div>
         <div className="flex flex-wrap items-center gap-2 mt-3 min-h-[28px]">
+          {ready && thesisLight ? (
+            <Link
+              href={`/research/thesis/${encodeURIComponent(symbol)}`}
+              aria-label={`${LIGHT_ARIA[thesisLight]} — open thesis for ${symbol}`}
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded font-badge text-badge border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
+            >
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "inline-block size-2 rounded-full",
+                  LIGHT_DOT_CLASS[thesisLight],
+                )}
+              />
+              <span>Active thesis</span>
+            </Link>
+          ) : null}
           {ready ? (
             entry ? (
               <>

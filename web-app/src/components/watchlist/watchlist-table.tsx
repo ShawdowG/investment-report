@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { ArrowDown, ArrowUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +26,12 @@ import type {
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
 import type { WatchlistUpdatePatch } from "./watchlist-view";
+import type { Light } from "@/lib/domain/quarterly-review";
+import {
+  getAllThesisLights,
+  LIGHT_ARIA,
+  LIGHT_DOT_CLASS,
+} from "@/lib/research/thesis-light";
 
 interface WatchlistTableProps {
   items: WatchlistItem[];
@@ -188,6 +195,12 @@ export function WatchlistTable({
   snapshots = {},
 }: WatchlistTableProps) {
   const [sort, setSort] = useState<SortState>({ key: "symbol", dir: "asc" });
+  // SPEC-023 W8.H — resolve thesis lights once on mount (single localStorage
+  // read for the whole table, not N reads per row).
+  const [thesisLights, setThesisLights] = useState<Record<string, Light>>({});
+  useEffect(() => {
+    setThesisLights(getAllThesisLights());
+  }, []);
 
   function toggleSort(key: SortKey) {
     setSort((prev) =>
@@ -284,7 +297,24 @@ export function WatchlistTable({
             return (
               <TableRow key={item.symbol}>
                 <TableCell className="font-data-mono text-data-mono text-text-primary">
-                  {item.symbol}
+                  <span className="inline-flex items-center gap-2">
+                    {thesisLights[item.symbol] ? (
+                      <Link
+                        href={`/research/thesis/${encodeURIComponent(item.symbol)}`}
+                        aria-label={LIGHT_ARIA[thesisLights[item.symbol]]}
+                        className="inline-block size-1.5 rounded-full hover:opacity-80 transition-opacity"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "inline-block size-1.5 rounded-full",
+                            LIGHT_DOT_CLASS[thesisLights[item.symbol]],
+                          )}
+                        />
+                      </Link>
+                    ) : null}
+                    <span>{item.symbol}</span>
+                  </span>
                 </TableCell>
                 <TableCell>
                   <StatusEditCell

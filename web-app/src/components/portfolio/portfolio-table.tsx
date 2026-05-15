@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +15,13 @@ import {
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { PortfolioPnLRow } from "@/lib/quotes/portfolio-pnl";
 import { fmtMoney, fmtMoneySigned, fmtPct } from "@/lib/utils/format";
+import type { Light } from "@/lib/domain/quarterly-review";
+import {
+  getAllThesisLights,
+  LIGHT_ARIA,
+  LIGHT_DOT_CLASS,
+} from "@/lib/research/thesis-light";
+import { cn } from "@/lib/utils";
 
 export type PortfolioUpdatePatch = Partial<
   Pick<PortfolioPosition, "quantity" | "avgPrice">
@@ -122,6 +130,13 @@ export function PortfolioTable({
   onUpdate,
   pnlRows,
 }: PortfolioTableProps) {
+  // SPEC-023 W8.H — single localStorage read for thesis lights across the
+  // whole table.
+  const [thesisLights, setThesisLights] = useState<Record<string, Light>>({});
+  useEffect(() => {
+    setThesisLights(getAllThesisLights());
+  }, []);
+
   if (positions.length === 0) {
     return (
       <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
@@ -180,7 +195,24 @@ export function PortfolioTable({
             return (
               <TableRow key={p.symbol}>
                 <TableCell className="font-data-mono text-data-mono text-text-primary">
-                  {p.symbol}
+                  <span className="inline-flex items-center gap-2">
+                    {thesisLights[p.symbol] ? (
+                      <Link
+                        href={`/research/thesis/${encodeURIComponent(p.symbol)}`}
+                        aria-label={LIGHT_ARIA[thesisLights[p.symbol]]}
+                        className="inline-block size-1.5 rounded-full hover:opacity-80 transition-opacity"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "inline-block size-1.5 rounded-full",
+                            LIGHT_DOT_CLASS[thesisLights[p.symbol]],
+                          )}
+                        />
+                      </Link>
+                    ) : null}
+                    <span>{p.symbol}</span>
+                  </span>
                 </TableCell>
                 <TableCell className="text-right font-data-mono text-data-mono text-text-primary">
                   {editable && onUpdate ? (
