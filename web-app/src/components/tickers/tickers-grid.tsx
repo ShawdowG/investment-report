@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Tag } from "@/components/ui/stitch";
+import { Chip, Tag } from "@/components/ui/stitch";
 import type { QuoteSnapshot, QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
@@ -119,25 +119,15 @@ export function TickersGrid({ snapshots }: TickersGridProps) {
           role="group"
           aria-label="Sort tickers"
         >
-          {SORT_OPTIONS.map((opt) => {
-            const active = opt.key === sort;
-            return (
-              <button
-                key={opt.key}
-                type="button"
-                onClick={() => setSort(opt.key)}
-                aria-pressed={active}
-                className={cn(
-                  "inline-flex items-center px-3 py-1 rounded-full border font-body-compact text-xs transition-colors",
-                  active
-                    ? "border-border-subtle bg-surface-elevated text-text-primary"
-                    : "border-border-subtle bg-surface-variant text-text-secondary hover:text-text-primary",
-                )}
-              >
-                {opt.label}
-              </button>
-            );
-          })}
+          {SORT_OPTIONS.map((opt) => (
+            <Chip
+              key={opt.key}
+              active={opt.key === sort}
+              onClick={() => setSort(opt.key)}
+            >
+              {opt.label}
+            </Chip>
+          ))}
         </div>
       </div>
 
