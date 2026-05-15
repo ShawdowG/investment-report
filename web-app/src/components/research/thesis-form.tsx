@@ -51,6 +51,7 @@ import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
 import { QuarterlyReviewForm } from "./quarterly-review-form";
 import { QuarterlyReviewTimeline } from "./quarterly-review-timeline";
+import { FilesSection } from "./files-section";
 import { buildChatGPTPrompt } from "@/lib/research/thesis-markdown";
 
 interface ThesisFormProps {
@@ -603,6 +604,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     return (
       <div className="space-y-4">
         <ThesisView thesis={existing} onEdit={() => setViewMode("edit")} />
+        <Card className="p-card-padding gap-3">
+          <FilesSection thesisSymbol={upper} />
+        </Card>
         <div className="space-y-3 pt-2">
           <QuarterlyReviewTimeline
             thesisSymbol={upper}
@@ -1087,6 +1091,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
             </span>
           </BadgeSelect>
         </div>
+      </Card>
+
+      <Card className="p-card-padding gap-3">
+        <FilesSection thesisSymbol={upper} />
       </Card>
 
       {error ? (
