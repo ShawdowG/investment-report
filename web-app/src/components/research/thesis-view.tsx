@@ -17,6 +17,7 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SectionHeader, Tag } from "@/components/ui/stitch";
+import { LightTrajectory } from "./light-trajectory";
 import { MarkdownBody } from "./markdown-body";
 import { LIGHT_ARIA, LIGHT_DOT_CLASS } from "@/lib/research/thesis-light";
 import type {
@@ -418,6 +419,8 @@ export function ThesisView({ thesis, onEdit }: ThesisViewProps) {
           </div>
         </Card>
       ) : null}
+
+      <LightTrajectory symbol={symbol} />
 
       {hasNotes ? (
         <Card className="p-card-padding gap-3">
