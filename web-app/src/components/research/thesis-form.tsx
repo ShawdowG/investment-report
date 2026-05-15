@@ -16,12 +16,15 @@ import {
   upsertThesis,
 } from "@/lib/storage/thesis-store";
 import type {
+  FundamentalsSnapshot,
   Light,
+  MarketPositionNotes,
   PlannedAction,
   ResearchNote,
   Scenario,
   Thesis,
   TradeLevel,
+  ValuationNotes,
 } from "@/lib/domain/thesis";
 import {
   GREEN_CHECK_COUNT,
@@ -125,6 +128,26 @@ function parseNumber(raw: string): number | undefined {
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 
+/** Drop blank strings so we don't persist empty `""` fields to localStorage. */
+function compactStrings<T extends object>(obj: T): T {
+  const out: Record<string, string> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (trimmed) out[key] = value;
+    }
+  }
+  return out as T;
+}
+
+/** Split one-bullet-per-line text into a string[], discarding blanks. */
+function linesToList(raw: string): string[] {
+  return raw
+    .split("\n")
+    .map((s) => s.replace(/^\s*[-*]\s*/, "").trim())
+    .filter((s) => s.length > 0);
+}
+
 function buildTradeLevels(form: FormState): TradeLevel[] {
   const out: TradeLevel[] = [];
   const triples: [string, 1 | 2 | 3][] = [
@@ -155,6 +178,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [redChecks, setRedChecks] = useState<boolean[]>(() => emptyChecks(RED_CHECK_COUNT));
   const [trimSellChecks, setTrimSellChecks] = useState<boolean[]>(() => emptyChecks(TRIM_SELL_CHECK_COUNT));
   const [notes, setNotes] = useState<ResearchNote[]>([]);
+  const [fundamentals, setFundamentals] = useState<FundamentalsSnapshot>({});
+  const [marketPosition, setMarketPosition] = useState<MarketPositionNotes>({});
+  const [coreDriversRaw, setCoreDriversRaw] = useState<string>("");
+  const [optionalDriversRaw, setOptionalDriversRaw] = useState<string>("");
+  const [valuation, setValuation] = useState<ValuationNotes>({});
   const [mode, setMode] = useState<Mode>("quick");
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -173,6 +201,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setRedChecks(stored.redChecks);
       setTrimSellChecks(stored.trimSellChecks);
       setNotes(stored.notes);
+      setFundamentals(stored.fundamentals);
+      setMarketPosition(stored.marketPosition);
+      setCoreDriversRaw(stored.coreDrivers.join("\n"));
+      setOptionalDriversRaw(stored.optionalDrivers.join("\n"));
+      setValuation(stored.valuation);
     } else {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
@@ -184,6 +217,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setRedChecks(emptyChecks(RED_CHECK_COUNT));
       setTrimSellChecks(emptyChecks(TRIM_SELL_CHECK_COUNT));
       setNotes([]);
+      setFundamentals({});
+      setMarketPosition({});
+      setCoreDriversRaw("");
+      setOptionalDriversRaw("");
+      setValuation({});
     }
     setHydrated(true);
   }, [upper, snapshots]);
@@ -214,6 +252,12 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       .map((s) => s.trim())
       .filter((s) => s.length > 0);
     const now = new Date().toISOString();
+    const cleanFundamentals = compactStrings(fundamentals);
+    const cleanMarketPosition = compactStrings(marketPosition);
+    const cleanValuation = compactStrings(valuation);
+    const coreDrivers = linesToList(coreDriversRaw);
+    const optionalDrivers = linesToList(optionalDriversRaw);
+
     const next: Thesis = existing
       ? {
           ...existing,
@@ -226,6 +270,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           redChecks,
           trimSellChecks,
           notes,
+          fundamentals: cleanFundamentals,
+          marketPosition: cleanMarketPosition,
+          coreDrivers,
+          optionalDrivers,
+          valuation: cleanValuation,
           updatedAt: now,
         }
       : {
@@ -237,11 +286,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           questions: [],
           classifiedPoints: [],
           tradeLevels,
-          fundamentals: {},
-          marketPosition: {},
-          coreDrivers: [],
-          optionalDrivers: [],
-          valuation: {},
+          fundamentals: cleanFundamentals,
+          marketPosition: cleanMarketPosition,
+          coreDrivers,
+          optionalDrivers,
+          valuation: cleanValuation,
           scenarios,
           currentLight: light,
           greenChecks,
@@ -281,6 +330,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setRedChecks(saved.redChecks);
       setTrimSellChecks(saved.trimSellChecks);
       setNotes(saved.notes);
+      setFundamentals(saved.fundamentals);
+      setMarketPosition(saved.marketPosition);
+      setCoreDriversRaw(saved.coreDrivers.join("\n"));
+      setOptionalDriversRaw(saved.optionalDrivers.join("\n"));
+      setValuation(saved.valuation);
       setSavedAt(Date.now());
       setError(null);
     } catch (err) {
@@ -305,6 +359,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setRedChecks(emptyChecks(RED_CHECK_COUNT));
       setTrimSellChecks(emptyChecks(TRIM_SELL_CHECK_COUNT));
       setNotes([]);
+      setFundamentals({});
+      setMarketPosition({});
+      setCoreDriversRaw("");
+      setOptionalDriversRaw("");
+      setValuation({});
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
@@ -383,6 +442,165 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
             title="Deep dive"
             caption="Optional sections mirroring the framework §4–§8. Save anytime — every field is optional."
           />
+          <DeepDiveSection
+            title="Fundamentals (§4)"
+            caption="Quarterly check on the seven framework rows — leave any blank."
+            defaultOpen
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <TextAreaField
+                label="Revenue growth"
+                helper="Latest quarter, TTM, guidance."
+                value={fundamentals.revenueGrowth ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, revenueGrowth: v }))}
+              />
+              <TextAreaField
+                label="Margins"
+                helper="Gross / operating / net."
+                value={fundamentals.margins ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, margins: v }))}
+              />
+              <TextAreaField
+                label="Free cash flow"
+                helper="Reported and normalised."
+                value={fundamentals.fcf ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, fcf: v }))}
+              />
+              <TextAreaField
+                label="Balance sheet"
+                helper="Net debt, cash, maturities."
+                value={fundamentals.balanceSheet ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, balanceSheet: v }))}
+              />
+              <TextAreaField
+                label="Segment / region growth"
+                helper="Where the growth is coming from."
+                value={fundamentals.segmentGrowth ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, segmentGrowth: v }))}
+              />
+              <TextAreaField
+                label="Guidance"
+                helper="Raised, stable, or cut."
+                value={fundamentals.guidance ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, guidance: v }))}
+              />
+              <TextAreaField
+                label="Capital allocation"
+                helper="Buybacks, M&A, reinvestment."
+                value={fundamentals.capitalAllocation ?? ""}
+                onChange={(v) => setFundamentals((f) => ({ ...f, capitalAllocation: v }))}
+              />
+            </div>
+          </DeepDiveSection>
+          <DeepDiveSection
+            title="Market position (§5)"
+            caption="Real competition, dominance, durability, new markets."
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <TextAreaField
+                label="Real competition"
+                helper="Who is the company actually competing against?"
+                value={marketPosition.realCompetition ?? ""}
+                onChange={(v) =>
+                  setMarketPosition((m) => ({ ...m, realCompetition: v }))
+                }
+              />
+              <TextAreaField
+                label="Dominance today"
+                helper="What does the company own outright?"
+                value={marketPosition.dominanceToday ?? ""}
+                onChange={(v) =>
+                  setMarketPosition((m) => ({ ...m, dominanceToday: v }))
+                }
+              />
+              <TextAreaField
+                label="Durability"
+                helper="Is the dominance defensible?"
+                value={marketPosition.durability ?? ""}
+                onChange={(v) =>
+                  setMarketPosition((m) => ({ ...m, durability: v }))
+                }
+              />
+              <TextAreaField
+                label="New markets"
+                helper="Adjacent expansion paths."
+                value={marketPosition.newMarkets ?? ""}
+                onChange={(v) =>
+                  setMarketPosition((m) => ({ ...m, newMarkets: v }))
+                }
+              />
+              <TextAreaField
+                label="New areas proven?"
+                helper="Proven or still optional?"
+                value={marketPosition.newAreasProven ?? ""}
+                onChange={(v) =>
+                  setMarketPosition((m) => ({ ...m, newAreasProven: v }))
+                }
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <TextAreaField
+                label="Core growth drivers"
+                helper="One per line — pricing, units, geo, margin, FCF, buybacks."
+                value={coreDriversRaw}
+                onChange={setCoreDriversRaw}
+                rows={5}
+              />
+              <TextAreaField
+                label="Optional upside drivers"
+                helper="One per line — new products, AI, live events, partnerships."
+                value={optionalDriversRaw}
+                onChange={setOptionalDriversRaw}
+                rows={5}
+              />
+            </div>
+          </DeepDiveSection>
+          <DeepDiveSection
+            title="Valuation (§6)"
+            caption="Which metrics, what assumptions, what is the price pricing in?"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <TextAreaField
+                label="Metrics tracked"
+                helper="e.g. fwd P/E, EV/EBITDA, P/FCF, EV/sales."
+                value={valuation.metricsTracked ?? ""}
+                onChange={(v) =>
+                  setValuation((val) => ({ ...val, metricsTracked: v }))
+                }
+              />
+              <TextAreaField
+                label="Growth assumed"
+                helper="What revenue growth does the current price imply?"
+                value={valuation.growthAssumed ?? ""}
+                onChange={(v) =>
+                  setValuation((val) => ({ ...val, growthAssumed: v }))
+                }
+              />
+              <TextAreaField
+                label="Margin assumed"
+                helper="Operating / net margin the multiple bakes in."
+                value={valuation.marginAssumed ?? ""}
+                onChange={(v) =>
+                  setValuation((val) => ({ ...val, marginAssumed: v }))
+                }
+              />
+              <TextAreaField
+                label="Multiple assumed"
+                helper="What multiple must the market keep paying?"
+                value={valuation.multipleAssumed ?? ""}
+                onChange={(v) =>
+                  setValuation((val) => ({ ...val, multipleAssumed: v }))
+                }
+              />
+            </div>
+            <TextAreaField
+              label="Notes"
+              helper="Cheap / fair / high-quality? What if the multiple compresses?"
+              value={valuation.notes ?? ""}
+              onChange={(v) => setValuation((val) => ({ ...val, notes: v }))}
+              rows={3}
+            />
+          </DeepDiveSection>
           <DeepDiveSection title="Scenarios (§7)" caption="Five canonical scenarios with optional price targets + probabilities.">
             <ScenariosEditor
               scenarios={scenarios}
@@ -596,6 +814,49 @@ function Field({
         {label}
       </label>
       {children}
+    </div>
+  );
+}
+
+/**
+ * Free-text textarea field for deep-dive sub-objects. Stable id is derived from
+ * the label so screen readers can announce it; helper text appears in the
+ * caption row beneath the label.
+ */
+function TextAreaField({
+  label,
+  helper,
+  value,
+  onChange,
+  rows = 2,
+}: {
+  label: string;
+  helper?: string;
+  value: string;
+  onChange: (next: string) => void;
+  rows?: number;
+}) {
+  const id = `field-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  return (
+    <div className="space-y-1">
+      <label
+        htmlFor={id}
+        className="block font-label-caps text-label-caps uppercase text-text-secondary"
+      >
+        {label}
+      </label>
+      {helper ? (
+        <p className="font-body-compact text-body-compact text-text-secondary">
+          {helper}
+        </p>
+      ) : null}
+      <textarea
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={rows}
+        className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-2 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
+      />
     </div>
   );
 }
