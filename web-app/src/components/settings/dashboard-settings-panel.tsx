@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -67,6 +67,35 @@ export function DashboardSettingsPanel({
   const [unknownIndexSymbols, setUnknownIndexSymbols] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
 
+  // "Saved" pulse — opacity fade-in (200ms) → hold (1500ms) → fade-out (200ms).
+  // Two-step state so we can transition both phases via CSS opacity.
+  const [savedVisible, setSavedVisible] = useState(false);
+  const [savedOpaque, setSavedOpaque] = useState(false);
+  const savedTimersRef = useRef<{ in?: number; out?: number; off?: number }>({});
+
+  function flashSaved() {
+    const timers = savedTimersRef.current;
+    if (timers.in) window.clearTimeout(timers.in);
+    if (timers.out) window.clearTimeout(timers.out);
+    if (timers.off) window.clearTimeout(timers.off);
+    setSavedVisible(true);
+    // Next frame: trigger fade-in.
+    timers.in = window.setTimeout(() => setSavedOpaque(true), 10);
+    // After 200ms fade-in + 1500ms hold, fade out.
+    timers.out = window.setTimeout(() => setSavedOpaque(false), 1700);
+    // After fade-out (200ms more), unmount.
+    timers.off = window.setTimeout(() => setSavedVisible(false), 1900);
+  }
+
+  useEffect(() => {
+    return () => {
+      const timers = savedTimersRef.current;
+      if (timers.in) window.clearTimeout(timers.in);
+      if (timers.out) window.clearTimeout(timers.out);
+      if (timers.off) window.clearTimeout(timers.off);
+    };
+  }, []);
+
   useEffect(() => {
     const loaded = getDashboardSettings();
     setSettings(loaded);
@@ -78,6 +107,7 @@ export function DashboardSettingsPanel({
     const next = updateDashboardSettings(patch);
     setSettings(next);
     if (patch.indexSymbols) setIndexDraft(next.indexSymbols.join(", "));
+    flashSaved();
   }
 
   function handleIndexBlur() {
@@ -127,6 +157,19 @@ export function DashboardSettingsPanel({
       <SectionHeader
         title="Dashboard preferences"
         caption="Controls the dashboard's index pulse, top movers and watchlist impact cards."
+        action={
+          savedVisible ? (
+            <span
+              role="status"
+              aria-live="polite"
+              className={`font-body-compact text-body-compact text-regime-risk-on transition-opacity duration-200 ${
+                savedOpaque ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              Saved
+            </span>
+          ) : null
+        }
       />
 
       <Field
