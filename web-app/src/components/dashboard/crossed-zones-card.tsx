@@ -15,9 +15,15 @@ import {
 import type { Thesis, TradeLevelKind } from "@/lib/domain/thesis";
 import { findCrossedZones } from "@/lib/quotes/zones";
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
+import { stampCrossedLevels } from "@/lib/research/zone-tracker";
 import { getTheses } from "@/lib/storage/thesis-store";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
+
+// SPEC-026 W10.B — TopBar's AlertsButton reads this localStorage key so the
+// badge count includes crossed zones without re-loading the snapshot map
+// client-side (snapshots are server-loaded via build-time fs reads).
+const CROSSED_COUNT_KEY = "thesis_crossed_zone_count";
 
 interface CrossedZonesCardProps {
   snapshots: QuoteSnapshotMap;
@@ -59,6 +65,23 @@ export function CrossedZonesCard({
     () => findCrossedZones(theses, snapshots, proximityPct),
     [theses, snapshots, proximityPct],
   );
+
+  // SPEC-026 W10.A — stamp lastCrossedAt on the matching levels (once per
+  // mount, at most one localStorage write per thesis). Plus write the count
+  // so the TopBar's AlertsButton can include it in the badge total.
+  useEffect(() => {
+    if (!ready) return;
+    try {
+      stampCrossedLevels(theses, snapshots, proximityPct);
+    } catch (err) {
+      console.warn("[crossed-zones-card] stamp failed", err);
+    }
+    try {
+      window.localStorage.setItem(CROSSED_COUNT_KEY, String(zones.length));
+    } catch {
+      /* quota / unavailable — non-fatal */
+    }
+  }, [ready, theses, snapshots, proximityPct, zones.length]);
 
   if (!ready) {
     return null;

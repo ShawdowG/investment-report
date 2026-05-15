@@ -31,6 +31,14 @@ export interface SentimentAreaReferenceLine {
   label?: string;
   /** When true, line renders thicker (used when the zone is currently in range). */
   emphasis?: boolean;
+  /**
+   * SPEC-026 W10.A — distinct from `emphasis` (which means "in range now").
+   * Set true when this level's `lastCrossedAt` is within the last 7 days but
+   * price has since recovered, so the chart still hints that the user should
+   * pay attention. Renders thicker (2.5) like `emphasis`; if both are set,
+   * either is enough.
+   */
+  recentlyCrossed?: boolean;
 }
 
 const REFERENCE_LINE_COLORS: Record<SentimentAreaReferenceLine["kind"], string> = {
@@ -155,14 +163,15 @@ export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
           />
           {referenceLines?.map((line, idx) => {
             const stroke = REFERENCE_LINE_COLORS[line.kind];
-            const strokeWidth = line.emphasis ? 2.5 : 1.5;
+            const highlighted = line.emphasis || line.recentlyCrossed;
+            const strokeWidth = highlighted ? 2.5 : 1.5;
             return (
               <ReferenceLine
                 key={`${line.kind}-${line.y}-${idx}`}
                 y={line.y}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
-                strokeOpacity={line.emphasis ? 1 : 0.85}
+                strokeOpacity={highlighted ? 1 : 0.85}
                 ifOverflow="extendDomain"
                 label={
                   line.label

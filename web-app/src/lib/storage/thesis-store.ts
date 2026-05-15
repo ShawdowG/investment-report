@@ -63,6 +63,9 @@ function coerceTradeLevels(raw: unknown): TradeLevel[] {
       price: t.price,
       ...(level !== undefined ? { level } : {}),
       ...(typeof t.note === "string" && t.note ? { note: t.note } : {}),
+      ...(typeof t.lastCrossedAt === "string" && t.lastCrossedAt
+        ? { lastCrossedAt: t.lastCrossedAt }
+        : {}),
     });
   }
   return out;

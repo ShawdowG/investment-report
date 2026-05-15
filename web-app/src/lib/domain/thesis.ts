@@ -28,6 +28,13 @@ export interface TradeLevel {
   /** Tranche number for "add" levels following the framework's 3-tranche pattern. */
   level?: 1 | 2 | 3;
   note?: string;
+  /**
+   * SPEC-026 W10.A — ISO date (YYYY-MM-DD) of the last time today's close was
+   * within `thesisProximityPct` of this level. Written client-side by the
+   * dashboard's CrossedZonesCard; persists across refreshes so the user can
+   * still see "Add L1 was crossed 2026-04-12" even after price recovers.
+   */
+  lastCrossedAt?: string;
 }
 
 export interface Concerns {

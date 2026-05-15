@@ -30,12 +30,17 @@ function formatLevelLabel(level: TradeLevel, currency: string): string {
   return `Sell — ${price}`;
 }
 
+// SPEC-026 W10.A — levels crossed within the last 7 days get the thicker
+// stroke even when price has since recovered.
+const RECENT_CROSSED_WINDOW_MS = 7 * 86_400_000;
+
 function deriveReferenceLines(
   thesis: Thesis,
   currentPrice: number | undefined,
   proximityPct: number,
   currency: string,
 ): SentimentAreaReferenceLine[] {
+  const now = Date.now();
   return thesis.tradeLevels
     .filter((lvl) => Number.isFinite(lvl.price) && lvl.price > 0)
     .map((lvl) => {
@@ -43,11 +48,19 @@ function deriveReferenceLines(
         typeof currentPrice === "number" && Number.isFinite(currentPrice)
           ? Math.abs((currentPrice - lvl.price) / lvl.price) * 100 <= proximityPct
           : false;
+      let recentlyCrossed = false;
+      if (lvl.lastCrossedAt) {
+        const ts = new Date(lvl.lastCrossedAt).getTime();
+        if (Number.isFinite(ts) && now - ts <= RECENT_CROSSED_WINDOW_MS) {
+          recentlyCrossed = true;
+        }
+      }
       return {
         y: lvl.price,
         kind: lvl.kind,
         label: formatLevelLabel(lvl, currency),
         emphasis,
+        recentlyCrossed,
       } satisfies SentimentAreaReferenceLine;
     });
 }

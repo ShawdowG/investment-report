@@ -518,14 +518,19 @@ function TradeLevelsTable({ levels }: { levels: TradeLevel[] }) {
         <tbody className="divide-y divide-border-subtle">
           {levels.map((lvl, i) => (
             <tr key={i}>
-              <td className="py-1 pr-3">{TRADE_KIND_LABEL[lvl.kind]}</td>
-              <td className="py-1 pr-3 font-data-mono">
+              <td className="py-1 pr-3 align-top">{TRADE_KIND_LABEL[lvl.kind]}</td>
+              <td className="py-1 pr-3 font-data-mono align-top">
                 {lvl.level ?? "—"}
               </td>
-              <td className="py-1 pr-3 font-data-mono">
-                {fmtMoney(lvl.price)}
+              <td className="py-1 pr-3 font-data-mono align-top">
+                <div>{fmtMoney(lvl.price)}</div>
+                {lvl.lastCrossedAt ? (
+                  <div className="text-text-secondary text-xs font-body-compact">
+                    Last crossed: {fmtDate(lvl.lastCrossedAt)}
+                  </div>
+                ) : null}
               </td>
-              <td className="py-1 text-text-secondary">{lvl.note ?? ""}</td>
+              <td className="py-1 text-text-secondary align-top">{lvl.note ?? ""}</td>
             </tr>
           ))}
         </tbody>
