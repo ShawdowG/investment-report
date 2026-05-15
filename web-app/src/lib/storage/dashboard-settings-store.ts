@@ -56,6 +56,14 @@ function coerce(raw: unknown): DashboardSettings {
     candidate.thesisStaleAfterDays > 0
       ? Math.floor(candidate.thesisStaleAfterDays)
       : DEFAULT_DASHBOARD_SETTINGS.thesisStaleAfterDays;
+  const notificationsEnabled =
+    typeof candidate.notificationsEnabled === "boolean"
+      ? candidate.notificationsEnabled
+      : DEFAULT_DASHBOARD_SETTINGS.notificationsEnabled;
+  const notificationsPermissionGranted =
+    typeof candidate.notificationsPermissionGranted === "boolean"
+      ? candidate.notificationsPermissionGranted
+      : DEFAULT_DASHBOARD_SETTINGS.notificationsPermissionGranted;
   return {
     indexSymbols,
     topMoversSource: source,
@@ -65,6 +73,8 @@ function coerce(raw: unknown): DashboardSettings {
     equityChartCollapsed: collapsed,
     thesisProximityPct: proximity,
     thesisStaleAfterDays: staleDays,
+    notificationsEnabled,
+    notificationsPermissionGranted,
   };
 }
 

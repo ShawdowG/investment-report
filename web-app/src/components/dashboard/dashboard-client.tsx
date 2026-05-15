@@ -9,10 +9,12 @@ import { WatchlistImpactCard } from "./watchlist-impact-card";
 import { DEFAULT_DASHBOARD_SETTINGS } from "@/lib/domain/dashboard-settings";
 import type { CompactDailyMap } from "@/lib/quotes/compact-daily";
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
+import { maybeNotifyCrossings } from "@/lib/research/notifications";
 import {
   getDashboardSettings,
   updateDashboardSettings,
 } from "@/lib/storage/dashboard-settings-store";
+import { getTheses } from "@/lib/storage/thesis-store";
 import { getWatchlist } from "@/lib/storage/watchlist-store";
 
 interface DashboardClientProps {
@@ -31,10 +33,23 @@ export function DashboardClient({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setSettings(getDashboardSettings());
+    const loadedSettings = getDashboardSettings();
+    setSettings(loadedSettings);
     setWatchlistSymbols(getWatchlist().map((w) => w.symbol));
     setMounted(true);
-  }, []);
+    // SPEC-026 W10.D — fire browser notifications for newly-crossed zones.
+    // Deferred so the CrossedZonesCard effect has a chance to stamp
+    // `lastCrossedAt` on the matching levels before we read them back.
+    const timer = window.setTimeout(() => {
+      try {
+        const theses = Object.values(getTheses());
+        maybeNotifyCrossings(theses, snapshots, loadedSettings.thesisProximityPct);
+      } catch (err) {
+        console.warn("[dashboard] notification check failed", err);
+      }
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, [snapshots]);
 
   // Cross-tab sync: settings exported/imported on /settings or edits made in
   // another tab fire `storage` events on this tab. e.key === null means the

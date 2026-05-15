@@ -20,6 +20,18 @@ export interface DashboardSettings {
    * pill in W8.G/W10.
    */
   thesisStaleAfterDays: number;
+  /**
+   * SPEC-026 W10.D — user has opted in to browser notifications for crossed
+   * thesis levels. The actual delivery only fires when this *and* the
+   * browser-level permission below are both granted.
+   */
+  notificationsEnabled: boolean;
+  /**
+   * SPEC-026 W10.D — mirrors `Notification.permission === "granted"` at the
+   * time the user last toggled the setting. Persisted so the UI can show
+   * "Permission denied" help text on revisits without re-requesting on load.
+   */
+  notificationsPermissionGranted: boolean;
 }
 
 export const DEFAULT_DASHBOARD_SETTINGS: DashboardSettings = {
@@ -31,4 +43,6 @@ export const DEFAULT_DASHBOARD_SETTINGS: DashboardSettings = {
   equityChartCollapsed: true,
   thesisProximityPct: 2,
   thesisStaleAfterDays: 90,
+  notificationsEnabled: false,
+  notificationsPermissionGranted: false,
 };

@@ -144,6 +144,41 @@ export function DashboardSettingsPanel({
   const topMoversSourceWatchlistId = useId();
   const excludeIndicesId = useId();
   const equityChartCollapsedId = useId();
+  const notificationsId = useId();
+
+  // SPEC-026 W10.D — toggling on requests Notification.permission.
+  async function handleNotificationsToggle(next: boolean) {
+    if (!next) {
+      applyPatch({
+        notificationsEnabled: false,
+        notificationsPermissionGranted: false,
+      });
+      return;
+    }
+    if (typeof Notification === "undefined") {
+      // Browser doesn't support the API at all — bail and leave the toggle off.
+      applyPatch({
+        notificationsEnabled: false,
+        notificationsPermissionGranted: false,
+      });
+      return;
+    }
+    try {
+      const result = await Notification.requestPermission();
+      applyPatch({
+        notificationsEnabled: result === "granted",
+        notificationsPermissionGranted: result === "granted",
+      });
+    } catch {
+      applyPatch({
+        notificationsEnabled: false,
+        notificationsPermissionGranted: false,
+      });
+    }
+  }
+
+  const browserDeniedNotifications =
+    typeof Notification !== "undefined" && Notification.permission === "denied";
 
   if (!ready) {
     return (
@@ -318,6 +353,32 @@ export function DashboardSettingsPanel({
           offLabel="Expanded"
           onChange={(checked) => applyPatch({ equityChartCollapsed: checked })}
         />
+      </Field>
+
+      <Field
+        label="Notifications"
+        hint="When enabled, the app fires a desktop notification when a thesis trade level crosses (within proximity %). Permission is requested on toggle."
+      >
+        <Checkbox
+          id={notificationsId}
+          checked={settings.notificationsEnabled}
+          onLabel="Notify me when thesis levels cross"
+          offLabel="Notify me when thesis levels cross"
+          onChange={(checked) => {
+            void handleNotificationsToggle(checked);
+          }}
+        />
+        {settings.notificationsEnabled && !settings.notificationsPermissionGranted ? (
+          <p className="text-xs text-regime-risk-off">
+            Permission denied — re-enable in your browser settings.
+          </p>
+        ) : null}
+        {!settings.notificationsEnabled && browserDeniedNotifications ? (
+          <p className="text-xs text-regime-risk-off">
+            Browser blocked notifications. Re-enable them in your browser
+            settings, then toggle this on again.
+          </p>
+        ) : null}
       </Field>
 
       <div className="pt-2">
