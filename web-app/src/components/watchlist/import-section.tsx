@@ -55,26 +55,26 @@ export function ImportSection({ onSave }: ImportSectionProps) {
   }
 
   return (
-    <div className="rounded-lg border border-border/50 bg-card">
+    <div className="rounded-lg border border-border-subtle bg-card">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium transition-colors hover:bg-muted/50"
+        className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium transition-colors hover:bg-surface-variant"
         aria-expanded={open}
         aria-controls="watchlist-import-body"
       >
         <span>Import multiple symbols</span>
         {open ? (
-          <ChevronUp className="size-4 text-muted-foreground" />
+          <ChevronUp className="size-4 text-text-secondary" />
         ) : (
-          <ChevronDown className="size-4 text-muted-foreground" />
+          <ChevronDown className="size-4 text-text-secondary" />
         )}
       </button>
       {open ? (
-        <div id="watchlist-import-body" className="space-y-3 border-t border-border/50 px-4 py-4">
+        <div id="watchlist-import-body" className="space-y-3 border-t border-border-subtle px-4 py-4">
           <label
             htmlFor="watchlist-import-textarea"
-            className="block text-xs font-medium text-muted-foreground"
+            className="block text-xs font-medium text-text-secondary"
           >
             Paste tokens
           </label>
@@ -120,7 +120,7 @@ export function ImportSection({ onSave }: ImportSectionProps) {
           </div>
           {preview ? <ImportPreview result={preview} /> : null}
           {savedMessage ? (
-            <p className="text-xs text-muted-foreground" role="status">
+            <p className="text-xs text-text-secondary" role="status">
               {savedMessage}
             </p>
           ) : null}
@@ -133,23 +133,23 @@ export function ImportSection({ onSave }: ImportSectionProps) {
 function ImportPreview({ result }: { result: ParseResult }) {
   if (result.accepted.length === 0 && result.unknown.length === 0) {
     return (
-      <p className="text-xs text-muted-foreground">No tokens recognised.</p>
+      <p className="text-xs text-text-secondary">No tokens recognised.</p>
     );
   }
   return (
     <div className="grid gap-3 md:grid-cols-2">
       <div>
-        <p className="mb-1 text-xs font-medium text-muted-foreground">
+        <p className="mb-1 text-xs font-medium text-text-secondary">
           Accepted ({result.accepted.length})
         </p>
         {result.accepted.length === 0 ? (
-          <p className="text-xs text-muted-foreground">No recognizable symbols found.</p>
+          <p className="text-xs text-text-secondary">No recognizable symbols found.</p>
         ) : (
           <div className="flex flex-wrap gap-1">
             {result.accepted.map((symbol) => (
               <span
                 key={symbol}
-                className="inline-flex items-center rounded-md border border-border bg-muted/50 px-2 py-0.5 font-mono text-xs"
+                className="inline-flex items-center rounded-md border border-border-subtle bg-surface-variant px-2 py-0.5 font-mono text-xs"
               >
                 {symbol}
               </span>
@@ -158,11 +158,11 @@ function ImportPreview({ result }: { result: ParseResult }) {
         )}
       </div>
       <div>
-        <p className="mb-1 text-xs font-medium text-muted-foreground">
+        <p className="mb-1 text-xs font-medium text-text-secondary">
           Unknown ({result.unknown.length})
         </p>
         {result.unknown.length === 0 ? (
-          <p className="text-xs text-muted-foreground">All tokens recognised.</p>
+          <p className="text-xs text-text-secondary">All tokens recognised.</p>
         ) : (
           <div className="flex flex-wrap gap-1">
             {result.unknown.map((token, i) => (
