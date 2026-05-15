@@ -16,6 +16,7 @@ import {
   upsertThesis,
 } from "@/lib/storage/thesis-store";
 import type {
+  Light,
   PlannedAction,
   Scenario,
   Thesis,
@@ -30,6 +31,7 @@ import {
   emptyChecks,
 } from "@/lib/domain/thesis";
 import { ScenariosEditor } from "@/components/research/scenarios-editor";
+import { ThesisChecklists } from "@/components/research/thesis-checklists";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -145,6 +147,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [hydrated, setHydrated] = useState(false);
   const [form, setForm] = useState<FormState>(emptyForm());
   const [scenarios, setScenarios] = useState<Scenario[]>(() => defaultScenarios());
+  const [light, setLight] = useState<Light>("yellow");
+  const [greenChecks, setGreenChecks] = useState<boolean[]>(() => emptyChecks(GREEN_CHECK_COUNT));
+  const [yellowChecks, setYellowChecks] = useState<boolean[]>(() => emptyChecks(YELLOW_CHECK_COUNT));
+  const [redChecks, setRedChecks] = useState<boolean[]>(() => emptyChecks(RED_CHECK_COUNT));
+  const [trimSellChecks, setTrimSellChecks] = useState<boolean[]>(() => emptyChecks(TRIM_SELL_CHECK_COUNT));
   const [mode, setMode] = useState<Mode>("quick");
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -157,11 +164,21 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setExisting(stored);
       setForm(formFromThesis(stored));
       setScenarios(stored.scenarios);
+      setLight(stored.currentLight);
+      setGreenChecks(stored.greenChecks);
+      setYellowChecks(stored.yellowChecks);
+      setRedChecks(stored.redChecks);
+      setTrimSellChecks(stored.trimSellChecks);
     } else {
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
       setForm(formFromPrefill(prefilled));
       setScenarios(defaultScenarios());
+      setLight("yellow");
+      setGreenChecks(emptyChecks(GREEN_CHECK_COUNT));
+      setYellowChecks(emptyChecks(YELLOW_CHECK_COUNT));
+      setRedChecks(emptyChecks(RED_CHECK_COUNT));
+      setTrimSellChecks(emptyChecks(TRIM_SELL_CHECK_COUNT));
     }
     setHydrated(true);
   }, [upper, snapshots]);
@@ -198,6 +215,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           thesisPoints,
           tradeLevels,
           scenarios,
+          currentLight: light,
+          greenChecks,
+          yellowChecks,
+          redChecks,
+          trimSellChecks,
           updatedAt: now,
         }
       : {
@@ -215,11 +237,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           optionalDrivers: [],
           valuation: {},
           scenarios,
-          currentLight: "yellow",
-          greenChecks: emptyChecks(GREEN_CHECK_COUNT),
-          yellowChecks: emptyChecks(YELLOW_CHECK_COUNT),
-          redChecks: emptyChecks(RED_CHECK_COUNT),
-          trimSellChecks: emptyChecks(TRIM_SELL_CHECK_COUNT),
+          currentLight: light,
+          greenChecks,
+          yellowChecks,
+          redChecks,
+          trimSellChecks,
           notes: [],
         };
 
@@ -247,6 +269,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setExisting(saved);
       setForm(formFromThesis(saved));
       setScenarios(saved.scenarios);
+      setLight(saved.currentLight);
+      setGreenChecks(saved.greenChecks);
+      setYellowChecks(saved.yellowChecks);
+      setRedChecks(saved.redChecks);
+      setTrimSellChecks(saved.trimSellChecks);
       setSavedAt(Date.now());
       setError(null);
     } catch (err) {
@@ -265,6 +292,11 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setPrefill(prefilled);
       setForm(formFromPrefill(prefilled));
       setScenarios(defaultScenarios());
+      setLight("yellow");
+      setGreenChecks(emptyChecks(GREEN_CHECK_COUNT));
+      setYellowChecks(emptyChecks(YELLOW_CHECK_COUNT));
+      setRedChecks(emptyChecks(RED_CHECK_COUNT));
+      setTrimSellChecks(emptyChecks(TRIM_SELL_CHECK_COUNT));
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
@@ -349,6 +381,20 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
               onChange={setScenarios}
               currentPrice={snapshot?.lastClose}
               currency={snapshot?.currency ?? "USD"}
+            />
+          </DeepDiveSection>
+          <DeepDiveSection title="Light + checklists (§8)" caption="Manual green / yellow / red call, plus the framework checklists as inputs.">
+            <ThesisChecklists
+              light={light}
+              onLightChange={setLight}
+              greenChecks={greenChecks}
+              onGreenChange={setGreenChecks}
+              yellowChecks={yellowChecks}
+              onYellowChange={setYellowChecks}
+              redChecks={redChecks}
+              onRedChange={setRedChecks}
+              trimSellChecks={trimSellChecks}
+              onTrimSellChange={setTrimSellChecks}
             />
           </DeepDiveSection>
         </Card>
