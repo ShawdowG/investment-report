@@ -8,6 +8,10 @@ import type { TickerNote } from "@/lib/domain/ticker-note";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
 import type { Strategy } from "@/lib/domain/strategy";
 import type { Thesis } from "@/lib/domain/thesis";
+import type {
+  QuarterlyReview,
+  QuarterlyReviewInput,
+} from "@/lib/domain/quarterly-review";
 
 /**
  * Future-Supabase contract for the 3 client-side stores. Today's localStorage
@@ -101,4 +105,12 @@ export interface ThesisRepository {
   get(symbol: string): Thesis | null;
   upsert(thesis: Thesis): Thesis;
   remove(symbol: string): void;
+}
+
+export interface QuarterlyReviewRepository {
+  list(): QuarterlyReview[];
+  listByThesis(symbol: string): QuarterlyReview[];
+  get(id: string): QuarterlyReview | null;
+  create(input: QuarterlyReviewInput): QuarterlyReview;
+  remove(id: string): void;
 }
