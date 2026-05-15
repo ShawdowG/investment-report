@@ -5,6 +5,7 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -17,6 +18,26 @@ const RISK_OFF = "#ef4444";
 export interface SentimentAreaChartPoint {
   date: string;
 }
+
+/**
+ * SPEC-023 W8.E — horizontal reference line drawn at `y` with a color tied
+ * to the trade-level kind. Theme-aware: resolves to a `--color-regime-*`
+ * CSS var so dark + light themes both render correctly.
+ */
+export interface SentimentAreaReferenceLine {
+  y: number;
+  kind: "add" | "trim" | "sell";
+  /** Optional short caption rendered at the right end of the line. */
+  label?: string;
+  /** When true, line renders thicker (used when the zone is currently in range). */
+  emphasis?: boolean;
+}
+
+const REFERENCE_LINE_COLORS: Record<SentimentAreaReferenceLine["kind"], string> = {
+  add: "var(--color-regime-risk-on)",
+  trim: "var(--color-regime-neutral)",
+  sell: "var(--color-regime-risk-off)",
+};
 
 interface TooltipPayloadEntry<T> {
   payload?: T;
@@ -41,6 +62,8 @@ interface SentimentAreaChartProps<T extends SentimentAreaChartPoint> {
   renderTooltip?: (point: T) => React.ReactNode;
   /** Minimum tick gap on x-axis. Default 40. */
   xTickGap?: number;
+  /** Optional horizontal reference lines (SPEC-023 trade-plan zones). */
+  referenceLines?: SentimentAreaReferenceLine[];
 }
 
 /**
@@ -56,6 +79,7 @@ export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
   formatXTick = (d) => d.slice(5),
   renderTooltip,
   xTickGap = 40,
+  referenceLines,
 }: SentimentAreaChartProps<T>) {
   const gradientId = useId();
 
@@ -129,6 +153,30 @@ export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
             strokeWidth={2}
             fill={`url(#${gradientId})`}
           />
+          {referenceLines?.map((line, idx) => {
+            const stroke = REFERENCE_LINE_COLORS[line.kind];
+            const strokeWidth = line.emphasis ? 2.5 : 1.5;
+            return (
+              <ReferenceLine
+                key={`${line.kind}-${line.y}-${idx}`}
+                y={line.y}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
+                strokeOpacity={line.emphasis ? 1 : 0.85}
+                ifOverflow="extendDomain"
+                label={
+                  line.label
+                    ? {
+                        value: line.label,
+                        position: "right",
+                        fill: stroke,
+                        fontSize: 10,
+                      }
+                    : undefined
+                }
+              />
+            );
+          })}
         </AreaChart>
       </ResponsiveContainer>
     </div>
