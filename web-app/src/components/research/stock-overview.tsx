@@ -61,13 +61,9 @@ export function StockOverview({
   company,
   defaultOpen = false,
 }: StockOverviewProps) {
-  // Same default as <PriceChart> — 1Y matches Google Finance.
-  const allowedLabels = ["1M", "3M", "6M", "YTD", "1Y", "3Y"];
-  const ranges = useMemo(
-    () => RANGES.filter((r) => allowedLabels.includes(r.label)),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
+  // Full range set including 5Y and All so the delta in the header reflects
+  // long-horizon performance (per user request 2026-05-17).
+  const ranges = RANGES;
   const oneYearIdx = ranges.findIndex((r) => r.label === "1Y");
   const [rangeIdx, setRangeIdx] = useState(oneYearIdx >= 0 ? oneYearIdx : 0);
   const range = ranges[rangeIdx];
@@ -77,13 +73,19 @@ export function StockOverview({
   );
 
   const last = daily[daily.length - 1];
-  const prev = daily.length >= 2 ? daily[daily.length - 2] : undefined;
-  const dayDelta =
-    last && prev && prev.close > 0
-      ? ((last.close - prev.close) / prev.close) * 100
+  // Range delta moves with the selected time frame — 1Y shows 1-year change,
+  // 5Y shows 5-year change, ALL shows whole-series change.
+  const rangeStart = sliced.length >= 2 ? sliced[0].close : null;
+  const rangeEnd =
+    sliced.length >= 2 ? sliced[sliced.length - 1].close : null;
+  const rangePct =
+    rangeStart !== null && rangeEnd !== null && rangeStart > 0
+      ? ((rangeEnd - rangeStart) / rangeStart) * 100
       : null;
-  const dayDeltaAbs =
-    last && prev ? last.close - prev.close : null;
+  const rangeAbs =
+    rangeStart !== null && rangeEnd !== null
+      ? rangeEnd - rangeStart
+      : null;
 
   const upper = symbol.toUpperCase();
 
@@ -111,22 +113,22 @@ export function StockOverview({
                 {fmtMoney(last.close, currency)}
               </span>
             ) : null}
-            {dayDelta !== null && dayDeltaAbs !== null ? (
+            {rangePct !== null && rangeAbs !== null ? (
               <span
                 className={cn(
                   "font-data-mono text-data-mono",
-                  dayDelta > 0
+                  rangePct > 0
                     ? "text-regime-risk-on"
-                    : dayDelta < 0
+                    : rangePct < 0
                       ? "text-regime-risk-off"
                       : "text-text-secondary",
                 )}
               >
-                {`${dayDelta > 0 ? "+" : ""}${dayDeltaAbs.toFixed(2)} (${dayDelta > 0 ? "+" : ""}${dayDelta.toFixed(2)}%)`}
+                {`${rangePct > 0 ? "+" : ""}${rangeAbs.toFixed(2)} (${rangePct > 0 ? "+" : ""}${rangePct.toFixed(2)}%)`}
               </span>
             ) : null}
             <span className="font-label-caps text-label-caps uppercase text-text-secondary">
-              today
+              {range.label === "ALL" ? "all-time" : `${range.label} change`}
             </span>
           </div>
           <RangePills
