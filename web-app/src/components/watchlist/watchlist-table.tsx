@@ -26,7 +26,7 @@ import type {
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
 import type { WatchlistUpdatePatch } from "./watchlist-view";
-import type { Light } from "@/lib/domain/quarterly-review";
+import type { Light } from "@/lib/domain/thesis";
 import {
   getAllThesisLights,
   LIGHT_ARIA,

@@ -15,7 +15,7 @@ import {
 import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { PortfolioPnLRow } from "@/lib/quotes/portfolio-pnl";
 import { fmtMoney, fmtMoneySigned, fmtPct } from "@/lib/utils/format";
-import type { Light } from "@/lib/domain/quarterly-review";
+import type { Light } from "@/lib/domain/thesis";
 import {
   getAllThesisLights,
   LIGHT_ARIA,

@@ -4,7 +4,7 @@
  * per mount so N rows don't translate to N localStorage reads.
  */
 
-import type { Light } from "@/lib/domain/quarterly-review";
+import type { Light } from "@/lib/domain/thesis";
 import { getTheses, getThesis } from "@/lib/storage/thesis-store";
 import type { Thesis } from "@/lib/domain/thesis";
 

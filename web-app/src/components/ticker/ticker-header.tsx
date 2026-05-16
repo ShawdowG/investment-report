@@ -29,7 +29,7 @@ import {
   addPosition,
   getPortfolio,
 } from "@/lib/storage/portfolio-store";
-import type { Light } from "@/lib/domain/quarterly-review";
+import type { Light } from "@/lib/domain/thesis";
 import {
   getThesisLight,
   LIGHT_ARIA,
