@@ -80,8 +80,9 @@ export const WIZARD_STEPS: readonly WizardStepMeta[] = [
     prompt:
       "Restate each thesis point and tag it as a core driver, optional upside, valuation claim, or risk. Core drivers must justify the valuation on their own; optional drivers can improve the upside but should not carry the case.",
     isComplete: (t) => {
-      const required = Math.max(t.thesisPoints.length, 1);
-      return t.classifiedPoints.length >= required;
+      // Empty thesis can't be "classified" — fail the step until points exist.
+      if (t.thesisPoints.length === 0) return false;
+      return t.classifiedPoints.length >= t.thesisPoints.length;
     },
   },
   {

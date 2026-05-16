@@ -97,8 +97,12 @@ function buildExternalLinks(symbol: string): ExternalLinkSpec[] {
       href: `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${symbol}&type=10-K&dateb=&owner=include&count=40`,
     },
     {
+      // Macrotrends per-ticker URLs require a company-name slug we don't
+      // derive; the /research suffix 404s. Route via Google instead so the
+      // user lands on the right Macrotrends page after one click. SPEC-029
+      // §6 left the slug derivation as a follow-up.
       label: "Macrotrends",
-      href: `https://www.macrotrends.net/stocks/charts/${symbol}/research`,
+      href: `https://www.google.com/search?q=${encodeURIComponent(`macrotrends ${symbol}`)}`,
     },
     {
       label: "Seeking Alpha",
