@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 import { DispatchForm } from "./dispatch-form";
 import { DispatchList } from "./dispatch-list";
 import { DispatchView } from "./dispatch-view";
+import { NewThesisDialog } from "./new-thesis-dialog";
 import { ThesesOverview } from "./theses-overview";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
 import type { DispatchInput } from "@/lib/storage/contracts";
+import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import {
   createDispatch,
   deleteDispatch,
@@ -30,18 +32,22 @@ type Tab = "theses" | "dispatches";
 const STORAGE_ERROR_MESSAGE =
   "Failed to save dispatch — your browser storage may be full";
 
-export function ResearchView() {
+interface ResearchViewProps {
+  snapshots?: QuoteSnapshotMap;
+}
+
+export function ResearchView({ snapshots = {} }: ResearchViewProps = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialId = searchParams?.get("id") ?? null;
+  const [newThesisOpen, setNewThesisOpen] = useState(false);
 
-  function handleNewThesis() {
-    const raw = typeof window !== "undefined"
-      ? window.prompt("Enter ticker to start a thesis (e.g. NVDA):")
-      : null;
-    if (raw === null) return;
-    const symbol = raw.trim().toUpperCase();
-    if (!symbol) return;
+  function openNewThesisDialog() {
+    setNewThesisOpen(true);
+  }
+
+  function handleNewThesisSelect(symbol: string) {
+    setNewThesisOpen(false);
     router.push(`/research/thesis/${encodeURIComponent(symbol)}`);
   }
 
@@ -197,7 +203,7 @@ export function ResearchView() {
       />
     );
   } else if (tab === "theses") {
-    body = <ThesesOverview onNewThesis={handleNewThesis} />;
+    body = <ThesesOverview onNewThesis={openNewThesisDialog} />;
   } else {
     body = <DispatchList items={items} onSelect={handleSelect} onNew={handleNew} />;
   }
@@ -246,7 +252,7 @@ export function ResearchView() {
             type="button"
             variant="outline"
             size="sm"
-            onClick={handleNewThesis}
+            onClick={openNewThesisDialog}
           >
             <BookOpen className="size-4 mr-1" aria-hidden="true" />
             New thesis
@@ -254,6 +260,12 @@ export function ResearchView() {
         </div>
       ) : null}
       {body}
+      <NewThesisDialog
+        open={newThesisOpen}
+        snapshots={snapshots}
+        onSelect={handleNewThesisSelect}
+        onCancel={() => setNewThesisOpen(false)}
+      />
     </div>
   );
 }
