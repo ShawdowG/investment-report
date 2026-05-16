@@ -70,7 +70,7 @@ export function AddSymbolForm({ onAdd }: AddSymbolFormProps) {
       <div className="space-y-2">
         <label
           htmlFor="watchlist-add-symbol"
-          className="block text-xs font-medium text-muted-foreground"
+          className="block text-xs font-medium text-text-secondary"
         >
           Add symbol
         </label>
@@ -106,7 +106,7 @@ export function AddSymbolForm({ onAdd }: AddSymbolFormProps) {
         type="button"
         onClick={() => setShowDetails((v) => !v)}
         aria-expanded={showDetails}
-        className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-text-primary transition-colors"
+        className="inline-flex items-center gap-1 text-xs text-text-secondary hover:text-text-primary transition-colors"
       >
         {showDetails ? <ChevronUp className="size-3.5" /> : <ChevronDown className="size-3.5" />}
         {showDetails ? "Hide details" : "Add details (status, priority, tags)"}
@@ -169,7 +169,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="block text-xs font-medium text-muted-foreground">
+      <label htmlFor={htmlFor} className="block text-xs font-medium text-text-secondary">
         {label}
       </label>
       {children}

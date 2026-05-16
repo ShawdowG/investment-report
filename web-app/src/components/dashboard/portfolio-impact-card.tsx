@@ -21,7 +21,7 @@ import {
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import type { CompactDailyMap } from "@/lib/quotes/compact-daily";
 import { buildEquityCurve } from "@/lib/quotes/portfolio-equity";
-import { PortfolioEquityChart } from "./portfolio-equity-chart";
+import { PortfolioEquityChart } from "@/components/portfolio/portfolio-equity-chart";
 
 interface PortfolioImpactCardProps {
   snapshots: QuoteSnapshotMap;

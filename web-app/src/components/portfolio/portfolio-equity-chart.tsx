@@ -134,6 +134,14 @@ export function PortfolioEquityChart({
                   </div>
                 )}
               />
+              {curve.startDate &&
+                curve.points.length > 0 &&
+                curve.startDate !== curve.points[0].date && (
+                  <p className="text-xs text-text-secondary">
+                    Curve starts {curve.startDate} — earliest date all positions
+                    have data
+                  </p>
+                )}
               {curve.missing.length > 0 && (
                 <p className="text-xs text-text-secondary">
                   {curve.missing.length} position

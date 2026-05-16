@@ -164,9 +164,9 @@ export function WatchlistView({ snapshots = {} }: WatchlistViewProps = {}) {
           snapshots={snapshots}
         />
       )}
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-text-secondary">
         {items.length} symbol{items.length === 1 ? "" : "s"} — stored locally
-        under <code className="rounded bg-muted px-1 py-0.5 text-[10px]">watchlist_items</code>.
+        under <code className="rounded bg-surface-variant px-1 py-0.5 text-[10px]">watchlist_items</code>.
         Prices reflect last close (~24h delay).
       </p>
     </div>

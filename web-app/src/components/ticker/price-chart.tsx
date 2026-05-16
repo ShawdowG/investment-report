@@ -3,13 +3,21 @@
 import { useMemo, useState } from "react";
 import { RangeDeltaHeader } from "@/components/charts/range-delta-header";
 import { RangePills } from "@/components/charts/range-pills";
-import { SentimentAreaChart } from "@/components/charts/sentiment-area-chart";
+import {
+  SentimentAreaChart,
+  type SentimentAreaReferenceLine,
+} from "@/components/charts/sentiment-area-chart";
 import { RANGES, sliceForRange } from "@/lib/quotes/chart-ranges";
 import type { QuoteBar } from "@/lib/quotes/types";
 
 interface PriceChartProps {
   daily: QuoteBar[];
   currency?: string;
+  /**
+   * Optional horizontal reference lines (SPEC-023 trade-plan zones).
+   * Plumbed straight through to the underlying SentimentAreaChart.
+   */
+  referenceLines?: SentimentAreaReferenceLine[];
 }
 
 function fmtMoney(n: number, currency = "USD"): string {
@@ -20,7 +28,11 @@ function fmtMoney(n: number, currency = "USD"): string {
   })}`;
 }
 
-export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
+export function PriceChart({
+  daily,
+  currency = "USD",
+  referenceLines,
+}: PriceChartProps) {
   // Default to 1Y on first render — same as Google Finance.
   const [rangeIdx, setRangeIdx] = useState(4);
   const range = RANGES[rangeIdx];
@@ -63,6 +75,7 @@ export function PriceChart({ daily, currency = "USD" }: PriceChartProps) {
         data={data}
         yKey="close"
         formatY={formatY}
+        referenceLines={referenceLines}
       />
     </div>
   );

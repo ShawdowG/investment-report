@@ -12,6 +12,7 @@ interface SymbolPickerProps {
 
 export function SymbolPicker({ available, selected, onChange }: SymbolPickerProps) {
   const [draft, setDraft] = useState("");
+  const [hovered, setHovered] = useState<string | null>(null);
 
   function add(symbol: string) {
     const upper = symbol.trim().toUpperCase();
@@ -70,23 +71,30 @@ export function SymbolPicker({ available, selected, onChange }: SymbolPickerProp
           autoComplete="off"
           autoCapitalize="characters"
           spellCheck={false}
-          className="flex-1 rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="flex-1 rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-primary/60"
         />
         <Button type="submit" size="sm" variant="outline">
           <Plus className="size-4" aria-hidden="true" />
         </Button>
       </form>
       {suggestions.length > 0 ? (
-        <div className="flex flex-wrap gap-1">
+        <div role="listbox" aria-label="Symbol suggestions" className="flex flex-wrap gap-1">
           {suggestions.map((s) => (
             <button
               key={s}
               type="button"
+              role="option"
+              aria-selected={hovered === s}
+              onMouseEnter={() => setHovered(s)}
+              onMouseLeave={() => setHovered((h) => (h === s ? null : h))}
+              onFocus={() => setHovered(s)}
+              onBlur={() => setHovered((h) => (h === s ? null : h))}
               onClick={() => {
                 add(s);
                 setDraft("");
+                setHovered(null);
               }}
-              className="inline-flex items-center px-2 py-0.5 rounded text-xs font-data-mono text-text-secondary border border-border-subtle bg-surface hover:bg-surface-variant transition-colors"
+              className="inline-flex items-center px-2 py-0.5 rounded text-xs font-data-mono text-text-secondary border border-border-subtle bg-surface hover:bg-surface-variant aria-selected:bg-surface-variant aria-selected:text-text-primary transition-colors"
             >
               {s}
             </button>

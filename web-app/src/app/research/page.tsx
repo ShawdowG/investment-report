@@ -2,12 +2,15 @@ export const dynamic = "force-static";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { ResearchView } from "@/components/research/research-view";
+import { ResearchHelp } from "@/components/research/research-help";
+import { loadAllQuoteSnapshots } from "@/lib/quotes/snapshots";
 
 export const metadata = {
   title: "Research — Investment Report",
 };
 
 export default function ResearchPage() {
+  const snapshots = loadAllQuoteSnapshots();
   return (
     <AppShell>
       <div className="space-y-6">
@@ -18,7 +21,8 @@ export default function ResearchPage() {
             locally on this device.
           </p>
         </header>
-        <ResearchView />
+        <ResearchView snapshots={snapshots} />
+        <ResearchHelp />
       </div>
     </AppShell>
   );

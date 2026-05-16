@@ -7,6 +7,12 @@ import type { PortfolioPosition } from "@/lib/domain/portfolio";
 import type { TickerNote } from "@/lib/domain/ticker-note";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
 import type { Strategy } from "@/lib/domain/strategy";
+import type { Thesis } from "@/lib/domain/thesis";
+import type {
+  QuarterlyReview,
+  QuarterlyReviewInput,
+} from "@/lib/domain/quarterly-review";
+import type { ResearchFileMeta } from "@/lib/domain/research-file";
 
 /**
  * Future-Supabase contract for the 3 client-side stores. Today's localStorage
@@ -43,10 +49,15 @@ export interface AddPortfolioInput {
   platform?: string;
 }
 
+export type PortfolioPatch = Partial<
+  Pick<PortfolioPosition, "quantity" | "avgPrice" | "platform">
+>;
+
 export interface PortfolioRepository {
   list(): PortfolioPosition[];
   add(input: AddPortfolioInput): PortfolioPosition[];
   remove(symbol: string): PortfolioPosition[];
+  update(symbol: string, patch: PortfolioPatch): PortfolioPosition[];
   clear(): void;
 }
 
@@ -88,4 +99,42 @@ export interface StrategyRepository {
   create(input: StrategyInputContract): Strategy;
   update(id: string, patch: Partial<StrategyInputContract>): Strategy | null;
   remove(id: string): void;
+}
+
+export interface ThesisRepository {
+  list(): Record<string, Thesis>;
+  get(symbol: string): Thesis | null;
+  upsert(thesis: Thesis): Thesis;
+  remove(symbol: string): void;
+}
+
+export interface QuarterlyReviewRepository {
+  list(): QuarterlyReview[];
+  listByThesis(symbol: string): QuarterlyReview[];
+  get(id: string): QuarterlyReview | null;
+  create(input: QuarterlyReviewInput): QuarterlyReview;
+  remove(id: string): void;
+}
+
+// SPEC-027: per-thesis file attachments live in IndexedDB. Async surface so a
+// Supabase Storage adapter can satisfy the same shape (SPEC-012 follow-up).
+export interface UploadResearchFileInput {
+  thesisSymbol: string;
+  file: File;
+  caption?: string;
+  sectionAnchor?: ResearchFileMeta["sectionAnchor"];
+}
+
+export interface ResearchFilesRepository {
+  list(thesisSymbol: string): Promise<ResearchFileMeta[]>;
+  get(id: string): Promise<{ meta: ResearchFileMeta; blob: Blob } | null>;
+  upload(input: UploadResearchFileInput): Promise<ResearchFileMeta>;
+  delete(id: string): Promise<void>;
+  rename(id: string, name: string): Promise<ResearchFileMeta>;
+  updateMeta(
+    id: string,
+    patch: Partial<Pick<ResearchFileMeta, "caption" | "sectionAnchor">>,
+  ): Promise<ResearchFileMeta>;
+  totalSize(thesisSymbol: string): Promise<number>;
+  deleteAll(): Promise<void>;
 }

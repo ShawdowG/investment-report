@@ -1,10 +1,15 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { ArrowDown, ArrowUp, ChevronDown, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { ArrowDown, ArrowUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PriorityBadge, StatusBadge, Tag } from "@/components/ui/stitch";
+import {
+  BadgeSelect,
+  PriorityBadge,
+  StatusBadge,
+  Tag,
+} from "@/components/ui/stitch";
 import {
   Table,
   TableBody,
@@ -21,6 +26,12 @@ import type {
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
 import type { WatchlistUpdatePatch } from "./watchlist-view";
+import type { Light } from "@/lib/domain/thesis";
+import {
+  getAllThesisLights,
+  LIGHT_ARIA,
+  LIGHT_DOT_CLASS,
+} from "@/lib/research/thesis-light";
 
 interface WatchlistTableProps {
   items: WatchlistItem[];
@@ -57,110 +68,6 @@ function parseTagInput(raw: string): string[] {
     .split(",")
     .map((t) => t.trim().slice(0, 20))
     .filter((t) => t.length > 0);
-}
-
-interface BadgeSelectProps<T extends string> {
-  value: T;
-  options: { value: T; label: string }[];
-  onSelect: (next: T) => void;
-  ariaLabel: string;
-  children: React.ReactNode;
-}
-
-function BadgeSelect<T extends string>({
-  value,
-  options,
-  onSelect,
-  ariaLabel,
-  children,
-}: BadgeSelectProps<T>) {
-  const [open, setOpen] = useState(false);
-  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-
-  useLayoutEffect(() => {
-    if (!open) return;
-    const rect = triggerRef.current?.getBoundingClientRect();
-    if (rect) setPos({ top: rect.bottom + 4, left: rect.left });
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    function onDocDown(e: MouseEvent) {
-      const t = e.target as Node;
-      if (triggerRef.current?.contains(t) || menuRef.current?.contains(t)) return;
-      setOpen(false);
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    function onScroll() {
-      setOpen(false);
-    }
-    document.addEventListener("mousedown", onDocDown);
-    document.addEventListener("keydown", onKey);
-    window.addEventListener("scroll", onScroll, true);
-    window.addEventListener("resize", onScroll);
-    return () => {
-      document.removeEventListener("mousedown", onDocDown);
-      document.removeEventListener("keydown", onKey);
-      window.removeEventListener("scroll", onScroll, true);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [open]);
-
-  return (
-    <>
-      <button
-        ref={triggerRef}
-        type="button"
-        aria-label={ariaLabel}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center gap-1 cursor-pointer rounded"
-      >
-        {children}
-        <ChevronDown aria-hidden="true" className="size-3 text-text-secondary" />
-      </button>
-      {open && pos && typeof document !== "undefined"
-        ? createPortal(
-            <div
-              ref={menuRef}
-              role="listbox"
-              style={{ position: "fixed", top: pos.top, left: pos.left, zIndex: 100 }}
-              className="min-w-[8rem] rounded-md border border-border-subtle bg-surface py-1 shadow-lg"
-            >
-              {options.map((opt) => {
-                const selected = opt.value === value;
-                return (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    role="option"
-                    aria-selected={selected}
-                    onClick={() => {
-                      onSelect(opt.value);
-                      setOpen(false);
-                    }}
-                    className={cn(
-                      "block w-full text-left px-3 py-1.5 font-body-compact text-body-compact transition-colors",
-                      selected
-                        ? "bg-primary-container/20 text-text-primary font-semibold"
-                        : "text-text-secondary hover:bg-surface-bright/70 hover:text-text-primary",
-                    )}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>,
-            document.body,
-          )
-        : null}
-    </>
-  );
 }
 
 interface StatusEditCellProps {
@@ -274,12 +181,62 @@ function TagsEditCell({ symbol, value, onUpdate }: TagsEditCellProps) {
   );
 }
 
+type SortKey = "symbol" | "lastPx" | "dayPct";
+type SortDir = "asc" | "desc";
+interface SortState {
+  key: SortKey;
+  dir: SortDir;
+}
+
 export function WatchlistTable({
   items,
   onRemove,
   onUpdate,
   snapshots = {},
 }: WatchlistTableProps) {
+  const [sort, setSort] = useState<SortState>({ key: "symbol", dir: "asc" });
+  // SPEC-023 W8.H — resolve thesis lights once on mount (single localStorage
+  // read for the whole table, not N reads per row).
+  const [thesisLights, setThesisLights] = useState<Record<string, Light>>({});
+  useEffect(() => {
+    setThesisLights(getAllThesisLights());
+  }, []);
+
+  function toggleSort(key: SortKey) {
+    setSort((prev) =>
+      prev.key === key
+        ? { key, dir: prev.dir === "asc" ? "desc" : "asc" }
+        : { key, dir: "asc" },
+    );
+  }
+
+  const sortedItems = useMemo(() => {
+    const arr = [...items];
+    if (sort.key === "symbol") {
+      arr.sort((a, b) => a.symbol.localeCompare(b.symbol));
+      if (sort.dir === "desc") arr.reverse();
+      return arr;
+    }
+    const factor = sort.dir === "asc" ? 1 : -1;
+    arr.sort((a, b) => {
+      const va =
+        sort.key === "lastPx"
+          ? snapshots[a.symbol]?.lastClose ?? null
+          : snapshots[a.symbol]?.dayDelta?.pct ?? null;
+      const vb =
+        sort.key === "lastPx"
+          ? snapshots[b.symbol]?.lastClose ?? null
+          : snapshots[b.symbol]?.dayDelta?.pct ?? null;
+      // Missing data sorts last regardless of direction.
+      if (va === null && vb === null) return a.symbol.localeCompare(b.symbol);
+      if (va === null) return 1;
+      if (vb === null) return -1;
+      if (va === vb) return a.symbol.localeCompare(b.symbol);
+      return (va - vb) * factor;
+    });
+    return arr;
+  }, [items, sort, snapshots]);
+
   if (items.length === 0) {
     return (
       <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
@@ -304,11 +261,21 @@ export function WatchlistTable({
             <TableHead className="hidden md:table-cell font-label-caps text-label-caps text-text-secondary uppercase">
               Tags
             </TableHead>
-            <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right">
-              Last Px
+            <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right p-0">
+              <SortableHeader
+                label="Last Px"
+                sortKey="lastPx"
+                sort={sort}
+                onToggle={toggleSort}
+              />
             </TableHead>
-            <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right">
-              Day Δ
+            <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right p-0">
+              <SortableHeader
+                label="Day Δ"
+                sortKey="dayPct"
+                sort={sort}
+                onToggle={toggleSort}
+              />
             </TableHead>
             <TableHead className="w-12 text-right">
               <span className="sr-only">Actions</span>
@@ -316,7 +283,7 @@ export function WatchlistTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {items.map((item) => {
+          {sortedItems.map((item) => {
             const snap = snapshots[item.symbol];
             const dayPct = snap?.dayDelta?.pct ?? null;
             const dayClass =
@@ -330,7 +297,24 @@ export function WatchlistTable({
             return (
               <TableRow key={item.symbol}>
                 <TableCell className="font-data-mono text-data-mono text-text-primary">
-                  {item.symbol}
+                  <span className="inline-flex items-center gap-2">
+                    {thesisLights[item.symbol] ? (
+                      <Link
+                        href={`/research/thesis/${encodeURIComponent(item.symbol)}`}
+                        aria-label={LIGHT_ARIA[thesisLights[item.symbol]]}
+                        className="inline-block size-1.5 rounded-full hover:opacity-80 transition-opacity"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "inline-block size-1.5 rounded-full",
+                            LIGHT_DOT_CLASS[thesisLights[item.symbol]],
+                          )}
+                        />
+                      </Link>
+                    ) : null}
+                    <span>{item.symbol}</span>
+                  </span>
                 </TableCell>
                 <TableCell>
                   <StatusEditCell
@@ -386,5 +370,47 @@ export function WatchlistTable({
         </TableBody>
       </Table>
     </div>
+  );
+}
+
+interface SortableHeaderProps {
+  label: string;
+  sortKey: SortKey;
+  sort: SortState;
+  onToggle: (key: SortKey) => void;
+}
+
+function SortableHeader({ label, sortKey, sort, onToggle }: SortableHeaderProps) {
+  const active = sort.key === sortKey;
+  const ariaSort = active
+    ? sort.dir === "asc"
+      ? "ascending"
+      : "descending"
+    : "none";
+  return (
+    <button
+      type="button"
+      onClick={() => onToggle(sortKey)}
+      aria-sort={ariaSort}
+      aria-label={`Sort by ${label}${
+        active ? `, currently ${ariaSort}` : ""
+      }`}
+      className={cn(
+        "inline-flex w-full items-center justify-end gap-1 px-2 py-2.5 font-label-caps text-label-caps uppercase transition-colors",
+        "hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
+        active ? "text-text-primary" : "text-text-secondary",
+      )}
+    >
+      <span>{label}</span>
+      {active ? (
+        sort.dir === "asc" ? (
+          <ArrowUp className="size-3" aria-hidden="true" />
+        ) : (
+          <ArrowDown className="size-3" aria-hidden="true" />
+        )
+      ) : (
+        <span aria-hidden="true" className="size-3" />
+      )}
+    </button>
   );
 }

@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { Bell, Search, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
+import { AlertsButton } from "./alerts-button";
 import { ThemeToggle } from "./theme-toggle";
 
 export function TopBar() {
@@ -53,13 +54,7 @@ export function TopBar() {
           <Search className="size-5" />
         </button>
         <ThemeToggle />
-        <button
-          type="button"
-          aria-label="Notifications"
-          className="text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
-        >
-          <Bell className="size-5" />
-        </button>
+        <AlertsButton />
         <button
           type="button"
           aria-label="Account"

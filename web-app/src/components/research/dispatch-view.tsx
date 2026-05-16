@@ -4,6 +4,7 @@ import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/stitch";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
+import { fmtDateTime } from "@/lib/utils/format";
 import { MarkdownBody } from "./markdown-body";
 
 interface DispatchViewProps {
@@ -11,17 +12,6 @@ interface DispatchViewProps {
   onBack: () => void;
   onEdit: () => void;
   onDelete: () => void;
-}
-
-function fmtDateTime(iso: string): string {
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  const hh = String(d.getHours()).padStart(2, "0");
-  const mi = String(d.getMinutes()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd} ${hh}:${mi}`;
 }
 
 export function DispatchView({ dispatch, onBack, onEdit, onDelete }: DispatchViewProps) {

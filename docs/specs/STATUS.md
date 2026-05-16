@@ -26,6 +26,14 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-020 | Strategy definition + multi-ticker backtest engine + `/strategies` route (4 strategy types, equity curve viz) | claude-code | ✅ done | - | b041aeb | 2026-05-10 |
 | SPEC-021 | Mobile-first IA — bottom-nav pattern below md, MobileDrawer retired | claude-code | ✅ done | - | 4f10034 | 2026-05-10 |
 | SPEC-022 | Sunset reports — drop report pipeline + scripts + dead components, rebuild dashboard with quote-driven cards | claude-code | ✅ done | - | 21595c2 | 2026-05-10 |
+| SPEC-023 | Thesis system — structured stock research + trade-plan zones + quarterly review (per `docs/research-framework.md`) + Notes | claude-code | ✅ done | - | 9b49341..0344970 | 2026-05-16 |
+| SPEC-025 | ChatGPT response import — heuristic parser folds LLM markdown back into structured thesis fields with diff preview | claude-code | ✅ done | - | 8f161df..37186a6 | 2026-05-16 |
+| SPEC-026 | Thesis monitoring loop — light trajectory chart + TopBar alert badge + crossed-zone `lastCrossedAt` + browser notifications opt-in | claude-code | ✅ done | - | 35a3886..2016418 | 2026-05-16 |
+| SPEC-027 | Research workspace files — IndexedDB-backed PDF/image attachments per thesis, drag-drop, inline preview | claude-code | ✅ done | - | 1ac71a9..a75f2b2 | 2026-05-16 |
+| SPEC-028 | Thesis guided wizard — 9-step framework walk-through alongside Quick + Deep modes | claude-code | ✅ done | - | 8e8f3e8..dfbfd9d | 2026-05-17 |
+| SPEC-029 | Research helpers — build-time company info enrichment + helpers panel + 9 external source links | claude-code | ✅ done | - | 726292c..d995084 | 2026-05-17 |
+| SPEC-030 | Stock Overview card on thesis page (Yahoo-style: multi-range chart + key-stats grid + news + description) | unassigned | ⬜ todo | SPEC-029 | - | 2026-05-17 |
+| SPEC-031 | Thesis auto-suggest from data (pipeline expansion + diff-preview panel) | unassigned | ⬜ todo | SPEC-029 | - | 2026-05-17 |
 
 ## Status Legend
 - ⬜ todo

@@ -8,22 +8,11 @@ import {
   ytdDelta,
   type Delta,
 } from "@/lib/quotes/quote-utils";
+import { fmtMoney, fmtPct } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
 
 interface QuoteSummaryProps {
   series: QuoteSeries;
-}
-
-function fmtMoney(n: number, currency = "USD"): string {
-  const symbol = currency === "USD" ? "$" : "";
-  return `${symbol}${n.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
-}
-
-function fmtPct(n: number): string {
-  return `${n > 0 ? "+" : ""}${n.toFixed(2)}%`;
 }
 
 function deltaClass(d: Delta | null): string {
@@ -45,7 +34,7 @@ export function QuoteSummary({ series }: QuoteSummaryProps) {
   const currency = meta.currency ?? "USD";
 
   return (
-    <div className="space-y-4">
+    <section aria-label="Quote summary" className="space-y-4">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
         <div>
           <div className="font-data-mono text-[36px] leading-none font-semibold text-text-primary tracking-tight">
@@ -77,7 +66,7 @@ export function QuoteSummary({ series }: QuoteSummaryProps) {
         </div>
       </div>
       <MetaRow meta={series.meta} />
-    </div>
+    </section>
   );
 }
 

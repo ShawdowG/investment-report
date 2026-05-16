@@ -75,7 +75,15 @@ export function createDispatch(input: DispatchInput): ResearchDispatch {
     createdAt: now,
     ...(normalizeTicker(input.ticker) ? { ticker: normalizeTicker(input.ticker)! } : {}),
   };
-  writeJson(STORAGE_KEY, [next, ...items]);
+  try {
+    const ok = writeJson(STORAGE_KEY, [next, ...items]);
+    if (!ok) {
+      throw new Error("localStorage write returned false (quota or unavailable)");
+    }
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err);
+    throw new Error(`Failed to create research dispatch: ${reason}`);
+  }
   return next;
 }
 
@@ -97,13 +105,29 @@ export function updateDispatch(
   }
   next.updatedAt = new Date().toISOString();
   items[idx] = next;
-  writeJson(STORAGE_KEY, items);
+  try {
+    const ok = writeJson(STORAGE_KEY, items);
+    if (!ok) {
+      throw new Error("localStorage write returned false (quota or unavailable)");
+    }
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err);
+    throw new Error(`Failed to update research dispatch ${id}: ${reason}`);
+  }
   return next;
 }
 
 export function deleteDispatch(id: string): void {
   const items = readItems().filter((d) => d.id !== id);
-  writeJson(STORAGE_KEY, items);
+  try {
+    const ok = writeJson(STORAGE_KEY, items);
+    if (!ok) {
+      throw new Error("localStorage write returned false (quota or unavailable)");
+    }
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err);
+    throw new Error(`Failed to delete research dispatch ${id}: ${reason}`);
+  }
 }
 
 // SPEC-016: compile-time conformance check vs the contract.

@@ -4,10 +4,11 @@ import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
 import { TickerHeader } from "@/components/ticker/ticker-header";
 import { PersonalNotesWidget } from "@/components/ticker/personal-notes-widget";
-import { PriceChart } from "@/components/ticker/price-chart";
 import { QuoteSummary } from "@/components/ticker/quote-summary";
+import { TickerChartWithLevels } from "@/components/ticker/ticker-chart-with-levels";
 import { TickerDispatches } from "@/components/ticker/ticker-dispatches";
 import { listQuoteSymbols, loadQuote } from "@/lib/quotes/load-quote";
+import { lastClose } from "@/lib/quotes/quote-utils";
 
 interface PageProps {
   params: Promise<{ symbol: string }>;
@@ -79,13 +80,19 @@ export default async function TickerDetailPage({ params }: PageProps) {
   }
 
   const friendlyName = series.meta.name;
+  const currentPrice = lastClose(series.daily) ?? undefined;
 
   return (
     <AppShell>
       <div className="space-y-6">
         <TickerHeader symbol={upper} name={friendlyName} />
         <QuoteSummary series={series} />
-        <PriceChart daily={series.daily} currency={series.meta.currency ?? "USD"} />
+        <TickerChartWithLevels
+          symbol={upper}
+          daily={series.daily}
+          currency={series.meta.currency ?? "USD"}
+          currentPrice={currentPrice}
+        />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap">
           <section className="lg:col-span-8 space-y-stack-gap">
             <TickerDispatches symbol={upper} />

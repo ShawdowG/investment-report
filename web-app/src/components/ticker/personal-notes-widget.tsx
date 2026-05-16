@@ -61,11 +61,7 @@ export function PersonalNotesWidget({ symbol }: PersonalNotesWidgetProps) {
     <Card className="p-card-padding gap-4">
       <SectionHeader title="Personal Notes" />
       <div className="rounded-lg bg-surface-container-low border border-border-subtle/50 p-4 min-h-[180px]">
-        {!ready ? (
-          <p className="font-body-compact text-body-compact text-text-secondary">
-            Loading notes…
-          </p>
-        ) : notes.length === 0 ? (
+        {!ready ? null : notes.length === 0 ? (
           <p className="font-body-compact text-body-compact text-text-secondary">
             No notes yet for {symbol}.
           </p>
@@ -111,7 +107,7 @@ export function PersonalNotesWidget({ symbol }: PersonalNotesWidgetProps) {
           }}
           placeholder={`Add a note about ${symbol}…`}
           rows={3}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="w-full rounded-md border border-border-subtle bg-surface px-3 py-2 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
         />
         {error ? <p className="text-xs text-destructive">{error}</p> : null}
         <div className="flex justify-end">

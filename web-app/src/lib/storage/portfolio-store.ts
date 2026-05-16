@@ -69,6 +69,37 @@ export function removePosition(rawSymbol: string): PortfolioPosition[] {
   return sortPositions(updated);
 }
 
+export type UpdatePositionPatch = Partial<
+  Pick<PortfolioPosition, "quantity" | "avgPrice" | "platform">
+>;
+
+export function updatePosition(
+  rawSymbol: string,
+  patch: UpdatePositionPatch,
+): PortfolioPosition[] {
+  const symbol = normalizeSymbol(rawSymbol);
+  if (!symbol) return getPortfolio();
+  // Reject invalid numeric fields up-front so a bad inline edit can't silently
+  // corrupt the row — readItems() would later drop it on the next reload.
+  if (patch.quantity !== undefined && !(patch.quantity > 0)) return getPortfolio();
+  if (patch.avgPrice !== undefined && !(patch.avgPrice > 0)) return getPortfolio();
+  const items = readItems();
+  let touched = false;
+  const updated = items.map((p) => {
+    if (p.symbol !== symbol) return p;
+    touched = true;
+    return {
+      ...p,
+      ...(patch.quantity !== undefined ? { quantity: patch.quantity } : {}),
+      ...(patch.avgPrice !== undefined ? { avgPrice: patch.avgPrice } : {}),
+      ...(patch.platform !== undefined ? { platform: patch.platform } : {}),
+    };
+  });
+  if (!touched) return sortPositions(items);
+  writeJson(STORAGE_KEY, updated);
+  return sortPositions(updated);
+}
+
 export function clearPortfolio(): void {
   removeKey(STORAGE_KEY);
 }
@@ -79,6 +110,7 @@ const _conforms: PortfolioRepository = {
   list: getPortfolio,
   add: addPosition,
   remove: removePosition,
+  update: updatePosition,
   clear: clearPortfolio,
 };
 void _conforms;

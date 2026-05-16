@@ -46,3 +46,21 @@ export type Strategy =
   | MACrossStrategy
   | RSIStrategy
   | PriceThresholdStrategy;
+
+// Default parameters for each strategy type. Extracted from strategy-form.tsx
+// (W4.7) so the form, tests, and any future seed data share a single source.
+
+export const DEFAULT_INITIAL_CAPITAL = 100_000;
+export const DEFAULT_FIXED_AMOUNT = 10_000;
+
+export const DEFAULT_MA_CROSS_PARAMS = {
+  shortPeriod: 50,
+  longPeriod: 200,
+} as const;
+
+export const DEFAULT_RSI_PARAMS = {
+  period: 14,
+  buyThreshold: 30,
+  sellThreshold: 70,
+} as const;
+

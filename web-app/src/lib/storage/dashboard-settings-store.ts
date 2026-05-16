@@ -44,6 +44,26 @@ function coerce(raw: unknown): DashboardSettings {
     typeof candidate.equityChartCollapsed === "boolean"
       ? candidate.equityChartCollapsed
       : DEFAULT_DASHBOARD_SETTINGS.equityChartCollapsed;
+  const proximity =
+    typeof candidate.thesisProximityPct === "number" &&
+    Number.isFinite(candidate.thesisProximityPct) &&
+    candidate.thesisProximityPct >= 0
+      ? candidate.thesisProximityPct
+      : DEFAULT_DASHBOARD_SETTINGS.thesisProximityPct;
+  const staleDays =
+    typeof candidate.thesisStaleAfterDays === "number" &&
+    Number.isFinite(candidate.thesisStaleAfterDays) &&
+    candidate.thesisStaleAfterDays > 0
+      ? Math.floor(candidate.thesisStaleAfterDays)
+      : DEFAULT_DASHBOARD_SETTINGS.thesisStaleAfterDays;
+  const notificationsEnabled =
+    typeof candidate.notificationsEnabled === "boolean"
+      ? candidate.notificationsEnabled
+      : DEFAULT_DASHBOARD_SETTINGS.notificationsEnabled;
+  const notificationsPermissionGranted =
+    typeof candidate.notificationsPermissionGranted === "boolean"
+      ? candidate.notificationsPermissionGranted
+      : DEFAULT_DASHBOARD_SETTINGS.notificationsPermissionGranted;
   return {
     indexSymbols,
     topMoversSource: source,
@@ -51,6 +71,10 @@ function coerce(raw: unknown): DashboardSettings {
     topMoversExcludeIndices: exclude,
     watchlistHighThresholdPct: threshold,
     equityChartCollapsed: collapsed,
+    thesisProximityPct: proximity,
+    thesisStaleAfterDays: staleDays,
+    notificationsEnabled,
+    notificationsPermissionGranted,
   };
 }
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { cn } from "@/lib/utils";
@@ -36,17 +37,24 @@ export function IndexPulseRow({ snapshots, symbols }: IndexPulseRowProps) {
                 ? "text-regime-risk-off"
                 : "text-text-secondary";
         return (
-          <Card key={symbol} className="p-card-padding gap-1">
-            <div className="font-label-caps text-label-caps text-text-secondary uppercase">
-              {FRIENDLY[symbol] ?? symbol}
-            </div>
-            <div className="font-data-mono text-data-mono text-text-primary text-lg">
-              {snap ? fmtPrice(snap.lastClose) : "—"}
-            </div>
-            <div className={cn("font-data-mono text-data-mono", colorClass)}>
-              {pct === null ? "—" : `${pct > 0 ? "+" : ""}${pct.toFixed(2)}%`}
-            </div>
-          </Card>
+          <Link
+            key={symbol}
+            href={`/ticker/${encodeURIComponent(symbol)}`}
+            className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+            aria-label={`Open ${FRIENDLY[symbol] ?? symbol} ticker page`}
+          >
+            <Card className="p-card-padding gap-1 hover:bg-surface-variant transition-colors h-full">
+              <div className="font-label-caps text-label-caps text-text-secondary uppercase">
+                {FRIENDLY[symbol] ?? symbol}
+              </div>
+              <div className="font-data-mono text-data-mono text-text-primary text-lg">
+                {snap ? fmtPrice(snap.lastClose) : "—"}
+              </div>
+              <div className={cn("font-data-mono text-data-mono", colorClass)}>
+                {pct === null ? "—" : `${pct > 0 ? "+" : ""}${pct.toFixed(2)}%`}
+              </div>
+            </Card>
+          </Link>
         );
       })}
     </div>

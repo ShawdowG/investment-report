@@ -2,8 +2,9 @@
 
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tag } from "@/components/ui/stitch";
+import { SectionHeader, Tag } from "@/components/ui/stitch";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
+import { fmtDate } from "@/lib/utils/format";
 
 interface DispatchListProps {
   items: ResearchDispatch[];
@@ -11,24 +12,19 @@ interface DispatchListProps {
   onNew: () => void;
 }
 
-function fmtDate(iso: string): string {
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
-}
-
 export function DispatchList({ items, onSelect, onNew }: DispatchListProps) {
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <Button type="button" size="sm" onClick={onNew}>
-          <Plus className="size-4 mr-1" />
-          New dispatch
-        </Button>
-      </div>
+      <SectionHeader
+        title="Research dispatches"
+        caption="Your published market views, post-mortems, and ticker theses."
+        action={
+          <Button type="button" size="sm" onClick={onNew}>
+            <Plus className="size-4 mr-1" />
+            New dispatch
+          </Button>
+        }
+      />
       {items.length === 0 ? (
         <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
           No dispatches yet. Click <span className="font-semibold">New dispatch</span> above to write your first.

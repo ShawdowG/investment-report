@@ -2,7 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import type { Strategy, StrategyType } from "@/lib/domain/strategy";
+import {
+  DEFAULT_FIXED_AMOUNT,
+  DEFAULT_INITIAL_CAPITAL,
+  DEFAULT_MA_CROSS_PARAMS,
+  DEFAULT_RSI_PARAMS,
+  type Strategy,
+  type StrategyType,
+} from "@/lib/domain/strategy";
 import type { StrategyInputContract } from "@/lib/storage/contracts";
 import { SymbolPicker } from "./symbol-picker";
 
@@ -32,32 +39,48 @@ export function StrategyForm({
   const [type, setType] = useState<StrategyType>(initial?.type ?? "buy-hold");
   const [symbols, setSymbols] = useState<string[]>(initial?.symbols ?? []);
   const [initialCapital, setInitialCapital] = useState(
-    String(initial?.initialCapital ?? 100000),
+    String(initial?.initialCapital ?? DEFAULT_INITIAL_CAPITAL),
   );
   const [sizing, setSizing] = useState<"equal-weight" | "fixed-dollar">(
     initial?.positionSizing.type ?? "equal-weight",
   );
   const [fixedAmount, setFixedAmount] = useState(
-    String(initial?.positionSizing.fixedAmount ?? 10000),
+    String(initial?.positionSizing.fixedAmount ?? DEFAULT_FIXED_AMOUNT),
   );
   const [startDate, setStartDate] = useState(initial?.startDate ?? "");
   const [endDate, setEndDate] = useState(initial?.endDate ?? "");
 
   // Type-specific
   const [shortPeriod, setShortPeriod] = useState(
-    String(initial && initial.type === "ma-crossover" ? initial.shortPeriod : 50),
+    String(
+      initial && initial.type === "ma-crossover"
+        ? initial.shortPeriod
+        : DEFAULT_MA_CROSS_PARAMS.shortPeriod,
+    ),
   );
   const [longPeriod, setLongPeriod] = useState(
-    String(initial && initial.type === "ma-crossover" ? initial.longPeriod : 200),
+    String(
+      initial && initial.type === "ma-crossover"
+        ? initial.longPeriod
+        : DEFAULT_MA_CROSS_PARAMS.longPeriod,
+    ),
   );
   const [rsiPeriod, setRsiPeriod] = useState(
-    String(initial && initial.type === "rsi" ? initial.period : 14),
+    String(initial && initial.type === "rsi" ? initial.period : DEFAULT_RSI_PARAMS.period),
   );
   const [rsiBuy, setRsiBuy] = useState(
-    String(initial && initial.type === "rsi" ? initial.buyThreshold : 30),
+    String(
+      initial && initial.type === "rsi"
+        ? initial.buyThreshold
+        : DEFAULT_RSI_PARAMS.buyThreshold,
+    ),
   );
   const [rsiSell, setRsiSell] = useState(
-    String(initial && initial.type === "rsi" ? initial.sellThreshold : 70),
+    String(
+      initial && initial.type === "rsi"
+        ? initial.sellThreshold
+        : DEFAULT_RSI_PARAMS.sellThreshold,
+    ),
   );
   const [buyPrice, setBuyPrice] = useState(
     String(initial && initial.type === "price-threshold" ? initial.buyPrice : ""),
@@ -67,6 +90,10 @@ export function StrategyForm({
   );
 
   const [error, setError] = useState<string | null>(null);
+  const errorId = "strategy-form-error";
+  const invalid = error !== null;
+  const ariaInvalid = invalid ? true : undefined;
+  const ariaDescribedBy = invalid ? errorId : undefined;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -80,6 +107,9 @@ export function StrategyForm({
     }
     if (type === "price-threshold" && symbols.length !== 1) {
       return setError("Price threshold strategy supports exactly one symbol.");
+    }
+    if (startDate && endDate && startDate > endDate) {
+      return setError("Start date must be on or before end date.");
     }
 
     const positionSizing =
@@ -151,7 +181,9 @@ export function StrategyForm({
             setError(null);
           }}
           placeholder="MA50/200 cross on mega-caps"
-          className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          aria-invalid={ariaInvalid}
+          aria-describedby={ariaDescribedBy}
+          className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-primary/60 aria-invalid:border-regime-risk-off"
         />
       </Field>
 
@@ -187,10 +219,22 @@ export function StrategyForm({
       {type === "ma-crossover" ? (
         <div className="grid grid-cols-2 gap-3">
           <Field label="Short MA period" htmlFor="ma-short">
-            <NumberInput id="ma-short" value={shortPeriod} onChange={setShortPeriod} />
+            <NumberInput
+              id="ma-short"
+              value={shortPeriod}
+              onChange={setShortPeriod}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
           <Field label="Long MA period" htmlFor="ma-long">
-            <NumberInput id="ma-long" value={longPeriod} onChange={setLongPeriod} />
+            <NumberInput
+              id="ma-long"
+              value={longPeriod}
+              onChange={setLongPeriod}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
         </div>
       ) : null}
@@ -198,13 +242,31 @@ export function StrategyForm({
       {type === "rsi" ? (
         <div className="grid grid-cols-3 gap-3">
           <Field label="RSI period" htmlFor="rsi-p">
-            <NumberInput id="rsi-p" value={rsiPeriod} onChange={setRsiPeriod} />
+            <NumberInput
+              id="rsi-p"
+              value={rsiPeriod}
+              onChange={setRsiPeriod}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
           <Field label="Buy threshold" htmlFor="rsi-buy">
-            <NumberInput id="rsi-buy" value={rsiBuy} onChange={setRsiBuy} />
+            <NumberInput
+              id="rsi-buy"
+              value={rsiBuy}
+              onChange={setRsiBuy}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
           <Field label="Sell threshold" htmlFor="rsi-sell">
-            <NumberInput id="rsi-sell" value={rsiSell} onChange={setRsiSell} />
+            <NumberInput
+              id="rsi-sell"
+              value={rsiSell}
+              onChange={setRsiSell}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
         </div>
       ) : null}
@@ -212,23 +274,41 @@ export function StrategyForm({
       {type === "price-threshold" ? (
         <div className="grid grid-cols-2 gap-3">
           <Field label="Buy ≤" htmlFor="pt-buy">
-            <NumberInput id="pt-buy" value={buyPrice} onChange={setBuyPrice} />
+            <NumberInput
+              id="pt-buy"
+              value={buyPrice}
+              onChange={setBuyPrice}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
           <Field label="Sell ≥" htmlFor="pt-sell">
-            <NumberInput id="pt-sell" value={sellPrice} onChange={setSellPrice} />
+            <NumberInput
+              id="pt-sell"
+              value={sellPrice}
+              onChange={setSellPrice}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
         </div>
       ) : null}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-border-subtle">
         <Field label="Initial capital ($)" htmlFor="cap">
-          <NumberInput id="cap" value={initialCapital} onChange={setInitialCapital} />
+          <NumberInput
+            id="cap"
+            value={initialCapital}
+            onChange={setInitialCapital}
+            ariaInvalid={ariaInvalid}
+            ariaDescribedBy={ariaDescribedBy}
+          />
         </Field>
         <Field label="Sizing">
           <select
             value={sizing}
             onChange={(e) => setSizing(e.target.value as "equal-weight" | "fixed-dollar")}
-            className="w-full rounded-md border border-input bg-background px-2 py-1.5 text-sm"
+            className="w-full rounded-md border border-border-subtle bg-surface px-2 py-1.5 text-sm text-text-primary"
           >
             <option value="equal-weight">Equal weight</option>
             <option value="fixed-dollar">Fixed $ per ticker</option>
@@ -236,7 +316,13 @@ export function StrategyForm({
         </Field>
         {sizing === "fixed-dollar" ? (
           <Field label="$ per ticker" htmlFor="fixed">
-            <NumberInput id="fixed" value={fixedAmount} onChange={setFixedAmount} />
+            <NumberInput
+              id="fixed"
+              value={fixedAmount}
+              onChange={setFixedAmount}
+              ariaInvalid={ariaInvalid}
+              ariaDescribedBy={ariaDescribedBy}
+            />
           </Field>
         ) : null}
       </div>
@@ -248,7 +334,9 @@ export function StrategyForm({
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            aria-invalid={ariaInvalid}
+            aria-describedby={ariaDescribedBy}
+            className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-primary/60 aria-invalid:border-regime-risk-off"
           />
         </Field>
         <Field label="End date (optional)" htmlFor="end">
@@ -257,12 +345,22 @@ export function StrategyForm({
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            aria-invalid={ariaInvalid}
+            aria-describedby={ariaDescribedBy}
+            className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-body-compact text-body-compact text-text-primary shadow-xs outline-none focus-visible:border-primary/60 aria-invalid:border-regime-risk-off"
           />
         </Field>
       </div>
 
-      {error ? <p className="text-xs text-destructive">{error}</p> : null}
+      {error ? (
+        <p
+          id={errorId}
+          role="alert"
+          className="text-xs text-regime-risk-off"
+        >
+          {error}
+        </p>
+      ) : null}
 
       <div className="flex justify-end gap-2">
         {onCancel ? (
@@ -289,7 +387,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1">
-      <label htmlFor={htmlFor} className="block text-xs font-medium text-muted-foreground">
+      <label htmlFor={htmlFor} className="block text-xs font-medium text-text-secondary">
         {label}
       </label>
       {children}
@@ -301,10 +399,14 @@ function NumberInput({
   id,
   value,
   onChange,
+  ariaInvalid,
+  ariaDescribedBy,
 }: {
   id: string;
   value: string;
   onChange: (v: string) => void;
+  ariaInvalid?: boolean;
+  ariaDescribedBy?: string;
 }) {
   return (
     <input
@@ -314,7 +416,9 @@ function NumberInput({
       step="any"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full rounded-md border border-input bg-background px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+      aria-invalid={ariaInvalid}
+      aria-describedby={ariaDescribedBy}
+      className="w-full rounded-md border border-border-subtle bg-surface px-3 py-1.5 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-primary/60 aria-invalid:border-regime-risk-off"
     />
   );
 }

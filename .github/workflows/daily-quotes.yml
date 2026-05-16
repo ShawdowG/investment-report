@@ -37,10 +37,10 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
-          git add data/quotes/
+          git add data/quotes/ data/company/
           git diff --cached --quiet \
-            && echo "No quote changes to commit." \
-            || git commit -m "auto: daily quotes $(date -u +%Y-%m-%d)"
+            && echo "No quote or company changes to commit." \
+            || git commit -m "auto: daily quotes + company $(date -u +%Y-%m-%d)"
           git push
 
       - name: Set up Node

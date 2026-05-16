@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { SectionHeader } from "@/components/ui/stitch";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { SectionHeader, Tag } from "@/components/ui/stitch";
 import {
   DEFAULT_DASHBOARD_SETTINGS,
   type DashboardSettings,
@@ -15,6 +16,7 @@ import {
   resetDashboardSettings,
   updateDashboardSettings,
 } from "@/lib/storage/dashboard-settings-store";
+import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
 
 function parseSymbolList(raw: string): string[] {
   return raw
@@ -23,14 +25,78 @@ function parseSymbolList(raw: string): string[] {
     .filter((s) => s.length > 0);
 }
 
-export function DashboardSettingsPanel() {
+/**
+ * Validate a raw token list against the quote universe.
+ * - Each token is normalized (case, exchange prefix, etc.).
+ * - Tokens that normalize cleanly AND match a known symbol => valid.
+ * - Everything else is flagged as unknown — we keep the original spelling so
+ *   the user can see what they typed in the chip and remove it.
+ */
+function splitValidation(
+  tokens: string[],
+  known: Set<string>,
+): { valid: string[]; unknown: string[] } {
+  const valid: string[] = [];
+  const unknown: string[] = [];
+  const seen = new Set<string>();
+  for (const token of tokens) {
+    const normalized = normalizeSymbol(token);
+    if (normalized && known.has(normalized)) {
+      if (seen.has(normalized)) continue;
+      seen.add(normalized);
+      valid.push(normalized);
+    } else {
+      unknown.push(token);
+    }
+  }
+  return { valid, unknown };
+}
+
+export function DashboardSettingsPanel({
+  knownSymbols,
+}: {
+  knownSymbols: string[];
+}) {
+  const knownSet = useMemo(() => new Set(knownSymbols), [knownSymbols]);
+
   const [settings, setSettings] = useState<DashboardSettings>(
     DEFAULT_DASHBOARD_SETTINGS,
   );
   const [indexDraft, setIndexDraft] = useState(
     DEFAULT_DASHBOARD_SETTINGS.indexSymbols.join(", "),
   );
+  const [unknownIndexSymbols, setUnknownIndexSymbols] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
+  const [resetConfirmOpen, setResetConfirmOpen] = useState(false);
+
+  // "Saved" pulse — opacity fade-in (200ms) → hold (1500ms) → fade-out (200ms).
+  // Two-step state so we can transition both phases via CSS opacity.
+  const [savedVisible, setSavedVisible] = useState(false);
+  const [savedOpaque, setSavedOpaque] = useState(false);
+  const savedTimersRef = useRef<{ in?: number; out?: number; off?: number }>({});
+
+  function flashSaved() {
+    const timers = savedTimersRef.current;
+    if (timers.in) window.clearTimeout(timers.in);
+    if (timers.out) window.clearTimeout(timers.out);
+    if (timers.off) window.clearTimeout(timers.off);
+    setSavedVisible(true);
+    // Next frame: trigger fade-in.
+    timers.in = window.setTimeout(() => setSavedOpaque(true), 10);
+    // After 200ms fade-in + 1500ms hold, fade out.
+    timers.out = window.setTimeout(() => setSavedOpaque(false), 1700);
+    // After fade-out (200ms more), unmount.
+    timers.off = window.setTimeout(() => setSavedVisible(false), 1900);
+  }
+
+  useEffect(() => {
+    return () => {
+      const timers = savedTimersRef.current;
+      if (timers.in) window.clearTimeout(timers.in);
+      if (timers.out) window.clearTimeout(timers.out);
+      if (timers.off) window.clearTimeout(timers.off);
+    };
+  }, []);
 
   useEffect(() => {
     const loaded = getDashboardSettings();
@@ -43,18 +109,76 @@ export function DashboardSettingsPanel() {
     const next = updateDashboardSettings(patch);
     setSettings(next);
     if (patch.indexSymbols) setIndexDraft(next.indexSymbols.join(", "));
+    flashSaved();
   }
 
   function handleIndexBlur() {
     const parsed = parseSymbolList(indexDraft);
-    applyPatch({ indexSymbols: parsed });
+    const { valid, unknown } = splitValidation(parsed, knownSet);
+    setUnknownIndexSymbols(unknown);
+    applyPatch({ indexSymbols: valid });
+    // Rewrite the input so it only shows valid, saved symbols.
+    setIndexDraft(valid.join(", "));
   }
 
-  function handleReset() {
+  function removeUnknown(symbol: string) {
+    setUnknownIndexSymbols((prev) => prev.filter((s) => s !== symbol));
+  }
+
+  function performReset() {
     const next = resetDashboardSettings();
     setSettings(next);
     setIndexDraft(next.indexSymbols.join(", "));
+    setUnknownIndexSymbols([]);
+    setResetConfirmOpen(false);
+    flashSaved();
   }
+
+  // Stable ids so every label↔input pair has a matching htmlFor / id.
+  // Clicking a label focuses its input and screen readers announce the link.
+  const indexInputId = useId();
+  const topMoversLimitId = useId();
+  const watchlistThresholdId = useId();
+  const topMoversSourceName = useId();
+  const topMoversSourceUniverseId = useId();
+  const topMoversSourceWatchlistId = useId();
+  const excludeIndicesId = useId();
+  const equityChartCollapsedId = useId();
+  const notificationsId = useId();
+
+  // SPEC-026 W10.D — toggling on requests Notification.permission.
+  async function handleNotificationsToggle(next: boolean) {
+    if (!next) {
+      applyPatch({
+        notificationsEnabled: false,
+        notificationsPermissionGranted: false,
+      });
+      return;
+    }
+    if (typeof Notification === "undefined") {
+      // Browser doesn't support the API at all — bail and leave the toggle off.
+      applyPatch({
+        notificationsEnabled: false,
+        notificationsPermissionGranted: false,
+      });
+      return;
+    }
+    try {
+      const result = await Notification.requestPermission();
+      applyPatch({
+        notificationsEnabled: result === "granted",
+        notificationsPermissionGranted: result === "granted",
+      });
+    } catch {
+      applyPatch({
+        notificationsEnabled: false,
+        notificationsPermissionGranted: false,
+      });
+    }
+  }
+
+  const browserDeniedNotifications =
+    typeof Notification !== "undefined" && Notification.permission === "denied";
 
   if (!ready) {
     return (
@@ -72,13 +196,28 @@ export function DashboardSettingsPanel() {
       <SectionHeader
         title="Dashboard preferences"
         caption="Controls the dashboard's index pulse, top movers and watchlist impact cards."
+        action={
+          savedVisible ? (
+            <span
+              role="status"
+              aria-live="polite"
+              className={`font-body-compact text-body-compact text-regime-risk-on transition-opacity duration-200 ${
+                savedOpaque ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              Saved
+            </span>
+          ) : null
+        }
       />
 
       <Field
         label="Index symbols"
+        htmlFor={indexInputId}
         hint="Comma-separated tickers shown in the top row. Examples: ^GSPC, ^NDX, BTC-USD, GC=F"
       >
         <input
+          id={indexInputId}
           type="text"
           value={indexDraft}
           onChange={(e) => setIndexDraft(e.target.value)}
@@ -91,6 +230,32 @@ export function DashboardSettingsPanel() {
           }}
           className="w-full rounded-md border border-border-subtle bg-surface-variant px-3 py-1.5 font-data-mono text-data-mono text-text-primary focus:outline-none focus:border-primary/60"
         />
+        {unknownIndexSymbols.length > 0 ? (
+          <div className="space-y-1 pt-1">
+            <div className="flex flex-wrap gap-1.5">
+              {unknownIndexSymbols.map((sym) => (
+                <Tag
+                  key={sym}
+                  className="border-regime-risk-off text-regime-risk-off bg-surface-variant gap-1 pr-1"
+                >
+                  <span className="font-data-mono">{sym}</span>
+                  <button
+                    type="button"
+                    aria-label={`Remove ${sym}`}
+                    onClick={() => removeUnknown(sym)}
+                    className="inline-flex items-center justify-center rounded hover:bg-surface-elevated text-regime-risk-off"
+                  >
+                    <X className="size-3" aria-hidden="true" />
+                  </button>
+                </Tag>
+              ))}
+            </div>
+            <p className="text-xs text-regime-risk-off">
+              {unknownIndexSymbols.length} unknown symbol
+              {unknownIndexSymbols.length === 1 ? "" : "s"} — not in the quote feed and won't render.
+            </p>
+          </div>
+        ) : null}
       </Field>
 
       <Field
@@ -99,7 +264,8 @@ export function DashboardSettingsPanel() {
       >
         <div className="flex gap-3">
           <Radio
-            name="topMoversSource"
+            id={topMoversSourceUniverseId}
+            name={topMoversSourceName}
             checked={settings.topMoversSource === "universe"}
             label="Universe"
             onSelect={() =>
@@ -107,7 +273,8 @@ export function DashboardSettingsPanel() {
             }
           />
           <Radio
-            name="topMoversSource"
+            id={topMoversSourceWatchlistId}
+            name={topMoversSourceName}
             checked={settings.topMoversSource === "watchlist"}
             label="Watchlist"
             onSelect={() =>
@@ -117,8 +284,13 @@ export function DashboardSettingsPanel() {
         </div>
       </Field>
 
-      <Field label="Top movers limit" hint="How many rows the card shows.">
+      <Field
+        label="Top movers limit"
+        htmlFor={topMoversLimitId}
+        hint="How many rows the card shows."
+      >
         <input
+          id={topMoversLimitId}
           type="number"
           min={1}
           max={50}
@@ -136,17 +308,22 @@ export function DashboardSettingsPanel() {
         hint="When on, the index symbols above are dropped from the movers pool."
       >
         <Checkbox
+          id={excludeIndicesId}
           checked={settings.topMoversExcludeIndices}
+          onLabel="On — indices excluded"
+          offLabel="Off — indices included"
           onChange={(checked) => applyPatch({ topMoversExcludeIndices: checked })}
         />
       </Field>
 
       <Field
         label="Watchlist high-attention threshold"
+        htmlFor={watchlistThresholdId}
         hint="Day Δ% bigger than this bumps a watchlist symbol into the 'High attention' bucket."
       >
         <div className="flex items-center gap-2">
           <input
+            id={watchlistThresholdId}
             type="number"
             min={0}
             max={100}
@@ -170,17 +347,60 @@ export function DashboardSettingsPanel() {
         hint="The portfolio equity chart starts hidden so it doesn't dominate the page; toggle it open inline."
       >
         <Checkbox
+          id={equityChartCollapsedId}
           checked={settings.equityChartCollapsed}
+          onLabel="Collapsed"
+          offLabel="Expanded"
           onChange={(checked) => applyPatch({ equityChartCollapsed: checked })}
         />
       </Field>
 
+      <Field
+        label="Notifications"
+        hint="When enabled, the app fires a desktop notification when a thesis trade level crosses (within proximity %). Permission is requested on toggle."
+      >
+        <Checkbox
+          id={notificationsId}
+          checked={settings.notificationsEnabled}
+          onLabel="Notify me when thesis levels cross"
+          offLabel="Notify me when thesis levels cross"
+          onChange={(checked) => {
+            void handleNotificationsToggle(checked);
+          }}
+        />
+        {settings.notificationsEnabled && !settings.notificationsPermissionGranted ? (
+          <p className="text-xs text-regime-risk-off">
+            Permission denied — re-enable in your browser settings.
+          </p>
+        ) : null}
+        {!settings.notificationsEnabled && browserDeniedNotifications ? (
+          <p className="text-xs text-regime-risk-off">
+            Browser blocked notifications. Re-enable them in your browser
+            settings, then toggle this on again.
+          </p>
+        ) : null}
+      </Field>
+
       <div className="pt-2">
-        <Button type="button" variant="outline" onClick={handleReset}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => setResetConfirmOpen(true)}
+        >
           <RotateCcw className="size-4 mr-1" aria-hidden="true" />
           Reset to defaults
         </Button>
       </div>
+
+      <ConfirmDialog
+        open={resetConfirmOpen}
+        title="Reset dashboard preferences?"
+        description="This restores indexSymbols, top movers source, and all other dashboard settings to defaults. Your watchlist/portfolio/notes are not affected."
+        confirmLabel="Reset"
+        destructive
+        onConfirm={performReset}
+        onCancel={() => setResetConfirmOpen(false)}
+      />
     </Card>
   );
 }
@@ -188,15 +408,20 @@ export function DashboardSettingsPanel() {
 function Field({
   label,
   hint,
+  htmlFor,
   children,
 }: {
   label: string;
   hint?: string;
+  htmlFor?: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="space-y-1.5">
-      <label className="font-label-caps text-label-caps text-text-secondary uppercase block">
+      <label
+        htmlFor={htmlFor}
+        className="font-label-caps text-label-caps text-text-secondary uppercase block"
+      >
         {label}
       </label>
       {children}
@@ -208,50 +433,66 @@ function Field({
 }
 
 function Radio({
+  id,
   name,
   checked,
   label,
   onSelect,
 }: {
+  id: string;
   name: string;
   checked: boolean;
   label: string;
   onSelect: () => void;
 }) {
   return (
-    <label className="inline-flex items-center gap-2 cursor-pointer">
+    <span className="inline-flex items-center gap-2">
       <input
+        id={id}
         type="radio"
         name={name}
         checked={checked}
         onChange={onSelect}
-        className="accent-primary"
+        className="accent-primary cursor-pointer"
       />
-      <span className="font-body-compact text-body-compact text-text-primary">
+      <label
+        htmlFor={id}
+        className="font-body-compact text-body-compact text-text-primary cursor-pointer"
+      >
         {label}
-      </span>
-    </label>
+      </label>
+    </span>
   );
 }
 
 function Checkbox({
+  id,
   checked,
+  onLabel,
+  offLabel,
   onChange,
 }: {
+  id: string;
   checked: boolean;
+  onLabel: string;
+  offLabel: string;
   onChange: (next: boolean) => void;
 }) {
   return (
-    <label className="inline-flex items-center gap-2 cursor-pointer">
+    <span className="inline-flex items-center gap-2">
       <input
+        id={id}
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="accent-primary"
+        className="accent-primary cursor-pointer"
       />
-      <span className="font-body-compact text-body-compact text-text-secondary">
-        {checked ? "Enabled" : "Disabled"}
-      </span>
-    </label>
+      <label
+        htmlFor={id}
+        className="font-body-compact text-body-compact text-text-secondary cursor-pointer"
+      >
+        {checked ? onLabel : offLabel}
+      </label>
+    </span>
   );
 }
