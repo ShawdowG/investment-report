@@ -54,8 +54,10 @@ import { QuarterlyReviewForm } from "./quarterly-review-form";
 import { QuarterlyReviewTimeline } from "./quarterly-review-timeline";
 import { FilesSection } from "./files-section";
 import { ResearchHelpers } from "./research-helpers";
+import { StockOverview } from "./stock-overview";
 import { buildChatGPTPrompt } from "@/lib/research/thesis-markdown";
 import type { CompanyInfo } from "@/lib/domain/company";
+import type { QuoteSeries } from "@/lib/quotes/types";
 
 interface ThesisFormProps {
   symbol: string;
@@ -66,6 +68,12 @@ interface ThesisFormProps {
    * external-links-only view.
    */
   company: CompanyInfo | null;
+  /**
+   * SPEC-030 W14.D — full daily series + meta for the Stock Overview card
+   * mounted above the form. Null when no quote file exists for the symbol;
+   * <StockOverview> handles the empty case internally.
+   */
+  series: QuoteSeries | null;
 }
 
 type Mode = "quick" | "deep" | "guided";
@@ -196,7 +204,12 @@ function buildTradeLevels(form: FormState): TradeLevel[] {
   return out;
 }
 
-export function ThesisForm({ symbol, snapshots, company }: ThesisFormProps) {
+export function ThesisForm({
+  symbol,
+  snapshots,
+  company,
+  series,
+}: ThesisFormProps) {
   const upper = symbol.toUpperCase();
   const snapshot = snapshots[upper];
 
@@ -676,14 +689,15 @@ export function ThesisForm({ symbol, snapshots, company }: ThesisFormProps) {
   if (viewMode === "view" && existing) {
     return (
       <div className="space-y-4">
-        <ResearchHelpers
-          company={company}
+        <StockOverview
           symbol={upper}
-          thesis={existing}
-          currentPrice={snapshot?.lastClose}
-          currency={snapshot?.currency}
+          daily={series?.daily ?? []}
+          marketCap={series?.meta.marketCap}
+          currency={series?.meta.currency}
+          company={company}
           defaultOpen={false}
         />
+        <ResearchHelpers symbol={upper} thesis={existing} defaultOpen={false} />
         <ThesisView thesis={existing} onEdit={() => setViewMode("edit")} />
         <Card className="p-card-padding gap-3">
           <FilesSection thesisSymbol={upper} />
@@ -735,12 +749,17 @@ export function ThesisForm({ symbol, snapshots, company }: ThesisFormProps) {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
-      <ResearchHelpers
+      <StockOverview
+        symbol={upper}
+        daily={series?.daily ?? []}
+        marketCap={series?.meta.marketCap}
+        currency={series?.meta.currency}
         company={company}
+        defaultOpen={existing === null}
+      />
+      <ResearchHelpers
         symbol={upper}
         thesis={existing}
-        currentPrice={snapshot?.lastClose}
-        currency={snapshot?.currency}
         defaultOpen={existing === null}
       />
       <div className="flex items-center justify-between gap-3">

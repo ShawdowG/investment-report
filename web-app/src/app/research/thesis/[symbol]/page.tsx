@@ -6,7 +6,7 @@ import { ThesisForm } from "@/components/research/thesis-form";
 import { ThesisLiveHeader } from "@/components/research/thesis-live-header";
 import { loadAllQuoteSnapshots } from "@/lib/quotes/snapshots";
 import { loadCompactDaily } from "@/lib/quotes/compact-daily";
-import { listQuoteSymbols } from "@/lib/quotes/load-quote";
+import { listQuoteSymbols, loadQuote } from "@/lib/quotes/load-quote";
 import { loadCompany } from "@/lib/company/load-company";
 
 interface PageProps {
@@ -35,6 +35,10 @@ export default async function ThesisPage({ params }: PageProps) {
   // returns null in that case and the helpers panel falls back to the
   // external-links-only view.
   const company = loadCompany(symbol);
+  // SPEC-030 W14.D — full series feeds the Stock Overview chart + stat grid
+  // (52W range, avg volume, market cap from meta). `null` when no quote file
+  // exists for this symbol; <StockOverview> renders the empty-state message.
+  const series = loadQuote(symbol);
 
   return (
     <AppShell>
@@ -56,7 +60,12 @@ export default async function ThesisPage({ params }: PageProps) {
             W8.B-L.
           </p>
         </header>
-        <ThesisForm symbol={symbol} snapshots={snapshots} company={company} />
+        <ThesisForm
+          symbol={symbol}
+          snapshots={snapshots}
+          company={company}
+          series={series}
+        />
       </div>
     </AppShell>
   );
