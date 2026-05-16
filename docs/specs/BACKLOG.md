@@ -166,6 +166,31 @@ Per-thesis file attachments (PDF/image/text) via IndexedDB, drag-drop, inline pr
 | W11.D | Section anchors + caption editing | `web-app/src/components/research/files-section.tsx` | S | P3 |
 | W11.E | Settings card: usage display + wipe-all | `web-app/src/components/settings/research-files-settings.tsx` (new), `web-app/src/app/settings/page.tsx` | S | P3 |
 
+### W12 — SPEC-028 Guided wizard (new feature spec, queued 2026-05-16)
+
+9-step framework walk-through alongside Quick + Deep modes. Each step shows just one editor + a one-paragraph prompt drawn from the framework. Progress bar based on per-step `isComplete` predicates. Resume capability via `lastEditMode` field on Thesis. See `docs/specs/028-thesis-guided-wizard.md`.
+
+| # | Task | Files | Effort | Priority |
+|---|---|---|---|---|
+| W12.A | WizardStepMeta registry + isComplete predicates + findResumeStep | `web-app/src/lib/research/wizard-steps.ts` (new) | M | P1 |
+| W12.B | Mode toggle bar (Quick / Deep / Guided) + lastEditMode field on Thesis | `web-app/src/lib/domain/thesis.ts`, `web-app/src/components/research/thesis-form.tsx` | S | P1 |
+| W12.C | Wizard shell — progress bar + step header + Previous/Next/Save&exit | `web-app/src/components/research/thesis-wizard.tsx` (new) | M | P1 |
+| W12.D | Resume banner + Restart-from-step-1 ConfirmDialog | `web-app/src/components/research/thesis-wizard.tsx` | S | P2 |
+| W12.E | Wire each step body to its existing editor (Setup / Thesis / Classify / Fundamentals / Market / Valuation / Scenarios / Trade / Light) | `web-app/src/components/research/thesis-wizard.tsx` | M | P1 |
+
+### W13 — SPEC-029 Research helpers (new feature spec, queued 2026-05-16)
+
+Build-time company info enrichment + helpers panel on the thesis page + 9 external source link buttons. Pulls `longBusinessSummary`, valuation metrics, analyst consensus, earnings calendar, and top-5 news from yfinance daily. See `docs/specs/029-research-helpers.md`.
+
+| # | Task | Files | Effort | Priority |
+|---|---|---|---|---|
+| W13.A | Expand `scripts/fetch-quotes.py` to write `data/company/SYMBOL.json` | `scripts/fetch-quotes.py` | M | P1 |
+| W13.B | TS domain + loader for CompanyInfo | `web-app/src/lib/domain/company.ts` (new), `web-app/src/lib/company/load-company.ts` (new) | S | P1 |
+| W13.C | Helpers panel UI — company info card + stats grid + analyst + calendar | `web-app/src/components/research/research-helpers.tsx` (new), thesis page wiring | M | P1 |
+| W13.D | External links grid + ChatGPT button | `web-app/src/components/research/research-helpers.tsx` | S | P2 |
+| W13.E | News list + relative time formatting | `web-app/src/components/research/research-helpers.tsx`, `web-app/src/lib/utils/format.ts` (add fmtRelativeTime) | S | P2 |
+| W13.F | CI workflow update — commit `data/company/` alongside `data/quotes/` | `.github/workflows/daily-quotes.yml` | S | P2 |
+
 ### Carry-overs from earlier dashboard polish
 
 | # | Task | Files | Effort | Priority |
