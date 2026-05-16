@@ -233,6 +233,13 @@ def _build_company_info(symbol, ticker, info, generated_at):
         "operatingMargins": opt_num("operatingMargins"),
         "returnOnAssets": opt_num("returnOnAssets"),
         "returnOnEquity": opt_num("returnOnEquity"),
+        # SPEC-030 W14.A — extra Yahoo-style overview stats consumed by
+        # <StockOverview>: 5Y monthly beta, trailing EPS, and the ex-dividend
+        # date. yfinance returns `exDividendDate` as unix seconds; normalise to
+        # an ISO date string so the TS loader can treat it as a plain string.
+        "beta": opt_num("beta"),
+        "trailingEps": opt_num("trailingEps"),
+        "exDividendDate": _iso_date_from_unix(info.get("exDividendDate")),
     }
     metrics = {k: v for k, v in metrics.items() if v is not None}
 
