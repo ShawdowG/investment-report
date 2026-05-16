@@ -42,6 +42,7 @@ import { ThesisChecklists } from "@/components/research/thesis-checklists";
 import { ThesisNotes } from "@/components/research/thesis-notes";
 import { ThesisView } from "@/components/research/thesis-view";
 import { ThesisImportPanel } from "@/components/research/thesis-import-panel";
+import { ThesisAutofillPanel } from "@/components/research/thesis-autofill-panel";
 import { ThesisWizard } from "@/components/research/thesis-wizard";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
@@ -450,6 +451,37 @@ export function ThesisForm({
     }
     if (patch.analysisNotes !== undefined) setAnalysisNotes(patch.analysisNotes);
     if (patch.notes) setNotes(patch.notes);
+  }
+
+  /**
+   * SPEC-031 W15.C — apply an autofill patch. Distributes the panel's
+   * `Partial<Thesis>` across the granular form-state hooks. Mirrors
+   * `handleImportApply` but is deliberately a separate entry point so the
+   * autofill semantics are explicit: `thesisPoints` and `questions` always
+   * append (the user's existing bullets stay) and `scenarios` merges by
+   * kind on the panel side, so we can replace the full array safely here.
+   */
+  function handleAutofillApply(patch: Partial<Thesis>) {
+    if (patch.thesisPoints !== undefined) {
+      const merged = Array.from(
+        new Set([...linesToList(form.thesisPointsRaw), ...patch.thesisPoints]),
+      );
+      setForm((f) => ({ ...f, thesisPointsRaw: merged.join("\n") }));
+    }
+    if (patch.concerns) setConcerns((c) => ({ ...c, ...patch.concerns }));
+    if (patch.fundamentals)
+      setFundamentals((f) => ({ ...f, ...patch.fundamentals }));
+    if (patch.marketPosition)
+      setMarketPosition((m) => ({ ...m, ...patch.marketPosition }));
+    if (patch.valuation) setValuation((v) => ({ ...v, ...patch.valuation }));
+    if (patch.scenarios) setScenarios(patch.scenarios);
+    if (patch.questions) {
+      const merged = Array.from(
+        new Set([...linesToList(questionsRaw), ...patch.questions]),
+      );
+      setQuestionsRaw(merged.join("\n"));
+    }
+    if (error) setError(null);
   }
 
 
@@ -1221,6 +1253,15 @@ export function ThesisForm({
         <p role="alert" className="font-body-compact text-body-compact text-regime-risk-off">
           {error}
         </p>
+      ) : null}
+
+      {mode !== "guided" ? (
+        <ThesisAutofillPanel
+          thesis={liveThesis}
+          company={company}
+          snapshot={snapshot}
+          onApply={handleAutofillApply}
+        />
       ) : null}
 
       <div className="flex flex-wrap items-center justify-between gap-2">
