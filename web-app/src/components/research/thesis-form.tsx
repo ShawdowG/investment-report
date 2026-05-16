@@ -729,7 +729,12 @@ export function ThesisForm({
           company={company}
           defaultOpen={false}
         />
-        <ResearchHelpers symbol={upper} thesis={existing} defaultOpen={false} />
+        <ResearchHelpers
+          symbol={upper}
+          thesis={existing}
+          companyName={company?.name}
+          defaultOpen={false}
+        />
         <ThesisView thesis={existing} onEdit={() => setViewMode("edit")} />
         <Card className="p-card-padding gap-3">
           <FilesSection thesisSymbol={upper} />
@@ -792,6 +797,7 @@ export function ThesisForm({
       <ResearchHelpers
         symbol={upper}
         thesis={existing}
+        companyName={company?.name}
         defaultOpen={existing === null}
       />
       <div className="flex items-center justify-between gap-3">

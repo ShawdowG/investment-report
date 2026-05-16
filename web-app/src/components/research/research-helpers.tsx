@@ -17,6 +17,12 @@ interface ResearchHelpersProps {
    * disabled until the user saves at least once).
    */
   thesis: Thesis | null;
+  /**
+   * Company name from `CompanyInfo.name` — feeds the Macrotrends slug so the
+   * external link lands on the right per-ticker page instead of bouncing
+   * through Google. Optional; falls back to Google search when absent.
+   */
+  companyName?: string;
   /** Whether the panel renders open on first mount. */
   defaultOpen?: boolean;
 }
@@ -35,6 +41,7 @@ interface ResearchHelpersProps {
 export function ResearchHelpers({
   symbol,
   thesis,
+  companyName,
   defaultOpen = false,
 }: ResearchHelpersProps) {
   const [open, setOpen] = useState(defaultOpen);
@@ -68,7 +75,11 @@ export function ResearchHelpers({
       />
       {open ? (
         <div className="space-y-4">
-          <ExternalLinksSection symbol={upper} thesis={thesis} />
+          <ExternalLinksSection
+            symbol={upper}
+            thesis={thesis}
+            companyName={companyName}
+          />
         </div>
       ) : null}
     </Card>
@@ -84,8 +95,37 @@ interface ExternalLinkSpec {
   href: string;
 }
 
-function buildExternalLinks(symbol: string): ExternalLinkSpec[] {
+/**
+ * Macrotrends per-ticker URLs need a kebab-case company slug (e.g. `apple`
+ * for AAPL). Derive it from the company name we now capture on
+ * `CompanyInfo.name`. Drops legal suffixes ("Inc.", "Corp.", etc.) and
+ * collapses whitespace + punctuation to single hyphens. Returns undefined
+ * when no name is available so we fall back to Google search.
+ */
+function macroTrendsSlug(name: string | undefined): string | undefined {
+  if (!name) return undefined;
+  const stripped = name
+    .toLowerCase()
+    // Drop common legal suffixes so the slug matches Macrotrends's path style.
+    .replace(/\b(inc|incorporated|corp|corporation|company|co|ltd|limited|llc|plc|sa|nv|ag|holdings?)\b\.?/g, "")
+    .replace(/[,.&]/g, " ")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return stripped.length > 0 ? stripped : undefined;
+}
+
+function buildExternalLinks(
+  symbol: string,
+  companyName: string | undefined,
+): ExternalLinkSpec[] {
   const encoded = encodeURIComponent(`${symbol} stock news`);
+  const macroSlug = macroTrendsSlug(companyName);
+  const macroHref = macroSlug
+    ? `https://www.macrotrends.net/stocks/charts/${symbol}/${macroSlug}/financial-statements`
+    : `https://www.google.com/search?q=${encodeURIComponent(`macrotrends ${symbol}`)}`;
   return [
     { label: "Yahoo Finance", href: `https://finance.yahoo.com/quote/${symbol}` },
     {
@@ -96,14 +136,7 @@ function buildExternalLinks(symbol: string): ExternalLinkSpec[] {
       label: "SEC EDGAR 10-K",
       href: `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${symbol}&type=10-K&dateb=&owner=include&count=40`,
     },
-    {
-      // Macrotrends per-ticker URLs require a company-name slug we don't
-      // derive; the /research suffix 404s. Route via Google instead so the
-      // user lands on the right Macrotrends page after one click. SPEC-029
-      // §6 left the slug derivation as a follow-up.
-      label: "Macrotrends",
-      href: `https://www.google.com/search?q=${encodeURIComponent(`macrotrends ${symbol}`)}`,
-    },
+    { label: "Macrotrends", href: macroHref },
     {
       label: "Seeking Alpha",
       href: `https://seekingalpha.com/symbol/${symbol}`,
@@ -123,9 +156,11 @@ function buildExternalLinks(symbol: string): ExternalLinkSpec[] {
 function ExternalLinksSection({
   symbol,
   thesis,
+  companyName,
 }: {
   symbol: string;
   thesis: Thesis | null;
+  companyName?: string;
 }) {
   const [copiedAt, setCopiedAt] = useState<number | null>(null);
   const [copyError, setCopyError] = useState<string | null>(null);
@@ -159,7 +194,7 @@ function ExternalLinksSection({
     }
   }
 
-  const links = buildExternalLinks(symbol);
+  const links = buildExternalLinks(symbol, companyName);
 
   return (
     <div className="space-y-2">

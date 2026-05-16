@@ -46,6 +46,7 @@ export function listCompanySymbols(): string[] {
 interface RawCompany {
   symbol?: unknown;
   generatedAt?: unknown;
+  name?: unknown;
   description?: unknown;
   industry?: unknown;
   sector?: unknown;
@@ -238,6 +239,7 @@ export function loadCompany(symbol: string): CompanyInfo | null {
   return {
     symbol: resolvedSymbol,
     generatedAt,
+    name: asString(raw.name),
     description: asString(raw.description),
     industry: asString(raw.industry),
     sector: asString(raw.sector),

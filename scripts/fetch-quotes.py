@@ -609,9 +609,16 @@ def _build_company_info(symbol, ticker, info, generated_at):
         except (TypeError, ValueError):
             employees_int = None
 
+    # Prefer longName ("Apple Inc."), fall back to shortName ("Apple") since
+    # not every ticker exposes both. Drops the StockOverview header from
+    # "AAPL Overview" to "Apple Inc. Overview" and lets us derive a clean
+    # Macrotrends slug from the name.
+    name = info.get("longName") or info.get("shortName") or None
+
     company = {
         "symbol": symbol,
         "generatedAt": generated_at,
+        "name": name,
         "description": description,
         "industry": info.get("industry") or None,
         "sector": info.get("sector") or None,

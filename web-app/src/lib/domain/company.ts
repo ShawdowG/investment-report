@@ -129,6 +129,8 @@ export interface CompanyInfo {
   symbol: string;
   /** ISO datetime — when the pipeline pulled this snapshot. */
   generatedAt: string;
+  /** Company name from yfinance `longName` (falls back to `shortName`). */
+  name?: string;
   description?: string;
   industry?: string;
   sector?: string;

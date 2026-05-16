@@ -108,6 +108,11 @@ export function StockOverview({
             <h2 className="font-h2 text-h2 text-text-primary font-data-mono">
               {upper}
             </h2>
+            {company?.name ? (
+              <span className="font-body-compact text-body-compact text-text-secondary truncate max-w-[16rem]">
+                {company.name}
+              </span>
+            ) : null}
             {last ? (
               <span className="font-data-mono text-data-mono text-text-primary">
                 {fmtMoney(last.close, currency)}
@@ -438,10 +443,14 @@ function CompanyOverviewSection({
   const sectorIndustry = [company.sector, company.industry]
     .filter((s): s is string => !!s)
     .join(" / ");
+  // Prefer company.name when the pipeline captured it; fall back to the
+  // ticker symbol so the header is still meaningful for fresh tickers
+  // where the cron hasn't ingested `longName` yet.
+  const displayName = company.name ?? symbol;
   const titleText =
     sectorIndustry.length > 0
-      ? `${symbol} Overview — ${sectorIndustry}`
-      : `${symbol} Overview`;
+      ? `${displayName} Overview — ${sectorIndustry}`
+      : `${displayName} Overview`;
 
   return (
     <section className="border-t border-border-subtle pt-4 space-y-2">
