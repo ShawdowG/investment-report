@@ -179,6 +179,132 @@ def _trend_vs_avg(latest, avg, tol_pct):
     return "stable"
 
 
+# yfinance "Action" strings map to our four-state lastChange enum. The "main"
+# action (re-iterating an existing grade) is treated as a reiteration. "init"
+# = first coverage. "up" / "down" = grade changes.
+_RECOMMENDATION_ACTION_MAP = {
+    "up": "upgrade",
+    "down": "downgrade",
+    "init": "init",
+    "main": "reiterate",
+    "reit": "reiterate",
+}
+
+# Lexicographic compare of analyst grades is unreliable ("Sell" > "Buy"
+# alphabetically). Rank them numerically so a higher number == more bullish.
+_GRADE_RANK = {
+    "strong sell": 1,
+    "sell": 2,
+    "underperform": 2,
+    "underweight": 2,
+    "negative": 2,
+    "reduce": 2,
+    "neutral": 3,
+    "hold": 3,
+    "equal-weight": 3,
+    "equal weight": 3,
+    "market perform": 3,
+    "sector perform": 3,
+    "perform": 3,
+    "in-line": 3,
+    "buy": 4,
+    "overweight": 4,
+    "outperform": 4,
+    "positive": 4,
+    "accumulate": 4,
+    "add": 4,
+    "strong buy": 5,
+    "conviction buy": 5,
+}
+
+
+def _classify_grade_change(from_grade, to_grade):
+    """Return 'upgrade' / 'downgrade' / 'reiterate' from two grade strings."""
+    if not to_grade:
+        return None
+    if not from_grade:
+        return "init"
+    fr = _GRADE_RANK.get(str(from_grade).strip().lower())
+    to = _GRADE_RANK.get(str(to_grade).strip().lower())
+    if fr is None or to is None:
+        # Can't rank → fall back to a string compare
+        return "reiterate" if str(from_grade).strip().lower() == str(to_grade).strip().lower() else None
+    if to > fr:
+        return "upgrade"
+    if to < fr:
+        return "downgrade"
+    return "reiterate"
+
+
+def _build_recommendations(ticker):
+    """Compute the recommendations sub-object for SPEC-031 §5.
+
+    Reads ticker.recommendations (a DataFrame of analyst rec history). We
+    report only the most-recent row — its date, the firm, the from/to grade,
+    and a normalised lastChange label. Returns None when no rec data is
+    available (typical for non-US tickers / commodities / indices).
+    """
+    try:
+        recs = ticker.recommendations
+    except Exception:
+        recs = None
+    if recs is None or getattr(recs, "empty", True):
+        return None
+
+    # The DataFrame may be indexed by datetime OR have a "Date" column. Sort
+    # so that .iloc[-1] is the most recent row regardless of source ordering.
+    try:
+        sorted_df = recs.sort_index()
+        latest_row = sorted_df.iloc[-1]
+        latest_index = sorted_df.index[-1]
+    except Exception:
+        return None
+
+    last_changed_at = None
+    if hasattr(latest_index, "strftime"):
+        last_changed_at = latest_index.strftime("%Y-%m-%d")
+    else:
+        s = str(latest_index)
+        if len(s) >= 10:
+            last_changed_at = s[:10]
+
+    def _get(row, *names):
+        for n in names:
+            try:
+                v = row.get(n) if hasattr(row, "get") else row[n]
+            except (KeyError, IndexError):
+                continue
+            if v is None:
+                continue
+            s = str(v).strip()
+            if s and s.lower() != "nan":
+                return s
+        return None
+
+    firm = _get(latest_row, "Firm", "firm")
+    from_grade = _get(latest_row, "From Grade", "FromGrade", "fromGrade")
+    to_grade = _get(latest_row, "To Grade", "ToGrade", "toGrade")
+    action = _get(latest_row, "Action", "action")
+
+    last_change = None
+    if action:
+        last_change = _RECOMMENDATION_ACTION_MAP.get(action.strip().lower())
+    if last_change is None:
+        last_change = _classify_grade_change(from_grade, to_grade)
+
+    out = {
+        "lastChangedAt": last_changed_at,
+        "lastChange": last_change,
+        "lastFirm": firm,
+        "lastFromGrade": from_grade,
+        "lastToGrade": to_grade,
+    }
+    # If literally nothing came back, treat as no data.
+    if not any(v is not None for v in out.values()):
+        return None
+    return out
+
+
 def _build_financials(ticker):
     """Compute the financials sub-object for SPEC-031 §5.
 
@@ -512,6 +638,19 @@ def _build_company_info(symbol, ticker, info, generated_at):
         print(f"[financials] skipping {symbol}: no income statement", file=sys.stderr)
     else:
         company["financials"] = financials
+
+    try:
+        recommendations = _build_recommendations(ticker)
+    except Exception as exc:
+        print(
+            f"[recommendations] {symbol}: build failed ({exc}); skipping",
+            file=sys.stderr,
+        )
+        recommendations = None
+    if recommendations is None:
+        print(f"[recommendations] skipping {symbol}: no rec history", file=sys.stderr)
+    else:
+        company["recommendations"] = recommendations
 
     # Drop top-level None values (keep metrics/analyst/calendar/news containers even if empty)
     keep_empty = {"metrics", "analyst", "calendar", "news", "symbol", "generatedAt", "description"}
