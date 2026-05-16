@@ -7,6 +7,7 @@ import { ThesisLiveHeader } from "@/components/research/thesis-live-header";
 import { loadAllQuoteSnapshots } from "@/lib/quotes/snapshots";
 import { loadCompactDaily } from "@/lib/quotes/compact-daily";
 import { listQuoteSymbols } from "@/lib/quotes/load-quote";
+import { loadCompany } from "@/lib/company/load-company";
 
 interface PageProps {
   params: Promise<{ symbol: string }>;
@@ -29,6 +30,11 @@ export default async function ThesisPage({ params }: PageProps) {
   const compactDaily = loadCompactDaily();
   const snapshot = snapshots[symbol];
   const bars = compactDaily[symbol] ?? [];
+  // SPEC-029 W13.B — `data/company/SYMBOL.json` may be missing (Python
+  // pipeline hasn't run yet, or the symbol is a macro index). `loadCompany`
+  // returns null in that case and the helpers panel falls back to the
+  // external-links-only view.
+  const company = loadCompany(symbol);
 
   return (
     <AppShell>
@@ -50,7 +56,7 @@ export default async function ThesisPage({ params }: PageProps) {
             W8.B-L.
           </p>
         </header>
-        <ThesisForm symbol={symbol} snapshots={snapshots} />
+        <ThesisForm symbol={symbol} snapshots={snapshots} company={company} />
       </div>
     </AppShell>
   );

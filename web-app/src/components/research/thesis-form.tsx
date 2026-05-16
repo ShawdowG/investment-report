@@ -53,11 +53,19 @@ import { cn } from "@/lib/utils";
 import { QuarterlyReviewForm } from "./quarterly-review-form";
 import { QuarterlyReviewTimeline } from "./quarterly-review-timeline";
 import { FilesSection } from "./files-section";
+import { ResearchHelpers } from "./research-helpers";
 import { buildChatGPTPrompt } from "@/lib/research/thesis-markdown";
+import type { CompanyInfo } from "@/lib/domain/company";
 
 interface ThesisFormProps {
   symbol: string;
   snapshots: QuoteSnapshotMap;
+  /**
+   * SPEC-029 — company info loaded server-side at build time. Null when no
+   * `data/company/SYMBOL.json` exists; the helpers panel falls back to its
+   * external-links-only view.
+   */
+  company: CompanyInfo | null;
 }
 
 type Mode = "quick" | "deep" | "guided";
@@ -188,7 +196,7 @@ function buildTradeLevels(form: FormState): TradeLevel[] {
   return out;
 }
 
-export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
+export function ThesisForm({ symbol, snapshots, company }: ThesisFormProps) {
   const upper = symbol.toUpperCase();
   const snapshot = snapshots[upper];
 
@@ -668,6 +676,14 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   if (viewMode === "view" && existing) {
     return (
       <div className="space-y-4">
+        <ResearchHelpers
+          company={company}
+          symbol={upper}
+          thesis={existing}
+          currentPrice={snapshot?.lastClose}
+          currency={snapshot?.currency}
+          defaultOpen={false}
+        />
         <ThesisView thesis={existing} onEdit={() => setViewMode("edit")} />
         <Card className="p-card-padding gap-3">
           <FilesSection thesisSymbol={upper} />
@@ -719,6 +735,14 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <ResearchHelpers
+        company={company}
+        symbol={upper}
+        thesis={existing}
+        currentPrice={snapshot?.lastClose}
+        currency={snapshot?.currency}
+        defaultOpen={existing === null}
+      />
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="font-label-caps text-label-caps uppercase text-text-secondary">
