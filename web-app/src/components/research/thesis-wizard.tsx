@@ -20,6 +20,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { SectionHeader, Tag } from "@/components/ui/stitch";
 import { cn } from "@/lib/utils";
 import type { Thesis } from "@/lib/domain/thesis";
@@ -47,12 +48,14 @@ export function ThesisWizard({
   onSkipToDeepDive,
 }: ThesisWizardProps) {
   // SPEC-028 W12.C — start on the first incomplete step so the user picks up
-  // where they left off. W12.D layers the resume banner + restart confirmation.
+  // where they left off. W12.D layers the resume banner + restart confirmation
+  // when that initial step is past Setup (i.e. resumedAtIdx > 0).
   const initialStepId = useMemo(() => findResumeStep(thesis), []);
   const initialIdx = WIZARD_STEPS.findIndex((s) => s.id === initialStepId);
   const [currentIdx, setCurrentIdx] = useState<number>(
     initialIdx >= 0 ? initialIdx : 0,
   );
+  const [restartOpen, setRestartOpen] = useState(false);
 
   const step = WIZARD_STEPS[currentIdx];
   const totalSteps = WIZARD_STEPS.length;
@@ -60,6 +63,13 @@ export function ThesisWizard({
   const completedCount = completed.filter(Boolean).length;
   const isLast = currentIdx === totalSteps - 1;
   const isFirst = currentIdx === 0;
+  // Banner only visible while the user is still parked on the auto-resumed
+  // step — once they navigate, the banner disappears (the cursor speaks for
+  // itself from then on).
+  const resumedAtIdx = initialIdx > 0 ? initialIdx : -1;
+  const resumedStep =
+    resumedAtIdx >= 0 ? WIZARD_STEPS[resumedAtIdx] : null;
+  const showResumeBanner = resumedStep !== null && currentIdx === resumedAtIdx;
 
   function goPrev() {
     if (currentIdx > 0) setCurrentIdx(currentIdx - 1);
@@ -86,6 +96,15 @@ export function ThesisWizard({
           onJump={(idx) => setCurrentIdx(idx)}
         />
       </div>
+
+      {showResumeBanner && resumedStep ? (
+        <ResumeBanner
+          stepNumber={resumedAtIdx + 1}
+          totalSteps={totalSteps}
+          stepTitle={resumedStep.title}
+          onRestart={() => setRestartOpen(true)}
+        />
+      ) : null}
 
       <div className="space-y-2">
         <Tag>Framework {step.frameworkSection}</Tag>
@@ -137,6 +156,18 @@ export function ThesisWizard({
         </div>
       </div>
 
+      <ConfirmDialog
+        open={restartOpen}
+        title="Jump back to step 1?"
+        description="Your filled fields aren't lost — just the wizard cursor moves to the Setup step."
+        confirmLabel="Jump back"
+        cancelLabel="Cancel"
+        onConfirm={() => {
+          setCurrentIdx(0);
+          setRestartOpen(false);
+        }}
+        onCancel={() => setRestartOpen(false)}
+      />
     </Card>
   );
 }
@@ -173,6 +204,40 @@ function WizardProgressBar({
           />
         );
       })}
+    </div>
+  );
+}
+
+/**
+ * SPEC-028 W12.D — pointer to the auto-resumed step with a "Restart from
+ * step 1" escape hatch. The actual reset goes through a ConfirmDialog so
+ * the user has a beat to decide; the dialog body is explicit that fields
+ * are not wiped.
+ */
+function ResumeBanner({
+  stepNumber,
+  totalSteps,
+  stepTitle,
+  onRestart,
+}: {
+  stepNumber: number;
+  totalSteps: number;
+  stepTitle: string;
+  onRestart: () => void;
+}) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-border-subtle bg-surface px-3 py-2">
+      <p className="font-body-compact text-body-compact text-text-secondary">
+        Resuming at step {stepNumber} of {totalSteps} —{" "}
+        <span className="text-text-primary">{stepTitle}</span>.
+      </p>
+      <button
+        type="button"
+        onClick={onRestart}
+        className="rounded font-body-compact text-body-compact text-text-secondary underline-offset-2 hover:underline hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
+      >
+        Restart from step 1
+      </button>
     </div>
   );
 }
