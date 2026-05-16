@@ -8,7 +8,7 @@ import { SectionHeader } from "@/components/ui/stitch";
 import type { CompanyInfo } from "@/lib/domain/company";
 import type { Thesis } from "@/lib/domain/thesis";
 import { buildChatGPTPrompt } from "@/lib/research/thesis-markdown";
-import { fmtDate, fmtMoney, fmtPct } from "@/lib/utils/format";
+import { fmtDate, fmtMoney, fmtPct, formatRelativeTime } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
 
 interface ResearchHelpersProps {
@@ -93,6 +93,9 @@ export function ResearchHelpers({
             </p>
           )}
           <ExternalLinksSection symbol={upper} thesis={thesis} />
+          {company && company.news.length > 0 ? (
+            <RecentNewsSection news={company.news} />
+          ) : null}
         </div>
       ) : null}
     </Card>
@@ -555,6 +558,48 @@ function ExternalLinksSection({
           {copyError}
         </p>
       ) : null}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Recent news sub-section (W13.E)
+// ---------------------------------------------------------------------------
+
+function RecentNewsSection({
+  news,
+}: {
+  news: CompanyInfo["news"];
+}) {
+  // Cap at the top 5 headlines per the spec; yfinance occasionally returns
+  // more than that, and the panel shouldn't grow unboundedly.
+  const items = news.slice(0, 5);
+  if (items.length === 0) return null;
+
+  return (
+    <div className="space-y-2">
+      <div className="font-label-caps text-label-caps uppercase text-text-secondary">
+        Recent news
+      </div>
+      <ul className="space-y-1">
+        {items.map((item) => (
+          <li key={item.url}>
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-baseline justify-between gap-3 rounded-md border border-transparent px-2 py-1 transition-colors hover:border-border-subtle hover:bg-surface-variant"
+            >
+              <span className="min-w-0 flex-1 truncate font-body-compact text-body-compact text-text-primary group-hover:underline">
+                {item.title}
+              </span>
+              <span className="shrink-0 font-label-caps text-label-caps uppercase text-text-secondary">
+                {item.publisher} · {formatRelativeTime(item.publishedAt)}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
