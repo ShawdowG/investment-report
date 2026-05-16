@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -42,6 +42,7 @@ import { ThesisChecklists } from "@/components/research/thesis-checklists";
 import { ThesisNotes } from "@/components/research/thesis-notes";
 import { ThesisView } from "@/components/research/thesis-view";
 import { ThesisImportPanel } from "@/components/research/thesis-import-panel";
+import { ThesisWizard } from "@/components/research/thesis-wizard";
 import { buildPrefill, type ThesisPrefill } from "@/lib/research/thesis-prefill";
 import { calcAllAddsTriggered } from "@/lib/research/position-calculator";
 import { fmtMoney, fmtPct } from "@/lib/utils/format";
@@ -228,6 +229,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
   // SPEC-023 W8.G — Copy-to-ChatGPT pulse.
   const [copiedAt, setCopiedAt] = useState<number | null>(null);
+  // SPEC-028 W12.C — let the wizard trigger the existing form submit pipeline
+  // (Save & exit / Finish) without duplicating the save logic.
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   // Initial hydration from localStorage + cross-store prefill.
   useEffect(() => {
@@ -438,6 +442,56 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
     if (error) setError(null);
+  }
+
+  /**
+   * SPEC-028 W12.C — apply a full Thesis snapshot back into the form state.
+   * The wizard owns its working copy via `liveThesis`; whenever a step's
+   * editor mutates a field, it ships the whole Thesis through this handler
+   * which fans it back out to the granular `useState` hooks that drive the
+   * Quick + Deep panels. Keeps everything in sync regardless of which mode
+   * is currently rendering.
+   */
+  function applyWizardThesis(next: Thesis) {
+    // Thesis points + the raw textarea representation used by the Quick form.
+    setForm((f) => ({
+      ...f,
+      thesisPointsRaw: next.thesisPoints.join("\n"),
+      plannedAction: next.plannedAction ?? "",
+      maxPositionSize:
+        next.maxPositionSize !== undefined ? String(next.maxPositionSize) : "",
+      add1:
+        next.tradeLevels.find((l) => l.kind === "add" && l.level === 1)?.price?.toString() ??
+        "",
+      add2:
+        next.tradeLevels.find((l) => l.kind === "add" && l.level === 2)?.price?.toString() ??
+        "",
+      add3:
+        next.tradeLevels.find((l) => l.kind === "add" && l.level === 3)?.price?.toString() ??
+        "",
+    }));
+    setConcerns(next.concerns);
+    setQuestionsRaw(next.questions.join("\n"));
+    setClassifiedPoints(next.classifiedPoints);
+    setFundamentals(next.fundamentals);
+    setMarketPosition(next.marketPosition);
+    setCoreDriversRaw(next.coreDrivers.join("\n"));
+    setOptionalDriversRaw(next.optionalDrivers.join("\n"));
+    setValuation(next.valuation);
+    setScenarios(next.scenarios);
+    setLight(next.currentLight);
+    setGreenChecks(next.greenChecks);
+    setYellowChecks(next.yellowChecks);
+    setRedChecks(next.redChecks);
+    setTrimSellChecks(next.trimSellChecks);
+    setNotes(next.notes);
+    setAnalysisNotes(next.analysisNotes ?? "");
+    if (error) setError(null);
+  }
+
+  /** Trigger the existing submit pipeline programmatically (Save & exit / Finish). */
+  function handleWizardSave() {
+    formRef.current?.requestSubmit();
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -664,7 +718,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           : "text-text-secondary";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="font-label-caps text-label-caps uppercase text-text-secondary">
@@ -710,6 +764,15 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           </span>
         ) : null}
       </div>
+
+      {mode === "guided" ? (
+        <ThesisWizard
+          thesis={liveThesis}
+          onChange={applyWizardThesis}
+          onSave={handleWizardSave}
+          onSkipToDeepDive={() => setMode("deep")}
+        />
+      ) : null}
 
       {mode === "deep" ? (
         <Card className="p-card-padding gap-3">
@@ -970,6 +1033,7 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
         </Card>
       ) : null}
 
+      {mode !== "guided" ? (
       <Card className="p-card-padding gap-4">
         <SectionHeader title="Ticker" />
         <div className="font-data-mono text-h2 text-text-primary">{upper}</div>
@@ -983,7 +1047,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           </p>
         )}
       </Card>
+      ) : null}
 
+      {mode !== "guided" ? (
+      <>
       <Card className="p-card-padding gap-3">
         <SectionHeader
           title="My thesis"
@@ -1104,6 +1171,8 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       <Card className="p-card-padding gap-3">
         <FilesSection thesisSymbol={upper} />
       </Card>
+      </>
+      ) : null}
 
       {error ? (
         <p role="alert" className="font-body-compact text-body-compact text-regime-risk-off">
