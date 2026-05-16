@@ -1,0 +1,62 @@
+{
+  "symbol": "AAPL",
+  "generatedAt": "2026-05-16T13:14:45.534748+00:00",
+  "name": "Apple Inc.",
+  "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple Vision Pro, Apple TV, Apple Watch, Beats products, and HomePod, as well as Apple branded and third-party accessories. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV, which offers exclusive original content and live sports; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The c...",
+  "industry": "Consumer Electronics",
+  "sector": "Technology",
+  "country": "United States",
+  "website": "https://www.apple.com",
+  "employees": 166000,
+  "city": "Cupertino",
+  "state": "CA",
+  "metrics": {
+    "trailingPE": 36.347458,
+    "forwardPE": 31.31931,
+    "priceToBook": 41.353996,
+    "enterpriseToEbitda": 27.665,
+    "dividendYield": 0.36,
+    "payoutRatio": 0.1259,
+    "profitMargins": 0.27152002,
+    "operatingMargins": 0.32275,
+    "returnOnAssets": 0.26229,
+    "returnOnEquity": 1.4147099,
+    "beta": 1.065,
+    "trailingEps": 8.26,
+    "exDividendDate": "2026-05-11"
+  },
+  "analyst": {
+    "recommendationMean": 1.95833,
+    "targetMeanPrice": 308.06512
+  },
+  "calendar": {
+    "earningsDate": "2026-07-30",
+    "lastFiscalYearEnd": "2025-09-27"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 416161000000.0,
+      "latestAnnualDate": "2025-09-30",
+      "yoyPct": 6.425511782832739,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.31970799762591884,
+      "fiveYearHigh": 0.31970799762591884,
+      "fiveYearLow": 0.2982141226502472,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 98767000000.0,
+      "fiveYearAvg": 104650250000.0,
+      "trend": "compressing"
+    },
+    "balanceSheet": {
+      "totalDebt": 98657000000.0,
+      "totalCash": 35934000000.0,
+      "netCash": -62723000000.0,
+      "currentRatio": 0.8932929222186667
+    }
+  }
+}

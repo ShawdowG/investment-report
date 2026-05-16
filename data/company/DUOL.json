@@ -1,0 +1,60 @@
+{
+  "symbol": "DUOL",
+  "generatedAt": "2026-05-16T13:14:45.534748+00:00",
+  "name": "Duolingo, Inc.",
+  "description": "Duolingo, Inc. operates as a mobile learning platform in the United States, the United Kingdom, and internationally. The company offers 250 language courses, including Spanish, English, French, German, Italian, Portuguese, Japanese, and Chinese through its Duolingo app. It also provides a digital English language proficiency assessment exam. The company was incorporated in 2011 and is headquartered in Pittsburgh, Pennsylvania.",
+  "industry": "Software - Application",
+  "sector": "Technology",
+  "country": "United States",
+  "website": "https://www.duolingo.com",
+  "employees": 900,
+  "city": "Pittsburgh",
+  "state": "PA",
+  "metrics": {
+    "trailingPE": 12.82151,
+    "forwardPE": 14.134587,
+    "priceToBook": 3.771667,
+    "enterpriseToEbitda": 22.894,
+    "payoutRatio": 0.0,
+    "profitMargins": 0.38441002,
+    "operatingMargins": 0.15369001,
+    "returnOnAssets": 0.05866,
+    "returnOnEquity": 0.36960998,
+    "beta": 0.9,
+    "trailingEps": 8.74
+  },
+  "analyst": {
+    "recommendationMean": 2.82609,
+    "targetMeanPrice": 104.25412
+  },
+  "calendar": {
+    "earningsDate": "2026-05-04",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 1037589000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 38.710656342577245,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.13065867120796384,
+      "fiveYearHigh": 0.13065867120796384,
+      "fiveYearLow": -0.1764435242696112,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 360424000.0,
+      "fiveYearAvg": 202064750.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 93779000.0,
+      "totalCash": 1036389000.0,
+      "netCash": 942610000.0,
+      "currentRatio": 2.6065702860211775
+    }
+  }
+}

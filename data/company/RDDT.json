@@ -1,0 +1,60 @@
+{
+  "symbol": "RDDT",
+  "generatedAt": "2026-05-16T13:14:45.534748+00:00",
+  "name": "Reddit, Inc.",
+  "description": "Reddit, Inc. operates a digital community in the United States and internationally. The company's platform enables user to engage in conversations, explore passions, research new hobbies, exchange goods and services, create new communities and experiences, share laughs, and find belonging. It also organizes communities based on specific interests that enable users to engage in conversations by sharing experiences, submitting links, uploading images and videos, and replying to one another. Reddit, Inc. was founded in 2005 and is headquartered in San Francisco, California.",
+  "industry": "Internet Content & Information",
+  "sector": "Communication Services",
+  "country": "United States",
+  "website": "https://redditinc.com",
+  "employees": 2555,
+  "city": "San Francisco",
+  "state": "CA",
+  "metrics": {
+    "trailingPE": 45.19143,
+    "forwardPE": 17.909895,
+    "priceToBook": 9.570979,
+    "enterpriseToEbitda": 43.472,
+    "payoutRatio": 0.0,
+    "profitMargins": 0.28604,
+    "operatingMargins": 0.27571,
+    "returnOnAssets": 0.13109,
+    "returnOnEquity": 0.26221,
+    "beta": 1.851,
+    "trailingEps": 3.5
+  },
+  "analyst": {
+    "recommendationMean": 1.9375,
+    "targetMeanPrice": 224.91936
+  },
+  "calendar": {
+    "earningsDate": "2026-07-30",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 2202506000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 69.39682588514889,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.20067323312626617,
+      "fiveYearHigh": 0.20067323312626617,
+      "fiveYearLow": -0.43113816667371685,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 684169000.0,
+      "fiveYearAvg": 178724250.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 23214000.0,
+      "totalCash": 953569000.0,
+      "netCash": 930355000.0,
+      "currentRatio": 11.559828666005611
+    }
+  }
+}

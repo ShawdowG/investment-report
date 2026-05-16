@@ -1,0 +1,60 @@
+{
+  "symbol": "NFLX",
+  "generatedAt": "2026-05-16T13:14:45.534748+00:00",
+  "name": "Netflix, Inc.",
+  "description": "Netflix, Inc. provides entertainment services worldwide. The company offers television (TV) series, documentaries, feature films, games, and live programming across various genres and languages. It also provides members the ability to receive streaming content through a host of internet-connected devices, including TVs, digital video players, TV set-top boxes, and mobile devices. Netflix, Inc. was incorporated in 1997 and is headquartered in Los Gatos, California.",
+  "industry": "Entertainment",
+  "sector": "Communication Services",
+  "country": "United States",
+  "website": "https://www.netflix.com",
+  "employees": 16000,
+  "city": "Los Gatos",
+  "state": "CA",
+  "metrics": {
+    "trailingPE": 28.070967,
+    "forwardPE": 22.653965,
+    "priceToBook": 11.776965,
+    "enterpriseToEbitda": 25.969,
+    "payoutRatio": 0.0,
+    "profitMargins": 0.28521,
+    "operatingMargins": 0.32303002,
+    "returnOnAssets": 0.15402001,
+    "returnOnEquity": 0.48494998,
+    "beta": 1.548,
+    "trailingEps": 3.1
+  },
+  "analyst": {
+    "recommendationMean": 1.68,
+    "targetMeanPrice": 114.555
+  },
+  "calendar": {
+    "earningsDate": "2026-07-16",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 45183036000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 15.851068919677527,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.29494704605507255,
+      "fiveYearHigh": 0.29494704605507255,
+      "fiveYearLow": 0.17816647187855345,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 9461053000.0,
+      "fiveYearAvg": 6231789000.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 14462836000.0,
+      "totalCash": 9033681000.0,
+      "netCash": -5429155000.0,
+      "currentRatio": 1.185709316059751
+    }
+  }
+}
