@@ -285,6 +285,15 @@ function coerceThesis(raw: unknown): Thesis | null {
   } else {
     delete next.analysisNotes;
   }
+  if (
+    candidate.lastEditMode === "quick" ||
+    candidate.lastEditMode === "deep" ||
+    candidate.lastEditMode === "guided"
+  ) {
+    next.lastEditMode = candidate.lastEditMode;
+  } else {
+    delete next.lastEditMode;
+  }
   // Touch SCENARIO_KINDS to keep the import live (used implicitly by coerceScenarios).
   void SCENARIO_KINDS;
   return next;

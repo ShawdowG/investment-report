@@ -59,7 +59,7 @@ interface ThesisFormProps {
   snapshots: QuoteSnapshotMap;
 }
 
-type Mode = "quick" | "deep";
+type Mode = "quick" | "deep" | "guided";
 type ViewMode = "view" | "edit";
 
 const STORAGE_ERROR_MESSAGE =
@@ -211,7 +211,10 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
   const [concerns, setConcerns] = useState<Concerns>({});
   const [questionsRaw, setQuestionsRaw] = useState<string>("");
   const [analysisNotes, setAnalysisNotes] = useState<string>("");
-  const [mode, setMode] = useState<Mode>("quick");
+  // SPEC-028 W12.B — default to Guided for new theses; saved theses honour
+  // their persisted `lastEditMode`. Updated on mount once the thesis (or lack
+  // thereof) has been loaded from localStorage.
+  const [mode, setMode] = useState<Mode>("guided");
   // SPEC-023 W8.K — once a thesis has been saved (i.e. `getThesis(symbol)`
   // returned a record on mount) the user lands on a clean read-only view and
   // must opt into editing. Brand-new theses (no stored record) jump straight
@@ -248,6 +251,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setConcerns(stored.concerns);
       setQuestionsRaw(stored.questions.join("\n"));
       setAnalysisNotes(stored.analysisNotes ?? "");
+      // SPEC-028 W12.B — saved thesis defaults to its last-used mode, falling
+      // back to "quick" if the field predates the wizard.
+      setMode(stored.lastEditMode ?? "quick");
       // Existing thesis → default to clean read mode; user clicks "Edit" to
       // re-enter the form. Detected purely by getThesis() returning a record.
       setViewMode("view");
@@ -271,6 +277,8 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
       setConcerns({});
       setQuestionsRaw("");
       setAnalysisNotes("");
+      // SPEC-028 W12.B — brand-new thesis defaults to Guided per spec §6.
+      setMode("guided");
       // No stored thesis → start in edit mode so the first-save flow is direct.
       setViewMode("edit");
     }
@@ -502,6 +510,9 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
     else delete next.plannedAction;
     if (trimmedAnalysisNotes) next.analysisNotes = analysisNotes;
     else delete next.analysisNotes;
+    // SPEC-028 W12.B — persist whichever mode produced this save so we resume
+    // in the same shape next time.
+    next.lastEditMode = mode;
 
     // First-save: capture the prefill values that no longer have a home in the
     // quick-start form (price-at-creation, avgEntry/positionSize from portfolio).
@@ -659,30 +670,27 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
           <span className="font-label-caps text-label-caps uppercase text-text-secondary">
             Mode
           </span>
-          <button
-            type="button"
-            onClick={() => setMode("quick")}
-            className={cn(
-              "rounded-md px-2 py-1 font-body-compact text-body-compact",
-              mode === "quick"
-                ? "bg-surface-variant text-text-primary"
-                : "text-text-secondary hover:text-text-primary",
-            )}
+          <div
+            role="tablist"
+            aria-label="Thesis editing mode"
+            className="inline-flex items-center rounded-md border border-border-subtle bg-surface p-0.5"
           >
-            Quick start
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode("deep")}
-            className={cn(
-              "rounded-md px-2 py-1 font-body-compact text-body-compact",
-              mode === "deep"
-                ? "bg-surface-variant text-text-primary"
-                : "text-text-secondary hover:text-text-primary",
-            )}
-          >
-            Deep dive →
-          </button>
+            <ModePill
+              active={mode === "quick"}
+              onClick={() => setMode("quick")}
+              label="Quick"
+            />
+            <ModePill
+              active={mode === "deep"}
+              onClick={() => setMode("deep")}
+              label="Deep dive"
+            />
+            <ModePill
+              active={mode === "guided"}
+              onClick={() => setMode("guided")}
+              label="Guided →"
+            />
+          </div>
         </div>
         {copiedAt !== null ? (
           <span
@@ -1183,6 +1191,39 @@ export function ThesisForm({ symbol, snapshots }: ThesisFormProps) {
         onCancel={() => setConfirmDelete(false)}
       />
     </form>
+  );
+}
+
+/**
+ * SPEC-028 W12.B — single pill in the 3-mode toggle bar (Quick · Deep · Guided).
+ * Active pill uses the on-primary container tokens; inactive pills are muted
+ * with a hover bump to feel clickable without competing with the active state.
+ */
+function ModePill({
+  active,
+  onClick,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={cn(
+        "rounded-md px-2.5 py-1 font-body-compact text-body-compact transition-colors",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+        active
+          ? "bg-primary-container text-on-primary-container"
+          : "text-text-secondary hover:bg-surface-variant hover:text-text-primary",
+      )}
+    >
+      {label}
+    </button>
   );
 }
 

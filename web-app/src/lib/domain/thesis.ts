@@ -151,6 +151,13 @@ export interface Thesis {
 
   // Attached notes — multiple markdown notes (ChatGPT responses, scratch, transcripts).
   notes: ResearchNote[];
+
+  /**
+   * SPEC-028 W12.B — tracks the form mode the user last picked so re-entry
+   * defaults are sane. New theses default to "guided"; saved theses default
+   * to whichever mode was last persisted.
+   */
+  lastEditMode?: "quick" | "deep" | "guided";
 }
 
 /** Build the canonical 5-row scenario stub (one per kind, in framework order). */
