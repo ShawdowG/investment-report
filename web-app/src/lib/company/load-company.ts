@@ -79,6 +79,10 @@ function coerceMetrics(raw: unknown): CompanyMetrics {
     operatingMargins: asNumber(obj.operatingMargins),
     returnOnAssets: asNumber(obj.returnOnAssets),
     returnOnEquity: asNumber(obj.returnOnEquity),
+    // SPEC-030 W14.B — extra Yahoo-style overview stats.
+    beta: asNumber(obj.beta),
+    trailingEps: asNumber(obj.trailingEps),
+    exDividendDate: asString(obj.exDividendDate),
   };
 }
 

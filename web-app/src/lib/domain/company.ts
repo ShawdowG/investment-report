@@ -20,6 +20,18 @@ export interface CompanyMetrics {
   operatingMargins?: number;
   returnOnAssets?: number;
   returnOnEquity?: number;
+  /**
+   * SPEC-030 W14.B — extra Yahoo-style overview stats surfaced by the
+   * Stock Overview card alongside the existing valuation rows. All three
+   * remain optional so existing tickers (and macro indices) continue to
+   * parse cleanly without these fields.
+   */
+  /** 5Y monthly beta (yfinance `info.beta`). */
+  beta?: number;
+  /** Trailing twelve-month EPS (yfinance `info.trailingEps`). */
+  trailingEps?: number;
+  /** ISO date — last ex-dividend date (yfinance `info.exDividendDate`). */
+  exDividendDate?: string;
 }
 
 export interface CompanyAnalyst {
