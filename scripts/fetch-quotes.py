@@ -101,6 +101,218 @@ def _build_daily(history):
 DESCRIPTION_MAX_CHARS = 1500
 NEWS_LIMIT = 5
 
+# Bands used to label the multi-year trajectory of operating margin / FCF.
+# Numbers below were chosen to be tight enough that a steady business reads as
+# "stable" but a clear regime change (e.g. AAPL services mix → margin lift)
+# reads as "expanding".
+TREND_MARGIN_TOL = 0.01      # 1 percentage point band around 5y high/low
+TREND_FCF_TOL_PCT = 0.05     # ±5% band around 5y average for FCF
+
+
+def _row_value(df, candidates, col_index=0):
+    """Return df.loc[name].iloc[col_index] for the first matching row name.
+
+    yfinance row names vary by symbol (e.g. "Total Revenue" vs "TotalRevenue"),
+    so we look up a list of candidates and return the first hit as a float.
+    """
+    if df is None or getattr(df, "empty", True):
+        return None
+    try:
+        index_labels = list(df.index)
+    except Exception:
+        return None
+    for name in candidates:
+        if name in index_labels:
+            try:
+                series = df.loc[name]
+                if col_index >= len(series):
+                    continue
+                return _safe_number(series.iloc[col_index])
+            except Exception:
+                continue
+    return None
+
+
+def _row_series(df, candidates):
+    """Return (column_dates, [floats]) for the first matching row in df.
+
+    Columns are returned newest-first (yfinance default ordering).
+    """
+    if df is None or getattr(df, "empty", True):
+        return None, []
+    try:
+        index_labels = list(df.index)
+    except Exception:
+        return None, []
+    for name in candidates:
+        if name in index_labels:
+            try:
+                series = df.loc[name]
+                values = [_safe_number(v) for v in series.tolist()]
+                cols = list(series.index)
+                return cols, values
+            except Exception:
+                continue
+    return None, []
+
+
+def _trend_label(latest, low, high, tol):
+    """Classify latest vs the 5y band as expanding / stable / compressing."""
+    if latest is None or low is None or high is None:
+        return None
+    if latest > high - tol:
+        return "expanding"
+    if latest < low + tol:
+        return "compressing"
+    return "stable"
+
+
+def _trend_vs_avg(latest, avg, tol_pct):
+    """Classify latest vs a 5y average using a percentage tolerance band."""
+    if latest is None or avg is None or avg == 0:
+        return None
+    delta_pct = (latest - avg) / abs(avg)
+    if delta_pct > tol_pct:
+        return "expanding"
+    if delta_pct < -tol_pct:
+        return "compressing"
+    return "stable"
+
+
+def _build_financials(ticker):
+    """Compute the financials sub-object for SPEC-031 §5.
+
+    Reads income_stmt / cashflow / balance_sheet from yfinance. Returns None
+    when no income statement is available (typical for ETFs / indices /
+    macros like ^GSPC). All inner fields are optional — missing rows produce
+    None rather than failing the whole block.
+    """
+    try:
+        income = ticker.income_stmt
+    except Exception:
+        income = None
+    if income is None or getattr(income, "empty", True):
+        return None
+
+    try:
+        cashflow = ticker.cashflow
+    except Exception:
+        cashflow = None
+    try:
+        balance = ticker.balance_sheet
+    except Exception:
+        balance = None
+
+    # --- Revenue ---
+    rev_cols, rev_values = _row_series(income, ["Total Revenue", "TotalRevenue"])
+    latest_annual = rev_values[0] if rev_values else None
+    latest_annual_date = None
+    if rev_cols:
+        first_col = rev_cols[0]
+        if hasattr(first_col, "strftime"):
+            latest_annual_date = first_col.strftime("%Y-%m-%d")
+        else:
+            latest_annual_date = str(first_col)[:10]
+    yoy_pct = None
+    if len(rev_values) >= 2 and rev_values[0] is not None and rev_values[1] not in (None, 0):
+        yoy_pct = (rev_values[0] - rev_values[1]) / rev_values[1] * 100.0
+    cagr5y = None
+    if len(rev_values) >= 6 and rev_values[0] is not None and rev_values[5] not in (None, 0):
+        try:
+            cagr5y = ((rev_values[0] / rev_values[5]) ** (1.0 / 5.0) - 1.0) * 100.0
+        except (ValueError, ZeroDivisionError):
+            cagr5y = None
+
+    # --- Operating margin (per-year op income / total revenue) ---
+    _, op_income_values = _row_series(income, ["Operating Income", "OperatingIncome"])
+    margins = []
+    if rev_values and op_income_values:
+        for op, rev in zip(op_income_values, rev_values):
+            if op is None or rev in (None, 0):
+                margins.append(None)
+            else:
+                margins.append(op / rev)
+    margin_latest = margins[0] if margins else None
+    margin_window = [m for m in margins[:5] if m is not None]
+    margin_high = max(margin_window) if margin_window else None
+    margin_low = min(margin_window) if margin_window else None
+    margin_trend = _trend_label(margin_latest, margin_low, margin_high, TREND_MARGIN_TOL)
+
+    # --- Free cash flow (prefer explicit row; fall back to OCF - CapEx) ---
+    _, fcf_values = _row_series(cashflow, ["Free Cash Flow", "FreeCashFlow"])
+    if not fcf_values:
+        _, ocf_values = _row_series(cashflow, ["Operating Cash Flow", "OperatingCashFlow"])
+        _, capex_values = _row_series(
+            cashflow, ["Capital Expenditure", "CapitalExpenditure", "Capital Expenditures"]
+        )
+        if ocf_values and capex_values:
+            fcf_values = []
+            for ocf, capex in zip(ocf_values, capex_values):
+                if ocf is None:
+                    fcf_values.append(None)
+                else:
+                    capex_abs = abs(capex) if capex is not None else 0
+                    fcf_values.append(ocf - capex_abs)
+    fcf_latest = fcf_values[0] if fcf_values else None
+    fcf_window = [v for v in fcf_values[:5] if v is not None]
+    fcf_avg = sum(fcf_window) / len(fcf_window) if fcf_window else None
+    fcf_trend = _trend_vs_avg(fcf_latest, fcf_avg, TREND_FCF_TOL_PCT)
+
+    # --- Balance sheet ---
+    total_debt = _row_value(balance, ["Total Debt", "TotalDebt"])
+    if total_debt is None:
+        long_term = _row_value(balance, ["Long Term Debt", "LongTermDebt"])
+        current_debt = _row_value(balance, ["Current Debt", "CurrentDebt"])
+        if long_term is not None or current_debt is not None:
+            total_debt = (long_term or 0) + (current_debt or 0)
+
+    total_cash = _row_value(
+        balance, ["Cash And Short Term Investments", "CashAndShortTermInvestments"]
+    )
+    if total_cash is None:
+        cash_only = _row_value(
+            balance, ["Cash And Cash Equivalents", "CashAndCashEquivalents"]
+        )
+        sti = _row_value(balance, ["Short Term Investments", "ShortTermInvestments"])
+        if cash_only is not None or sti is not None:
+            total_cash = (cash_only or 0) + (sti or 0)
+
+    net_cash = None
+    if total_cash is not None and total_debt is not None:
+        net_cash = total_cash - total_debt
+
+    current_assets = _row_value(balance, ["Current Assets", "CurrentAssets"])
+    current_liab = _row_value(balance, ["Current Liabilities", "CurrentLiabilities"])
+    current_ratio = None
+    if current_assets is not None and current_liab not in (None, 0):
+        current_ratio = current_assets / current_liab
+
+    return {
+        "revenue": {
+            "latestAnnual": _safe_number(latest_annual),
+            "latestAnnualDate": latest_annual_date,
+            "yoyPct": _safe_number(yoy_pct),
+            "cagr5y": _safe_number(cagr5y),
+        },
+        "operatingMargin": {
+            "latest": _safe_number(margin_latest),
+            "fiveYearHigh": _safe_number(margin_high),
+            "fiveYearLow": _safe_number(margin_low),
+            "trend": margin_trend,
+        },
+        "freeCashFlow": {
+            "latestAnnual": _safe_number(fcf_latest),
+            "fiveYearAvg": _safe_number(fcf_avg),
+            "trend": fcf_trend,
+        },
+        "balanceSheet": {
+            "totalDebt": _safe_number(total_debt),
+            "totalCash": _safe_number(total_cash),
+            "netCash": _safe_number(net_cash),
+            "currentRatio": _safe_number(current_ratio),
+        },
+    }
+
 
 def _iso_date_from_unix(value):
     """yfinance often returns epoch seconds. Convert to ISO date (YYYY-MM-DD)."""
@@ -287,6 +499,20 @@ def _build_company_info(symbol, ticker, info, generated_at):
         "calendar": calendar,
         "news": news,
     }
+
+    try:
+        financials = _build_financials(ticker)
+    except Exception as exc:
+        print(
+            f"[financials] {symbol}: build failed ({exc}); skipping financials",
+            file=sys.stderr,
+        )
+        financials = None
+    if financials is None:
+        print(f"[financials] skipping {symbol}: no income statement", file=sys.stderr)
+    else:
+        company["financials"] = financials
+
     # Drop top-level None values (keep metrics/analyst/calendar/news containers even if empty)
     keep_empty = {"metrics", "analyst", "calendar", "news", "symbol", "generatedAt", "description"}
     return {k: v for k, v in company.items() if v is not None or k in keep_empty}
