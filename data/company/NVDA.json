@@ -1,0 +1,61 @@
+{
+  "symbol": "NVDA",
+  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company. The company operates through two segments, Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. The company sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants worldwide. It has a collaboration with Tech Mahindra Limited to develop artificial intelligence powered telco network operations reasoning agent. The company has a strategic partnership with Lumentum Holdings Inc. to develop optics technologies for AI and data centers. It also has a strategic partnership with Nebius Group N.V. to develop and deploy hyperscale cloud for the artificial intelligence market; and has a strategic partnership with IREN Limited to accelerate deployment of up to 5 gigawatts of infrastructure. NVIDIA Corpor...",
+  "industry": "Semiconductors",
+  "sector": "Technology",
+  "country": "United States",
+  "website": "https://www.nvidia.com",
+  "employees": 42000,
+  "city": "Santa Clara",
+  "state": "CA",
+  "metrics": {
+    "trailingPE": 45.464214,
+    "forwardPE": 19.556273,
+    "priceToBook": 34.35105,
+    "enterpriseToEbitda": 40.165,
+    "dividendYield": 0.02,
+    "payoutRatio": 0.0082,
+    "profitMargins": 0.55603004,
+    "operatingMargins": 0.65024,
+    "returnOnAssets": 0.51188,
+    "returnOnEquity": 1.01485,
+    "beta": 2.244,
+    "trailingEps": 4.89,
+    "exDividendDate": "2026-03-11"
+  },
+  "analyst": {
+    "recommendationMean": 1.29508,
+    "targetMeanPrice": 272.93738
+  },
+  "calendar": {
+    "earningsDate": "2026-05-20",
+    "lastFiscalYearEnd": "2026-01-25"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 215938000000.0,
+      "latestAnnualDate": "2026-01-31",
+      "yoyPct": 65.4735357900948,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.6038168363141272,
+      "fiveYearHigh": 0.6241752683969747,
+      "fiveYearLow": 0.20675465262845702,
+      "trend": "stable"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 96676000000.0,
+      "fiveYearAvg": 47089500000.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 11040000000.0,
+      "totalCash": 10605000000.0,
+      "netCash": -435000000.0,
+      "currentRatio": 3.905263812455306
+    }
+  }
+}

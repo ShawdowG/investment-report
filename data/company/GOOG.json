@@ -1,0 +1,61 @@
+{
+  "symbol": "GOOG",
+  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California.",
+  "industry": "Internet Content & Information",
+  "sector": "Communication Services",
+  "country": "United States",
+  "website": "https://abc.xyz",
+  "employees": 194668,
+  "city": "Mountain View",
+  "state": "CA",
+  "metrics": {
+    "trailingPE": 30.008394,
+    "forwardPE": 27.202301,
+    "priceToBook": 9.948626,
+    "enterpriseToEbitda": 29.349,
+    "dividendYield": 0.22,
+    "payoutRatio": 0.0641,
+    "profitMargins": 0.37919,
+    "operatingMargins": 0.36121,
+    "returnOnAssets": 0.14641,
+    "returnOnEquity": 0.38884997,
+    "beta": 1.267,
+    "trailingEps": 13.1,
+    "exDividendDate": "2026-06-08"
+  },
+  "analyst": {
+    "recommendationMean": 1.42424,
+    "targetMeanPrice": 420.44
+  },
+  "calendar": {
+    "earningsDate": "2026-07-23",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 402836000000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 15.090081081544376,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.32032638592380025,
+      "fiveYearHigh": 0.32109777211457696,
+      "fiveYearLow": 0.2646127084246701,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 73266000000.0,
+      "fiveYearAvg": 68883750000.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 59291000000.0,
+      "totalCash": 30708000000.0,
+      "netCash": -28583000000.0,
+      "currentRatio": 2.005333592875566
+    }
+  }
+}

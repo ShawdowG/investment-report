@@ -1,0 +1,60 @@
+{
+  "symbol": "BA",
+  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "description": "The Boeing Company, together with its subsidiaries, designs, develops, manufactures, sells, services, and supports commercial jetliners, military aircraft, satellites, missile defense, human space flight and launch systems, and services worldwide. The company operates through three segments: Commercial Airplanes; Defense, Space & Security; and Global Services. The Commercial Airplanes segment develops, produces, and markets commercial jet aircraft for passenger and cargo requirements. The Defense, Space & Security segment engages in the research, development, production, and modification of manned and unmanned military aircraft and weapons systems; strategic defense and intelligence systems, which include strategic missile and defense systems, command, control, communications, computers, intelligence, surveillance and reconnaissance, cyber and information solutions, and intelligence systems; and satellite systems, such as government and commercial satellites, and space exploration. The Global Services segment offers products and services, including supply chain and logistics management, engineering, maintenance and modifications, upgrades and conversions, spare parts, pilot and maintenance training systems and services, technical and maintenance documents, and data analytics and digital services to commercial and defense customers. The Boeing Company was incorporated in 1916 and is based in Arlington, Virginia.",
+  "industry": "Aerospace & Defense",
+  "sector": "Industrials",
+  "country": "United States",
+  "website": "https://www.boeing.com",
+  "employees": 182000,
+  "city": "Arlington",
+  "state": "VA",
+  "metrics": {
+    "trailingPE": 86.85433,
+    "forwardPE": 51.76901,
+    "priceToBook": 29.062046,
+    "enterpriseToEbitda": -62.396,
+    "payoutRatio": 0.0,
+    "profitMargins": 0.024600001,
+    "operatingMargins": 0.01715,
+    "returnOnAssets": -0.02069,
+    "returnOnEquity": 1.69947,
+    "beta": 1.207,
+    "trailingEps": 2.54,
+    "exDividendDate": "2020-02-13"
+  },
+  "analyst": {
+    "recommendationMean": 1.62963,
+    "targetMeanPrice": 269.84
+  },
+  "calendar": {
+    "earningsDate": "2026-07-28",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 89463000000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 34.496444517942784,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": -0.06053899377396242,
+      "fiveYearHigh": -0.010553513124405481,
+      "fiveYearLow": -0.16272531833967258,
+      "trend": "stable"
+    },
+    "freeCashFlow": {
+      "latestAnnual": -1886000000.0,
+      "fiveYearAvg": -2390250000.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 54433000000.0,
+      "totalCash": 10921000000.0,
+      "netCash": -43512000000.0,
+      "currentRatio": 1.1881700041622347
+    }
+  }
+}

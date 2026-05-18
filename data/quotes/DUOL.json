@@ -1,14 +1,14 @@
 {
   "symbol": "DUOL",
   "meta": {
-    "generatedAt": "2026-05-15T23:29:44.547402+00:00",
+    "generatedAt": "2026-05-18T23:38:05.878767+00:00",
     "name": "Duolingo, Inc.",
     "currency": "USD",
     "exchange": "NMS",
     "sector": "Technology",
     "industry": "Software - Application",
-    "marketCap": 5221224448.0,
-    "peRatio": 12.82151
+    "marketCap": 5276204544.0,
+    "peRatio": 12.956522
   },
   "daily": [
     {
@@ -9657,7 +9657,15 @@
       "high": 112.88,
       "low": 107.81,
       "close": 112.06,
-      "volume": 1492039
+      "volume": 1494000
+    },
+    {
+      "date": "2026-05-18",
+      "open": 111.47,
+      "high": 115.74,
+      "low": 110.47,
+      "close": 113.24,
+      "volume": 1575952
     }
   ]
 }

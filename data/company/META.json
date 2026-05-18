@@ -1,0 +1,61 @@
+{
+  "symbol": "META",
+  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "description": "Meta Platforms, Inc. engages in the development of products that enable people to connect and share with friends and family through mobile devices, personal computers, virtual reality (VR) headsets, and AI glasses in the United States, Canada, Europe, Asia-Pacific, and internationally. It operates through two segments, Family of Apps (FoA) and Reality Labs (RL). The FoA segment offers Facebook, which enables people to build community through feed, reels, stories, groups, marketplace, and other; Instagram that brings people closer through Instagram feed, stories, reels, live, and messaging; Messenger, a messaging application for people to connect with friends, family, communities, and businesses across platforms and devices through text, audio, and video calls; Meta AI, an assistant that's available across apps, as a stand-alone app, on AI glasses, and on the web; Threads, an application for text-based updates and public conversations; and WhatsApp, a messaging application that is used by people and businesses to communicate and transact. The RL segment provides virtual and augmented reality products, including consumer hardware, software, and content that help people feel connected, as well as Meta Quest devices that enable social experiences across gaming, fitness, entertainment, and more. The segment also includes wearables such as AI glasses like Ray Ban Meta and Oakley Meta glasses; and the Meta Ray Ban Display, which combines AI glasses with an integrated lens display an...",
+  "industry": "Internet Content & Information",
+  "sector": "Communication Services",
+  "country": "United States",
+  "website": "https://www.meta.com",
+  "employees": 77986,
+  "city": "Menlo Park",
+  "state": "CA",
+  "metrics": {
+    "trailingPE": 22.209665,
+    "forwardPE": 16.901941,
+    "priceToBook": 6.365909,
+    "enterpriseToEbitda": 14.315,
+    "dividendYield": 0.34,
+    "payoutRatio": 0.0764,
+    "profitMargins": 0.32837,
+    "operatingMargins": 0.40617,
+    "returnOnAssets": 0.16395001,
+    "returnOnEquity": 0.32930002,
+    "beta": 1.243,
+    "trailingEps": 27.52,
+    "exDividendDate": "2026-03-16"
+  },
+  "analyst": {
+    "recommendationMean": 1.34921,
+    "targetMeanPrice": 826.69104
+  },
+  "calendar": {
+    "earningsDate": "2026-07-29",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 200966000000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 22.16703849824621,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.41437855159579234,
+      "fiveYearHigh": 0.42176035404040096,
+      "fiveYearLow": 0.24821411726367604,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 46109000000.0,
+      "fiveYearAvg": 40884500000.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 83897000000.0,
+      "totalCash": 35873000000.0,
+      "netCash": -48024000000.0,
+      "currentRatio": 2.5987666124868536
+    }
+  }
+}

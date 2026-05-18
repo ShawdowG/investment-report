@@ -1,0 +1,60 @@
+{
+  "symbol": "NVO",
+  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "description": "Novo Nordisk A/S, together with its subsidiaries, engages in the research and development, manufacture, and distribution of pharmaceutical products. It operates through two segments, Obesity and Diabetes Care, and Rare Disease. The Obesity and Diabetes care segment provides products for diabetes, obesity, cardiovascular, and other emerging therapy areas. The Rare Disease segment offers products in the areas of rare blood disorders, rare endocrine disorders, and hormone replacement therapy. The company also provides NovoPen 6 and NovoPen Echo Plus, smart insulin pens; Dose Check, an insulin dose guidance application; and growth hormone pens and injection needles. It operates in Europe, Canada, the United States, Japan, Korea, Oceania, Southeast Asia, Mainland China, Hong Kong and Taiwan, Latin America, the Middle East, and Africa. Novo Nordisk A/S was founded in 1923 and is headquartered in Bagsvaerd, Denmark.",
+  "industry": "Drug Manufacturers - General",
+  "sector": "Healthcare",
+  "country": "Denmark",
+  "website": "https://www.novonordisk.com",
+  "employees": 67900,
+  "city": "Bagsvaerd",
+  "metrics": {
+    "trailingPE": 10.297673,
+    "forwardPE": 13.149312,
+    "priceToBook": 6.2090564,
+    "enterpriseToEbitda": 1.849,
+    "dividendYield": 4.03,
+    "payoutRatio": 0.4259,
+    "profitMargins": 0.37205002,
+    "operatingMargins": 0.61574,
+    "returnOnAssets": 0.19249001,
+    "returnOnEquity": 0.71402,
+    "beta": 0.348,
+    "trailingEps": 4.3,
+    "exDividendDate": "2026-03-30"
+  },
+  "analyst": {
+    "recommendationMean": 2.35714,
+    "targetMeanPrice": 46.85554
+  },
+  "calendar": {
+    "earningsDate": "2026-08-05",
+    "lastFiscalYearEnd": "2025-12-31"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 309064000000.0,
+      "latestAnnualDate": "2025-12-31",
+      "yoyPct": 6.425897804086047,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.4130471358682991,
+      "fiveYearHigh": 0.4419341397988313,
+      "fiveYearLow": 0.4130471358682991,
+      "trend": "compressing"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 28989000000.0,
+      "fiveYearAvg": 58198500000.0,
+      "trend": "compressing"
+    },
+    "balanceSheet": {
+      "totalDebt": 130958000000.0,
+      "totalCash": 26464000000.0,
+      "netCash": -104494000000.0,
+      "currentRatio": 0.7996485224495852
+    }
+  }
+}

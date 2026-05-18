@@ -1,0 +1,61 @@
+{
+  "symbol": "MSFT",
+  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "description": "Microsoft Corporation develops and supports software, services, devices, and solutions worldwide. The Productivity and Business Processes segment offers Microsoft 365 commercial, enterprise mobility + security, windows commercial, power BI, exchange, sharepoint, Microsoft teams, security and compliance, and copilot; Microsoft 365 commercial products, such as Windows commercial on-premises and office licensed services; Microsoft 365 consumer products and cloud services, including Microsoft 365 consumer subscriptions, office licensed on-premises, and other consumer services; LinkedIn; dynamics products and cloud services, such as dynamics 365, cloud-based applications, and on-premises ERP and CRM applications. Its Intelligent Cloud segment provides Server products and cloud services comprising Azure and other cloud services, GitHub, Nuance Healthcare, virtual desktop offerings, and other cloud services; server products, including SQL and windows server, visual studio and system center related client access licenses, and other on-premises offerings; enterprise and partner services, such as enterprise support and nuance professional services, industry solutions, Microsoft partner network, and learning experience. The Personal Computing segment provides windows and devices, such as Windows OEM licensing and devices and surface and PC accessories; gaming services and solutions, such as Xbox hardware, content, and services, first- and third-party content Xbox game pass, subscription...",
+  "industry": "Software - Infrastructure",
+  "sector": "Technology",
+  "country": "United States",
+  "website": "https://www.microsoft.com",
+  "employees": 228000,
+  "city": "Redmond",
+  "state": "WA",
+  "metrics": {
+    "trailingPE": 25.225729,
+    "forwardPE": 21.864609,
+    "priceToBook": 7.5934525,
+    "enterpriseToEbitda": 17.247,
+    "dividendYield": 0.86,
+    "payoutRatio": 0.20729999,
+    "profitMargins": 0.39341998,
+    "operatingMargins": 0.46326,
+    "returnOnAssets": 0.14814,
+    "returnOnEquity": 0.34013999,
+    "beta": 1.093,
+    "trailingEps": 16.79,
+    "exDividendDate": "2026-05-21"
+  },
+  "analyst": {
+    "recommendationMean": 1.30909,
+    "targetMeanPrice": 560.6302
+  },
+  "calendar": {
+    "earningsDate": "2026-07-29",
+    "lastFiscalYearEnd": "2025-06-30"
+  },
+  "news": [],
+  "financials": {
+    "revenue": {
+      "latestAnnual": 281724000000.0,
+      "latestAnnualDate": "2025-06-30",
+      "yoyPct": 14.93215623240672,
+      "cagr5y": null
+    },
+    "operatingMargin": {
+      "latest": 0.4562195624085985,
+      "fiveYearHigh": 0.4562195624085985,
+      "fiveYearLow": 0.417728806361041,
+      "trend": "expanding"
+    },
+    "freeCashFlow": {
+      "latestAnnual": 71611000000.0,
+      "fiveYearAvg": 67576500000.0,
+      "trend": "expanding"
+    },
+    "balanceSheet": {
+      "totalDebt": 60588000000.0,
+      "totalCash": 30242000000.0,
+      "netCash": -30346000000.0,
+      "currentRatio": 1.3534464445042416
+    }
+  }
+}
