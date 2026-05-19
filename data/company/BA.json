@@ -1,6 +1,6 @@
 {
   "symbol": "BA",
-  "generatedAt": "2026-05-18T23:38:05.878767+00:00",
+  "generatedAt": "2026-05-19T23:42:27.438455+00:00",
   "description": "The Boeing Company, together with its subsidiaries, designs, develops, manufactures, sells, services, and supports commercial jetliners, military aircraft, satellites, missile defense, human space flight and launch systems, and services worldwide. The company operates through three segments: Commercial Airplanes; Defense, Space & Security; and Global Services. The Commercial Airplanes segment develops, produces, and markets commercial jet aircraft for passenger and cargo requirements. The Defense, Space & Security segment engages in the research, development, production, and modification of manned and unmanned military aircraft and weapons systems; strategic defense and intelligence systems, which include strategic missile and defense systems, command, control, communications, computers, intelligence, surveillance and reconnaissance, cyber and information solutions, and intelligence systems; and satellite systems, such as government and commercial satellites, and space exploration. The Global Services segment offers products and services, including supply chain and logistics management, engineering, maintenance and modifications, upgrades and conversions, spare parts, pilot and maintenance training systems and services, technical and maintenance documents, and data analytics and digital services to commercial and defense customers. The Boeing Company was incorporated in 1916 and is based in Arlington, Virginia.",
   "industry": "Aerospace & Defense",
   "sector": "Industrials",
@@ -10,10 +10,10 @@
   "city": "Arlington",
   "state": "VA",
   "metrics": {
-    "trailingPE": 86.85433,
-    "forwardPE": 51.76901,
-    "priceToBook": 29.062046,
-    "enterpriseToEbitda": -62.396,
+    "trailingPE": 84.649605,
+    "forwardPE": 50.454895,
+    "priceToBook": 28.324331,
+    "enterpriseToEbitda": -61.042,
     "payoutRatio": 0.0,
     "profitMargins": 0.024600001,
     "operatingMargins": 0.01715,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 1.62963,
-    "targetMeanPrice": 269.84
+    "targetMeanPrice": 270.0
   },
   "calendar": {
     "earningsDate": "2026-07-28",
