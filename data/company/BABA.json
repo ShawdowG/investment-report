@@ -1,6 +1,6 @@
 {
   "symbol": "BABA",
-  "generatedAt": "2026-05-19T23:42:27.438455+00:00",
+  "generatedAt": "2026-05-20T23:50:15.700467+00:00",
   "description": "Alibaba Group Holding Limited, through its subsidiaries, provides technology infrastructure and marketing reach to help merchants, brands, retailers, and other businesses to engage with their users and customers in the People's Republic of China and internationally. It operates digital retail platforms under the Taobao and Tmall names; wholesale marketplaces through 1688.com and Alibaba.com; global e-commerce platform under the AliExpress name; e-commerce platforms under the Lazada, Trendyol, and Daraz names; and consumer-to-consumer community and marketplace under the Tmall Global, Tmall Supermarket, and Xianyu names. The company also operates Cainiao, an e-commerce logistics solution; Ele.me, an on-demand delivery and local services platform; and Amap, a provider of mobile digital map, navigation, and real-time traffic information; Youku, an online video platform; and Damai Entertainment that provides content production, promotion and distribution, performance and event ticketing management, IP-related licensing and operations, cinema ticketing management, and internet data services for the entertainment industry. In addition, it provides elastic computing, storage, network, security, database, big data, cloud native, and Alibaba cloud model studio services; and hardware, software license and installation, and application development and maintenance services, as well as sells membership packages and subscriptions. Further, the company offers Freshippo, a retail platform for...",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
@@ -9,11 +9,11 @@
   "employees": 131462,
   "city": "Causeway Bay",
   "metrics": {
-    "trailingPE": 20.996904,
-    "forwardPE": 14.721442,
-    "priceToBook": 2.0222573,
-    "enterpriseToEbitda": 25.073,
-    "dividendYield": 0.79,
+    "trailingPE": 20.81579,
+    "forwardPE": 14.572823,
+    "priceToBook": 2.0018418,
+    "enterpriseToEbitda": 24.86,
+    "dividendYield": 0.77,
     "payoutRatio": 0.1712,
     "profitMargins": 0.1012,
     "operatingMargins": -0.00348,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 1.36585,
-    "targetMeanPrice": 190.7205
+    "targetMeanPrice": 191.12416
   },
   "calendar": {
     "earningsDate": "2026-05-13",
