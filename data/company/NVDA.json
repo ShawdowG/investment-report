@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-05-20T23:50:15.700467+00:00",
+  "generatedAt": "2026-05-21T23:36:32.089744+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company. The company operates through two segments, Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. The company sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants worldwide. It has a collaboration with Tech Mahindra Limited to develop artificial intelligence powered telco network operations reasoning agent. The company has a strategic partnership with Lumentum Holdings Inc. to develop optics technologies for AI and data centers. It also has a strategic partnership with Nebius Group N.V. to develop and deploy hyperscale cloud for the artificial intelligence market; and has a strategic partnership with IREN Limited to accelerate deployment of up to 5 gigawatts of infrastructure. NVIDIA Corpor...",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,23 +10,23 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 45.60612,
-    "forwardPE": 19.250051,
-    "priceToBook": 34.52874,
-    "enterpriseToEbitda": 39.853,
+    "trailingPE": 33.61562,
+    "forwardPE": 18.846476,
+    "priceToBook": 33.91687,
+    "enterpriseToEbitda": 40.375,
     "dividendYield": 0.02,
-    "payoutRatio": 0.0082,
+    "payoutRatio": 0.0061000003,
     "profitMargins": 0.55603004,
     "operatingMargins": 0.65024,
     "returnOnAssets": 0.51188,
     "returnOnEquity": 1.01485,
     "beta": 2.244,
-    "trailingEps": 4.9,
-    "exDividendDate": "2026-03-11"
+    "trailingEps": 6.53,
+    "exDividendDate": "2026-06-04"
   },
   "analyst": {
     "recommendationMean": 1.29508,
-    "targetMeanPrice": 275.83212
+    "targetMeanPrice": 278.0251
   },
   "calendar": {
     "earningsDate": "2026-05-20",
