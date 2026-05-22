@@ -1,7 +1,7 @@
 {
   "symbol": "BABA",
-  "generatedAt": "2026-05-21T23:36:32.089744+00:00",
-  "description": "Alibaba Group Holding Limited, through its subsidiaries, provides technology infrastructure and marketing reach to help merchants, brands, retailers, and other businesses to engage with their users and customers in the People's Republic of China and internationally. It operates digital retail platforms under the Taobao and Tmall names; wholesale marketplaces through 1688.com and Alibaba.com; global e-commerce platform under the AliExpress name; e-commerce platforms under the Lazada, Trendyol, and Daraz names; and consumer-to-consumer community and marketplace under the Tmall Global, Tmall Supermarket, and Xianyu names. The company also operates Cainiao, an e-commerce logistics solution; Ele.me, an on-demand delivery and local services platform; and Amap, a provider of mobile digital map, navigation, and real-time traffic information; Youku, an online video platform; and Damai Entertainment that provides content production, promotion and distribution, performance and event ticketing management, IP-related licensing and operations, cinema ticketing management, and internet data services for the entertainment industry. In addition, it provides elastic computing, storage, network, security, database, big data, cloud native, and Alibaba cloud model studio services; and hardware, software license and installation, and application development and maintenance services, as well as sells membership packages and subscriptions. Further, the company offers Freshippo, a retail platform for...",
+  "generatedAt": "2026-05-22T23:41:06.178527+00:00",
+  "description": "Alibaba Group Holding Limited, through its subsidiaries, provides technology infrastructure and marketing reach to help merchants, brands, retailers, and other businesses in the People's Republic of China and internationally. It operates through the Alibaba China E-Commerce Group, Alibaba International Digital Commerce Group, Cloud Intelligence Group, and All Others segments. The Alibaba China E-commerce Group segment operates Taobao and Tmall, which are digital retail platforms; Taobao Instant Commerce, a local services and on-demand delivery platform; 1688.com, a domestic wholesale marketplace; and Xianyu, a consumer-to-consumer community and marketplace for idle goods. Its Alibaba International Digital Commerce Group segment includes AliExpress, a global e-commerce platform; Trendyol, an e-commerce platform in Turkey; Lazada, an e-commerce platform in Southeast Asia; Daraz, an e-commerce platform in South Asia, primarily in Pakistan and Bangladesh; and Alibaba.com, an integrated international online wholesale marketplace. The Cloud Intelligence Group segment offers a suite of cloud services based on infrastructure-as-a-service, platform-as-a-service, and model-as-a-service. Its All Others segment comprises Amap, a provider of mobile digital maps, navigation, and real-time traffic information in China; Cainiao, which provides logistics solutions; Youku, an online long-form video platform in China; Freshippo, a retail platform for groceries and fresh goods; and Alibaba Healt...",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
   "country": "Hong Kong",
@@ -9,23 +9,23 @@
   "employees": 131462,
   "city": "Causeway Bay",
   "metrics": {
-    "trailingPE": 20.319939,
-    "forwardPE": 14.319674,
-    "priceToBook": 1.9571811,
-    "enterpriseToEbitda": 24.86,
-    "dividendYield": 0.78,
+    "trailingPE": 20.123838,
+    "forwardPE": 14.132495,
+    "priceToBook": 1.9364421,
+    "enterpriseToEbitda": 22.569,
+    "dividendYield": 0.8,
     "payoutRatio": 0.1712,
     "profitMargins": 0.1012,
-    "operatingMargins": -0.00348,
-    "returnOnAssets": 0.020079998,
+    "operatingMargins": 0.0101499995,
+    "returnOnAssets": 0.0212,
     "returnOnEquity": 0.092159994,
     "beta": 0.494,
-    "trailingEps": 6.47,
+    "trailingEps": 6.46,
     "exDividendDate": "2026-06-11"
   },
   "analyst": {
     "recommendationMean": 1.36585,
-    "targetMeanPrice": 191.06798
+    "targetMeanPrice": 191.29297
   },
   "calendar": {
     "earningsDate": "2026-05-13",
@@ -34,27 +34,27 @@
   "news": [],
   "financials": {
     "revenue": {
-      "latestAnnual": 996347000000.0,
-      "latestAnnualDate": "2025-03-31",
-      "yoyPct": 5.862821515393639,
+      "latestAnnual": 1023670000000.0,
+      "latestAnnualDate": "2026-03-31",
+      "yoyPct": 2.742317686508817,
       "cagr5y": null
     },
     "operatingMargin": {
-      "latest": 0.14761523846611674,
+      "latest": 0.058285384938505574,
       "fiveYearHigh": 0.14761523846611674,
-      "fiveYearLow": 0.11110446837392828,
-      "trend": "expanding"
+      "fiveYearLow": 0.058285384938505574,
+      "trend": "compressing"
     },
     "freeCashFlow": {
-      "latestAnnual": 77537000000.0,
-      "fiveYearAvg": 120509000000.0,
+      "latestAnnual": -50724000000.0,
+      "fiveYearAvg": 85469250000.0,
       "trend": "compressing"
     },
     "balanceSheet": {
-      "totalDebt": 248110000000.0,
-      "totalCash": 145487000000.0,
-      "netCash": -102623000000.0,
-      "currentRatio": 1.5483064045609698
+      "totalDebt": 281722000000.0,
+      "totalCash": 131530000000.0,
+      "netCash": -150192000000.0,
+      "currentRatio": 1.2820561799167922
     }
   }
 }

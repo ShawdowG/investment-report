@@ -1,6 +1,6 @@
 {
   "symbol": "GOOG",
-  "generatedAt": "2026-05-21T23:36:32.089744+00:00",
+  "generatedAt": "2026-05-22T23:41:06.178527+00:00",
   "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California.",
   "industry": "Internet Content & Information",
   "sector": "Communication Services",
@@ -10,10 +10,10 @@
   "city": "Mountain View",
   "state": "CA",
   "metrics": {
-    "trailingPE": 29.205635,
-    "forwardPE": 26.535236,
-    "priceToBook": 9.704661,
-    "enterpriseToEbitda": 28.717,
+    "trailingPE": 28.938217,
+    "forwardPE": 26.252218,
+    "priceToBook": 9.601154,
+    "enterpriseToEbitda": 28.609,
     "dividendYield": 0.23,
     "payoutRatio": 0.0641,
     "profitMargins": 0.37919,
@@ -21,7 +21,7 @@
     "returnOnAssets": 0.14641,
     "returnOnEquity": 0.38884997,
     "beta": 1.267,
-    "trailingEps": 13.13,
+    "trailingEps": 13.11,
     "exDividendDate": "2026-06-08"
   },
   "analyst": {
