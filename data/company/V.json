@@ -1,6 +1,6 @@
 {
   "symbol": "V",
-  "generatedAt": "2026-05-26T23:42:47.599640+00:00",
+  "generatedAt": "2026-05-27T23:45:58.016033+00:00",
   "description": "Visa Inc. operates as a payment technology company in the United States and internationally. The company operates VisaNet, a transaction processing network that enables authorization, clearing, and settlement of payment transactions. It also offers credit, debit, and prepaid card products; tap to pay, tokenization, and click to pay services; Visa Direct, a platform which facilitates money movement, enabling clients to collect, hold, convert, and send funds across its network; and issuing solutions, such as airport lounge access, dining reservations, shopping experiences, event tickets, and seller offers. In addition, the company provides acceptance solutions, an omnichannel payment integration with e-commerce platforms; risk detection and prevention solutions; and advisory and other services comprising consulting practice, proprietary analytics models, data scientists and economists, marketing services, and managed services. It provides its services under the Visa, Visa Electron, V PAY, Interlink, and PLUS brands. The company serves consumers, sellers, financial institutions, and government entities. Visa Inc. was founded in 1958 and is headquartered in San Francisco, California.",
   "industry": "Credit Services",
   "sector": "Financial Services",
@@ -10,18 +10,18 @@
   "city": "San Francisco",
   "state": "CA",
   "metrics": {
-    "trailingPE": 28.439026,
-    "forwardPE": 21.98378,
-    "priceToBook": 16.296297,
-    "enterpriseToEbitda": 20.762,
-    "dividendYield": 0.81,
+    "trailingPE": 28.58726,
+    "forwardPE": 22.059866,
+    "priceToBook": 16.3527,
+    "enterpriseToEbitda": 20.832,
+    "dividendYield": 0.82,
     "payoutRatio": 0.2197,
     "profitMargins": 0.51679003,
     "operatingMargins": 0.67346,
     "returnOnAssets": 0.19193001,
     "returnOnEquity": 0.60349,
     "beta": 0.784,
-    "trailingEps": 11.48,
+    "trailingEps": 11.46,
     "exDividendDate": "2026-05-12"
   },
   "analyst": {

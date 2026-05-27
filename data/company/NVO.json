@@ -1,6 +1,6 @@
 {
   "symbol": "NVO",
-  "generatedAt": "2026-05-26T23:42:47.599640+00:00",
+  "generatedAt": "2026-05-27T23:45:58.016033+00:00",
   "description": "Novo Nordisk A/S, together with its subsidiaries, engages in the research and development, manufacture, and distribution of pharmaceutical products. It operates through two segments, Obesity and Diabetes Care, and Rare Disease. The Obesity and Diabetes care segment provides products for diabetes, obesity, cardiovascular, and other emerging therapy areas. The Rare Disease segment offers products in the areas of rare blood disorders, rare endocrine disorders, and hormone replacement therapy. The company also provides NovoPen 6 and NovoPen Echo Plus, smart insulin pens; Dose Check, an insulin dose guidance application; and growth hormone pens and injection needles. It operates in Europe, Canada, the United States, Japan, Korea, Oceania, Southeast Asia, Mainland China, Hong Kong and Taiwan, Latin America, the Middle East, and Africa. Novo Nordisk A/S was founded in 1923 and is headquartered in Bagsvaerd, Denmark.",
   "industry": "Drug Manufacturers - General",
   "sector": "Healthcare",
@@ -9,23 +9,23 @@
   "employees": 67900,
   "city": "Bagsvaerd",
   "metrics": {
-    "trailingPE": 10.373239,
-    "forwardPE": 13.145471,
-    "priceToBook": 6.2070985,
-    "enterpriseToEbitda": 1.866,
-    "dividendYield": 4.01,
+    "trailingPE": 10.433255,
+    "forwardPE": 13.256648,
+    "priceToBook": 6.2595143,
+    "enterpriseToEbitda": 1.847,
+    "dividendYield": 4.08,
     "payoutRatio": 0.4259,
     "profitMargins": 0.37205002,
     "operatingMargins": 0.61574,
     "returnOnAssets": 0.19249001,
     "returnOnEquity": 0.71402,
     "beta": 0.348,
-    "trailingEps": 4.26,
+    "trailingEps": 4.27,
     "exDividendDate": "2026-03-30"
   },
   "analyst": {
     "recommendationMean": 2.35714,
-    "targetMeanPrice": 46.82169
+    "targetMeanPrice": 46.750973
   },
   "calendar": {
     "earningsDate": "2026-08-05",
