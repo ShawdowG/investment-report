@@ -1,6 +1,6 @@
 {
   "symbol": "BA",
-  "generatedAt": "2026-05-27T23:45:58.016033+00:00",
+  "generatedAt": "2026-05-28T23:51:34.610443+00:00",
   "description": "The Boeing Company, together with its subsidiaries, designs, develops, manufactures, sells, services, and supports commercial jetliners, military aircraft, satellites, missile defense, human space flight and launch systems, and services worldwide. The company operates through three segments: Commercial Airplanes; Defense, Space & Security; and Global Services. The Commercial Airplanes segment develops, produces, and markets commercial jet aircraft for passenger and cargo requirements. The Defense, Space & Security segment engages in the research, development, production, and modification of manned and unmanned military aircraft and weapons systems; strategic defense and intelligence systems, which include strategic missile and defense systems, command, control, communications, computers, intelligence, surveillance and reconnaissance, cyber and information solutions, and intelligence systems; and satellite systems, such as government and commercial satellites, and space exploration. The Global Services segment offers products and services, including supply chain and logistics management, engineering, maintenance and modifications, upgrades and conversions, spare parts, pilot and maintenance training systems and services, technical and maintenance documents, and data analytics and digital services to commercial and defense customers. The Boeing Company was incorporated in 1916 and is based in Arlington, Virginia.",
   "industry": "Aerospace & Defense",
   "sector": "Industrials",
@@ -10,17 +10,17 @@
   "city": "Arlington",
   "state": "VA",
   "metrics": {
-    "trailingPE": 88.30709,
-    "forwardPE": 53.641937,
-    "priceToBook": 29.54815,
-    "enterpriseToEbitda": -61.983,
+    "trailingPE": 88.33205,
+    "forwardPE": 54.71334,
+    "priceToBook": 30.13832,
+    "enterpriseToEbitda": -64.372,
     "payoutRatio": 0.0,
     "profitMargins": 0.024600001,
     "operatingMargins": 0.01715,
     "returnOnAssets": -0.02069,
     "returnOnEquity": 1.69947,
     "beta": 1.207,
-    "trailingEps": 2.54,
+    "trailingEps": 2.59,
     "exDividendDate": "2020-02-13"
   },
   "analyst": {
