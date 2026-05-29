@@ -1,6 +1,6 @@
 {
   "symbol": "TSLA",
-  "generatedAt": "2026-05-28T23:51:34.610443+00:00",
+  "generatedAt": "2026-05-29T23:50:57.086944+00:00",
   "description": "Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive; and Energy Generation and Storage. The company offers electric vehicles, as well as sells automotive regulatory credits; and non-warranty maintenance services and collision, automotive insurance services, as well as part sales and retail merchandise sale. It also provides sedans and sport utility vehicles through direct and used vehicle sales, a network of Tesla Superchargers, and in-app upgrades; purchase financing and leasing services; services for electric vehicles through its company-owned service locations and Tesla mobile service technicians; and vehicle limited warranties and extended service plans. In addition, the company engages in the design, manufacture, installation, sale, and leasing of solar energy generation and energy storage products, and related services to residential, commercial, and industrial customers and utilities through its website, stores, and galleries, as well as through a network of channel partners. Further, it provides services and repairs to its energy product customers, including under warranty and extended service plans; and various financing options to its residential customers; lithium-ion battery energy storage products, such as Powerwall and Megapack; energy generation products, including solar panels and solar roof;...",
   "industry": "Auto Manufacturers",
   "sector": "Consumer Cyclical",
@@ -10,16 +10,17 @@
   "city": "Austin",
   "state": "TX",
   "metrics": {
-    "trailingPE": 401.9091,
-    "forwardPE": 176.15721,
-    "priceToBook": 20.189981,
-    "enterpriseToEbitda": 146.539,
+    "trailingPE": 392.6036,
+    "forwardPE": 173.64296,
+    "priceToBook": 19.901814,
+    "enterpriseToEbitda": 144.992,
+    "payoutRatio": 0.0,
     "profitMargins": 0.03946,
     "operatingMargins": 0.04203,
     "returnOnAssets": 0.022330001,
     "returnOnEquity": 0.04901,
     "beta": 1.793,
-    "trailingEps": 1.1
+    "trailingEps": 1.11
   },
   "analyst": {
     "recommendationMean": 2.3617,
