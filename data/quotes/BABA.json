@@ -1,33 +1,17 @@
 {
   "symbol": "BABA",
   "meta": {
-    "generatedAt": "2026-05-29T23:50:57.086944+00:00",
+    "generatedAt": "2026-06-01T23:53:13.067714+00:00",
     "name": "Alibaba Group Holding Limited",
     "currency": "USD",
     "exchange": "NYQ",
     "sector": "Consumer Cyclical",
     "industry": "Internet Retail",
-    "marketCap": 298020438016.0,
-    "peRatio": 19.169754,
-    "dividendYield": 0.83
+    "marketCap": 300851396608.0,
+    "peRatio": 19.351852,
+    "dividendYield": 0.85
   },
   "daily": [
-    {
-      "date": "2016-05-31",
-      "open": 76.9253,
-      "high": 77.9035,
-      "low": 76.1655,
-      "close": 77.875,
-      "volume": 78861400
-    },
-    {
-      "date": "2016-06-01",
-      "open": 77.875,
-      "high": 77.875,
-      "low": 72.6992,
-      "close": 72.8321,
-      "volume": 62531500
-    },
     {
       "date": "2016-06-02",
       "open": 72.7941,
@@ -20122,7 +20106,15 @@
       "high": 125.04,
       "low": 123.43,
       "close": 124.22,
-      "volume": 12448653
+      "volume": 12504300
+    },
+    {
+      "date": "2026-06-01",
+      "open": 124.2,
+      "high": 126.32,
+      "low": 124.0,
+      "close": 125.4,
+      "volume": 9158692
     }
   ]
 }
