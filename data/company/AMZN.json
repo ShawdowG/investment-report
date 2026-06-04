@@ -1,6 +1,6 @@
 {
   "symbol": "AMZN",
-  "generatedAt": "2026-06-03T00:13:35.122852+00:00",
+  "generatedAt": "2026-06-04T00:15:12.241127+00:00",
   "description": "Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS). It also manufactures and sells electronic devices, including Kindle, fire tablets, fire TVs, echo, ring, blink, and eero; and develops and produces media content. In addition, the company offers programs that enable sellers to sell their products in its stores; and programs that allow authors, independent publishers, musicians, filmmakers, Twitch streamers, skill and app developers, and others to publish and sell content. Further, it provides compute, storage, Artificial intelligence, database, analytics, machine learning, and other services, as well as advertising services through programs, such as sponsored ads, display, and video advertising. Additionally, the company offers Amazon Prime, a membership program. The company's products offered through its stores include merchandise and content purchased for resale and products offered by third-party sellers. It serves consumers, sellers, developers, enterprises, content creators, advertisers, and employees. The company was incorporated in 1994 and is headquartered in Seattle, Washington.",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
@@ -10,17 +10,17 @@
   "city": "Seattle",
   "state": "WA",
   "metrics": {
-    "trailingPE": 31.055687,
-    "forwardPE": 26.006178,
-    "priceToBook": 6.2424254,
-    "enterpriseToEbitda": 18.297,
+    "trailingPE": 30.828608,
+    "forwardPE": 25.347204,
+    "priceToBook": 6.084248,
+    "enterpriseToEbitda": 17.849,
     "payoutRatio": 0.0,
     "profitMargins": 0.12224,
     "operatingMargins": 0.1314,
     "returnOnAssets": 0.06845,
     "returnOnEquity": 0.24285,
     "beta": 1.468,
-    "trailingEps": 8.26
+    "trailingEps": 8.11
   },
   "analyst": {
     "recommendationMean": 1.34848,

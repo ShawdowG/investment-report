@@ -1,6 +1,6 @@
 {
   "symbol": "TM",
-  "generatedAt": "2026-06-03T00:13:35.122852+00:00",
+  "generatedAt": "2026-06-04T00:15:12.241127+00:00",
   "description": "Toyota Motor Corporation designs, manufactures, assembles, and sells passenger vehicles, minivans and commercial vehicles, and related parts and accessories in Japan, North America, Europe, Asia, Central and South America, Oceania, Africa, the Middle East, and internationally. It operates through Automotive, Financial Services, and All Other segments. The company offers subcompact and compact cars; mini-vehicles; mid-size, luxury, sports, and specialty cars; recreational and sport-utility vehicles; pickup trucks; minivans; trucks; and buses. It also develops and sells battery electric vehicles and batteries. In addition, the company provides financial services, such as retail financing and leasing, wholesale financing, insurance, and credit cards. Further, it operates GAZOO.com, a web portal for automobile information, as well as engages in telecommunications and other businesses. It offers vehicles under the Toyota and Lexus brand names. Toyota Motor Corporation was founded in 1933 and is headquartered in Toyota, Japan.",
   "industry": "Auto Manufacturers",
   "sector": "Consumer Cyclical",
@@ -9,18 +9,18 @@
   "employees": 390927,
   "city": "Toyota",
   "metrics": {
-    "trailingPE": 9.740421,
-    "forwardPE": 11.437897,
-    "priceToBook": 15.392291,
+    "trailingPE": 9.731101,
+    "forwardPE": 11.420786,
+    "priceToBook": 15.357026,
     "enterpriseToEbitda": 5.319,
-    "dividendYield": 3.14,
+    "dividendYield": 3.18,
     "payoutRatio": 0.1443,
     "profitMargins": 0.07592,
     "operatingMargins": 0.04566,
     "returnOnAssets": 0.02368,
     "returnOnEquity": 0.10233,
     "beta": 0.327,
-    "trailingEps": 18.53,
+    "trailingEps": 18.52,
     "exDividendDate": "2025-09-30"
   },
   "analyst": {
