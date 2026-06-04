@@ -1,6 +1,6 @@
 {
   "symbol": "MA",
-  "generatedAt": "2026-06-04T00:15:12.241127+00:00",
+  "generatedAt": "2026-06-04T23:47:18.620209+00:00",
   "description": "Mastercard Incorporated, a technology company, provides transaction processing and other payment-related products and services in the United States and internationally. The company offers products and services for account holders, merchants, financial institutions, digital partners, businesses, governments, and other organizations, such as programs that enable issuers to provide consumers with credits to defer payments; payment products and solutions that allow its customers to access funds in deposit and other accounts; prepaid programs services; consumer bill payment services; and commercial credit, debit, and prepaid payment products and solutions. It also provides solutions that enable businesses or governments to make payments to businesses, including Virtual Card Number, which is generated dynamically from an existing account and leverages the credit limit of the funding account; and a platform to optimize supplier payment enablement campaigns for financial institutions. In addition, the company offers Mastercard Move, which partners with digital messaging and payment platforms to enable consumers to send money directly within applications to other consumers; and partners with central banks, fintechs, and financial institutions, as well as enables various cross-border payment flows. Further, it provides security solutions; marketing, personalization, and issuer and merchant loyalty services; business and operational intelligence, advanced analytics and AI, consulting an...",
   "industry": "Credit Services",
   "sector": "Financial Services",
@@ -10,18 +10,18 @@
   "city": "Purchase",
   "state": "NY",
   "metrics": {
-    "trailingPE": 27.272987,
-    "forwardPE": 20.730234,
-    "priceToBook": 62.242603,
-    "enterpriseToEbitda": 20.247,
-    "dividendYield": 0.73,
+    "trailingPE": 27.911936,
+    "forwardPE": 21.179085,
+    "priceToBook": 63.590286,
+    "enterpriseToEbitda": 19.993,
+    "dividendYield": 0.74,
     "payoutRatio": 0.1823,
     "profitMargins": 0.45876,
     "operatingMargins": 0.60836,
     "returnOnAssets": 0.25032,
     "returnOnEquity": 2.32076,
     "beta": 0.759,
-    "trailingEps": 17.29,
+    "trailingEps": 17.26,
     "exDividendDate": "2026-04-09"
   },
   "analyst": {
