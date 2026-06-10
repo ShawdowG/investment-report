@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-06-09T23:53:50.648596+00:00",
+  "generatedAt": "2026-06-10T23:58:26.573575+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company. The company operates through two segments, Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. The company sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants worldwide. The company has a strategic collaboration with Tech Mahindra Limited, Lumentum Holdings Inc., Nebius Group N.V., IREN Limited, and SK hynix Inc. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,10 +10,10 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 31.930983,
-    "forwardPE": 16.415857,
-    "priceToBook": 25.79802,
-    "enterpriseToEbitda": 30.262,
+    "trailingPE": 30.64526,
+    "forwardPE": 15.7474375,
+    "priceToBook": 24.835194,
+    "enterpriseToEbitda": 30.196,
     "dividendYield": 0.48,
     "payoutRatio": 0.0061000003,
     "profitMargins": 0.62966,
@@ -21,7 +21,7 @@
     "returnOnAssets": 0.52727,
     "returnOnEquity": 1.14288,
     "beta": 2.202,
-    "trailingEps": 6.52,
+    "trailingEps": 6.54,
     "exDividendDate": "2026-06-04"
   },
   "analyst": {
