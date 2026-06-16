@@ -1,6 +1,6 @@
 {
   "symbol": "V",
-  "generatedAt": "2026-06-13T00:02:19.317525+00:00",
+  "generatedAt": "2026-06-16T00:13:35.152973+00:00",
   "description": "Visa Inc. operates as a payment technology company in the United States and internationally. The company operates VisaNet, a transaction processing network that enables authorization, clearing, and settlement of payment transactions. It also offers credit, debit, and prepaid card products; tap to pay, tokenization, and click to pay services; Visa Direct, a platform which facilitates money movement, enabling clients to collect, hold, convert, and send funds across its network; and issuing solutions, such as airport lounge access, dining reservations, shopping experiences, event tickets, and seller offers. In addition, the company provides acceptance solutions, an omnichannel payment integration with e-commerce platforms; risk detection and prevention solutions; and advisory and other services comprising consulting practice, proprietary analytics models, data scientists and economists, marketing services, and managed services. It provides its services under the Visa, Visa Electron, V PAY, Interlink, and PLUS brands. The company serves consumers, sellers, financial institutions, and government entities. Visa Inc. was founded in 1958 and is headquartered in San Francisco, California.",
   "industry": "Credit Services",
   "sector": "Financial Services",
@@ -10,18 +10,18 @@
   "city": "San Francisco",
   "state": "CA",
   "metrics": {
-    "trailingPE": 28.058313,
-    "forwardPE": 21.689682,
-    "priceToBook": 17.293745,
+    "trailingPE": 28.20732,
+    "forwardPE": 21.785889,
+    "priceToBook": 17.370455,
     "enterpriseToEbitda": 20.506,
-    "dividendYield": 0.84,
+    "dividendYield": 0.83,
     "payoutRatio": 0.2197,
     "profitMargins": 0.51679003,
     "operatingMargins": 0.67346,
     "returnOnAssets": 0.19193001,
     "returnOnEquity": 0.60349,
     "beta": 0.765,
-    "trailingEps": 11.49,
+    "trailingEps": 11.48,
     "exDividendDate": "2026-05-12"
   },
   "analyst": {

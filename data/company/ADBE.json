@@ -1,6 +1,6 @@
 {
   "symbol": "ADBE",
-  "generatedAt": "2026-06-13T00:02:19.317525+00:00",
+  "generatedAt": "2026-06-16T00:13:35.152973+00:00",
   "description": "Adobe Inc. operates as a technology company worldwide. The Digital Media segment offers products and services that enable individuals, teams, and enterprises to create, publish, and promote content. This segment serves photographers, video editors, graphic and experience designers, game developers, content creators, students, marketers, business owners, knowledge workers, and consumers. The Digital Experience segment provides an integrated platform; and products, services, and solutions that enable brands and businesses to create, manage, execute, measure, monetize, and optimize customer experiences from analytics to commerce. This segment serves marketers, advertisers, agencies, publishers, merchandisers, merchants, web analysts, data scientists, developers, and executives across the C-suite. The Publishing and Advertising segment offers e-learning, technical document publishing, web conferencing, document and forms platform, web application development, printing, and Adobe Advertising solutions. It also provides consulting, training, customer management, technical support, and learning services. The company offers its solutions to enterprise customers, and businesses and consumers; and licenses its products to end-user customers through app stores and website at adobe.com. It markets and distributes its products through distributors, retailers, software developers, mobile app stores, systems integrators, independent software vendors, value-added resellers, and original equi...",
   "industry": "Software - Application",
   "sector": "Technology",
@@ -10,21 +10,22 @@
   "city": "San Jose",
   "state": "CA",
   "metrics": {
-    "trailingPE": 11.671625,
-    "forwardPE": 7.456013,
-    "priceToBook": 7.12062,
+    "trailingPE": 11.665347,
+    "forwardPE": 7.493343,
+    "priceToBook": 7.2022896,
     "enterpriseToEbitda": 8.723,
     "payoutRatio": 0.0,
     "profitMargins": 0.28689,
     "operatingMargins": 0.33817002,
     "returnOnAssets": 0.19577,
     "returnOnEquity": 0.62953997,
-    "trailingEps": 17.48,
+    "beta": 1.404,
+    "trailingEps": 17.69,
     "exDividendDate": "2005-03-24"
   },
   "analyst": {
-    "recommendationMean": 2.44737,
-    "targetMeanPrice": 329.33374
+    "recommendationMean": 2.61538,
+    "targetMeanPrice": 288.47516
   },
   "calendar": {
     "earningsDate": "2026-09-10",
