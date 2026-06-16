@@ -1,6 +1,6 @@
 {
   "symbol": "META",
-  "generatedAt": "2026-06-16T00:13:35.152973+00:00",
+  "generatedAt": "2026-06-16T23:58:25.490387+00:00",
   "description": "Meta Platforms, Inc. engages in the development of products that enable people to connect and share with friends and family through mobile devices, personal computers, virtual reality (VR) headsets, and AI glasses in the United States, Canada, Europe, Asia-Pacific, and internationally. It operates through two segments, Family of Apps (FoA) and Reality Labs (RL). The FoA segment offers Facebook, which enables people to build community through feed, reels, stories, groups, marketplace, and other; Instagram that brings people closer through Instagram feed, stories, reels, live, and messaging; Messenger, a messaging application for people to connect with friends, family, communities, and businesses across platforms and devices through text, audio, and video calls; Meta AI, an assistant that's available across apps, as a stand-alone app, on AI glasses, and on the web; Threads, an application for text-based updates and public conversations; and WhatsApp, a messaging application that is used by people and businesses to communicate and transact. The RL segment provides virtual and augmented reality products, including consumer hardware, software, and content that help people feel connected, as well as Meta Quest devices that enable social experiences across gaming, fitness, entertainment, and more. The segment also includes wearables such as AI glasses like Ray Ban Meta and Oakley Meta glasses; and the Meta Ray Ban Display, which combines AI glasses with an integrated lens display an...",
   "industry": "Internet Content & Information",
   "sector": "Communication Services",
@@ -10,18 +10,18 @@
   "city": "Menlo Park",
   "state": "CA",
   "metrics": {
-    "trailingPE": 21.58109,
-    "forwardPE": 16.373686,
-    "priceToBook": 6.1812463,
-    "enterpriseToEbitda": 13.218,
-    "dividendYield": 0.37,
+    "trailingPE": 21.841703,
+    "forwardPE": 16.559362,
+    "priceToBook": 6.2513413,
+    "enterpriseToEbitda": 13.833,
+    "dividendYield": 0.35,
     "payoutRatio": 0.0764,
     "profitMargins": 0.32837,
     "operatingMargins": 0.40617,
     "returnOnAssets": 0.16395001,
     "returnOnEquity": 0.32930002,
     "beta": 1.229,
-    "trailingEps": 27.5,
+    "trailingEps": 27.48,
     "exDividendDate": "2026-06-15"
   },
   "analyst": {
