@@ -1,7 +1,7 @@
 {
   "symbol": "AMZN",
   "meta": {
-    "generatedAt": "2026-06-19T00:11:52.665908+00:00",
+    "generatedAt": "2026-06-19T23:39:05.499971+00:00",
     "name": "Amazon.com, Inc.",
     "currency": "USD",
     "exchange": "NMS",
@@ -20117,11 +20117,11 @@
     },
     {
       "date": "2026-06-18",
-      "open": 240.22,
+      "open": 240.12,
       "high": 245.73,
       "low": 236.02,
       "close": 244.39,
-      "volume": 66532506
+      "volume": 75624400
     }
   ]
 }

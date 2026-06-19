@@ -1,7 +1,7 @@
 {
   "symbol": "TSLA",
   "meta": {
-    "generatedAt": "2026-06-19T00:11:52.665908+00:00",
+    "generatedAt": "2026-06-19T23:39:05.499971+00:00",
     "name": "Tesla, Inc.",
     "currency": "USD",
     "exchange": "NMS",
@@ -20117,11 +20117,11 @@
     },
     {
       "date": "2026-06-18",
-      "open": 398.085,
+      "open": 398.1,
       "high": 402.52,
       "low": 384.7,
       "close": 400.49,
-      "volume": 54706416
+      "volume": 58384700
     }
   ]
 }

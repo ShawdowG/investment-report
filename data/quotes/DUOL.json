@@ -1,7 +1,7 @@
 {
   "symbol": "DUOL",
   "meta": {
-    "generatedAt": "2026-06-19T00:11:52.665908+00:00",
+    "generatedAt": "2026-06-19T23:39:05.499971+00:00",
     "name": "Duolingo, Inc.",
     "currency": "USD",
     "exchange": "NMS",
@@ -9837,11 +9837,11 @@
     },
     {
       "date": "2026-06-18",
-      "open": 123.5,
+      "open": 123.7,
       "high": 126.66,
-      "low": 121.1019,
+      "low": 121.102,
       "close": 125.56,
-      "volume": 1544389
+      "volume": 1663800
     }
   ]
 }

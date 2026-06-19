@@ -1,7 +1,7 @@
 {
   "symbol": "RDDT",
   "meta": {
-    "generatedAt": "2026-06-19T00:11:52.665908+00:00",
+    "generatedAt": "2026-06-19T23:39:05.499971+00:00",
     "name": "Reddit, Inc.",
     "currency": "USD",
     "exchange": "NYQ",
@@ -4513,7 +4513,7 @@
       "high": 176.22,
       "low": 165.88,
       "close": 174.96,
-      "volume": 5207652
+      "volume": 5337400
     }
   ]
 }
