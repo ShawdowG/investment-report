@@ -1,6 +1,6 @@
 {
   "symbol": "MA",
-  "generatedAt": "2026-06-17T23:58:57.883685+00:00",
+  "generatedAt": "2026-06-19T00:11:52.665908+00:00",
   "description": "Mastercard Incorporated, a technology company, provides transaction processing and other payment-related products and services in the United States and internationally. The company offers products and services for account holders, merchants, financial institutions, digital partners, businesses, governments, and other organizations, such as programs that enable issuers to provide consumers with credits to defer payments; payment products and solutions that allow its customers to access funds in deposit and other accounts; prepaid programs services; consumer bill payment services; and commercial credit, debit, and prepaid payment products and solutions. It also provides solutions that enable businesses or governments to make payments to businesses, including Virtual Card Number, which is generated dynamically from an existing account and leverages the credit limit of the funding account; and a platform to optimize supplier payment enablement campaigns for financial institutions. In addition, the company offers Mastercard Move, which partners with digital messaging and payment platforms to enable consumers to send money directly within applications to other consumers; and partners with central banks, fintechs, and financial institutions, as well as enables various cross-border payment flows. Further, it provides security solutions; marketing, personalization, and issuer and merchant loyalty services; business and operational intelligence, advanced analytics and AI, consulting an...",
   "industry": "Credit Services",
   "sector": "Financial Services",
@@ -10,9 +10,9 @@
   "city": "Purchase",
   "state": "NY",
   "metrics": {
-    "trailingPE": 28.496532,
-    "forwardPE": 21.641922,
-    "priceToBook": 65.07259,
+    "trailingPE": 28.311562,
+    "forwardPE": 21.501444,
+    "priceToBook": 64.65021,
     "enterpriseToEbitda": 21.224,
     "dividendYield": 0.69,
     "payoutRatio": 0.1823,
