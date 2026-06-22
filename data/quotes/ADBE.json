@@ -1,40 +1,16 @@
 {
   "symbol": "ADBE",
   "meta": {
-    "generatedAt": "2026-06-19T23:39:05.499971+00:00",
+    "generatedAt": "2026-06-22T23:51:43.764241+00:00",
     "name": "Adobe Inc.",
     "currency": "USD",
     "exchange": "NMS",
     "sector": "Technology",
     "industry": "Software - Application",
-    "marketCap": 77576101888.0,
-    "peRatio": 11.164761
+    "marketCap": 77472751616.0,
+    "peRatio": 11.143511
   },
   "daily": [
-    {
-      "date": "2016-06-20",
-      "open": 97.1,
-      "high": 98.75,
-      "low": 96.77,
-      "close": 97.99,
-      "volume": 4310600
-    },
-    {
-      "date": "2016-06-21",
-      "open": 98.64,
-      "high": 99.92,
-      "low": 98.13,
-      "close": 99.72,
-      "volume": 6505100
-    },
-    {
-      "date": "2016-06-22",
-      "open": 95.53,
-      "high": 96.5,
-      "low": 93.86,
-      "close": 94.01,
-      "volume": 10280500
-    },
     {
       "date": "2016-06-23",
       "open": 94.73,
@@ -20122,6 +20098,14 @@
       "low": 190.12,
       "close": 195.16,
       "volume": 15852500
+    },
+    {
+      "date": "2026-06-22",
+      "open": 193.393,
+      "high": 199.25,
+      "low": 191.21,
+      "close": 194.9,
+      "volume": 7879662
     }
   ]
 }
