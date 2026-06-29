@@ -1,6 +1,6 @@
 {
   "symbol": "MSFT",
-  "generatedAt": "2026-06-26T23:44:23.643308+00:00",
+  "generatedAt": "2026-06-29T23:35:56.531315+00:00",
   "description": "Microsoft Corporation develops and supports software, services, devices, and solutions worldwide. The Productivity and Business Processes segment offers Microsoft 365 commercial, enterprise mobility + security, windows commercial, power BI, exchange, sharepoint, Microsoft teams, security and compliance, and copilot; Microsoft 365 commercial products, such as Windows commercial on-premises and office licensed services; Microsoft 365 consumer products and cloud services, including Microsoft 365 consumer subscriptions, office licensed on-premises, and other consumer services; LinkedIn; dynamics products and cloud services, such as dynamics 365, cloud-based applications, and on-premises ERP and CRM applications. Its Intelligent Cloud segment provides Server products and cloud services comprising Azure and other cloud services, GitHub, Nuance Healthcare, virtual desktop offerings, and other cloud services; server products, including SQL and windows server, visual studio and system center related client access licenses, and other on-premises offerings; enterprise and partner services, such as enterprise support and nuance professional services, industry solutions, Microsoft partner network, and learning experience. The Personal Computing segment provides windows and devices, such as Windows OEM licensing and devices and surface and PC accessories; gaming services and solutions, such as Xbox hardware, content, and services, first- and third-party content Xbox game pass, subscription...",
   "industry": "Software - Infrastructure",
   "sector": "Technology",
@@ -10,18 +10,18 @@
   "city": "Redmond",
   "state": "WA",
   "metrics": {
-    "trailingPE": 22.213816,
-    "forwardPE": 19.256187,
-    "priceToBook": 6.686806,
-    "enterpriseToEbitda": 14.465,
-    "dividendYield": 1.03,
+    "trailingPE": 21.964838,
+    "forwardPE": 19.029018,
+    "priceToBook": 6.607921,
+    "enterpriseToEbitda": 15.096,
+    "dividendYield": 0.98,
     "payoutRatio": 0.20729999,
     "profitMargins": 0.39341998,
     "operatingMargins": 0.46326,
     "returnOnAssets": 0.14814,
     "returnOnEquity": 0.34013999,
     "beta": 1.103,
-    "trailingEps": 16.79,
+    "trailingEps": 16.78,
     "exDividendDate": "2026-08-20"
   },
   "analyst": {
