@@ -1,7 +1,7 @@
 {
   "symbol": "TM",
-  "generatedAt": "2026-06-30T23:45:35.217718+00:00",
-  "description": "Toyota Motor Corporation designs, manufactures, assembles, and sells passenger vehicles, minivans and commercial vehicles, and related parts and accessories in Japan, North America, Europe, Asia, Central and South America, Oceania, Africa, the Middle East, and internationally. The company operates through Automotive, Financial Services, and All Other segments. The company offers subcompact and compact cars; mini-vehicles; mid-size, luxury, sports, and specialty cars; recreational and sport-utility vehicles; pickup trucks; minivans; trucks; and buses. It also develops and sells battery and hybrid electric vehicles and batteries. In addition, the company provides financial services, such as retail financing and leasing, wholesale financing, insurance, and credit cards. Further, it operates GAZOO.com, a web portal for automobile information, as well as engages in telecommunications and other businesses. It offers vehicles under the Toyota and Lexus brand names. Toyota Motor Corporation was founded in 1933 and is headquartered in Toyota, Japan.",
+  "generatedAt": "2026-07-01T23:52:28.490192+00:00",
+  "description": "Toyota Motor Corporation designs, manufactures, assembles, and sells passenger vehicles, minivans and commercial vehicles, and related parts and accessories in Japan, North America, Europe, Asia, Central and South America, Oceania, Africa, the Middle East, and internationally. The company operates through Automotive, Financial Services, and All Other segments. The company offers subcompact and compact cars; mini-vehicles; mid-size, luxury, sports, and specialty cars; recreational and sport-utility vehicles; pickup trucks; minivans; trucks; and buses. It also develops and sells battery and hybrid electric vehicles and batteries. In addition, the company provides financial services, such as retail financing and leasing, wholesale financing, insurance, and credit cards. Further, it operates GAZOO.com, a web portal for automobile information, as well as engages in telecommunications and other businesses. It offers vehicles under the Toyota and Lexus brand names. It has strategic manufacturing alliance with Joby Aviation, Inc. to establish a joint venture to realize air mobility. Toyota Motor Corporation was founded in 1933 and is headquartered in Toyota, Japan.",
   "industry": "Auto Manufacturers",
   "sector": "Consumer Cyclical",
   "country": "Japan",
@@ -9,22 +9,21 @@
   "employees": 390927,
   "city": "Toyota",
   "metrics": {
-    "trailingPE": 9.228493,
-    "forwardPE": 10.673004,
-    "priceToBook": 14.236534,
-    "enterpriseToEbitda": 6.186,
-    "dividendYield": 3.66,
+    "trailingPE": 9.2913475,
+    "forwardPE": 10.751585,
+    "priceToBook": 14.352963,
+    "enterpriseToEbitda": 6.175,
+    "dividendYield": 3.72,
     "payoutRatio": 0.314,
     "profitMargins": 0.07592,
     "operatingMargins": 0.04566,
     "returnOnAssets": 0.02368,
     "returnOnEquity": 0.10233,
     "beta": 0.306,
-    "trailingEps": 18.25,
+    "trailingEps": 18.26,
     "exDividendDate": "2026-03-31"
   },
   "analyst": {
-    "recommendationMean": 1.5,
     "targetMeanPrice": 256.52435
   },
   "calendar": {
