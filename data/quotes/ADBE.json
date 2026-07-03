@@ -1,7 +1,7 @@
 {
   "symbol": "ADBE",
   "meta": {
-    "generatedAt": "2026-07-02T23:40:19.269502+00:00",
+    "generatedAt": "2026-07-03T23:37:00.510718+00:00",
     "name": "Adobe Inc.",
     "currency": "USD",
     "exchange": "NMS",
@@ -20111,9 +20111,9 @@
       "date": "2026-07-02",
       "open": 215.55,
       "high": 222.15,
-      "low": 213.735,
+      "low": 213.74,
       "close": 219.72,
-      "volume": 7855227
+      "volume": 7907500
     }
   ]
 }

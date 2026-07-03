@@ -1,7 +1,7 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-07-02T23:40:19.269502+00:00",
-  "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation has a strategic collaboration with Palantir Technologies Inc. to deliver an intelligent engine for running NVIDIA AI and Nemotron open models in sovereign environments. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
+  "generatedAt": "2026-07-03T23:37:00.510718+00:00",
+  "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
   "country": "United States",
@@ -10,18 +10,18 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 29.881903,
+    "trailingPE": 29.83614,
     "forwardPE": 15.26351,
     "priceToBook": 24.142504,
-    "enterpriseToEbitda": 28.645,
+    "enterpriseToEbitda": 28.242,
     "dividendYield": 0.51,
     "payoutRatio": 0.0061000003,
     "profitMargins": 0.62966,
     "operatingMargins": 0.65596,
     "returnOnAssets": 0.52727,
     "returnOnEquity": 1.14288,
-    "beta": 2.202,
-    "trailingEps": 6.52,
+    "beta": 2.211,
+    "trailingEps": 6.53,
     "exDividendDate": "2026-06-04"
   },
   "analyst": {
