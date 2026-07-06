@@ -1,6 +1,6 @@
 {
   "symbol": "V",
-  "generatedAt": "2026-07-03T23:37:00.510718+00:00",
+  "generatedAt": "2026-07-06T23:40:31.681666+00:00",
   "description": "Visa Inc. operates as a payment technology company in the United States and internationally. The company operates VisaNet, a transaction processing network that enables authorization, clearing, and settlement of payment transactions. It also offers credit, debit, and prepaid card products; tap to pay, tokenization, and click to pay services; Visa Direct, a platform which facilitates money movement, enabling clients to collect, hold, convert, and send funds across its network; and issuing solutions, such as airport lounge access, dining reservations, shopping experiences, event tickets, and seller offers. In addition, the company provides acceptance solutions, an omnichannel payment integration with e-commerce platforms; risk detection and prevention solutions; and advisory and other services comprising consulting practice, proprietary analytics models, data scientists and economists, marketing services, and managed services. It provides its services under the Visa, Visa Electron, V PAY, Interlink, and PLUS brands. The company serves consumers, sellers, financial institutions, and government entities. Visa Inc. was founded in 1958 and is headquartered in San Francisco, California.",
   "industry": "Credit Services",
   "sector": "Financial Services",
@@ -10,10 +10,10 @@
   "city": "San Francisco",
   "state": "CA",
   "metrics": {
-    "trailingPE": 31.544426,
-    "forwardPE": 24.35609,
-    "priceToBook": 19.425491,
-    "enterpriseToEbitda": 22.991,
+    "trailingPE": 31.119339,
+    "forwardPE": 24.027872,
+    "priceToBook": 19.163715,
+    "enterpriseToEbitda": 22.685,
     "dividendYield": 0.74,
     "payoutRatio": 0.2197,
     "profitMargins": 0.51679003,
