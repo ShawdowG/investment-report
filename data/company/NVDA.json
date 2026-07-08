@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-07-07T23:30:49.943212+00:00",
+  "generatedAt": "2026-07-08T23:38:59.147101+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,10 +10,10 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 30.157732,
-    "forwardPE": 15.428029,
-    "priceToBook": 24.402725,
-    "enterpriseToEbitda": 28.348,
+    "trailingPE": 31.211008,
+    "forwardPE": 15.991313,
+    "priceToBook": 25.29368,
+    "enterpriseToEbitda": 28.55,
     "dividendYield": 0.51,
     "payoutRatio": 0.0061000003,
     "profitMargins": 0.62966,
@@ -21,7 +21,7 @@
     "returnOnAssets": 0.52727,
     "returnOnEquity": 1.14288,
     "beta": 2.211,
-    "trailingEps": 6.53,
+    "trailingEps": 6.54,
     "exDividendDate": "2026-06-04"
   },
   "analyst": {
