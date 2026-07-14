@@ -1,6 +1,6 @@
 {
   "symbol": "AMD",
-  "generatedAt": "2026-07-13T23:27:16.541824+00:00",
+  "generatedAt": "2026-07-14T23:26:39.113904+00:00",
   "description": "Advanced Micro Devices, Inc. operates as a semiconductor company internationally. It operates in three segments: Data Center, Client and Gaming, and Embedded. The company offers artificial intelligence (AI) accelerators, microprocessors, and graphics processing units (GPUs) as standalone devices or as incorporated into accelerated processing units, chipsets, and data center and professional GPUs; and embedded processors and semi-custom system-on-chip (SoC) products, microprocessor and SoC development services and technology, data processing units, field programmable gate arrays (FPGA), system on modules, AI network interface cards, and adaptive SoC products. It provides processors under the AMD Ryzen, AMD Ryzen AI, AMD Ryzen PRO, AMD Ryzen Threadripper, AMD Ryzen Threadripper PRO, AMD Athlon, and AMD PRO A-Series brands; graphics under the AMD Radeon graphics and AMD Embedded Radeon graphics; professional graphics under the AMD Radeon Pro graphics brand; and AI and general-purpose compute infrastructure for hyperscale providers. The company offers data center graphics under the AMD Instinct accelerators and Radeon PRO V-series brands; server microprocessors under the AMD EPYC brand; low power solutions under the AMD Athlon, AMD Geode, AMD Ryzen, AMD EPYC, and AMD R-Series and G-Series brands; FPGA products under the Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6, and Spartan-7 brands; adaptive SOC...",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,22 +10,22 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 177.53821,
-    "forwardPE": 40.235817,
-    "priceToBook": 13.512782,
-    "enterpriseToEbitda": 121.295,
+    "trailingPE": 183.32108,
+    "forwardPE": 41.11821,
+    "priceToBook": 13.860217,
+    "enterpriseToEbitda": 116.137,
     "payoutRatio": 0.0,
     "profitMargins": 0.13374,
     "operatingMargins": 0.14396,
     "returnOnAssets": 0.03647,
     "returnOnEquity": 0.08063,
     "beta": 2.469,
-    "trailingEps": 3.01,
+    "trailingEps": 2.99,
     "exDividendDate": "1995-04-27"
   },
   "analyst": {
-    "recommendationMean": 1.48077,
-    "targetMeanPrice": 516.125
+    "recommendationMean": 1.4902,
+    "targetMeanPrice": 525.40424
   },
   "calendar": {
     "earningsDate": "2026-08-04",
