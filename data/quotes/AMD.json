@@ -1,13 +1,13 @@
 {
   "symbol": "AMD",
   "meta": {
-    "generatedAt": "2026-07-30T23:34:06.745331+00:00",
+    "generatedAt": "2026-07-31T23:32:57.486613+00:00",
     "name": "Advanced Micro Devices, Inc.",
     "currency": "USD",
     "exchange": "NMS",
     "sector": "Technology",
     "industry": "Semiconductors",
-    "peRatio": 161.25914
+    "peRatio": 158.18936
   },
   "daily": [
     {
@@ -20108,11 +20108,19 @@
     },
     {
       "date": "2026-07-30",
-      "open": 459.16,
+      "open": 460.0,
       "high": 498.2,
       "low": 457.68,
       "close": 485.39,
-      "volume": 35105728
+      "volume": 36936600
+    },
+    {
+      "date": "2026-07-31",
+      "open": 510.275,
+      "high": 515.62,
+      "low": 475.76,
+      "close": 476.15,
+      "volume": 25316589
     }
   ]
 }
