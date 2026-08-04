@@ -1,6 +1,6 @@
 {
   "symbol": "BABA",
-  "generatedAt": "2026-08-03T23:39:26.849795+00:00",
+  "generatedAt": "2026-08-04T23:34:40.312723+00:00",
   "description": "Alibaba Group Holding Limited, through its subsidiaries, provides technology infrastructure and marketing reach to help merchants, brands, retailers, and other businesses in the People's Republic of China and internationally. It operates through the Alibaba China E-Commerce Group, Alibaba International Digital Commerce Group, Cloud Intelligence Group, and All Others segments. The Alibaba China E-commerce Group segment operates Taobao and Tmall, which are digital retail platforms; Taobao Instant Commerce, a local services and on-demand delivery platform; 1688.com, a domestic wholesale marketplace; and Xianyu, a consumer-to-consumer community and marketplace for idle goods. Its Alibaba International Digital Commerce Group segment includes AliExpress, a global e-commerce platform; Trendyol, an e-commerce platform in Turkey; Lazada, an e-commerce platform in Southeast Asia; Daraz, an e-commerce platform in South Asia, primarily in Pakistan and Bangladesh; and Alibaba.com, an integrated international online wholesale marketplace. The Cloud Intelligence Group segment offers a suite of cloud services based on infrastructure-as-a-service, platform-as-a-service, and model-as-a-service. Its All Others segment comprises Amap, a provider of mobile digital maps, navigation, and real-time traffic information in China; Cainiao, which provides logistics solutions; Youku, an online long-form video platform in China; Freshippo, a retail platform for groceries and fresh goods; and Alibaba Healt...",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
@@ -9,10 +9,10 @@
   "employees": 131462,
   "city": "Hangzhou",
   "metrics": {
-    "trailingPE": 19.584616,
-    "forwardPE": 14.043332,
-    "priceToBook": 1.8874142,
-    "enterpriseToEbitda": 2.866,
+    "trailingPE": 19.844616,
+    "forwardPE": 14.229768,
+    "priceToBook": 1.912471,
+    "enterpriseToEbitda": 2.973,
     "dividendYield": 0.86,
     "payoutRatio": 0.1712,
     "profitMargins": 0.1012,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 1.325,
-    "targetMeanPrice": 189.81981
+    "targetMeanPrice": 190.058
   },
   "calendar": {
     "earningsDate": "2026-08-28",

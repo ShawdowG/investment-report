@@ -1,24 +1,16 @@
 {
   "symbol": "NFLX",
   "meta": {
-    "generatedAt": "2026-08-03T23:39:26.849795+00:00",
+    "generatedAt": "2026-08-04T23:34:40.312723+00:00",
     "name": "Netflix, Inc.",
     "currency": "USD",
     "exchange": "NMS",
     "sector": "Communication Services",
     "industry": "Entertainment",
-    "marketCap": 305341693952.0,
-    "peRatio": 23.059748
+    "marketCap": 306341019648.0,
+    "peRatio": 23.13522
   },
   "daily": [
-    {
-      "date": "2016-08-04",
-      "open": 9.32,
-      "high": 9.373,
-      "low": 9.182,
-      "close": 9.344,
-      "volume": 60434000
-    },
     {
       "date": "2016-08-05",
       "open": 9.377,
@@ -20097,15 +20089,23 @@
       "high": 72.75,
       "low": 71.11,
       "close": 71.71,
-      "volume": 35818000
+      "volume": 35847500
     },
     {
       "date": "2026-08-03",
-      "open": 72.63,
+      "open": 72.77,
       "high": 73.95,
       "low": 72.18,
       "close": 73.33,
-      "volume": 32254063
+      "volume": 33922300
+    },
+    {
+      "date": "2026-08-04",
+      "open": 72.45,
+      "high": 73.745,
+      "low": 72.3,
+      "close": 73.57,
+      "volume": 42742380
     }
   ]
 }
