@@ -1,6 +1,6 @@
 {
   "symbol": "V",
-  "generatedAt": "2026-08-07T01:36:53.979756+00:00",
+  "generatedAt": "2026-08-07T23:07:43.990478+00:00",
   "description": "Visa Inc. operates as a payment technology company in the United States and internationally. The company operates VisaNet, a transaction processing network that enables authorization, clearing, and settlement of payment transactions. It also offers credit, debit, and prepaid card products; tap to pay, tokenization, and click to pay services; Visa Direct, a platform which facilitates money movement, enabling clients to collect, hold, convert, and send funds across its network; and issuing solutions, such as airport lounge access, dining reservations, shopping experiences, event tickets, and seller offers. In addition, the company provides acceptance solutions, an omnichannel payment integration with e-commerce platforms; risk detection and prevention solutions; and advisory and other services comprising consulting practice, proprietary analytics models, data scientists and economists, marketing services, and managed services. It provides its services under the Visa, Visa Electron, V PAY, Interlink, and PLUS brands. The company serves consumers, sellers, financial institutions, and government entities. Visa Inc. was founded in 1958 and is headquartered in San Francisco, California.",
   "industry": "Credit Services",
   "sector": "Financial Services",
@@ -10,23 +10,23 @@
   "city": "San Francisco",
   "state": "CA",
   "metrics": {
-    "trailingPE": 31.50255,
-    "forwardPE": 24.751661,
-    "priceToBook": 19.63275,
+    "trailingPE": 30.877342,
+    "forwardPE": 24.20491,
+    "priceToBook": 19.210386,
     "enterpriseToEbitda": 22.239,
-    "dividendYield": 0.73,
+    "dividendYield": 0.72,
     "payoutRatio": 0.22129999,
     "profitMargins": 0.50782,
     "operatingMargins": 0.66130996,
     "returnOnAssets": 0.1911,
     "returnOnEquity": 0.6119,
     "beta": 0.759,
-    "trailingEps": 11.76,
+    "trailingEps": 11.74,
     "exDividendDate": "2026-08-11"
   },
   "analyst": {
-    "recommendationMean": 1.36585,
-    "targetMeanPrice": 414.1192
+    "recommendationMean": 1.375,
+    "targetMeanPrice": 415.38947
   },
   "calendar": {
     "earningsDate": "2026-10-27",
