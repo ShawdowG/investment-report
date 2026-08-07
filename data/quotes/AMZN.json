@@ -1,14 +1,14 @@
 {
   "symbol": "AMZN",
   "meta": {
-    "generatedAt": "2026-08-05T23:30:48.221393+00:00",
+    "generatedAt": "2026-08-07T01:36:53.979756+00:00",
     "name": "Amazon.com, Inc.",
     "currency": "USD",
     "exchange": "NMS",
     "sector": "Consumer Cyclical",
     "industry": "Internet Retail",
-    "marketCap": 2940888154112.0,
-    "peRatio": 21.917202
+    "marketCap": 2936681791488.0,
+    "peRatio": 21.90346
   },
   "daily": [
     {
@@ -20103,9 +20103,17 @@
       "date": "2026-08-05",
       "open": 281.59,
       "high": 282.79,
-      "low": 270.74,
+      "low": 270.73,
       "close": 272.65,
-      "volume": 42366662
+      "volume": 45119800
+    },
+    {
+      "date": "2026-08-06",
+      "open": 272.765,
+      "high": 275.48,
+      "low": 271.0845,
+      "close": 272.26,
+      "volume": 27906615
     }
   ]
 }

@@ -1,33 +1,34 @@
 {
   "symbol": "NVO",
-  "generatedAt": "2026-08-05T23:30:48.221393+00:00",
+  "generatedAt": "2026-08-07T01:36:53.979756+00:00",
   "description": "Novo Nordisk A/S, together with its subsidiaries, engages in the research and development, manufacture, and distribution of pharmaceutical products. It operates through two segments, Obesity and Diabetes Care, and Rare Disease. The Obesity and Diabetes care segment provides products for diabetes, obesity, cardiovascular, and other emerging therapy areas. The Rare Disease segment offers products in the areas of rare blood disorders, rare endocrine disorders, and hormone replacement therapy. The company also provides NovoPen 6 and NovoPen Echo Plus, smart insulin pens; Dose Check, an insulin dose guidance application; growth hormone pens and injection needles; and Wegovy pill an oral glucagon-like peptide-1 (GLP-1) receptor agonist therapy for weight management. It operates in Europe, Canada, the United States, Japan, Korea, Oceania, Southeast Asia, Mainland China, Hong Kong and Taiwan, Latin America, the Middle East, and Africa. Novo Nordisk A/S was founded in 1923 and is headquartered in Bagsvaerd, Denmark.",
   "industry": "Drug Manufacturers - General",
   "sector": "Healthcare",
   "country": "Denmark",
   "website": "https://www.novonordisk.com",
-  "employees": 68794,
+  "employees": 66700,
   "city": "Bagsvaerd",
   "metrics": {
-    "trailingPE": 11.049627,
-    "forwardPE": 13.417236,
-    "priceToBook": 6.351628,
-    "enterpriseToEbitda": 1.684,
-    "dividendYield": 4.07,
+    "trailingPE": 11.406947,
+    "forwardPE": 13.76398,
+    "priceToBook": 6.557026,
+    "enterpriseToEbitda": 1.72,
+    "dividendYield": 4.05,
     "payoutRatio": 0.4455,
     "profitMargins": 0.35347,
-    "operatingMargins": 0.34478,
-    "returnOnAssets": 0.17995001,
+    "operatingMargins": 0.42540002,
+    "returnOnAssets": 0.18729,
     "returnOnEquity": 0.59815,
+    "beta": 0.349,
     "trailingEps": 4.03,
-    "exDividendDate": "2026-03-30"
+    "exDividendDate": "2026-08-17"
   },
   "analyst": {
     "recommendationMean": 2.42857,
-    "targetMeanPrice": 47.94454
+    "targetMeanPrice": 47.804054
   },
   "calendar": {
-    "earningsDate": "2026-08-05",
+    "earningsDate": "2026-11-04",
     "lastFiscalYearEnd": "2025-12-31"
   },
   "news": [],

@@ -1,6 +1,6 @@
 {
   "symbol": "MSFT",
-  "generatedAt": "2026-08-05T23:30:48.221393+00:00",
+  "generatedAt": "2026-08-07T01:36:53.979756+00:00",
   "description": "Microsoft Corporation, a technology company, develops and supports a portfolio of technology solutions for individuals and businesses worldwide. It operates through three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. The Productivity and Business Processes segment offers Microsoft 365 Commercial, Enterprise Mobility + Security, Power BI, Exchange, SharePoint, Microsoft Teams, Microsoft 365 Security and Compliance, Microsoft 365 Copilot, and Windows Commercial on-premises and Office licensed on-premises. This segment also provides Microsoft 365 Consumer products and cloud services; LinkedIn, including talent solutions, marketing solutions, subscriptions, and sales solutions; Dynamics 365, a set of cloud-based applications; and on-premises ERP and CRM applications. The Intelligent Cloud segment offers server products and cloud services; cloud and AI consumption-based services, GitHub cloud services, health and life sciences cloud services, as well as virtual desktop offerings, and other cloud services; SQL Server, Windows Server, Visual Studio, System Center, and related client access licenses; and enterprise support services, industry solutions, Microsoft partner network, and learning experience. The More Personal Computing segment provides Windows OEM licensing and devices comprising Surface and PC accessories; XBOX hardware, and XBOX first- and third-party content and services; XBOX Game Pass and other subscriptions; XBOX Clou...",
   "industry": "Software - Infrastructure",
   "sector": "Technology",
@@ -10,10 +10,10 @@
   "city": "Redmond",
   "state": "WA",
   "metrics": {
-    "trailingPE": 27.171682,
-    "forwardPE": 20.7706,
-    "priceToBook": 8.183665,
-    "enterpriseToEbitda": 18.911,
+    "trailingPE": 27.862875,
+    "forwardPE": 21.298962,
+    "priceToBook": 8.391841,
+    "enterpriseToEbitda": 19.378,
     "dividendYield": 0.75,
     "payoutRatio": 0.1983,
     "profitMargins": 0.40305,
