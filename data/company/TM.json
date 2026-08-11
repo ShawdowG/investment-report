@@ -1,6 +1,6 @@
 {
   "symbol": "TM",
-  "generatedAt": "2026-08-10T23:08:18.881915+00:00",
+  "generatedAt": "2026-08-11T23:19:42.846735+00:00",
   "description": "Toyota Motor Corporation designs, manufactures, assembles, and sells passenger vehicles, minivans and commercial vehicles, and related parts and accessories in Japan, North America, Europe, Asia, Central and South America, Oceania, Africa, the Middle East, and internationally. The company operates through Automotive, Financial Services, and All Other segments. The company offers subcompact and compact cars; mini-vehicles; mid-size, luxury, sports, and specialty cars; recreational and sport-utility vehicles; pickup trucks; minivans; trucks; and buses. It also develops and sells battery and hybrid electric vehicles and batteries. In addition, the company provides financial services, such as retail financing and leasing, wholesale financing, insurance, and credit cards. Further, it operates GAZOO.com, a web portal for automobile information, as well as engages in telecommunications and other businesses. It offers vehicles under the Toyota and Lexus brand names. It has strategic manufacturing alliance with Joby Aviation, Inc. to establish a joint venture to realize air mobility. Toyota Motor Corporation was founded in 1933 and is headquartered in Toyota, Japan.",
   "industry": "Auto Manufacturers",
   "sector": "Consumer Cyclical",
@@ -9,18 +9,18 @@
   "employees": 367990,
   "city": "Toyota",
   "metrics": {
-    "trailingPE": 8.465471,
-    "forwardPE": 11.963244,
-    "priceToBook": 15.525462,
-    "enterpriseToEbitda": 6.272,
-    "dividendYield": 3.3,
+    "trailingPE": 8.527404,
+    "forwardPE": 12.029152,
+    "priceToBook": 15.342713,
+    "enterpriseToEbitda": 6.267,
+    "dividendYield": 3.32,
     "payoutRatio": 0.2638,
     "profitMargins": 0.0863,
     "operatingMargins": 0.07863,
     "returnOnAssets": 0.02339,
     "returnOnEquity": 0.12404,
     "beta": 0.335,
-    "trailingEps": 22.3,
+    "trailingEps": 22.26,
     "exDividendDate": "2026-03-31"
   },
   "analyst": {
