@@ -1,6 +1,6 @@
 {
   "symbol": "LMT",
-  "generatedAt": "2026-08-11T23:19:42.846735+00:00",
+  "generatedAt": "2026-08-12T23:13:19.320726+00:00",
   "description": "Lockheed Martin Corporation, an aerospace and defense company, engages in the research, design, development, manufacture, integration, and sustainment of technology systems, products, and services in the United States, Europe, Asia, the Middle East, and internationally. The company operates through four segments: Aeronautics; Missiles and Fire Control (MFC); Rotary and Mission Systems (RMS); and Space. The Aeronautics segment offers combat and air mobility aircraft, unmanned air vehicles, and related technologies. The MFC segment provides air and missile defense systems; tactical missiles and precision strike weapon systems; logistics; fire control systems; mission operations support, readiness, engineering support, and integration services; and ground vehicles. The RMS segment offers military and commercial helicopters, surface ships, sea- and land-based missile defense systems, radar and laser systems, sea- and air-based mission and combat systems, command and control mission solutions, cyber solutions, simulation and training solutions, and services and support for surface ships. The Space segment provides satellites; space transportation systems; strategic, advanced strike, and defensive systems; and classified systems and services in support of national security systems. This segment also provides network-enabled situational awareness; and integrates space and ground global systems to help its customers gather, analyze, and securely distribute critical intelligence data....",
   "industry": "Aerospace & Defense",
   "sector": "Industrials",
@@ -10,10 +10,10 @@
   "city": "Bethesda",
   "state": "MD",
   "metrics": {
-    "trailingPE": 22.025425,
-    "forwardPE": 18.271175,
-    "priceToBook": 15.680447,
-    "enterpriseToEbitda": 16.111,
+    "trailingPE": 22.355194,
+    "forwardPE": 18.544735,
+    "priceToBook": 15.915218,
+    "enterpriseToEbitda": 15.982,
     "dividendYield": 2.29,
     "payoutRatio": 0.5033,
     "profitMargins": 0.08163,
