@@ -1,6 +1,6 @@
 {
   "symbol": "LMT",
-  "generatedAt": "2026-08-18T22:53:20.099600+00:00",
+  "generatedAt": "2026-08-19T22:53:06.318749+00:00",
   "description": "Lockheed Martin Corporation, an aerospace and defense company, engages in the research, design, development, manufacture, integration, and sustainment of technology systems, products, and services in the United States, Europe, Asia, the Middle East, and internationally. The company operates through four segments: Aeronautics; Missiles and Fire Control (MFC); Rotary and Mission Systems (RMS); and Space. The Aeronautics segment offers combat and air mobility aircraft, unmanned air vehicles, and related technologies. The MFC segment provides air and missile defense systems; tactical missiles and precision strike weapon systems; logistics; fire control systems; mission operations support, readiness, engineering support, and integration services; and ground vehicles. The RMS segment offers military and commercial helicopters, surface ships, sea- and land-based missile defense systems, radar and laser systems, sea- and air-based mission and combat systems, command and control mission solutions, cyber solutions, simulation and training solutions, and services and support for surface ships. The Space segment provides satellites; space transportation systems; strategic, advanced strike, and defensive systems; and classified systems and services in support of national security systems. This segment also provides network-enabled situational awareness; and integrates space and ground global systems to help its customers gather, analyze, and securely distribute critical intelligence data....",
   "industry": "Aerospace & Defense",
   "sector": "Industrials",
@@ -10,16 +10,19 @@
   "city": "Bethesda",
   "state": "MD",
   "metrics": {
-    "trailingPE": 22.380022,
-    "forwardPE": 18.55849,
-    "priceToBook": 15.927023,
-    "enterpriseToEbitda": 15.886,
+    "trailingPE": 21.707813,
+    "forwardPE": 18.0077,
+    "priceToBook": 15.45433,
+    "enterpriseToEbitda": 16.206,
+    "dividendYield": 2.27,
+    "payoutRatio": 0.5033,
     "profitMargins": 0.08163,
     "operatingMargins": 0.119569995,
     "returnOnAssets": 0.08638,
     "returnOnEquity": 0.89165,
     "beta": 0.11,
-    "trailingEps": 27.13
+    "trailingEps": 27.14,
+    "exDividendDate": "2026-09-01"
   },
   "analyst": {
     "recommendationMean": 2.57143,
