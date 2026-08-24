@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-08-21T22:52:43.808297+00:00",
+  "generatedAt": "2026-08-24T22:55:17.575077+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,11 +10,11 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 32.88208,
-    "forwardPE": 16.482347,
-    "priceToBook": 26.60719,
-    "enterpriseToEbitda": 31.462,
-    "dividendYield": 0.46,
+    "trailingPE": 31.92649,
+    "forwardPE": 15.986504,
+    "priceToBook": 25.833954,
+    "enterpriseToEbitda": 31.151,
+    "dividendYield": 0.47,
     "payoutRatio": 0.0061000003,
     "profitMargins": 0.62966,
     "operatingMargins": 0.65596,
@@ -25,8 +25,8 @@
     "exDividendDate": "2026-06-04"
   },
   "analyst": {
-    "recommendationMean": 1.29508,
-    "targetMeanPrice": 304.1207
+    "recommendationMean": 1.29032,
+    "targetMeanPrice": 304.72882
   },
   "calendar": {
     "earningsDate": "2026-08-26",

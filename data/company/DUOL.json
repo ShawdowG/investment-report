@@ -1,6 +1,6 @@
 {
   "symbol": "DUOL",
-  "generatedAt": "2026-08-21T22:52:43.808297+00:00",
+  "generatedAt": "2026-08-24T22:55:17.575077+00:00",
   "description": "Duolingo, Inc. operates as a mobile learning platform in the United States, the United Kingdom, and internationally. The company offers 250 language courses, including Spanish, English, French, German, Italian, Portuguese, Japanese, and Chinese through its Duolingo app. It also provides a digital English language proficiency assessment exam. The company was incorporated in 2011 and is headquartered in Pittsburgh, Pennsylvania.",
   "industry": "Software - Application",
   "sector": "Technology",
@@ -10,21 +10,21 @@
   "city": "Pittsburgh",
   "state": "PA",
   "metrics": {
-    "trailingPE": 17.293491,
-    "forwardPE": 19.037012,
-    "priceToBook": 4.843232,
-    "enterpriseToEbitda": 31.566,
+    "trailingPE": 17.356974,
+    "forwardPE": 19.129505,
+    "priceToBook": 4.8667636,
+    "enterpriseToEbitda": 31.331,
     "payoutRatio": 0.0,
     "profitMargins": 0.35875,
     "operatingMargins": 0.11684,
     "returnOnAssets": 0.056420002,
     "returnOnEquity": 0.3442,
     "beta": 0.881,
-    "trailingEps": 8.45
+    "trailingEps": 8.46
   },
   "analyst": {
     "recommendationMean": 2.79167,
-    "targetMeanPrice": 126.45778
+    "targetMeanPrice": 127.06889
   },
   "calendar": {
     "earningsDate": "2026-11-04",
