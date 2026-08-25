@@ -1,6 +1,6 @@
 {
   "symbol": "NVO",
-  "generatedAt": "2026-08-24T22:55:17.575077+00:00",
+  "generatedAt": "2026-08-25T22:57:02.739204+00:00",
   "description": "Novo Nordisk A/S, together with its subsidiaries, engages in the research and development, manufacture, and distribution of pharmaceutical products. It operates through two segments, Obesity and Diabetes Care, and Rare Disease. The Obesity and Diabetes care segment provides products for diabetes, obesity, cardiovascular, and other emerging therapy areas. The Rare Disease segment offers products in the areas of rare blood disorders, rare endocrine disorders, and hormone replacement therapy. The company also provides NovoPen 6 and NovoPen Echo Plus, smart insulin pens; Dose Check, an insulin dose guidance application; growth hormone pens and injection needles; and Wegovy pill an oral glucagon-like peptide-1 (GLP-1) receptor agonist therapy for weight management. It operates in Europe, Canada, the United States, Japan, Korea, Oceania, Southeast Asia, Mainland China, Hong Kong and Taiwan, Latin America, the Middle East, and Africa. Novo Nordisk A/S was founded in 1923 and is headquartered in Bagsvaerd, Denmark.",
   "industry": "Drug Manufacturers - General",
   "sector": "Healthcare",
@@ -9,11 +9,11 @@
   "employees": 66700,
   "city": "Bagsvaerd",
   "metrics": {
-    "trailingPE": 11.443902,
-    "forwardPE": 13.643801,
-    "priceToBook": 6.6925306,
-    "enterpriseToEbitda": 1.74,
-    "dividendYield": 3.84,
+    "trailingPE": 11.868293,
+    "forwardPE": 14.158468,
+    "priceToBook": 6.232488,
+    "enterpriseToEbitda": 1.744,
+    "dividendYield": 3.83,
     "payoutRatio": 0.4446,
     "profitMargins": 0.35347,
     "operatingMargins": 0.42540002,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 2.57143,
-    "targetMeanPrice": 47.400055
+    "targetMeanPrice": 47.452705
   },
   "calendar": {
     "earningsDate": "2026-11-04",
