@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-08-27T03:29:56.123711+00:00",
+  "generatedAt": "2026-08-28T06:15:18.402076+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,9 +10,9 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 32.5559,
-    "forwardPE": 15.970859,
-    "priceToBook": 25.980175,
+    "trailingPE": 32.155148,
+    "forwardPE": 15.692964,
+    "priceToBook": 28.25031,
     "enterpriseToEbitda": 30.411,
     "dividendYield": 0.47,
     "payoutRatio": 0.0061000003,
@@ -21,7 +21,7 @@
     "returnOnAssets": 0.52727,
     "returnOnEquity": 1.14288,
     "beta": 2.215,
-    "trailingEps": 6.44,
+    "trailingEps": 7.09,
     "exDividendDate": "2026-06-04"
   },
   "analyst": {
@@ -29,7 +29,7 @@
     "targetMeanPrice": 305.7931
   },
   "calendar": {
-    "earningsDate": "2026-08-26",
+    "earningsDate": "2026-11-17",
     "lastFiscalYearEnd": "2026-01-25"
   },
   "news": [],
