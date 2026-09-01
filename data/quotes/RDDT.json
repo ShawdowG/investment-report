@@ -1,14 +1,14 @@
 {
   "symbol": "RDDT",
   "meta": {
-    "generatedAt": "2026-08-29T03:49:18.427587+00:00",
+    "generatedAt": "2026-09-01T01:22:09.864494+00:00",
     "name": "Reddit, Inc.",
     "currency": "USD",
     "exchange": "NYQ",
     "sector": "Communication Services",
     "industry": "Internet Content & Information",
-    "marketCap": 29436665856.0,
-    "peRatio": 35.581394
+    "marketCap": 28438128640.0,
+    "peRatio": 35.616867
   },
   "daily": [
     {
@@ -4903,9 +4903,17 @@
       "date": "2026-08-28",
       "open": 152.25,
       "high": 158.86,
-      "low": 152.0565,
+      "low": 152.057,
       "close": 153.0,
-      "volume": 2744092
+      "volume": 2749300
+    },
+    {
+      "date": "2026-08-31",
+      "open": 151.32,
+      "high": 151.9418,
+      "low": 146.62,
+      "close": 147.81,
+      "volume": 3841138
     }
   ]
 }

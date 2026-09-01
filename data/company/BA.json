@@ -1,6 +1,6 @@
 {
   "symbol": "BA",
-  "generatedAt": "2026-08-29T03:49:18.427587+00:00",
+  "generatedAt": "2026-09-01T01:22:09.864494+00:00",
   "description": "The Boeing Company, together with its subsidiaries, designs, develops, manufactures, sells, services, and supports commercial jetliners, military aircraft, satellites, missile defense, human space flight and launch systems, and services worldwide. The company operates through three segments: Commercial Airplanes; Defense, Space & Security; and Global Services. The Commercial Airplanes segment develops, produces, and markets commercial jet aircraft for passenger and cargo requirements. The Defense, Space & Security segment engages in the research, development, production, and modification of manned and unmanned military aircraft and weapons systems; strategic defense and intelligence systems, which include strategic missile and defense systems, command, control, communications, computers, intelligence, surveillance and reconnaissance, cyber and information solutions, and intelligence systems; and satellite systems, such as government and commercial satellites, and space exploration. The Global Services segment offers products and services, including supply chain and logistics management, engineering, maintenance and modifications, upgrades and conversions, spare parts, pilot and maintenance training systems and services, technical and maintenance documents, and data analytics and digital services to commercial and defense customers. The Boeing Company was incorporated in 1916 and is based in Arlington, Virginia.",
   "industry": "Aerospace & Defense",
   "sector": "Industrials",
@@ -10,10 +10,10 @@
   "city": "Arlington",
   "state": "VA",
   "metrics": {
-    "trailingPE": 75.7473,
-    "forwardPE": 50.916805,
-    "priceToBook": 27.192846,
-    "enterpriseToEbitda": -67.234,
+    "trailingPE": 75.01083,
+    "forwardPE": 50.421757,
+    "priceToBook": 26.92846,
+    "enterpriseToEbitda": -66.659,
     "payoutRatio": 0.0,
     "profitMargins": 0.025910001,
     "operatingMargins": 4.0000003e-05,
