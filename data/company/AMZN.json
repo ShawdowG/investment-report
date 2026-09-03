@@ -1,6 +1,6 @@
 {
   "symbol": "AMZN",
-  "generatedAt": "2026-09-02T00:26:16.057047+00:00",
+  "generatedAt": "2026-09-03T00:32:39.608126+00:00",
   "description": "Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS). It also manufactures and sells electronic devices, including Kindle, fire tablets, fire TVs, echo, ring, blink, and eero; and develops and produces media content. In addition, the company offers programs that enable sellers to sell their products in its stores; and programs that allow authors, independent publishers, musicians, filmmakers, Twitch streamers, skill and app developers, and others to publish and sell content. Further, it provides compute, storage, Artificial intelligence, database, analytics, machine learning, and other services, as well as advertising services through programs, such as sponsored ads, display, and video advertising. Additionally, the company offers Amazon Prime, a membership program. The company's products offered through its stores include merchandise and content purchased for resale and products offered by third-party sellers. It serves consumers, sellers, developers, enterprises, content creators, advertisers, and employees. The company was incorporated in 1994 and is headquartered in Seattle, Washington.",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
@@ -10,9 +10,9 @@
   "city": "Seattle",
   "state": "WA",
   "metrics": {
-    "trailingPE": 20.491962,
-    "forwardPE": 24.526207,
-    "priceToBook": 4.9831886,
+    "trailingPE": 20.496784,
+    "forwardPE": 24.53198,
+    "priceToBook": 4.9843616,
     "enterpriseToEbitda": 17.04,
     "payoutRatio": 0.0,
     "profitMargins": 0.1744,
@@ -24,7 +24,7 @@
   },
   "analyst": {
     "recommendationMean": 1.31148,
-    "targetMeanPrice": 327.6707
+    "targetMeanPrice": 328.004
   },
   "calendar": {
     "earningsDate": "2026-10-29",

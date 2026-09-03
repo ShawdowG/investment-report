@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-09-02T00:26:16.057047+00:00",
+  "generatedAt": "2026-09-03T00:32:39.608126+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,23 +10,23 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 27.454546,
-    "forwardPE": 14.206213,
-    "priceToBook": 26.944239,
+    "trailingPE": 28.370419,
+    "forwardPE": 14.568058,
+    "priceToBook": 23.664454,
     "enterpriseToEbitda": 25.919,
-    "dividendYield": 0.45,
+    "dividendYield": 0.46,
     "payoutRatio": 0.0354,
     "profitMargins": 0.63663,
     "operatingMargins": 0.66236997,
     "returnOnAssets": 0.53572,
     "returnOnEquity": 1.17211,
     "beta": 2.215,
-    "trailingEps": 7.92,
+    "trailingEps": 7.91,
     "exDividendDate": "2026-09-10"
   },
   "analyst": {
-    "recommendationMean": 1.27869,
-    "targetMeanPrice": 323.41898
+    "recommendationMean": 1.28333,
+    "targetMeanPrice": 325.98773
   },
   "calendar": {
     "earningsDate": "2026-11-17",
