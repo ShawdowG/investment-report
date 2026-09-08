@@ -1,7 +1,7 @@
 {
   "symbol": "NFLX",
   "meta": {
-    "generatedAt": "2026-09-05T00:18:31.428298+00:00",
+    "generatedAt": "2026-09-08T00:37:37.069308+00:00",
     "name": "Netflix, Inc.",
     "currency": "USD",
     "exchange": "NMS",
@@ -20114,6 +20114,14 @@
       "low": 81.63,
       "close": 82.67,
       "volume": 24006400
+    },
+    {
+      "date": "2026-09-04",
+      "open": 82.17,
+      "high": 82.69,
+      "low": 78.23,
+      "close": 78.25,
+      "volume": 40066200
     }
   ]
 }
