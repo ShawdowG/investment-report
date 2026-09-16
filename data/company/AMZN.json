@@ -1,6 +1,6 @@
 {
   "symbol": "AMZN",
-  "generatedAt": "2026-09-15T00:50:49.617559+00:00",
+  "generatedAt": "2026-09-16T00:43:33.319185+00:00",
   "description": "Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS). It also manufactures and sells electronic devices, including Kindle, fire tablets, fire TVs, echo, ring, blink, and eero; and develops and produces media content. In addition, the company offers programs that enable sellers to sell their products in its stores; and programs that allow authors, independent publishers, musicians, filmmakers, Twitch streamers, skill and app developers, and others to publish and sell content. Further, it provides compute, storage, Artificial intelligence, database, analytics, machine learning, and other services, as well as advertising services through programs, such as sponsored ads, display, and video advertising. Additionally, the company offers Amazon Prime, a membership program. The company's products offered through its stores include merchandise and content purchased for resale and products offered by third-party sellers. It serves consumers, sellers, developers, enterprises, content creators, advertisers, and employees. The company was incorporated in 1994 and is headquartered in Seattle, Washington.",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
@@ -10,20 +10,20 @@
   "city": "Seattle",
   "state": "WA",
   "metrics": {
-    "trailingPE": 20.397425,
-    "forwardPE": 24.369732,
-    "priceToBook": 4.9562125,
-    "enterpriseToEbitda": 16.952,
+    "trailingPE": 20.00161,
+    "forwardPE": 23.885803,
+    "priceToBook": 4.8561263,
+    "enterpriseToEbitda": 16.625,
     "payoutRatio": 0.0,
     "profitMargins": 0.1744,
     "operatingMargins": 0.13689,
     "returnOnAssets": 0.06589,
     "returnOnEquity": 0.30558002,
     "beta": 1.443,
-    "trailingEps": 12.43
+    "trailingEps": 12.42
   },
   "analyst": {
-    "recommendationMean": 1.30645,
+    "recommendationMean": 1.31148,
     "targetMeanPrice": 328.1707
   },
   "calendar": {
