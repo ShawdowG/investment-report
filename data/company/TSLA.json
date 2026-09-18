@@ -1,6 +1,6 @@
 {
   "symbol": "TSLA",
-  "generatedAt": "2026-09-17T00:49:36.658074+00:00",
+  "generatedAt": "2026-09-18T00:43:12.623918+00:00",
   "description": "Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive; and Energy Generation and Storage. The company offers electric vehicles, as well as sells automotive regulatory credits; and non-warranty maintenance services and collision, automotive insurance services, as well as part sales and retail merchandise sale. It also provides sedans and sport utility vehicles through direct and used vehicle sales, a network of Tesla Superchargers, and in-app upgrades; purchase financing and leasing services; services for electric vehicles through its company-owned service locations and Tesla mobile service technicians; and vehicle limited warranties and extended service plans. In addition, the company engages in the design, manufacture, installation, sale, and leasing of solar energy generation and energy storage products, and related services to residential, commercial, and industrial customers and utilities through its website, stores, and galleries, as well as through a network of channel partners. Further, it provides services and repairs to its energy product customers, including under warranty and extended service plans; and various financing options to its residential customers; lithium-ion battery energy storage products, such as Powerwall and Megapack; energy generation products, including solar panels and solar roof;...",
   "industry": "Auto Manufacturers",
   "sector": "Consumer Cyclical",
@@ -10,10 +10,10 @@
   "city": "Austin",
   "state": "TX",
   "metrics": {
-    "trailingPE": 334.65417,
-    "forwardPE": 165.88683,
-    "priceToBook": 16.280062,
-    "enterpriseToEbitda": 129.007,
+    "trailingPE": 342.24298,
+    "forwardPE": 166.63936,
+    "priceToBook": 16.649239,
+    "enterpriseToEbitda": 131.989,
     "payoutRatio": 0.0,
     "profitMargins": 0.03671,
     "operatingMargins": 0.014099999,
@@ -23,8 +23,8 @@
     "trailingEps": 1.07
   },
   "analyst": {
-    "recommendationMean": 2.40909,
-    "targetMeanPrice": 390.09283
+    "recommendationMean": 2.34884,
+    "targetMeanPrice": 396.93738
   },
   "calendar": {
     "earningsDate": "2026-10-21",
