@@ -1,7 +1,7 @@
 {
   "symbol": "NVO",
-  "generatedAt": "2026-09-18T00:43:12.623918+00:00",
-  "description": "Novo Nordisk A/S, together with its subsidiaries, engages in the research and development, manufacture, and distribution of pharmaceutical products. It operates through two segments, Obesity and Diabetes Care, and Rare Disease. The Obesity and Diabetes care segment provides products for diabetes, obesity, cardiovascular, and other emerging therapy areas. The Rare Disease segment offers products in the areas of rare blood disorders, rare endocrine disorders, and hormone replacement therapy. The company also provides NovoPen 6 and NovoPen Echo Plus, smart insulin pens; Dose Check, an insulin dose guidance application; growth hormone pens and injection needles; and Wegovy pill an oral glucagon-like peptide-1 (GLP-1) receptor agonist therapy for weight management. The company has a collaboration with Anthropic accelerate the development of new medicines and advance AI-driven software development. It operates in Europe, Canada, the United States, Japan, Korea, Oceania, Southeast Asia, Mainland China, Hong Kong and Taiwan, Latin America, the Middle East, and Africa. The company was formerly known as Novo Industri A/S and changed its name to Novo Nordisk A/S in April 1989. The company was founded in 1923 and is headquartered in Bagsvaerd, Denmark.",
+  "generatedAt": "2026-09-19T00:32:01.178307+00:00",
+  "description": "Novo Nordisk A/S, together with its subsidiaries, engages in the research and development, manufacture, and distribution of pharmaceutical products. It operates through two segments, Obesity and Diabetes Care, and Rare Disease. The Obesity and Diabetes care segment provides products for diabetes, obesity, cardiovascular, and other emerging therapy areas. The Rare Disease segment offers products in the areas of rare blood disorders, rare endocrine disorders, and hormone replacement therapy. The company also provides NovoPen 6 and NovoPen Echo Plus, smart insulin pens; Dose Check, an insulin dose guidance application; growth hormone pens and injection needles; and Wegovy pill an oral glucagon-like peptide-1 (GLP-1) receptor agonist therapy for weight management. The company has a collaboration with Anthropic accelerate the development of new medicines and advance AI-driven software development. It operates in Europe, Canada, the United States, Japan, Korea, Oceania, Southeast Asia, Mainland China, Hong Kong and Taiwan, Latin America, the Middle East, and Africa. It has a strategic collaboration with Orbis Medicines to discover and develop oral macrocycle therapeutics for cardiometabolic diseases. The company was formerly known as Novo Industri A/S and changed its name to Novo Nordisk A/S in April 1989. The company was founded in 1923 and is headquartered in Bagsvaerd, Denmark.",
   "industry": "Drug Manufacturers - General",
   "sector": "Healthcare",
   "country": "Denmark",
@@ -9,11 +9,11 @@
   "employees": 66700,
   "city": "Bagsvaerd",
   "metrics": {
-    "trailingPE": 10.664197,
-    "forwardPE": 12.7726755,
-    "priceToBook": 5.595266,
+    "trailingPE": 10.676543,
+    "forwardPE": 12.8636465,
+    "priceToBook": 5.6017437,
     "enterpriseToEbitda": 1.649,
-    "dividendYield": 4.31,
+    "dividendYield": 4.16,
     "payoutRatio": 0.4446,
     "profitMargins": 0.35347,
     "operatingMargins": 0.42540002,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 2.71429,
-    "targetMeanPrice": 46.76863
+    "targetMeanPrice": 46.804134
   },
   "calendar": {
     "earningsDate": "2026-11-04",
