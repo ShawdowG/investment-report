@@ -1,6 +1,6 @@
 {
   "symbol": "MSFT",
-  "generatedAt": "2026-10-07T01:45:23.087474+00:00",
+  "generatedAt": "2026-10-08T02:13:06.145493+00:00",
   "description": "Microsoft Corporation, a technology company, develops and supports a portfolio of technology solutions for individuals and businesses worldwide. Its products include operating systems, server applications, business solution applications, software development tools, desktop and server management tools, and video games; and devices, such as PCs, tablets, gaming and entertainment consoles, other intelligent devices, and related accessories. The company's Productivity and Business Processes segment offers Microsoft 365 Commercial, Enterprise Mobility + Security, Power BI, Exchange, SharePoint, Microsoft Teams, Microsoft 365 Security and Compliance, Microsoft 365 Copilot, and Windows Commercial on-premises and Office licensed on-premises. This segment also provides Microsoft 365 Consumer products and cloud services; LinkedIn, including talent solutions, marketing solutions, subscriptions, and sales solutions; Dynamics 365, a set of cloud-based applications; and on-premises ERP and CRM applications. Its Intelligent Cloud segment offers server products and cloud services; cloud and AI consumption-based services, GitHub cloud services, health and life sciences cloud services, as well as virtual desktop offerings, and other cloud services; SQL Server, Windows Server, Visual Studio, System Center, and related client access licenses; and enterprise support services, industry solutions, Microsoft partner network, and learning experience. The company's More Personal Computing segment prov...",
   "industry": "Software - Infrastructure",
   "sector": "Technology",
@@ -10,11 +10,11 @@
   "city": "Redmond",
   "state": "WA",
   "metrics": {
-    "trailingPE": 29.487463,
-    "forwardPE": 22.35501,
-    "priceToBook": 8.886091,
-    "enterpriseToEbitda": 20.345,
-    "dividendYield": 0.75,
+    "trailingPE": 29.513092,
+    "forwardPE": 22.374153,
+    "priceToBook": 8.893814,
+    "enterpriseToEbitda": 20.52,
+    "dividendYield": 0.74,
     "payoutRatio": 0.1983,
     "profitMargins": 0.40305,
     "operatingMargins": 0.45111,
@@ -26,7 +26,7 @@
   },
   "analyst": {
     "recommendationMean": 1.28571,
-    "targetMeanPrice": 585.6149
+    "targetMeanPrice": 587.6338
   },
   "calendar": {
     "earningsDate": "2026-10-28",
