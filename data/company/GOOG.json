@@ -1,6 +1,6 @@
 {
   "symbol": "GOOG",
-  "generatedAt": "2026-10-10T01:52:55.994885+00:00",
+  "generatedAt": "2026-10-13T03:07:44.469187+00:00",
   "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California.",
   "industry": "Internet Content & Information",
   "sector": "Communication Services",
@@ -10,11 +10,11 @@
   "city": "Mountain View",
   "state": "CA",
   "metrics": {
-    "trailingPE": 17.454088,
-    "forwardPE": 22.865774,
-    "priceToBook": 6.8347216,
-    "enterpriseToEbitda": 23.935,
-    "dividendYield": 0.26,
+    "trailingPE": 17.509785,
+    "forwardPE": 22.938738,
+    "priceToBook": 6.856531,
+    "enterpriseToEbitda": 24.048,
+    "dividendYield": 0.25,
     "payoutRatio": 0.042600002,
     "profitMargins": 0.54771,
     "operatingMargins": 0.34033,
@@ -25,8 +25,8 @@
     "exDividendDate": "2026-09-04"
   },
   "analyst": {
-    "recommendationMean": 1.38333,
-    "targetMeanPrice": 419.64572
+    "recommendationMean": 1.37097,
+    "targetMeanPrice": 420.36
   },
   "calendar": {
     "earningsDate": "2026-10-28",
