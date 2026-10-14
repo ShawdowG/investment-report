@@ -1,6 +1,6 @@
 {
   "symbol": "BA",
-  "generatedAt": "2026-10-13T03:07:44.469187+00:00",
+  "generatedAt": "2026-10-14T01:20:41.621180+00:00",
   "description": "The Boeing Company, together with its subsidiaries, designs, develops, manufactures, sells, services, and supports commercial jetliners, military aircraft, satellites, missile defense, human space flight and launch systems, and services worldwide. The company operates through three segments: Commercial Airplanes; Defense, Space & Security; and Global Services. The Commercial Airplanes segment develops, produces, and markets commercial jet aircraft for passenger and cargo requirements. The Defense, Space & Security segment engages in the research, development, production, and modification of manned and unmanned military aircraft and weapons systems; strategic defense and intelligence systems, which include strategic missile and defense systems, command, control, communications, computers, intelligence, surveillance and reconnaissance, cyber and information solutions, and intelligence systems; and satellite systems, such as government and commercial satellites, and space exploration. The Global Services segment offers products and services, including supply chain and logistics management, engineering, maintenance and modifications, upgrades and conversions, spare parts, pilot and maintenance training systems and services, technical and maintenance documents, and data analytics and digital services to commercial and defense customers. The Boeing Company was incorporated in 1916 and is based in Arlington, Virginia.",
   "industry": "Aerospace & Defense",
   "sector": "Industrials",
@@ -10,10 +10,10 @@
   "city": "Arlington",
   "state": "VA",
   "metrics": {
-    "trailingPE": 67.67857,
-    "forwardPE": 49.55816,
-    "priceToBook": 24.559357,
-    "enterpriseToEbitda": -61.677,
+    "trailingPE": 66.60358,
+    "forwardPE": 49.247517,
+    "priceToBook": 24.16926,
+    "enterpriseToEbitda": -60.857,
     "dividendYield": 0.0,
     "payoutRatio": 0.0,
     "profitMargins": 0.025910001,
@@ -26,7 +26,7 @@
   },
   "analyst": {
     "recommendationMean": 1.51724,
-    "targetMeanPrice": 271.55557
+    "targetMeanPrice": 269.25925
   },
   "calendar": {
     "earningsDate": "2026-10-27",
