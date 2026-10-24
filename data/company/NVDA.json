@@ -1,6 +1,6 @@
 {
   "symbol": "NVDA",
-  "generatedAt": "2026-10-23T00:51:47.242622+00:00",
+  "generatedAt": "2026-10-24T00:58:41.167996+00:00",
   "description": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. It has a collaboration with Cisco to develop Ultra-Dense Small Form Factor Pluggable (USFP), a high-density optical module pluggable transceiver. It has a collaboration with ChipAgents to develop Build-A-Chip-Bench, a benchmark for AI agents carrying chip design tasks and The Company has a strategic alliance with MediaTek to build the next generations of AI computing platforms. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
   "industry": "Semiconductors",
   "sector": "Technology",
@@ -10,23 +10,23 @@
   "city": "Santa Clara",
   "state": "CA",
   "metrics": {
-    "trailingPE": 28.070107,
-    "forwardPE": 13.334297,
-    "priceToBook": 22.377941,
-    "enterpriseToEbitda": 25.293,
-    "dividendYield": 0.45,
+    "trailingPE": 26.67004,
+    "forwardPE": 13.255753,
+    "priceToBook": 22.246126,
+    "enterpriseToEbitda": 25.143,
+    "dividendYield": 0.47,
     "payoutRatio": 0.0354,
     "profitMargins": 0.63663,
     "operatingMargins": 0.66236997,
     "returnOnAssets": 0.53572,
     "returnOnEquity": 1.17211,
     "beta": 2.216,
-    "trailingEps": 7.56,
+    "trailingEps": 7.91,
     "exDividendDate": "2026-09-10"
   },
   "analyst": {
     "recommendationMean": 1.29032,
-    "targetMeanPrice": 328.71695
+    "targetMeanPrice": 328.95346
   },
   "calendar": {
     "earningsDate": "2026-11-17",
