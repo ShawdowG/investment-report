@@ -1,6 +1,6 @@
 {
   "symbol": "AMZN",
-  "generatedAt": "2026-10-24T00:58:41.167996+00:00",
+  "generatedAt": "2026-10-27T01:35:28.713492+00:00",
   "description": "Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS). It also manufactures and sells electronic devices, including Kindle, fire tablets, fire TVs, echo, ring, blink, and eero; and develops and produces media content. In addition, the company offers programs that enable sellers to sell their products in its stores; and programs that allow authors, independent publishers, musicians, filmmakers, Twitch streamers, skill and app developers, and others to publish and sell content. Further, it provides compute, storage, Artificial intelligence, database, analytics, machine learning, and other services, as well as advertising services through programs, such as sponsored ads, display, and video advertising. Additionally, the company offers Amazon Prime, a membership program. The company's products offered through its stores include merchandise and content purchased for resale and products offered by third-party sellers. It serves consumers, sellers, developers, enterprises, content creators, advertisers, and employees. The company was incorporated in 1994 and is headquartered in Seattle, Washington.",
   "industry": "Internet Retail",
   "sector": "Consumer Cyclical",
@@ -10,10 +10,10 @@
   "city": "Seattle",
   "state": "WA",
   "metrics": {
-    "trailingPE": 19.951729,
-    "forwardPE": 23.77549,
-    "priceToBook": 4.847916,
-    "enterpriseToEbitda": 16.598,
+    "trailingPE": 20.03942,
+    "forwardPE": 23.875319,
+    "priceToBook": 4.8692236,
+    "enterpriseToEbitda": 16.668,
     "dividendYield": 0.0,
     "payoutRatio": 0.0,
     "profitMargins": 0.1744,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 1.33333,
-    "targetMeanPrice": 331.71967
+    "targetMeanPrice": 332.2369
   },
   "calendar": {
     "earningsDate": "2026-10-29",
