@@ -1,25 +1,17 @@
 {
   "symbol": "TSLA",
   "meta": {
-    "generatedAt": "2026-10-27T01:35:28.713492+00:00",
+    "generatedAt": "2026-10-28T01:34:40.808460+00:00",
     "name": "Tesla, Inc.",
     "currency": "USD",
     "exchange": "NMS",
     "sector": "Consumer Cyclical",
     "industry": "Auto Manufacturers",
-    "marketCap": 1547968184320.0,
-    "peRatio": 430.35162,
+    "marketCap": 1610579312640.0,
+    "peRatio": 447.7582,
     "dividendYield": 0.0
   },
   "daily": [
-    {
-      "date": "2016-10-27",
-      "open": 14.0893,
-      "high": 14.2467,
-      "low": 13.4433,
-      "close": 13.6007,
-      "volume": 196405500
-    },
     {
       "date": "2016-10-28",
       "open": 13.6,
@@ -20106,7 +20098,15 @@
       "high": 397.27,
       "low": 383.73,
       "close": 391.62,
-      "volume": 52957700
+      "volume": 53090200
+    },
+    {
+      "date": "2026-10-27",
+      "open": 397.76,
+      "high": 408.45,
+      "low": 395.25,
+      "close": 407.46,
+      "volume": 45189400
     }
   ]
 }
