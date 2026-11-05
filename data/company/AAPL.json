@@ -1,7 +1,7 @@
 {
   "symbol": "AAPL",
-  "generatedAt": "2026-11-04T02:37:19.187512+00:00",
-  "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple Vision Pro, Apple TV, Apple Watch, Beats products, and HomePod, as well as Apple branded and third-party accessories. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allows customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV, which offers original content and live sports; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company al...",
+  "generatedAt": "2026-11-05T02:42:25.335603+00:00",
+  "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories, including Apple Watch, AirPods, Beats products, Apple Vision Pro, Apple TV 4K, HomePod, and Apple HomeView, as well as Apple branded and third-party accessories. It also provides advertising services comprising third-party licensing arrangements and own advertising platforms; AppleCare and cloud services; and payment services, including Apple Card and Apple Pay. In addition, the company operates App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. Further, it provides digital content through subscription-based services, including Apple Arcade, a game service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience; Apple News+, a news and magazine service; and Apple TV, which offers original content and live sports. The company sells its products and resells third-party products through its retail and online stores, and direct sales force; its services through its various service platforms; and third-party cellular network carriers and other resellers. It serves consumer, small and mid-sized business, education, enterprise, and government markets. The company oper...",
   "industry": "Consumer Electronics",
   "sector": "Technology",
   "country": "United States",
@@ -10,27 +10,27 @@
   "city": "Cupertino",
   "state": "CA",
   "metrics": {
-    "trailingPE": 36.95991,
-    "forwardPE": 31.07349,
-    "priceToBook": 45.095108,
-    "enterpriseToEbitda": 29.528,
-    "dividendYield": 0.32,
-    "payoutRatio": 0.1204,
-    "profitMargins": 0.27618998,
-    "operatingMargins": 0.32623002,
-    "returnOnAssets": 0.27082002,
-    "returnOnEquity": 1.4875101,
+    "trailingPE": 38.920937,
+    "forwardPE": 32.823452,
+    "priceToBook": 45.314407,
+    "enterpriseToEbitda": 29.755,
+    "dividendYield": 0.33,
+    "payoutRatio": 0.118,
+    "profitMargins": 0.27604,
+    "operatingMargins": 0.31125,
+    "returnOnAssets": 0.25868,
+    "returnOnEquity": 1.42257,
     "beta": 1.089,
     "trailingEps": 8.98,
-    "exDividendDate": "2026-08-10"
+    "exDividendDate": "2026-11-12"
   },
   "analyst": {
     "recommendationMean": 2.23256,
-    "targetMeanPrice": 333.43842
+    "targetMeanPrice": 333.28052
   },
   "calendar": {
     "earningsDate": "2027-01-28",
-    "lastFiscalYearEnd": "2025-09-27"
+    "lastFiscalYearEnd": "2026-09-26"
   },
   "news": [],
   "financials": {
