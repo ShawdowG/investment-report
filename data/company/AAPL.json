@@ -1,20 +1,20 @@
 {
   "symbol": "AAPL",
-  "generatedAt": "2026-11-05T02:42:25.335603+00:00",
+  "generatedAt": "2026-11-06T02:45:50.088155+00:00",
   "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories, including Apple Watch, AirPods, Beats products, Apple Vision Pro, Apple TV 4K, HomePod, and Apple HomeView, as well as Apple branded and third-party accessories. It also provides advertising services comprising third-party licensing arrangements and own advertising platforms; AppleCare and cloud services; and payment services, including Apple Card and Apple Pay. In addition, the company operates App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. Further, it provides digital content through subscription-based services, including Apple Arcade, a game service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience; Apple News+, a news and magazine service; and Apple TV, which offers original content and live sports. The company sells its products and resells third-party products through its retail and online stores, and direct sales force; its services through its various service platforms; and third-party cellular network carriers and other resellers. It serves consumer, small and mid-sized business, education, enterprise, and government markets. The company oper...",
   "industry": "Consumer Electronics",
   "sector": "Technology",
   "country": "United States",
   "website": "https://www.apple.com",
-  "employees": 150000,
+  "employees": 167000,
   "city": "Cupertino",
   "state": "CA",
   "metrics": {
-    "trailingPE": 38.920937,
-    "forwardPE": 32.823452,
-    "priceToBook": 45.314407,
-    "enterpriseToEbitda": 29.755,
-    "dividendYield": 0.33,
+    "trailingPE": 38.326283,
+    "forwardPE": 32.321957,
+    "priceToBook": 44.62207,
+    "enterpriseToEbitda": 29.386,
+    "dividendYield": 0.31,
     "payoutRatio": 0.118,
     "profitMargins": 0.27604,
     "operatingMargins": 0.31125,
@@ -35,27 +35,27 @@
   "news": [],
   "financials": {
     "revenue": {
-      "latestAnnual": 416161000000.0,
-      "latestAnnualDate": "2025-09-30",
-      "yoyPct": 6.425511782832739,
+      "latestAnnual": 478834000000.0,
+      "latestAnnualDate": "2026-09-30",
+      "yoyPct": 15.05979656911628,
       "cagr5y": null
     },
     "operatingMargin": {
-      "latest": 0.31970799762591884,
-      "fiveYearHigh": 0.31970799762591884,
+      "latest": 0.3300997840587761,
+      "fiveYearHigh": 0.3300997840587761,
       "fiveYearLow": 0.2982141226502472,
       "trend": "expanding"
     },
     "freeCashFlow": {
-      "latestAnnual": 98767000000.0,
-      "fiveYearAvg": 104650250000.0,
-      "trend": "compressing"
+      "latestAnnual": 136056000000.0,
+      "fiveYearAvg": 110803500000.0,
+      "trend": "expanding"
     },
     "balanceSheet": {
-      "totalDebt": 98657000000.0,
-      "totalCash": 35934000000.0,
-      "netCash": -62723000000.0,
-      "currentRatio": 0.8932929222186667
+      "totalDebt": 80111000000.0,
+      "totalCash": 36305000000.0,
+      "netCash": -43806000000.0,
+      "currentRatio": 1.0231998352117235
     }
   }
 }
