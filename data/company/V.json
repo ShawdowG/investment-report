@@ -1,18 +1,19 @@
 {
   "symbol": "V",
-  "generatedAt": "2026-11-07T02:17:01.439077+00:00",
+  "generatedAt": "2026-11-10T04:15:34.079329+00:00",
   "description": "Visa Inc. operates as a payments technology company in the United States and internationally. It operates VisaNet, a transaction processing network that enables authorization, clearing, and settlement of payment transactions. The company also offers credit, debit, and prepaid card products; tap to pay, tokenization, and click to pay services; Visa Direct, a platform which facilitates money movement, enabling clients to collect, hold, convert, and send funds across its network; and issuing solutions, such as airport lounge access, dining reservations, shopping experiences, event tickets, and seller offers. In addition, it provides acceptance solutions, an omnichannel payment integration with e-commerce platforms; risk detection and prevention solutions; and advisory and other services comprising consulting practice, proprietary analytics models, data scientists and economists, marketing services, and managed services. The company provides its services under the Visa, Visa Electron, V PAY, Interlink, and PLUS brands. It serves consumers, sellers, financial institutions, and government entities. Visa Inc. was founded in 1958 and is headquartered in San Francisco, California.",
   "industry": "Credit Services",
   "sector": "Financial Services",
   "country": "United States",
   "website": "https://corporate.visa.com",
+  "employees": 34800,
   "city": "San Francisco",
   "state": "CA",
   "metrics": {
-    "trailingPE": 34.306007,
-    "forwardPE": 24.677958,
-    "priceToBook": 21.691044,
-    "enterpriseToEbitda": 24.164,
+    "trailingPE": 34.294067,
+    "forwardPE": 24.629517,
+    "priceToBook": 22.025356,
+    "enterpriseToEbitda": 24.578,
     "dividendYield": 0.74,
     "payoutRatio": 0.2175,
     "profitMargins": 0.51203996,
@@ -20,12 +21,12 @@
     "returnOnAssets": 0.19613001,
     "returnOnEquity": 0.63507,
     "beta": 0.786,
-    "trailingEps": 12.32,
+    "trailingEps": 12.31,
     "exDividendDate": "2026-11-10"
   },
   "analyst": {
-    "recommendationMean": 1.45,
-    "targetMeanPrice": 443.4427
+    "recommendationMean": 1.5,
+    "targetMeanPrice": 446.3346
   },
   "calendar": {
     "earningsDate": "2027-01-26",
@@ -34,27 +35,27 @@
   "news": [],
   "financials": {
     "revenue": {
-      "latestAnnual": 40000000000.0,
-      "latestAnnualDate": "2025-09-30",
-      "yoyPct": 11.339976618604911,
+      "latestAnnual": 45903000000.0,
+      "latestAnnualDate": "2026-09-30",
+      "yoyPct": 14.7575,
       "cagr5y": null
     },
     "operatingMargin": {
-      "latest": 0.6639,
+      "latest": 0.6508071367884452,
       "fiveYearHigh": 0.6715156340918139,
-      "fiveYearLow": 0.6639,
-      "trend": "expanding"
+      "fiveYearLow": 0.6508071367884452,
+      "trend": "compressing"
     },
     "freeCashFlow": {
-      "latestAnnual": 21577000000.0,
-      "fiveYearAvg": 19461250000.0,
+      "latestAnnual": 22057000000.0,
+      "fiveYearAvg": 20505750000.0,
       "trend": "expanding"
     },
     "balanceSheet": {
-      "totalDebt": 25171000000.0,
-      "totalCash": 17164000000.0,
-      "netCash": -8007000000.0,
-      "currentRatio": 1.0775507874914403
+      "totalDebt": 22071000000.0,
+      "totalCash": 12938000000.0,
+      "netCash": -9133000000.0,
+      "currentRatio": 0.9651133341775358
     }
   }
 }
