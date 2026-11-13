@@ -1,6 +1,6 @@
 {
   "symbol": "AAPL",
-  "generatedAt": "2026-11-12T03:17:18.450337+00:00",
+  "generatedAt": "2026-11-13T02:50:51.522062+00:00",
   "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories, including Apple Watch, AirPods, Beats products, Apple Vision Pro, Apple TV 4K, HomePod, and Apple HomeView, as well as Apple branded and third-party accessories. It also provides advertising services comprising third-party licensing arrangements and own advertising platforms; AppleCare and cloud services; and payment services, including Apple Card and Apple Pay. In addition, the company operates App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. Further, it provides digital content through subscription-based services, including Apple Arcade, a game service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience; Apple News+, a news and magazine service; and Apple TV, which offers original content and live sports. The company sells its products and resells third-party products through its retail and online stores, and direct sales force; its services through its various service platforms; and third-party cellular network carriers and other resellers. It serves consumer, small and mid-sized business, education, enterprise, and government markets. The company oper...",
   "industry": "Consumer Electronics",
   "sector": "Technology",
@@ -10,22 +10,22 @@
   "city": "Cupertino",
   "state": "CA",
   "metrics": {
-    "trailingPE": 38.824238,
-    "forwardPE": 33.72352,
-    "priceToBook": 46.107872,
-    "enterpriseToEbitda": 30.357,
-    "dividendYield": 0.31,
+    "trailingPE": 39.518932,
+    "forwardPE": 33.652397,
+    "priceToBook": 46.01063,
+    "enterpriseToEbitda": 30.297,
+    "dividendYield": 0.3,
     "payoutRatio": 0.118,
     "profitMargins": 0.27604,
     "operatingMargins": 0.33009997,
     "returnOnAssets": 0.25868,
     "returnOnEquity": 1.42257,
     "beta": 1.089,
-    "trailingEps": 9.16,
+    "trailingEps": 8.98,
     "exDividendDate": "2026-11-12"
   },
   "analyst": {
-    "recommendationMean": 2.22222,
+    "recommendationMean": 2.17778,
     "targetMeanPrice": 344.6155
   },
   "calendar": {
