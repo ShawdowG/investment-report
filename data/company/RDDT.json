@@ -1,6 +1,6 @@
 {
   "symbol": "RDDT",
-  "generatedAt": "2026-11-13T02:50:51.522062+00:00",
+  "generatedAt": "2026-11-14T02:38:12.963980+00:00",
   "description": "Reddit, Inc. operates a digital community in the United States and internationally. The company's platform enables user to engage in conversations, explore passions, research new hobbies, exchange goods and services, create new communities and experiences, share laughs, and find belonging. It also organizes communities based on specific interests that enable users to engage in conversations by sharing experiences, submitting links, uploading images and videos, and replying to one another. Reddit, Inc. was founded in 2005 and is headquartered in San Francisco, California.",
   "industry": "Internet Content & Information",
   "sector": "Communication Services",
@@ -10,10 +10,10 @@
   "city": "San Francisco",
   "state": "CA",
   "metrics": {
-    "trailingPE": 20.316326,
-    "forwardPE": 10.720728,
-    "priceToBook": 5.367445,
-    "enterpriseToEbitda": 17.537,
+    "trailingPE": 20.091835,
+    "forwardPE": 10.770874,
+    "priceToBook": 5.3081355,
+    "enterpriseToEbitda": 17.307,
     "dividendYield": 0.0,
     "payoutRatio": 0.0,
     "profitMargins": 0.32105,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 2.21875,
-    "targetMeanPrice": 150.0138
+    "targetMeanPrice": 148.46207
   },
   "calendar": {
     "earningsDate": "2026-10-29",
