@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope, Work_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { StorageFoundation } from "@/components/storage-foundation";
 import "./globals.css";
 
 const inter = Inter({
@@ -39,7 +40,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${manrope.variable} ${workSans.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <StorageFoundation>{children}</StorageFoundation>
+        </ThemeProvider>
       </body>
     </html>
   );

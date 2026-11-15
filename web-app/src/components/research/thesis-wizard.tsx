@@ -18,7 +18,7 @@
  */
 
 import { Trash2 } from "lucide-react";
-import { useMemo, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
@@ -61,7 +61,7 @@ export function ThesisWizard({
   // SPEC-028 W12.C — start on the first incomplete step so the user picks up
   // where they left off. W12.D layers the resume banner + restart confirmation
   // when that initial step is past Setup (i.e. resumedAtIdx > 0).
-  const initialStepId = useMemo(() => findResumeStep(thesis), []);
+  const [initialStepId] = useState(() => findResumeStep(thesis));
   const initialIdx = WIZARD_STEPS.findIndex((s) => s.id === initialStepId);
   const [currentIdx, setCurrentIdx] = useState<number>(
     initialIdx >= 0 ? initialIdx : 0,

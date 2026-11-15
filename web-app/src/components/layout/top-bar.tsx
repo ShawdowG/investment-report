@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { Search, User } from "lucide-react";
+import { Search } from "lucide-react";
 import { normalizeSymbol } from "@/lib/parsing/normalize-symbol";
 import { AlertsButton } from "./alerts-button";
 import { ThemeToggle } from "./theme-toggle";
@@ -22,8 +22,8 @@ export function TopBar() {
   return (
     <header className="w-full h-16 border-b border-border-subtle bg-background flex justify-between items-center px-margin-mobile md:px-gutter sticky top-0 z-40">
       <div className="flex items-center gap-3 flex-1 md:flex-none">
-        <div className="md:hidden font-h2 text-h2 text-text-primary">
-          Investment Report
+        <div className="md:hidden font-h2 text-h2 text-text-primary" aria-label="Investment Report">
+          IR
         </div>
         <form
           onSubmit={handleSubmit}
@@ -49,19 +49,12 @@ export function TopBar() {
           type="button"
           aria-label="Search"
           onClick={() => router.push("/tickers")}
-          className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
+          className="touch-target md:hidden text-text-secondary hover:text-text-primary transition-colors rounded-full hover:bg-surface-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Search className="size-5" />
         </button>
         <ThemeToggle />
         <AlertsButton />
-        <button
-          type="button"
-          aria-label="Account"
-          className="text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
-        >
-          <User className="size-5" />
-        </button>
       </div>
     </header>
   );

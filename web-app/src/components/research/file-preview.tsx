@@ -23,7 +23,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getFile } from "@/lib/storage/research-files-store";
-import type { ResearchFileMeta } from "@/lib/domain/research-file";
+import {
+  isSafeRasterImageMime,
+  type ResearchFileMeta,
+} from "@/lib/domain/research-file";
 import { MarkdownBody } from "./markdown-body";
 
 interface FilePreviewProps {
@@ -52,11 +55,15 @@ export function FilePreview({ meta }: FilePreviewProps) {
           setState({ kind: "error", message: "File not found in storage" });
           return;
         }
-        url = URL.createObjectURL(got.blob);
         let text: string | null = null;
         if (meta.kind === "text" || meta.kind === "markdown") {
           text = await got.blob.text();
         }
+        const previewBlob =
+          text === null
+            ? got.blob
+            : new Blob([text], { type: "text/plain;charset=utf-8" });
+        url = URL.createObjectURL(previewBlob);
         if (cancelled) {
           if (url) URL.revokeObjectURL(url);
           return;
@@ -107,19 +114,11 @@ export function FilePreview({ meta }: FilePreviewProps) {
           className="w-full rounded-md border border-border-subtle bg-surface"
           style={{ height: 480 }}
         />
-        <a
-          href={blobUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block font-body-compact text-body-compact text-text-secondary hover:text-text-primary underline"
-        >
-          Open in new tab
-        </a>
       </div>
     );
   }
 
-  if (meta.kind === "image") {
+  if (meta.kind === "image" && isSafeRasterImageMime(meta.mimeType)) {
     return (
       <a
         href={blobUrl}

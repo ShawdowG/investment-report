@@ -39,8 +39,10 @@ export function NewThesisDialog({
   const [activeIdx, setActiveIdx] = useState(0);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const titleId = useId();
+  const listId = useId();
 
   const allEntries = useMemo(() => {
     return Object.values(snapshots)
@@ -127,6 +129,24 @@ export function NewThesisDialog({
         e.preventDefault();
         commit(activeIdx);
         break;
+      case "Tab": {
+        const focusable = Array.from(
+          dialogRef.current?.querySelectorAll<HTMLElement>(
+            'input:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ) ?? [],
+        );
+        if (focusable.length === 0) break;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+        break;
+      }
     }
   }
 
@@ -136,14 +156,15 @@ export function NewThesisDialog({
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onCancel();
       }}
-      className="fixed inset-0 z-[200] flex items-start justify-center bg-black/60 backdrop-blur-sm p-4 pt-24"
+      className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/60 p-4 pt-[max(1rem,env(safe-area-inset-top))] backdrop-blur-sm sm:pt-24"
     >
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         onKeyDown={onKeyDown}
-        className="w-full max-w-md rounded-lg border border-border-subtle bg-surface shadow-xl"
+        className="flex max-h-[calc(100dvh-2rem)] w-full max-w-md flex-col overflow-hidden rounded-lg border border-border-subtle bg-surface shadow-xl"
       >
         <div className="p-card-padding pb-3">
           <h2
@@ -170,11 +191,21 @@ export function NewThesisDialog({
               spellCheck={false}
               className="w-full bg-transparent border-0 font-body-compact text-body-compact text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-0"
               aria-label="Filter tickers"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls={listId}
+              aria-expanded="true"
+              aria-activedescendant={
+                filtered[activeIdx]
+                  ? `${listId}-option-${filtered[activeIdx].symbol}`
+                  : undefined
+              }
             />
           </div>
         </div>
         <ul
           ref={listRef}
+          id={listId}
           role="listbox"
           aria-label="Available tickers"
           className="mt-3 max-h-[40vh] overflow-y-auto"
@@ -190,6 +221,7 @@ export function NewThesisDialog({
               return (
                 <li
                   key={entry.symbol}
+                  id={`${listId}-option-${entry.symbol}`}
                   role="option"
                   aria-selected={active}
                   data-idx={idx}

@@ -18,7 +18,7 @@ export function ThemeToggle() {
     return (
       <span
         aria-hidden="true"
-        className="text-text-secondary p-2 rounded-full inline-flex"
+        className="touch-target text-text-secondary rounded-full inline-flex items-center justify-center"
       >
         <Sun className="size-5" />
       </span>
@@ -34,7 +34,7 @@ export function ThemeToggle() {
       type="button"
       aria-label={`Switch to ${next} mode`}
       onClick={() => setTheme(next)}
-      className="text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
+      className="touch-target inline-flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors rounded-full hover:bg-surface-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <Icon className="size-5" />
     </button>

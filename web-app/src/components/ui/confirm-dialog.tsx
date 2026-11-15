@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useId, useRef, type KeyboardEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,7 @@ interface ConfirmDialogProps {
  * Behavior:
  *   - Backdrop click or Escape → cancel.
  *   - Tab cycles between Cancel and Confirm (simple two-button focus trap).
- *   - On open, focuses the confirm button; on close, restores the previously focused element.
+ *   - On open, focuses Cancel so destructive confirmation is deliberate; on close, restores focus.
  */
 export function ConfirmDialog({
   open,
@@ -40,6 +40,8 @@ export function ConfirmDialog({
   const confirmRef = useRef<HTMLButtonElement | null>(null);
   const cancelRef = useRef<HTMLButtonElement | null>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const titleId = useId();
+  const descriptionId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -47,7 +49,7 @@ export function ConfirmDialog({
       typeof document !== "undefined"
         ? (document.activeElement as HTMLElement | null)
         : null;
-    confirmRef.current?.focus();
+    cancelRef.current?.focus();
     return () => {
       previouslyFocusedRef.current?.focus?.();
     };
@@ -78,20 +80,20 @@ export function ConfirmDialog({
       <div
         role="alertdialog"
         aria-modal="true"
-        aria-labelledby="confirm-dialog-title"
-        aria-describedby={description ? "confirm-dialog-description" : undefined}
+        aria-labelledby={titleId}
+        aria-describedby={description ? descriptionId : undefined}
         onKeyDown={onKeyDown}
-        className="w-[90vw] max-w-md rounded-lg border border-border-subtle bg-surface p-card-padding shadow-xl"
+        className="max-h-[calc(100dvh-2rem)] w-[90vw] max-w-md overflow-y-auto rounded-lg border border-border-subtle bg-surface p-card-padding shadow-xl"
       >
         <h2
-          id="confirm-dialog-title"
+          id={titleId}
           className="font-h2 text-h2 text-text-primary"
         >
           {title}
         </h2>
         {description ? (
           <div
-            id="confirm-dialog-description"
+            id={descriptionId}
             className="mt-2 font-body-compact text-body-compact text-text-secondary"
           >
             {description}

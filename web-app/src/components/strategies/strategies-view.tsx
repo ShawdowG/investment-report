@@ -29,6 +29,7 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
   const [items, setItems] = useState<Strategy[]>([]);
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<Mode>({ kind: "list" });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setItems(getStrategies());
@@ -40,21 +41,40 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
   }
 
   function handleSaveNew(input: StrategyInputContract) {
-    const created = createStrategy(input);
-    refresh();
-    setMode({ kind: "view", id: created.id });
+    try {
+      const created = createStrategy(input);
+      refresh();
+      setError(null);
+      setMode({ kind: "view", id: created.id });
+      return true;
+    } catch {
+      setError("Strategy could not be saved. Your draft is still available on this device.");
+      return false;
+    }
   }
 
   function handleSaveEdit(id: string, input: StrategyInputContract) {
-    updateStrategy(id, input);
-    refresh();
-    setMode({ kind: "view", id });
+    try {
+      updateStrategy(id, input);
+      refresh();
+      setError(null);
+      setMode({ kind: "view", id });
+      return true;
+    } catch {
+      setError("Strategy changes could not be saved. Your draft is still available on this device.");
+      return false;
+    }
   }
 
   function handleDelete(id: string) {
-    deleteStrategy(id);
-    refresh();
-    setMode({ kind: "list" });
+    try {
+      deleteStrategy(id);
+      refresh();
+      setError(null);
+      setMode({ kind: "list" });
+    } catch {
+      setError("Strategy could not be deleted. It remains in local storage.");
+    }
   }
 
   if (!ready) {
@@ -67,12 +87,15 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
 
   if (mode.kind === "new") {
     return (
+      <div className="space-y-3">
+      {error ? <p role="alert" className="text-sm text-regime-risk-off">{error}</p> : null}
       <StrategyForm
         available={available}
         submitLabel="Save strategy"
         onSave={handleSaveNew}
         onCancel={() => setMode({ kind: "list" })}
       />
+      </div>
     );
   }
 
@@ -83,6 +106,8 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
       return null;
     }
     return (
+      <div className="space-y-3">
+      {error ? <p role="alert" className="text-sm text-regime-risk-off">{error}</p> : null}
       <StrategyView
         strategy={strategy}
         seriesBySymbol={seriesBySymbol}
@@ -90,6 +115,7 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
         onEdit={() => setMode({ kind: "edit", id: mode.id })}
         onDelete={() => handleDelete(mode.id)}
       />
+      </div>
     );
   }
 
@@ -100,6 +126,8 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
       return null;
     }
     return (
+      <div className="space-y-3">
+      {error ? <p role="alert" className="text-sm text-regime-risk-off">{error}</p> : null}
       <StrategyForm
         available={available}
         initial={strategy}
@@ -107,14 +135,18 @@ export function StrategiesView({ available, seriesBySymbol }: StrategiesViewProp
         onSave={(input) => handleSaveEdit(mode.id, input)}
         onCancel={() => setMode({ kind: "view", id: mode.id })}
       />
+      </div>
     );
   }
 
   return (
+    <div className="space-y-3">
+    {error ? <p role="alert" className="text-sm text-regime-risk-off">{error}</p> : null}
     <StrategyList
       items={items}
       onSelect={(id) => setMode({ kind: "view", id })}
       onNew={() => setMode({ kind: "new" })}
     />
+    </div>
   );
 }

@@ -101,20 +101,27 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
   const priority: WatchlistPriority = entry?.priority ?? "med";
 
   return (
-    <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pb-4 border-b border-border-subtle/50">
+    <header className="space-y-4 border-b border-border-subtle/50 pb-4">
       <div>
-        <div className="flex items-baseline gap-3">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
           <h1 className="font-h1 text-h1 text-text-primary tracking-tight">{symbol}</h1>
           {name ? (
             <span className="font-h2 text-h2 text-text-secondary font-normal">{name}</span>
           ) : null}
         </div>
-        <div className="flex flex-wrap items-center gap-2 mt-3 min-h-[28px]">
+        <section aria-labelledby="personal-context-heading" className="mt-4 rounded-xl border border-border-subtle bg-surface p-3">
+          <div className="mb-2">
+            <h2 id="personal-context-heading" className="font-body-main text-body-main font-semibold text-text-primary">
+              Personal context
+            </h2>
+            <p className="text-xs text-text-secondary">Thesis first, with watchlist and position controls nearby.</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 min-h-[44px]">
           {ready && thesisLight ? (
             <Link
               href={`/research/thesis/${encodeURIComponent(symbol)}`}
               aria-label={`${LIGHT_ARIA[thesisLight]} — open thesis for ${symbol}`}
-              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded font-badge text-badge border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-primary px-3 py-2 font-body-compact text-body-compact font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             >
               <span
                 aria-hidden="true"
@@ -123,7 +130,15 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
                   LIGHT_DOT_CLASS[thesisLight],
                 )}
               />
-              <span>Active thesis</span>
+              <span>Open thesis</span>
+            </Link>
+          ) : ready ? (
+            <Link
+              href={`/research/thesis/${encodeURIComponent(symbol)}`}
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-primary px-3 py-2 font-body-compact text-body-compact font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <Plus aria-hidden="true" className="size-4" />
+              Create thesis
             </Link>
           ) : null}
           {ready ? (
@@ -149,7 +164,7 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
                 type="button"
                 onClick={handleAdd}
                 aria-label={`Add ${symbol} to watchlist`}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded font-badge text-badge border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
+                className="inline-flex min-h-11 items-center gap-1 px-3 py-2 rounded-md font-body-compact text-body-compact border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
               >
                 <Plus aria-hidden="true" className="size-3.5" />
                 Add to watchlist
@@ -171,7 +186,8 @@ export function TickerHeader({ symbol, name, tags }: TickerHeaderProps) {
               {tag}
             </span>
           ))}
-        </div>
+          </div>
+        </section>
       </div>
     </header>
   );
@@ -235,7 +251,7 @@ function WatchlistMoreMenu({
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center justify-center size-7 rounded border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
+        className="touch-target inline-flex items-center justify-center rounded border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
       >
         <MoreVertical aria-hidden="true" className="size-4" />
       </button>
@@ -397,7 +413,7 @@ function PortfolioQuickAction({ symbol, position, onSaved }: PortfolioQuickActio
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center gap-1 px-2 py-0.5 rounded font-badge text-badge border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
+        className="inline-flex min-h-11 items-center gap-1 px-3 py-2 rounded-md font-body-compact text-body-compact border border-border-subtle bg-surface-variant text-text-secondary hover:bg-surface-elevated hover:text-text-primary transition-colors"
       >
         <Briefcase aria-hidden="true" className="size-3.5" />
         {inPortfolio ? (

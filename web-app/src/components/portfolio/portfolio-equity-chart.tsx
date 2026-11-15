@@ -118,6 +118,7 @@ export function PortfolioEquityChart({
               />
               <SentimentAreaChart
                 data={sliced}
+                title={`${range.label} portfolio ${view === "value" ? "value" : "profit and loss"}`}
                 yKey={view}
                 formatY={fmtDollar}
                 renderTooltip={(point) => (

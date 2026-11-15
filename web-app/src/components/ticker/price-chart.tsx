@@ -73,6 +73,7 @@ export function PriceChart({
       />
       <SentimentAreaChart
         data={data}
+        title={`${range.label} price history`}
         yKey="close"
         formatY={formatY}
         referenceLines={referenceLines}

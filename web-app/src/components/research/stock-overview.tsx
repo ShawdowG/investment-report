@@ -18,6 +18,17 @@ import { cn } from "@/lib/utils";
 
 const MISSING = "—";
 
+function safeHttpUrl(value: string): string | null {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "https:" || parsed.protocol === "http:"
+      ? parsed.href
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 interface StockOverviewProps {
   symbol: string;
   /** Full daily OHLCV series — typically `loadQuote(symbol).daily`. */
@@ -96,7 +107,11 @@ export function StockOverview({
     company,
   ]);
 
-  const hasNews = !!company?.news && company.news.length > 0;
+  const safeNews = (company?.news ?? []).flatMap((item) => {
+    const url = safeHttpUrl(item.url);
+    return url ? [{ ...item, url }] : [];
+  });
+  const hasNews = safeNews.length > 0;
   const hasOverview = !!company?.description;
 
   return (
@@ -179,7 +194,7 @@ export function StockOverview({
           defaultOpen={defaultOpen}
         >
           <ul className="space-y-1">
-            {company!.news.slice(0, 5).map((item) => (
+            {safeNews.slice(0, 5).map((item) => (
               <li key={item.url}>
                 <a
                   href={item.url}

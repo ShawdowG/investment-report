@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import {
   BadgeSelect,
   PriorityBadge,
@@ -195,6 +196,7 @@ export function WatchlistTable({
   snapshots = {},
 }: WatchlistTableProps) {
   const [sort, setSort] = useState<SortState>({ key: "symbol", dir: "asc" });
+  const [pendingRemove, setPendingRemove] = useState<string | null>(null);
   // SPEC-023 W8.H — resolve thesis lights once on mount (single localStorage
   // read for the whole table, not N reads per row).
   const [thesisLights, setThesisLights] = useState<Record<string, Light>>({});
@@ -239,13 +241,90 @@ export function WatchlistTable({
 
   if (items.length === 0) {
     return (
-      <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
-        No symbols yet — add one above.
+      <div className="rounded-lg border border-dashed border-border-subtle bg-surface p-card-padding">
+        <h2 className="font-h2 text-h2 text-text-primary">Build your watchlist</h2>
+        <p className="mt-1 font-body-compact text-body-compact text-text-secondary">
+          Add a symbol above to track its latest close, daily move, research status, and priority.
+        </p>
       </div>
     );
   }
   return (
-    <div className="rounded-lg border border-border-subtle bg-surface">
+    <>
+    <div className="space-y-3 md:hidden" aria-label="Watchlist symbols">
+      {sortedItems.map((item) => {
+        const snap = snapshots[item.symbol];
+        const dayPct = snap?.dayDelta?.pct ?? null;
+        const dayClass =
+          dayPct === null
+            ? "text-text-secondary"
+            : dayPct > 0
+              ? "text-regime-risk-on"
+              : dayPct < 0
+                ? "text-regime-risk-off"
+                : "text-text-secondary";
+        return (
+          <article key={item.symbol} className="rounded-xl border border-border-subtle bg-surface p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <Link
+                  href={`/ticker/${encodeURIComponent(item.symbol)}`}
+                  className="inline-flex min-h-11 items-center font-data-mono text-lg font-semibold text-text-primary underline-offset-4 hover:underline"
+                >
+                  {item.symbol}
+                </Link>
+                {thesisLights[item.symbol] ? (
+                  <Link
+                    href={`/research/thesis/${encodeURIComponent(item.symbol)}`}
+                    className="ml-2 inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 text-xs text-text-secondary hover:bg-surface-variant hover:text-text-primary"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "size-2 rounded-full",
+                        LIGHT_DOT_CLASS[thesisLights[item.symbol]],
+                      )}
+                    />
+                    Thesis
+                  </Link>
+                ) : null}
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={`Remove ${item.symbol}`}
+                onClick={() => setPendingRemove(item.symbol)}
+              >
+                <X />
+              </Button>
+            </div>
+            <div className="mt-1 flex items-baseline justify-between gap-3">
+              <span className="font-data-mono text-text-primary">
+                {snap ? fmtMoney(snap.lastClose, snap.currency) : "Quote unavailable"}
+              </span>
+              <span className={cn("font-data-mono", dayClass)}>
+                {dayPct === null ? "Daily move unavailable" : `${dayPct > 0 ? "+" : ""}${dayPct.toFixed(2)}% today`}
+              </span>
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <div>
+                <p className="mb-1 text-xs text-text-secondary">Status</p>
+                <StatusEditCell symbol={item.symbol} value={item.status ?? "watching"} onUpdate={onUpdate} />
+              </div>
+              <div>
+                <p className="mb-1 text-xs text-text-secondary">Priority</p>
+                <PriorityEditCell symbol={item.symbol} value={item.priority ?? "med"} onUpdate={onUpdate} />
+              </div>
+            </div>
+            <div className="mt-3">
+              <p className="mb-1 text-xs text-text-secondary">Tags</p>
+              <TagsEditCell symbol={item.symbol} value={item.tags ?? []} onUpdate={onUpdate} />
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <div className="hidden rounded-lg border border-border-subtle bg-surface md:block">
       <Table>
         <TableHeader>
           <TableRow>
@@ -261,7 +340,10 @@ export function WatchlistTable({
             <TableHead className="hidden md:table-cell font-label-caps text-label-caps text-text-secondary uppercase">
               Tags
             </TableHead>
-            <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right p-0">
+            <TableHead
+              aria-sort={sort.key === "lastPx" ? (sort.dir === "asc" ? "ascending" : "descending") : "none"}
+              className="font-label-caps text-label-caps text-text-secondary uppercase text-right p-0"
+            >
               <SortableHeader
                 label="Last Px"
                 sortKey="lastPx"
@@ -269,7 +351,10 @@ export function WatchlistTable({
                 onToggle={toggleSort}
               />
             </TableHead>
-            <TableHead className="font-label-caps text-label-caps text-text-secondary uppercase text-right p-0">
+            <TableHead
+              aria-sort={sort.key === "dayPct" ? (sort.dir === "asc" ? "ascending" : "descending") : "none"}
+              className="font-label-caps text-label-caps text-text-secondary uppercase text-right p-0"
+            >
               <SortableHeader
                 label="Day Δ"
                 sortKey="dayPct"
@@ -359,7 +444,7 @@ export function WatchlistTable({
                     variant="ghost"
                     size="icon-sm"
                     aria-label={`Remove ${item.symbol}`}
-                    onClick={() => onRemove(item.symbol)}
+                    onClick={() => setPendingRemove(item.symbol)}
                   >
                     <X />
                   </Button>
@@ -370,6 +455,19 @@ export function WatchlistTable({
         </TableBody>
       </Table>
     </div>
+    <ConfirmDialog
+      open={pendingRemove !== null}
+      title={`Remove ${pendingRemove ?? "symbol"} from the watchlist?`}
+      description="The symbol will leave your watchlist. Its thesis, notes, files, and portfolio position will stay unchanged."
+      confirmLabel="Remove symbol"
+      destructive
+      onConfirm={() => {
+        if (pendingRemove) onRemove(pendingRemove);
+        setPendingRemove(null);
+      }}
+      onCancel={() => setPendingRemove(null)}
+    />
+    </>
   );
 }
 
@@ -391,7 +489,6 @@ function SortableHeader({ label, sortKey, sort, onToggle }: SortableHeaderProps)
     <button
       type="button"
       onClick={() => onToggle(sortKey)}
-      aria-sort={ariaSort}
       aria-label={`Sort by ${label}${
         active ? `, currently ${ariaSort}` : ""
       }`}

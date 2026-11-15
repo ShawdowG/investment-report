@@ -90,8 +90,8 @@ export function DashboardSettingsPanel({
   }
 
   useEffect(() => {
+    const timers = savedTimersRef.current;
     return () => {
-      const timers = savedTimersRef.current;
       if (timers.in) window.clearTimeout(timers.in);
       if (timers.out) window.clearTimeout(timers.out);
       if (timers.off) window.clearTimeout(timers.off);
@@ -252,7 +252,7 @@ export function DashboardSettingsPanel({
             </div>
             <p className="text-xs text-regime-risk-off">
               {unknownIndexSymbols.length} unknown symbol
-              {unknownIndexSymbols.length === 1 ? "" : "s"} — not in the quote feed and won't render.
+              {unknownIndexSymbols.length === 1 ? "" : "s"} — not in the quote feed and will not render.
             </p>
           </div>
         ) : null}

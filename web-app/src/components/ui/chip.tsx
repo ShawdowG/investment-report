@@ -22,7 +22,7 @@ export function Chip({ active, onClick, children, className }: ChipProps) {
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs border transition-colors",
+        "touch-target inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs border transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
         active
           ? "bg-primary-container text-on-primary-container border-primary-container"

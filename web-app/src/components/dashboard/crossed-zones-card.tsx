@@ -101,7 +101,7 @@ export function CrossedZonesCard({
       />
       {zones.length === 0 ? (
         <p className="font-body-compact text-body-compact text-text-secondary">
-          No thesis levels are within ±{proximityPct}% of today's close.
+          No thesis levels are within ±{proximityPct}% of the current close.
         </p>
       ) : (
         <div className="rounded-lg border border-border-subtle">

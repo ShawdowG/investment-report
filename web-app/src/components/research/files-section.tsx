@@ -45,6 +45,10 @@ import type {
   ResearchFileMeta,
   ResearchFileSectionAnchor,
 } from "@/lib/domain/research-file";
+import {
+  canOpenResearchFile,
+  isSafeRasterImageMime,
+} from "@/lib/domain/research-file";
 import { fmtDate } from "@/lib/utils/format";
 import { cn } from "@/lib/utils";
 import { FileDropzone } from "./file-dropzone";
@@ -202,8 +206,13 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
   async function handleOpen(meta: ResearchFileMeta) {
     try {
       const got = await getFile(meta.id);
-      if (!got) return;
-      const url = URL.createObjectURL(got.blob);
+      if (!got || !canOpenResearchFile(meta)) return;
+      const safeBlob = isSafeRasterImageMime(meta.mimeType)
+        ? got.blob
+        : new Blob([await got.blob.text()], {
+            type: "text/plain;charset=utf-8",
+          });
+      const url = URL.createObjectURL(safeBlob);
       window.open(url, "_blank", "noopener,noreferrer");
       // Best-effort revoke a minute later — leaving it open longer than the
       // tab needs is wasteful, but revoking too soon breaks the open tab.
@@ -249,7 +258,7 @@ export function FilesSection({ thesisSymbol }: FilesSectionProps) {
           )
         }
         onRename={(name) => handleRename(meta.id, name)}
-        onOpen={() => handleOpen(meta)}
+        onOpen={canOpenResearchFile(meta) ? () => handleOpen(meta) : undefined}
         onDownload={() => handleDownload(meta)}
         onRequestDelete={() => setPendingDeleteId(meta.id)}
         onUpdateCaption={(caption) => handleUpdateMeta(meta.id, { caption })}
@@ -399,7 +408,7 @@ interface FileRowProps {
   previewOpen: boolean;
   onTogglePreview: () => void;
   onRename: (name: string) => void;
-  onOpen: () => void;
+  onOpen?: () => void;
   onDownload: () => void;
   onRequestDelete: () => void;
   onUpdateCaption: (caption: string) => void;
@@ -572,16 +581,18 @@ function FileRow({
               </>
             )}
           </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            onClick={onOpen}
-            aria-label={`Open ${meta.name} in a new tab`}
-          >
-            <ExternalLink className="size-4" aria-hidden="true" />
-            Open
-          </Button>
+          {onOpen ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={onOpen}
+              aria-label={`Open ${meta.name} in a new tab`}
+            >
+              <ExternalLink className="size-4" aria-hidden="true" />
+              Open
+            </Button>
+          ) : null}
           <Button
             type="button"
             variant="ghost"

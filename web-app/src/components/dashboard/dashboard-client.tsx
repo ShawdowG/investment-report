@@ -7,6 +7,7 @@ import { PortfolioImpactCard } from "./portfolio-impact-card";
 import { TopMoversCard } from "./top-movers-card";
 import { WatchlistImpactCard } from "./watchlist-impact-card";
 import { DEFAULT_DASHBOARD_SETTINGS } from "@/lib/domain/dashboard-settings";
+import { assessQuoteFreshness } from "@/lib/domain/quote-freshness";
 import type { CompactDailyMap } from "@/lib/quotes/compact-daily";
 import type { QuoteSnapshotMap } from "@/lib/quotes/snapshots";
 import { maybeNotifyCrossings } from "@/lib/research/notifications";
@@ -67,19 +68,16 @@ export function DashboardClient({
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  // Days between asOf and now; null when asOf is unknown. Computed on the
-  // client so SSR + client render agree until hydration sets `mounted`.
-  const ageDays = useMemo<number | null>(() => {
+  const freshness = useMemo(() => {
     if (!mounted || asOf === "—") return null;
-    const parsed = new Date(asOf);
-    if (Number.isNaN(parsed.getTime())) return null;
-    const todayMs = Date.now();
-    const diff = Math.floor((todayMs - parsed.getTime()) / 86_400_000);
-    return diff;
-  }, [mounted, asOf]);
-
-  // Treat >3 calendar days as stale (covers weekends without a calendar lib).
-  const isStale = ageDays !== null && ageDays > 3;
+    const generatedAt = Object.values(snapshots)
+      .map((snapshot) => snapshot.generatedAt)
+      .filter((value): value is string => Boolean(value))
+      .sort()[0];
+    return assessQuoteFreshness({ latestBarDate: asOf, generatedAt, now: new Date() });
+  }, [mounted, asOf, snapshots]);
+  const ageDays = freshness?.businessDaysOld ?? null;
+  const isStale = freshness?.status === "stale";
 
   function handleToggleChartCollapsed() {
     setSettings((prev) => {
@@ -99,7 +97,7 @@ export function DashboardClient({
   return (
     <div className="space-y-6">
       <header className="space-y-1">
-        <h1 className="font-h1 text-h1 text-text-primary">Dashboard</h1>
+        <h1 className="font-h1 text-h1 text-text-primary">Today</h1>
         <p className="font-body-compact text-body-compact text-text-secondary flex flex-wrap items-center gap-2">
           <span>Daily market snapshot · as of {asOf}</span>
           {ageDays !== null && ageDays > 0 ? (
@@ -110,15 +108,53 @@ export function DashboardClient({
                   : "text-xs text-text-secondary"
               }
             >
-              {isStale ? `${ageDays} days old — check quote pipeline` : `${ageDays}d ago`}
+              {isStale ? `${ageDays} business days old — check quote pipeline` : `${ageDays} business day${ageDays === 1 ? "" : "s"} ago`}
             </span>
           ) : null}
         </p>
       </header>
 
-      <IndexPulseRow snapshots={snapshots} symbols={settings.indexSymbols} />
+      <section aria-labelledby="attention-heading" className="space-y-3">
+        <div>
+          <h2 id="attention-heading" className="font-h2 text-h2 text-text-primary">
+            Needs attention
+          </h2>
+          <p className="font-body-compact text-body-compact text-text-secondary">
+            Personal watchlist, portfolio, and thesis signals come first.
+          </p>
+        </div>
+        <CrossedZonesCard
+          snapshots={snapshots}
+          proximityPct={settings.thesisProximityPct ?? 2}
+        />
+        <WatchlistImpactCard
+          snapshots={snapshots}
+          highThresholdPct={settings.watchlistHighThresholdPct}
+        />
+      </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-stack-gap">
+      <section aria-labelledby="portfolio-summary-heading" className="space-y-3">
+        <h2 id="portfolio-summary-heading" className="font-h2 text-h2 text-text-primary">
+          Portfolio summary
+        </h2>
+        <PortfolioImpactCard
+          snapshots={snapshots}
+          compactDaily={compactDaily}
+          equityChartCollapsed={settings.equityChartCollapsed}
+          onToggleEquityChart={handleToggleChartCollapsed}
+        />
+      </section>
+
+      <section aria-labelledby="market-context-heading" className="space-y-3">
+        <div>
+          <h2 id="market-context-heading" className="font-h2 text-h2 text-text-primary">
+            Market context
+          </h2>
+          <p className="font-body-compact text-body-compact text-text-secondary">
+            Broad indices and movers from the available daily quote feed.
+          </p>
+        </div>
+        <IndexPulseRow snapshots={snapshots} symbols={settings.indexSymbols} />
         <TopMoversCard
           snapshots={snapshots}
           limit={settings.topMoversLimit}
@@ -126,23 +162,7 @@ export function DashboardClient({
           includeOnly={useWatchlistForMovers ? watchlistSymbols : undefined}
           sourceLabel={useWatchlistForMovers ? "watchlist" : "universe"}
         />
-        <WatchlistImpactCard
-          snapshots={snapshots}
-          highThresholdPct={settings.watchlistHighThresholdPct}
-        />
-      </div>
-
-      <CrossedZonesCard
-        snapshots={snapshots}
-        proximityPct={settings.thesisProximityPct ?? 2}
-      />
-
-      <PortfolioImpactCard
-        snapshots={snapshots}
-        compactDaily={compactDaily}
-        equityChartCollapsed={settings.equityChartCollapsed}
-        onToggleEquityChart={handleToggleChartCollapsed}
-      />
+      </section>
     </div>
   );
 }

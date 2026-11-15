@@ -114,7 +114,7 @@ export function AlertsButton() {
           showBadge ? `Notifications — ${total} unread` : "Notifications"
         }
         onClick={handleOpen}
-        className="relative text-text-secondary hover:text-text-primary transition-colors p-2 rounded-full hover:bg-surface-variant"
+        className="touch-target relative inline-flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors rounded-full hover:bg-surface-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <Bell className="size-5" />
         {showBadge ? (

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { Tag } from "@/components/ui/stitch";
 import type { ResearchDispatch } from "@/lib/domain/research-dispatch";
 import { fmtDateTime } from "@/lib/utils/format";
@@ -15,6 +17,7 @@ interface DispatchViewProps {
 }
 
 export function DispatchView({ dispatch, onBack, onEdit, onDelete }: DispatchViewProps) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   return (
     <article className="space-y-4">
       <div className="flex items-center justify-between gap-2">
@@ -31,9 +34,7 @@ export function DispatchView({ dispatch, onBack, onEdit, onDelete }: DispatchVie
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => {
-              if (confirm("Delete this dispatch?")) onDelete();
-            }}
+            onClick={() => setConfirmDelete(true)}
             className="text-text-secondary hover:text-destructive"
           >
             <Trash2 className="size-4 mr-1" />
@@ -64,6 +65,18 @@ export function DispatchView({ dispatch, onBack, onEdit, onDelete }: DispatchVie
           </p>
         )}
       </div>
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Delete this dispatch?"
+        description={`Delete “${dispatch.title}” from this browser? This cannot be undone.`}
+        confirmLabel="Delete dispatch"
+        destructive
+        onConfirm={() => {
+          setConfirmDelete(false);
+          onDelete();
+        }}
+        onCancel={() => setConfirmDelete(false)}
+      />
     </article>
   );
 }
