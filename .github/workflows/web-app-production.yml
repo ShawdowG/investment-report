@@ -32,8 +32,6 @@ jobs:
 
       - name: Quality gate and static export
         run: npm run check
-        env:
-          NODE_ENV: production
 
       - name: Create Pages project (first run only)
         run: npx wrangler pages project create investment-report-app --production-branch main
