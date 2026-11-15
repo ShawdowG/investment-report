@@ -1,59 +1,94 @@
-/**
- * Export / import the entire localStorage-backed dataset as a single JSON file.
- *
- * Each user-facing store has its own STORAGE_KEY inside its module; for export
- * we read those keys raw so we round-trip every field (even ones not yet on
- * the domain type) and avoid coercing/dropping data on the way out.
- *
- * On import we validate the top-level schema marker and then overwrite each
- * store atomically. Per-item validation is intentionally NOT done here — the
- * stores already coerce on read, so a malformed entry will just be dropped
- * the next time it's loaded, not silently saved as junk.
- */
+import type { ResearchFileMeta } from "@/lib/domain/research-file";
+import {
+  listAllFilesForBackup,
+  replaceAllFilesFromBackup,
+  type ResearchFileBackupEntry,
+} from "./research-files-store";
+import { readJsonResult, removeKey, writeJson } from "./local-storage";
+import { DATASET_IDS, DATASET_REGISTRY, type DatasetId } from "./registry";
 
-import { readJson, removeKey, writeJson } from "./local-storage";
+export const EXPORT_SCHEMA = "investment-report-v2" as const;
+export const LEGACY_EXPORT_SCHEMA = "investment-report-v1" as const;
 
-export const EXPORT_SCHEMA = "investment-report-v1" as const;
+type ExportData = Record<DatasetId, unknown>;
 
-// Storage keys — keep in sync with each *-store.ts module.
-const KEYS = {
-  watchlist: "watchlist_items",
-  portfolio: "portfolio_positions",
-  notes: "ticker_notes",
-  dispatches: "research_dispatches",
-  strategies: "strategies",
-  dashboardSettings: "dashboard_settings",
-} as const;
+export interface EncodedResearchFile {
+  meta: ResearchFileMeta;
+  blob: { type: string; base64: string };
+}
 
 export interface ExportPayload {
   schema: typeof EXPORT_SCHEMA;
   exportedAt: string;
-  data: {
-    watchlist: unknown;
-    portfolio: unknown;
-    notes: unknown;
-    dispatches: unknown;
-    strategies: unknown;
-    dashboardSettings: unknown;
-  };
+  data: ExportData;
+  files: EncodedResearchFile[];
 }
 
-export function buildExportPayload(): ExportPayload {
+export interface LegacyExportPayload {
+  schema: typeof LEGACY_EXPORT_SCHEMA;
+  exportedAt?: string;
+  data: Partial<ExportData>;
+}
+
+export type ImportPayload = ExportPayload | LegacyExportPayload;
+
+function readDataset(id: DatasetId): unknown {
+  const entry = DATASET_REGISTRY[id];
+  const result = readJsonResult<unknown>(entry.key);
+  if (!result.ok) throw new Error(result.message);
+  return result.status === "missing" ? entry.defaultValue : result.value;
+}
+
+function bytesToBase64(bytes: Uint8Array): string {
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+  }
+  return btoa(binary);
+}
+
+function base64ToBytes(value: string): Uint8Array<ArrayBuffer> {
+  const binary = atob(value);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return bytes;
+}
+
+async function encodeFile(entry: ResearchFileBackupEntry): Promise<EncodedResearchFile> {
+  const blob = entry.blob as Blob & { arrayBuffer?: () => Promise<ArrayBuffer> };
+  const buffer = blob.arrayBuffer
+    ? await blob.arrayBuffer()
+    : await new Promise<ArrayBuffer>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(reader.error ?? new Error("Could not read attachment."));
+        reader.onload = () => resolve(reader.result as ArrayBuffer);
+        reader.readAsArrayBuffer(blob);
+      });
   return {
-    schema: EXPORT_SCHEMA,
-    exportedAt: new Date().toISOString(),
-    data: {
-      watchlist: readJson<unknown>(KEYS.watchlist, []),
-      portfolio: readJson<unknown>(KEYS.portfolio, []),
-      notes: readJson<unknown>(KEYS.notes, {}),
-      dispatches: readJson<unknown>(KEYS.dispatches, []),
-      strategies: readJson<unknown>(KEYS.strategies, []),
-      dashboardSettings: readJson<unknown>(KEYS.dashboardSettings, null),
+    meta: entry.meta,
+    blob: {
+      type: entry.blob.type,
+      base64: bytesToBase64(new Uint8Array(buffer)),
     },
   };
 }
 
-/** Returns YYYY-MM-DD in the user's locale calendar. */
+function decodeFiles(files: EncodedResearchFile[]): ResearchFileBackupEntry[] {
+  return files.map((entry) => ({
+    meta: entry.meta,
+    blob: new Blob([base64ToBytes(entry.blob.base64)], { type: entry.blob.type }),
+  }));
+}
+
+export async function buildExportPayload(now = new Date()): Promise<ExportPayload> {
+  const data = Object.fromEntries(DATASET_IDS.map((id) => [id, readDataset(id)])) as ExportData;
+  const files = await Promise.all((await listAllFilesForBackup()).map(encodeFile));
+  return { schema: EXPORT_SCHEMA, exportedAt: now.toISOString(), data, files };
+}
+
 function formatDateStamp(date: Date): string {
   const y = date.getFullYear();
   const m = `${date.getMonth() + 1}`.padStart(2, "0");
@@ -61,26 +96,25 @@ function formatDateStamp(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-export function exportAllData(): void {
-  if (typeof window === "undefined") return;
-  const payload = buildExportPayload();
-  const json = JSON.stringify(payload, null, 2);
-  const blob = new Blob([json], { type: "application/json" });
+export async function exportAllData(): Promise<void> {
+  if (typeof window === "undefined") throw new Error("Export is only available in the browser.");
+  const payload = await buildExportPayload();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   try {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `investment-report-export-${formatDateStamp(new Date())}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `investment-report-export-${formatDateStamp(new Date())}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
   } finally {
     URL.revokeObjectURL(url);
   }
 }
 
 export type ImportValidationResult =
-  | { ok: true; payload: ExportPayload }
+  | { ok: true; payload: ImportPayload }
   | { ok: false; reason: string };
 
 export function parseImportText(raw: string): ImportValidationResult {
@@ -93,38 +127,56 @@ export function parseImportText(raw: string): ImportValidationResult {
   if (typeof candidate !== "object" || candidate === null) {
     return { ok: false, reason: "Top-level value must be an object." };
   }
-  const obj = candidate as Record<string, unknown>;
-  if (obj.schema !== EXPORT_SCHEMA) {
-    return {
-      ok: false,
-      reason: `Unrecognized schema marker (expected "${EXPORT_SCHEMA}").`,
-    };
+  const object = candidate as Record<string, unknown>;
+  if (object.schema !== EXPORT_SCHEMA && object.schema !== LEGACY_EXPORT_SCHEMA) {
+    return { ok: false, reason: "Unrecognized backup schema marker." };
   }
-  if (typeof obj.data !== "object" || obj.data === null) {
+  if (typeof object.data !== "object" || object.data === null || Array.isArray(object.data)) {
     return { ok: false, reason: "Missing 'data' object." };
   }
-  return { ok: true, payload: obj as unknown as ExportPayload };
-}
-
-/**
- * Overwrite every store from the payload. Keys whose value is absent are
- * removed so an import truly mirrors the source. Per-store coercion happens
- * on next read; we don't validate item shapes here.
- */
-export function applyImport(payload: ExportPayload): void {
-  const d = payload.data;
-  writeOrRemove(KEYS.watchlist, d.watchlist);
-  writeOrRemove(KEYS.portfolio, d.portfolio);
-  writeOrRemove(KEYS.notes, d.notes);
-  writeOrRemove(KEYS.dispatches, d.dispatches);
-  writeOrRemove(KEYS.strategies, d.strategies);
-  writeOrRemove(KEYS.dashboardSettings, d.dashboardSettings);
-}
-
-function writeOrRemove(key: string, value: unknown): void {
-  if (value === undefined || value === null) {
-    removeKey(key);
-    return;
+  if (object.schema === EXPORT_SCHEMA && !Array.isArray(object.files)) {
+    return { ok: false, reason: "Version 2 backup is missing its files array." };
   }
-  writeJson(key, value);
+  return { ok: true, payload: candidate as ImportPayload };
+}
+
+function backupLocalValues(ids: DatasetId[]): Map<string, string | null> {
+  const backup = new Map<string, string | null>();
+  for (const id of ids) backup.set(DATASET_REGISTRY[id].key, localStorage.getItem(DATASET_REGISTRY[id].key));
+  return backup;
+}
+
+function restoreLocalValues(backup: Map<string, string | null>): void {
+  for (const [key, value] of backup) {
+    if (value === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, value);
+  }
+}
+
+/** Legacy backups update only fields they contain; omitted personal data is retained. */
+export async function applyImport(payload: ImportPayload): Promise<void> {
+  if (typeof window === "undefined") throw new Error("Import is only available in the browser.");
+  const ids = DATASET_IDS.filter((id) => Object.hasOwn(payload.data, id));
+  const localBackup = backupLocalValues(ids);
+  const fileBackup = payload.schema === EXPORT_SCHEMA ? await listAllFilesForBackup() : null;
+  try {
+    for (const id of ids) {
+      const value = payload.data[id];
+      if (value === undefined || value === null) removeKey(DATASET_REGISTRY[id].key);
+      else writeJson(DATASET_REGISTRY[id].key, value);
+    }
+    if (payload.schema === EXPORT_SCHEMA) {
+      await replaceAllFilesFromBackup(decodeFiles(payload.files));
+    }
+  } catch (error) {
+    restoreLocalValues(localBackup);
+    if (fileBackup) {
+      try {
+        await replaceAllFilesFromBackup(fileBackup);
+      } catch {
+        // The original error remains the actionable failure.
+      }
+    }
+    throw error;
+  }
 }
