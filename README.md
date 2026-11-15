@@ -11,7 +11,7 @@ stay in the browser.
 - Current app: `https://investment-report-app.pages.dev/`
 - Cloudflare Pages project: `investment-report-app`
 
-Use the Node version pinned in `.nvmrc` (Node 20.19.5). Install the locked app
+Use the Node version pinned in `.nvmrc` (Node 22.12.0). Install the locked app
 dependencies, then run the complete quality gate from the repository root:
 
 ```bash
