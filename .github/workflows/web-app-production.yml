@@ -6,6 +6,8 @@ on:
     paths:
       - "web-app/**"
       - "data/quotes/**"
+      - "data/company/**"
+      - ".github/workflows/web-app-production.yml"
   workflow_dispatch:
 
 jobs:
@@ -28,11 +30,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: TypeScript check
-        run: npx tsc --noEmit
-
-      - name: Next.js static export
-        run: npm run build
+      - name: Quality gate and static export
+        run: npm run check
         env:
           NODE_ENV: production
 

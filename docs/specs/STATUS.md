@@ -34,6 +34,8 @@ Oppdater denne filen hver gang en spec startes, blokkeres eller ferdigstilles.
 | SPEC-029 | Research helpers — build-time company info enrichment + helpers panel + 9 external source links | claude-code | ✅ done | - | 726292c..d995084 | 2026-05-17 |
 | SPEC-030 | Stock Overview card on thesis page (Yahoo-style: multi-range chart + key-stats grid + news + description) | unassigned | ⬜ todo | SPEC-029 | - | 2026-05-17 |
 | SPEC-031 | Thesis auto-suggest from data (pipeline expansion + diff-preview panel) | unassigned | ⬜ todo | SPEC-029 | - | 2026-05-17 |
+| [SPEC-033](033-app-architecture-target.md) | Application architecture target — module boundaries, local compatibility, migration order, deletion gates (documentation only; implementation downstream) | Vision | ✅ architecture review done | - | [INT-374](/INT/issues/INT-374) | 2026-11-14 |
+| [SPEC-034](034-frontend-revamp-patterns.md) | Shared shell, responsive collection, overlay, state, draft, and chart patterns | Thor | ✅ implemented; preview acceptance pending | [INT-377](/INT/issues/INT-377) | `revamp-2026` | 2026-11-15 |
 
 ## Status Legend
 - ⬜ todo

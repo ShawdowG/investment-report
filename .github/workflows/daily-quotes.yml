@@ -54,12 +54,8 @@ jobs:
         run: npm ci
         working-directory: web-app
 
-      - name: TypeScript check
-        run: npx tsc --noEmit
-        working-directory: web-app
-
-      - name: Next.js static export
-        run: npm run build
+      - name: Quality gate and static export
+        run: npm run check
         working-directory: web-app
         env:
           NODE_ENV: production
