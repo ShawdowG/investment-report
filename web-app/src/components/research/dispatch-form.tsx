@@ -79,6 +79,8 @@ export function DispatchForm({
               if (error) setError(null);
             }}
             placeholder="Weekly market take, NVDA earnings post-mortem…"
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? "dispatch-title-error" : undefined}
             className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-1.5 font-body-main text-body-main text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           />
         </Field>
@@ -120,7 +122,11 @@ export function DispatchForm({
           className="w-full rounded-md border border-border-subtle bg-surface-elevated px-3 py-2 font-data-mono text-data-mono text-text-primary shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 leading-relaxed"
         />
       </Field>
-      {error ? <p className="text-xs text-destructive">{error}</p> : null}
+      {error ? (
+        <p id="dispatch-title-error" role="alert" className="text-xs text-destructive">
+          {error}
+        </p>
+      ) : null}
       <div className="flex justify-end gap-2">
         {onCancel ? (
           <Button type="button" variant="ghost" size="sm" onClick={onCancel}>

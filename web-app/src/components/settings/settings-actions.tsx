@@ -11,7 +11,7 @@ import {
   applyImport,
   exportAllData,
   parseImportText,
-  type ExportPayload,
+  type ImportPayload,
 } from "@/lib/storage/export-import";
 
 type StatusKind = "info" | "warn";
@@ -20,7 +20,8 @@ export function SettingsActions() {
   const [status, setStatus] = useState<string | null>(null);
   const [statusKind, setStatusKind] = useState<StatusKind>("info");
 
-  const [pendingImport, setPendingImport] = useState<ExportPayload | null>(null);
+  const [pendingImport, setPendingImport] = useState<ImportPayload | null>(null);
+  const [pendingDemo, setPendingDemo] = useState(false);
   const [pendingClear, setPendingClear] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -30,10 +31,15 @@ export function SettingsActions() {
   }
 
   function handleLoadDemo() {
+    setPendingDemo(true);
+  }
+
+  function confirmLoadDemo() {
     loadDemoData();
+    setPendingDemo(false);
     setBanner(
       "info",
-      "Demo data loaded. Refresh /watchlist, /portfolio, /research, /ticker/NVDA to see the populated state.",
+      "Demo watchlist, portfolio, ticker notes, and research dispatches loaded. Theses, reviews, strategies, preferences, and research files were not changed.",
     );
   }
 
@@ -44,12 +50,15 @@ export function SettingsActions() {
   function confirmClear() {
     clearAllUserData();
     setPendingClear(false);
-    setBanner("warn", "All local user data cleared.");
+    setBanner(
+      "warn",
+      "Watchlist, portfolio, ticker notes, and research dispatches cleared. Theses, reviews, strategies, preferences, and research files were retained.",
+    );
   }
 
-  function handleExport() {
+  async function handleExport() {
     try {
-      exportAllData();
+      await exportAllData();
       setBanner("info", "Export downloaded.");
     } catch (err) {
       setBanner(
@@ -84,32 +93,46 @@ export function SettingsActions() {
     }
   }
 
-  function confirmImport() {
+  async function confirmImport() {
     if (!pendingImport) return;
-    applyImport(pendingImport);
-    setPendingImport(null);
-    setBanner(
-      "info",
-      "Import applied. Refresh /watchlist, /portfolio, /research, /strategies to see the restored state.",
-    );
+    try {
+      await applyImport(pendingImport);
+      setPendingImport(null);
+      setBanner(
+        "info",
+        "Import applied. Refresh /watchlist, /portfolio, /research, /strategies to see the restored state.",
+      );
+    } catch (err) {
+      setBanner(
+        "warn",
+        `Import failed without clearing the prior backup: ${err instanceof Error ? err.message : "unknown error"}.`,
+      );
+    }
   }
 
   return (
     <>
       <Card className="p-card-padding gap-4">
         <SectionHeader
-          title="Data"
-          caption="Seed the four local-storage stores with example content, or wipe them."
+          title="Backup & restore"
+          caption="Download a complete versioned backup or preview a backup before it replaces local data."
         />
         <div className="flex flex-wrap gap-3">
-          <Button type="button" onClick={handleLoadDemo}>
-            <Database className="size-4 mr-1" aria-hidden="true" />
-            Load demo data
+          <Button type="button" onClick={handleExport}>
+            <Download className="size-4" aria-hidden="true" />
+            Download full backup
           </Button>
-          <Button type="button" variant="outline" onClick={handleClear}>
-            <Trash2 className="size-4 mr-1" aria-hidden="true" />
-            Clear all data
+          <Button type="button" variant="outline" onClick={handleImportClick}>
+            <Upload className="size-4" aria-hidden="true" />
+            Restore backup
           </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={handleImportFile}
+          />
         </div>
         {status ? (
           <p
@@ -123,48 +146,47 @@ export function SettingsActions() {
             {status}
           </p>
         ) : null}
-        <ul className="list-disc list-inside font-body-compact text-body-compact text-text-secondary space-y-1 marker:text-text-secondary/60">
-          <li>Watchlist: 8 symbols across all status / priority levels with tags.</li>
-          <li>Portfolio: 5 positions (NVDA / MSFT / AAPL / BTC-USD / TSLA).</li>
-          <li>Research: 3 dispatches, one linked to NVDA.</li>
-          <li>Notes: 4 ticker notes spread across NVDA / MSFT / AAPL.</li>
-        </ul>
+        <p className="font-body-compact text-body-compact text-text-secondary">
+          Export covers watchlist, portfolio, ticker notes, research dispatches,
+          strategies, dashboard preferences, theses, quarterly reviews, and
+          attachment bytes. Version 1 backups remain importable and do not clear
+          newer datasets they do not contain.
+        </p>
       </Card>
 
       <Card className="p-card-padding gap-4">
         <SectionHeader
-          title="Export / import"
-          caption="Snapshot every local-storage store to a single JSON file, or restore one. Useful as a manual backup before clearing or swapping browsers."
+          title="Demo data"
+          caption="Replace four starter datasets with disposable examples. Research theses and files stay unchanged."
         />
-        <div className="flex flex-wrap gap-3">
-          <Button type="button" onClick={handleExport}>
-            <Download className="size-4 mr-1" aria-hidden="true" />
-            Export all data
-          </Button>
-          <Button type="button" variant="outline" onClick={handleImportClick}>
-            <Upload className="size-4 mr-1" aria-hidden="true" />
-            Import data
-          </Button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="application/json,.json"
-            className="hidden"
-            onChange={handleImportFile}
-          />
-        </div>
+        <Button type="button" variant="outline" className="self-start" onClick={handleLoadDemo}>
+          <Database className="size-4" aria-hidden="true" />
+          Load demo data
+        </Button>
+        <ul className="list-disc space-y-1 pl-5 font-body-compact text-body-compact text-text-secondary marker:text-text-secondary/60">
+          <li>Replaces watchlist, portfolio, ticker notes, and research dispatches.</li>
+          <li>Retains theses, quarterly reviews, strategies, preferences, and research files.</li>
+        </ul>
+      </Card>
+
+      <Card className="gap-4 border-destructive/30 p-card-padding">
+        <SectionHeader
+          title="Danger zone"
+          caption="Clear only the four legacy local datasets listed below. This action cannot be undone."
+        />
+        <Button type="button" variant="destructive" className="self-start" onClick={handleClear}>
+          <Trash2 className="size-4" aria-hidden="true" />
+          Clear watchlist, portfolio, notes & dispatches
+        </Button>
         <p className="font-body-compact text-body-compact text-text-secondary">
-          Export covers watchlist, portfolio, ticker notes, research dispatches,
-          strategies, and dashboard preferences. Import validates the schema
-          marker then overwrites each store; malformed entries are dropped on
-          next read.
+          Theses, quarterly reviews, strategies, dashboard preferences, and research files are retained.
         </p>
       </Card>
 
       <ConfirmDialog
         open={pendingImport !== null}
         title="Overwrite local data?"
-        description="This will overwrite all your local data (watchlist, portfolio, notes, dispatches, strategies, dashboard preferences) with the contents of the import file. Continue?"
+        description="This restores every dataset present in the backup. Version 2 backups also replace research attachments. Continue?"
         confirmLabel="Overwrite"
         destructive
         onConfirm={confirmImport}
@@ -172,10 +194,20 @@ export function SettingsActions() {
       />
 
       <ConfirmDialog
+        open={pendingDemo}
+        title="Replace four datasets with demo data?"
+        description="This replaces your watchlist, portfolio, ticker notes, and research dispatches. It retains theses, quarterly reviews, strategies, preferences, and research files."
+        confirmLabel="Load demo data"
+        destructive
+        onConfirm={confirmLoadDemo}
+        onCancel={() => setPendingDemo(false)}
+      />
+
+      <ConfirmDialog
         open={pendingClear}
-        title="Clear all local data?"
-        description="This wipes watchlist, portfolio, ticker notes, and research dispatches from this browser. It cannot be undone."
-        confirmLabel="Clear all"
+        title="Clear four local datasets?"
+        description="This removes watchlist, portfolio, ticker notes, and research dispatches. It retains theses, quarterly reviews, strategies, preferences, and research files. It cannot be undone."
+        confirmLabel="Clear four datasets"
         destructive
         onConfirm={confirmClear}
         onCancel={() => setPendingClear(false)}

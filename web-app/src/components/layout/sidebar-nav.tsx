@@ -2,43 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  ChartCandlestick,
-  Eye,
-  LayoutDashboard,
-  LineChart,
-  NotebookPen,
-  Settings,
-  Wallet,
-  type LucideIcon,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
-
-interface NavItem {
-  href: string;
-  label: string;
-  Icon: LucideIcon;
-}
-
-const NAV: NavItem[] = [
-  { href: "/", label: "Dashboard", Icon: LayoutDashboard },
-  { href: "/research", label: "Research", Icon: NotebookPen },
-  { href: "/watchlist", label: "Watchlist", Icon: Eye },
-  { href: "/portfolio", label: "Portfolio", Icon: Wallet },
-  { href: "/strategies", label: "Strategies", Icon: ChartCandlestick },
-  { href: "/tickers", label: "Tickers", Icon: LineChart },
-];
-
-const SETTINGS_ITEM: NavItem = {
-  href: "/settings",
-  label: "Settings",
-  Icon: Settings,
-};
-
-function isActiveHref(pathname: string, href: string): boolean {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
+import {
+  EXPLORE_NAVIGATION,
+  PRIMARY_NAVIGATION,
+  SETTINGS_NAVIGATION,
+  isActiveNavigation,
+  type NavigationItem,
+} from "./navigation";
 
 interface SidebarNavProps {
   onItemClick?: () => void;
@@ -66,20 +37,36 @@ export function SidebarNav({ onItemClick, collapsed = false }: SidebarNavProps) 
           </>
         )}
       </Link>
-      <nav className="flex-1 flex flex-col gap-1.5">
-        {NAV.map((item) => (
+      <nav aria-label="Primary navigation" className="flex-1 flex flex-col gap-1.5">
+        {PRIMARY_NAVIGATION.map((item) => (
           <SidebarLink
             key={item.href}
             item={item}
-            active={isActiveHref(pathname, item.href)}
+            active={isActiveNavigation(pathname, item.href)}
+            collapsed={collapsed}
+            onClick={onItemClick}
+          />
+        ))}
+        {!collapsed ? (
+          <p className="mb-1 mt-5 px-4 font-label-caps text-label-caps uppercase text-text-secondary">
+            Explore
+          </p>
+        ) : (
+          <div className="my-3 h-px bg-border-subtle" aria-hidden="true" />
+        )}
+        {EXPLORE_NAVIGATION.map((item) => (
+          <SidebarLink
+            key={item.href}
+            item={item}
+            active={isActiveNavigation(pathname, item.href)}
             collapsed={collapsed}
             onClick={onItemClick}
           />
         ))}
         <div className="mt-auto">
           <SidebarLink
-            item={SETTINGS_ITEM}
-            active={isActiveHref(pathname, SETTINGS_ITEM.href)}
+            item={SETTINGS_NAVIGATION}
+            active={isActiveNavigation(pathname, SETTINGS_NAVIGATION.href)}
             collapsed={collapsed}
             onClick={onItemClick}
           />
@@ -95,7 +82,7 @@ function SidebarLink({
   collapsed,
   onClick,
 }: {
-  item: NavItem;
+  item: NavigationItem;
   active: boolean;
   collapsed: boolean;
   onClick?: () => void;
@@ -108,7 +95,7 @@ function SidebarLink({
       aria-current={active ? "page" : undefined}
       title={collapsed ? label : undefined}
       className={cn(
-        "flex items-center rounded-lg transition-all font-body-compact text-body-compact",
+        "flex min-h-11 items-center rounded-lg font-body-compact text-body-compact transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         collapsed ? "gap-0 px-3 py-3 justify-center" : "gap-3 px-4 py-3",
         active
           ? "bg-primary-container text-on-primary-container font-semibold"

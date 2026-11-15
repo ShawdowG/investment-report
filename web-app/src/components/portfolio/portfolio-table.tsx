@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import {
   Table,
   TableBody,
@@ -133,14 +134,18 @@ export function PortfolioTable({
   // SPEC-023 W8.H — single localStorage read for thesis lights across the
   // whole table.
   const [thesisLights, setThesisLights] = useState<Record<string, Light>>({});
+  const [pendingRemove, setPendingRemove] = useState<string | null>(null);
   useEffect(() => {
     setThesisLights(getAllThesisLights());
   }, []);
 
   if (positions.length === 0) {
     return (
-      <div className="rounded-lg border border-border-subtle bg-surface p-card-padding font-body-compact text-body-compact text-text-secondary">
-        No positions yet — add one above.
+      <div className="rounded-lg border border-dashed border-border-subtle bg-surface p-card-padding">
+        <h2 className="font-h2 text-h2 text-text-primary">Add your first position</h2>
+        <p className="mt-1 font-body-compact text-body-compact text-text-secondary">
+          Positions are manual and stay in this browser. Add quantity and average price above to calculate performance.
+        </p>
       </div>
     );
   }
@@ -152,7 +157,97 @@ export function PortfolioTable({
   const editable = onUpdate !== undefined;
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-surface overflow-x-auto">
+    <>
+    <div className="space-y-3 md:hidden" aria-label="Portfolio positions">
+      {positions.map((position) => {
+        const pnl = pnlBySymbol.get(position.symbol);
+        return (
+          <article key={position.symbol} className="rounded-xl border border-border-subtle bg-surface p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <Link
+                  href={`/ticker/${encodeURIComponent(position.symbol)}`}
+                  className="inline-flex min-h-11 items-center font-data-mono text-lg font-semibold text-text-primary underline-offset-4 hover:underline"
+                >
+                  {position.symbol}
+                </Link>
+                {thesisLights[position.symbol] ? (
+                  <Link
+                    href={`/research/thesis/${encodeURIComponent(position.symbol)}`}
+                    className="ml-2 inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 text-xs text-text-secondary hover:bg-surface-variant hover:text-text-primary"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "size-2 rounded-full",
+                        LIGHT_DOT_CLASS[thesisLights[position.symbol]],
+                      )}
+                    />
+                    Thesis
+                  </Link>
+                ) : null}
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={`Remove ${position.symbol}`}
+                onClick={() => setPendingRemove(position.symbol)}
+              >
+                <X />
+              </Button>
+            </div>
+            <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-3">
+              <div>
+                <dt className="text-xs text-text-secondary">Current value</dt>
+                <dd className="mt-1 font-data-mono text-text-primary">
+                  {pnl ? fmtMoney(pnl.currentValue, pnl.currency) : "Quote unavailable"}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-text-secondary">Total P&amp;L</dt>
+                <dd className={cn("mt-1 font-data-mono", pnl ? pnlColorClass(pnl.totalPnL) : "text-text-secondary")}>
+                  {pnl ? `${fmtMoneySigned(pnl.totalPnL, pnl.currency)} (${fmtPct(pnl.totalPnLPct)})` : "—"}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-text-secondary">Quantity</dt>
+                <dd className="mt-1">
+                  {editable && onUpdate ? (
+                    <NumericEditCell
+                      symbol={position.symbol}
+                      field="quantity"
+                      value={position.quantity}
+                      display={String(position.quantity)}
+                      ariaLabel={`Quantity for ${position.symbol}`}
+                      onUpdate={onUpdate}
+                      className="min-h-11 text-left"
+                    />
+                  ) : position.quantity}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-text-secondary">Average price</dt>
+                <dd className="mt-1">
+                  {editable && onUpdate ? (
+                    <NumericEditCell
+                      symbol={position.symbol}
+                      field="avgPrice"
+                      value={position.avgPrice}
+                      display={fmtMoney(position.avgPrice)}
+                      ariaLabel={`Average price for ${position.symbol}`}
+                      onUpdate={onUpdate}
+                      className="min-h-11 text-left"
+                    />
+                  ) : fmtMoney(position.avgPrice)}
+                </dd>
+              </div>
+            </dl>
+            <p className="mt-3 text-xs text-text-secondary">Tap quantity or average price to edit.</p>
+          </article>
+        );
+      })}
+    </div>
+    <div className="hidden rounded-lg border border-border-subtle bg-surface overflow-x-auto md:block">
       <Table>
         <TableHeader>
           <TableRow>
@@ -292,7 +387,7 @@ export function PortfolioTable({
                     variant="ghost"
                     size="icon-sm"
                     aria-label={`Remove ${p.symbol}`}
-                    onClick={() => onRemove(p.symbol)}
+                    onClick={() => setPendingRemove(p.symbol)}
                   >
                     <X />
                   </Button>
@@ -309,5 +404,18 @@ export function PortfolioTable({
         <span className="text-text-primary font-data-mono">Total cost {fmtMoney(totalCost)}</span>
       </div>
     </div>
+    <ConfirmDialog
+      open={pendingRemove !== null}
+      title={`Remove ${pendingRemove ?? "position"} from the portfolio?`}
+      description="This removes the manual holding and its performance calculations. Watchlist, thesis, notes, and research files stay unchanged."
+      confirmLabel="Remove position"
+      destructive
+      onConfirm={() => {
+        if (pendingRemove) onRemove(pendingRemove);
+        setPendingRemove(null);
+      }}
+      onCancel={() => setPendingRemove(null)}
+    />
+    </>
   );
 }

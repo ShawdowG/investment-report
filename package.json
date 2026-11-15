@@ -2,8 +2,12 @@
   "name": "investment-report-scripts",
   "private": true,
   "type": "commonjs",
+  "engines": {
+    "node": "20.19.x"
+  },
   "scripts": {
-    "fetch:quotes": "python scripts/fetch-quotes.py"
+    "fetch:quotes": "python scripts/fetch-quotes.py",
+    "check": "npm --prefix web-app run check"
   },
   "dependencies": {}
 }

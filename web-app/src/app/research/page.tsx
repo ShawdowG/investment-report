@@ -17,8 +17,8 @@ export default function ResearchPage() {
         <header className="space-y-1">
           <h1 className="font-h1 text-h1 text-text-primary">Research</h1>
           <p className="font-body-compact text-body-compact text-text-secondary">
-            Your dispatches — market views, strategy notes, post-mortems. Stored
-            locally on this device.
+            Build investment theses and keep supporting research dispatches.
+            Everything is stored locally on this device.
           </p>
         </header>
         <ResearchView snapshots={snapshots} />

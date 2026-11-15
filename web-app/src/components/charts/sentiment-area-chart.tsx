@@ -58,6 +58,8 @@ interface TooltipRenderProps<T> {
 
 interface SentimentAreaChartProps<T extends SentimentAreaChartPoint> {
   data: T[];
+  /** Programmatic chart name shown in the non-visual summary. */
+  title?: string;
   /** Key on each datum holding the y-axis numeric value. */
   yKey: keyof T & string;
   /** Format any y-axis numeric value for ticks + tooltip. */
@@ -81,6 +83,7 @@ interface SentimentAreaChartProps<T extends SentimentAreaChartPoint> {
  */
 export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
   data,
+  title = "Time series",
   yKey,
   formatY,
   height = 280,
@@ -101,7 +104,17 @@ export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
 
   const first = data[0][yKey] as unknown as number;
   const last = data[data.length - 1][yKey] as unknown as number;
+  const values = data
+    .map((point) => point[yKey] as unknown as number)
+    .filter((value) => Number.isFinite(value));
+  const low = Math.min(...values);
+  const high = Math.max(...values);
   const color = last >= first ? RISK_ON : RISK_OFF;
+  const tablePoints = data.filter((_, index) => {
+    if (data.length <= 12) return true;
+    const interval = Math.ceil((data.length - 1) / 10);
+    return index === 0 || index === data.length - 1 || index % interval === 0;
+  });
 
   function DefaultTooltip({ active, payload }: TooltipRenderProps<T>) {
     if (!active || !payload || payload.length === 0) return null;
@@ -122,7 +135,15 @@ export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
   }
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-surface p-2">
+    <figure className="rounded-lg border border-border-subtle bg-surface p-2">
+      <figcaption className="sr-only">
+        {title}. From {formatY(first)} on {data[0].date} to {formatY(last)} on {data[data.length - 1].date}.
+        Low {formatY(low)} and high {formatY(high)}.
+        {referenceLines?.length
+          ? ` ${referenceLines.length} reference level${referenceLines.length === 1 ? "" : "s"}: ${referenceLines.map((line) => line.label ?? formatY(line.y)).join(", ")}.`
+          : ""}
+      </figcaption>
+      <div aria-hidden="true">
       <ResponsiveContainer width="100%" height={height}>
         <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <defs>
@@ -188,6 +209,51 @@ export function SentimentAreaChart<T extends SentimentAreaChartPoint>({
           })}
         </AreaChart>
       </ResponsiveContainer>
-    </div>
+      </div>
+      <details className="mx-2 mb-1 mt-2 border-t border-border-subtle pt-2">
+        <summary className="touch-target inline-flex cursor-pointer items-center font-body-compact text-body-compact font-medium text-text-primary">
+          View chart data
+        </summary>
+        <p className="mb-2 text-xs text-text-secondary">
+          {data.length > tablePoints.length
+            ? `${tablePoints.length} representative points from ${data.length} observations.`
+            : `${data.length} observations.`}
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-border-subtle text-text-secondary">
+                <th scope="col" className="px-2 py-2 font-medium">Date</th>
+                <th scope="col" className="px-2 py-2 text-right font-medium">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tablePoints.map((point) => (
+                <tr key={point.date} className="border-b border-border-subtle last:border-0">
+                  <td className="px-2 py-2">{point.date}</td>
+                  <td className="px-2 py-2 text-right font-data-mono">
+                    {formatY(point[yKey] as unknown as number)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {referenceLines?.length ? (
+          <div className="mt-3 text-sm">
+            <p className="font-medium text-text-primary">Reference levels</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-text-secondary">
+              {referenceLines.map((line, index) => (
+                <li key={`${line.kind}-${line.y}-${index}`}>
+                  {line.label ?? formatY(line.y)} ({line.kind})
+                  {line.emphasis ? " — currently in range" : ""}
+                  {!line.emphasis && line.recentlyCrossed ? " — crossed recently" : ""}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </details>
+    </figure>
   );
 }

@@ -41,15 +41,49 @@ export interface ResearchFileMeta {
   sectionAnchor?: ResearchFileSectionAnchor;
 }
 
+const SAFE_RASTER_IMAGE_MIME_TYPES = new Set([
+  "image/avif",
+  "image/bmp",
+  "image/gif",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+]);
+
+const SAFE_TEXT_MIME_TYPES = new Set([
+  "text/csv",
+  "text/markdown",
+  "text/plain",
+  "text/x-markdown",
+]);
+
+function normalizeMime(mime: string): string {
+  return (mime ?? "").split(";", 1)[0].trim().toLowerCase();
+}
+
+/** Active image formats such as SVG are intentionally excluded. */
+export function isSafeRasterImageMime(mime: string): boolean {
+  return SAFE_RASTER_IMAGE_MIME_TYPES.has(normalizeMime(mime));
+}
+
+/**
+ * Only passive raster images and known text formats may open as blob URLs.
+ * Text is re-wrapped as `text/plain` by the caller before navigation.
+ */
+export function canOpenResearchFile(meta: ResearchFileMeta): boolean {
+  const mime = normalizeMime(meta.mimeType);
+  return isSafeRasterImageMime(mime) || SAFE_TEXT_MIME_TYPES.has(mime);
+}
+
 /**
  * Derive the renderable kind from a MIME type. Returns `"other"` for anything
  * we don't preview inline (Office docs, archives, etc.).
  */
 export function fileKindForMime(mime: string): ResearchFileKind {
-  const normalized = (mime ?? "").trim().toLowerCase();
+  const normalized = normalizeMime(mime);
   if (!normalized) return "other";
   if (normalized === "application/pdf") return "pdf";
-  if (normalized.startsWith("image/")) return "image";
+  if (isSafeRasterImageMime(normalized)) return "image";
   if (normalized === "text/markdown" || normalized === "text/x-markdown") {
     return "markdown";
   }

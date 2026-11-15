@@ -1,17 +1,7 @@
 import { listQuoteSymbols, loadQuote } from "./load-quote";
-import { dayDelta, lastClose, type Delta } from "./quote-utils";
-
-export interface QuoteSnapshot {
-  symbol: string;
-  lastClose: number;
-  dayDelta: Delta | null;
-  currency: string;
-  name?: string;
-  sector?: string;
-  asOf: string;
-}
-
-export type QuoteSnapshotMap = Record<string, QuoteSnapshot>;
+import { dayDelta, lastClose } from "./quote-utils";
+import type { QuoteSnapshotMap } from "@/lib/domain/quote-data";
+export type { QuoteSnapshot, QuoteSnapshotMap } from "@/lib/domain/quote-data";
 
 /**
  * Build a compact { symbol -> { lastClose, dayDelta, … } } map from every
@@ -36,6 +26,7 @@ export function loadAllQuoteSnapshots(): QuoteSnapshotMap {
       name: series.meta.name,
       sector: series.meta.sector,
       asOf: last.date,
+      generatedAt: series.meta.generatedAt,
     };
   }
   return map;

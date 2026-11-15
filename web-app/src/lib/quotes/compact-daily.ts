@@ -1,11 +1,6 @@
 import { listQuoteSymbols, loadQuote } from "./load-quote";
-
-export interface CompactBar {
-  date: string;
-  close: number;
-}
-
-export type CompactDailyMap = Record<string, CompactBar[]>;
+import type { CompactDailyMap } from "@/lib/domain/quote-data";
+export type { CompactBar, CompactDailyMap } from "@/lib/domain/quote-data";
 
 /**
  * Build a `{ symbol -> [{date, close}] }` map for every available quote

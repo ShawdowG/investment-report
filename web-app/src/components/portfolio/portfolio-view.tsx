@@ -35,6 +35,8 @@ const EMPTY_PNL: PortfolioPnL = {
   totalPnLPct: 0,
   totalDayPnL: 0,
   totalDayPnLPct: null,
+  totalsByCurrency: {},
+  hasMixedCurrencies: false,
 };
 
 function pnlColorClass(n: number): string {
@@ -97,17 +99,22 @@ export function PortfolioView({ snapshots, compactDaily }: PortfolioViewProps) {
 
       {hasPositions && hasPriced ? (
         <div className="rounded-lg border border-border-subtle bg-surface p-card-padding">
+          {pnl.hasMixedCurrencies ? (
+            <p className="mb-3 text-sm text-muted-foreground">
+              Totals are grouped by currency because no FX conversion policy is configured.
+            </p>
+          ) : null}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <Stat label="Current value" value={fmtMoney(pnl.totalCurrentValue)} />
-            <Stat label="Cost basis" value={fmtMoney(pnl.totalCostBasis)} muted />
+            <Stat label="Current value" value={pnl.hasMixedCurrencies ? "Grouped" : fmtMoney(pnl.totalCurrentValue)} />
+            <Stat label="Cost basis" value={pnl.hasMixedCurrencies ? "Grouped" : fmtMoney(pnl.totalCostBasis)} muted />
             <Stat
               label="Total P&L"
-              value={`${fmtMoneySigned(pnl.totalPnL)} (${fmtPct(pnl.totalPnLPct)})`}
+              value={pnl.hasMixedCurrencies ? "Grouped" : `${fmtMoneySigned(pnl.totalPnL)} (${fmtPct(pnl.totalPnLPct)})`}
               colorClass={pnlColorClass(pnl.totalPnL)}
             />
             <Stat
               label="Day P&L"
-              value={dayPnLLabel}
+              value={pnl.hasMixedCurrencies ? "Grouped" : dayPnLLabel}
               colorClass={pnlColorClass(pnl.totalDayPnL)}
             />
           </div>

@@ -122,6 +122,30 @@ interface FormState {
   plannedAction: PlannedAction | "";
 }
 
+interface ThesisDraft {
+  version: 1;
+  symbol: string;
+  savedAt: string;
+  form: FormState;
+  scenarios: Scenario[];
+  light: Light;
+  greenChecks: boolean[];
+  yellowChecks: boolean[];
+  redChecks: boolean[];
+  trimSellChecks: boolean[];
+  notes: ResearchNote[];
+  fundamentals: FundamentalsSnapshot;
+  marketPosition: MarketPositionNotes;
+  coreDriversRaw: string;
+  optionalDriversRaw: string;
+  valuation: ValuationNotes;
+  classifiedPoints: ClassifiedThesisPoint[];
+  concerns: Concerns;
+  questionsRaw: string;
+  analysisNotes: string;
+  mode: Mode;
+}
+
 function emptyForm(): FormState {
   return {
     thesisPointsRaw: "",
@@ -234,6 +258,7 @@ export function ThesisForm({
   const [concerns, setConcerns] = useState<Concerns>({});
   const [questionsRaw, setQuestionsRaw] = useState<string>("");
   const [analysisNotes, setAnalysisNotes] = useState<string>("");
+  const [draftStatus, setDraftStatus] = useState<string | null>(null);
   // SPEC-028 W12.B — default to Guided for new theses; saved theses honour
   // their persisted `lastEditMode`. Updated on mount once the thesis (or lack
   // thereof) has been loaded from localStorage.
@@ -254,6 +279,7 @@ export function ThesisForm({
   // SPEC-028 W12.C — let the wizard trigger the existing form submit pipeline
   // (Save & exit / Finish) without duplicating the save logic.
   const formRef = useRef<HTMLFormElement | null>(null);
+  const draftKey = `thesis_draft:${upper}`;
 
   // Initial hydration from localStorage + cross-store prefill.
   useEffect(() => {
@@ -308,8 +334,107 @@ export function ThesisForm({
       // No stored thesis → start in edit mode so the first-save flow is direct.
       setViewMode("edit");
     }
+    try {
+      const rawDraft = window.localStorage.getItem(draftKey);
+      if (rawDraft) {
+        const draft = JSON.parse(rawDraft) as Partial<ThesisDraft>;
+        const draftIsNewer =
+          !stored ||
+          (typeof draft.savedAt === "string" &&
+            new Date(draft.savedAt).getTime() > new Date(stored.updatedAt).getTime());
+        if (
+          draft.version === 1 &&
+          draft.symbol === upper &&
+          draftIsNewer &&
+          draft.form &&
+          Array.isArray(draft.scenarios)
+        ) {
+          setForm(draft.form);
+          setScenarios(draft.scenarios);
+          if (draft.light) setLight(draft.light);
+          if (draft.greenChecks) setGreenChecks(draft.greenChecks);
+          if (draft.yellowChecks) setYellowChecks(draft.yellowChecks);
+          if (draft.redChecks) setRedChecks(draft.redChecks);
+          if (draft.trimSellChecks) setTrimSellChecks(draft.trimSellChecks);
+          if (draft.notes) setNotes(draft.notes);
+          if (draft.fundamentals) setFundamentals(draft.fundamentals);
+          if (draft.marketPosition) setMarketPosition(draft.marketPosition);
+          if (typeof draft.coreDriversRaw === "string") setCoreDriversRaw(draft.coreDriversRaw);
+          if (typeof draft.optionalDriversRaw === "string") setOptionalDriversRaw(draft.optionalDriversRaw);
+          if (draft.valuation) setValuation(draft.valuation);
+          if (draft.classifiedPoints) setClassifiedPoints(draft.classifiedPoints);
+          if (draft.concerns) setConcerns(draft.concerns);
+          if (typeof draft.questionsRaw === "string") setQuestionsRaw(draft.questionsRaw);
+          if (typeof draft.analysisNotes === "string") setAnalysisNotes(draft.analysisNotes);
+          if (draft.mode) setMode(draft.mode);
+          setViewMode("edit");
+          setDraftStatus("Unsaved draft restored from this device.");
+        }
+      }
+    } catch {
+      setDraftStatus("An unsaved draft could not be restored.");
+    }
     setHydrated(true);
-  }, [upper, snapshots]);
+  }, [upper, snapshots, draftKey]);
+
+  useEffect(() => {
+    if (!hydrated || viewMode !== "edit") return;
+    const timer = window.setTimeout(() => {
+      const draft: ThesisDraft = {
+        version: 1,
+        symbol: upper,
+        savedAt: new Date().toISOString(),
+        form,
+        scenarios,
+        light,
+        greenChecks,
+        yellowChecks,
+        redChecks,
+        trimSellChecks,
+        notes,
+        fundamentals,
+        marketPosition,
+        coreDriversRaw,
+        optionalDriversRaw,
+        valuation,
+        classifiedPoints,
+        concerns,
+        questionsRaw,
+        analysisNotes,
+        mode,
+      };
+      try {
+        window.localStorage.setItem(draftKey, JSON.stringify(draft));
+        setDraftStatus("Draft saved on this device.");
+      } catch {
+        setDraftStatus("Draft could not be saved. Keep this page open.");
+      }
+    }, 400);
+    return () => window.clearTimeout(timer);
+  }, [
+    hydrated,
+    viewMode,
+    draftKey,
+    upper,
+    form,
+    scenarios,
+    light,
+    greenChecks,
+    yellowChecks,
+    redChecks,
+    trimSellChecks,
+    notes,
+    fundamentals,
+    marketPosition,
+    coreDriversRaw,
+    optionalDriversRaw,
+    valuation,
+    classifiedPoints,
+    concerns,
+    questionsRaw,
+    analysisNotes,
+    mode,
+  ]);
 
   // Saved-pulse auto-dismiss.
   useEffect(() => {
@@ -637,6 +762,11 @@ export function ThesisForm({
 
     try {
       const saved = upsertThesis(next);
+      try {
+        window.localStorage.removeItem(draftKey);
+      } catch {
+        // The saved thesis remains authoritative if draft cleanup is unavailable.
+      }
       setExisting(saved);
       setForm(formFromThesis(saved));
       setScenarios(saved.scenarios);
@@ -657,6 +787,7 @@ export function ThesisForm({
       setAnalysisNotes(saved.analysisNotes ?? "");
       setSavedAt(Date.now());
       setError(null);
+      setDraftStatus(null);
       // SPEC-023 W8.K — flip to read mode after a successful save so the user
       // immediately sees the clean rendered thesis. They can click "Edit" to
       // come back.
@@ -672,6 +803,11 @@ export function ThesisForm({
   function handleDelete() {
     try {
       deleteThesis(upper);
+      try {
+        window.localStorage.removeItem(draftKey);
+      } catch {
+        // Deletion of the durable thesis still succeeded.
+      }
       setExisting(null);
       const prefilled = buildPrefill(upper, snapshots, getPortfolio(), getWatchlist());
       setPrefill(prefilled);
@@ -695,6 +831,7 @@ export function ThesisForm({
       setConfirmDelete(false);
       setSavedAt(null);
       setError(null);
+      setDraftStatus(null);
       // After deletion the symbol has no stored thesis again — same starting
       // state as a brand-new thesis flow.
       setViewMode("edit");
@@ -836,6 +973,10 @@ export function ThesisForm({
             className="font-label-caps text-label-caps uppercase text-regime-risk-on animate-pulse"
           >
             Saved
+          </span>
+        ) : draftStatus ? (
+          <span role="status" aria-live="polite" className="text-xs text-text-secondary">
+            {draftStatus}
           </span>
         ) : null}
       </div>

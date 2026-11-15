@@ -8,12 +8,10 @@
  * the route change deactivates the drawer naturally.
  */
 
-import { useEffect } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
-import { X } from "lucide-react";
 import type { ThesisAlert } from "@/lib/research/alerts";
 import { Tag } from "@/components/ui/stitch";
+import { Sheet } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
 interface AlertsDrawerProps {
@@ -33,72 +31,39 @@ const KIND_TONE: Record<ThesisAlert["kind"], string> = {
 };
 
 export function AlertsDrawer({ open, onClose, alerts }: AlertsDrawerProps) {
-  useEffect(() => {
-    if (!open) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-
-  if (!open) return null;
-  if (typeof document === "undefined") return null;
-
   const crossed = alerts.filter((a) => a.kind === "crossed-zone");
   const stale = alerts.filter((a) => a.kind === "stale-thesis");
 
-  return createPortal(
-    <div className="fixed inset-0 z-50" role="dialog" aria-label="Alerts">
-      <button
-        type="button"
-        aria-label="Close alerts"
-        onClick={onClose}
-        className="absolute inset-0 bg-black/40 cursor-default"
-      />
-      <aside
-        className={cn(
-          "absolute right-0 top-0 h-full w-full max-w-md",
-          "bg-surface border-l border-border-subtle shadow-lg",
-          "flex flex-col",
+  return (
+    <Sheet
+      open={open}
+      title="Alerts"
+      description="Personal thesis levels and research that may need attention."
+      onClose={onClose}
+    >
+      <div className="space-y-5">
+        {alerts.length === 0 ? (
+          <p className="font-body-compact text-body-compact text-text-secondary">
+            Nothing needs your attention right now.
+          </p>
+        ) : (
+          <>
+            <Section
+              title="Crossed zones (today)"
+              rows={crossed}
+              onLinkClick={onClose}
+              emptyHint="No thesis levels are in range right now."
+            />
+            <Section
+              title="Stale theses"
+              rows={stale}
+              onLinkClick={onClose}
+              emptyHint="Every thesis is fresh."
+            />
+          </>
         )}
-      >
-        <header className="flex items-center justify-between px-4 py-3 border-b border-border-subtle">
-          <h2 className="font-h2 text-h2 text-text-primary">Alerts</h2>
-          <button
-            type="button"
-            aria-label="Close alerts"
-            onClick={onClose}
-            className="text-text-secondary hover:text-text-primary p-1 rounded hover:bg-surface-variant transition-colors"
-          >
-            <X className="size-4" aria-hidden="true" />
-          </button>
-        </header>
-        <div className="flex-1 overflow-y-auto px-4 py-3 space-y-5">
-          {alerts.length === 0 ? (
-            <p className="font-body-compact text-body-compact text-text-secondary">
-              Nothing needs your attention right now.
-            </p>
-          ) : (
-            <>
-              <Section
-                title="Crossed zones (today)"
-                rows={crossed}
-                onLinkClick={onClose}
-                emptyHint="No thesis levels are in range right now."
-              />
-              <Section
-                title="Stale theses"
-                rows={stale}
-                onLinkClick={onClose}
-                emptyHint="Every thesis is fresh."
-              />
-            </>
-          )}
-        </div>
-      </aside>
-    </div>,
-    document.body,
+      </div>
+    </Sheet>
   );
 }
 

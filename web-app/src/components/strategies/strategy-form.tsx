@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DEFAULT_FIXED_AMOUNT,
@@ -17,7 +17,7 @@ interface StrategyFormProps {
   available: string[];
   initial?: Strategy;
   submitLabel?: string;
-  onSave: (input: StrategyInputContract) => void;
+  onSave: (input: StrategyInputContract) => boolean | void;
   onCancel?: () => void;
 }
 
@@ -27,6 +27,26 @@ const TYPE_OPTIONS: { value: StrategyType; label: string; description: string }[
   { value: "rsi", label: "RSI threshold", description: "Buy when RSI < buy, sell when RSI > sell." },
   { value: "price-threshold", label: "Price threshold", description: "Buy at price ≤ X, sell at price ≥ Y. Single symbol only." },
 ];
+
+interface StrategyDraft {
+  version: 1;
+  savedAt: string;
+  name: string;
+  type: StrategyType;
+  symbols: string[];
+  initialCapital: string;
+  sizing: "equal-weight" | "fixed-dollar";
+  fixedAmount: string;
+  startDate: string;
+  endDate: string;
+  shortPeriod: string;
+  longPeriod: string;
+  rsiPeriod: string;
+  rsiBuy: string;
+  rsiSell: string;
+  buyPrice: string;
+  sellPrice: string;
+}
 
 export function StrategyForm({
   available,
@@ -90,10 +110,93 @@ export function StrategyForm({
   );
 
   const [error, setError] = useState<string | null>(null);
+  const [draftReady, setDraftReady] = useState(false);
+  const [draftStatus, setDraftStatus] = useState<string | null>(null);
+  const draftKey = `strategy_draft:${initial?.id ?? "new"}`;
   const errorId = "strategy-form-error";
   const invalid = error !== null;
   const ariaInvalid = invalid ? true : undefined;
   const ariaDescribedBy = invalid ? errorId : undefined;
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(draftKey);
+      if (raw) {
+        const draft = JSON.parse(raw) as Partial<StrategyDraft>;
+        if (draft.version === 1 && typeof draft.name === "string") {
+          setName(draft.name);
+          if (draft.type) setType(draft.type);
+          if (Array.isArray(draft.symbols)) setSymbols(draft.symbols);
+          if (typeof draft.initialCapital === "string") setInitialCapital(draft.initialCapital);
+          if (draft.sizing) setSizing(draft.sizing);
+          if (typeof draft.fixedAmount === "string") setFixedAmount(draft.fixedAmount);
+          if (typeof draft.startDate === "string") setStartDate(draft.startDate);
+          if (typeof draft.endDate === "string") setEndDate(draft.endDate);
+          if (typeof draft.shortPeriod === "string") setShortPeriod(draft.shortPeriod);
+          if (typeof draft.longPeriod === "string") setLongPeriod(draft.longPeriod);
+          if (typeof draft.rsiPeriod === "string") setRsiPeriod(draft.rsiPeriod);
+          if (typeof draft.rsiBuy === "string") setRsiBuy(draft.rsiBuy);
+          if (typeof draft.rsiSell === "string") setRsiSell(draft.rsiSell);
+          if (typeof draft.buyPrice === "string") setBuyPrice(draft.buyPrice);
+          if (typeof draft.sellPrice === "string") setSellPrice(draft.sellPrice);
+          setDraftStatus("Draft restored from this device.");
+        }
+      }
+    } catch {
+      setDraftStatus("A saved strategy draft could not be restored.");
+    }
+    setDraftReady(true);
+  }, [draftKey]);
+
+  useEffect(() => {
+    if (!draftReady) return;
+    const timer = window.setTimeout(() => {
+      const draft: StrategyDraft = {
+        version: 1,
+        savedAt: new Date().toISOString(),
+        name,
+        type,
+        symbols,
+        initialCapital,
+        sizing,
+        fixedAmount,
+        startDate,
+        endDate,
+        shortPeriod,
+        longPeriod,
+        rsiPeriod,
+        rsiBuy,
+        rsiSell,
+        buyPrice,
+        sellPrice,
+      };
+      try {
+        window.localStorage.setItem(draftKey, JSON.stringify(draft));
+        setDraftStatus("Draft saved on this device.");
+      } catch {
+        setDraftStatus("Draft could not be saved. Keep this page open.");
+      }
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [
+    draftReady,
+    draftKey,
+    name,
+    type,
+    symbols,
+    initialCapital,
+    sizing,
+    fixedAmount,
+    startDate,
+    endDate,
+    shortPeriod,
+    longPeriod,
+    rsiPeriod,
+    rsiBuy,
+    rsiSell,
+    buyPrice,
+    sellPrice,
+  ]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -166,11 +269,23 @@ export function StrategyForm({
         break;
     }
 
-    onSave(input);
+    const saved = onSave(input);
+    if (saved !== false) {
+      try {
+        window.localStorage.removeItem(draftKey);
+      } catch {
+        // Saving the strategy is still valid if the ephemeral draft cannot clear.
+      }
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {draftStatus ? (
+        <p role="status" className="text-xs text-text-secondary">
+          {draftStatus}
+        </p>
+      ) : null}
       <Field label="Strategy name" htmlFor="strategy-name">
         <input
           id="strategy-name"
@@ -217,7 +332,7 @@ export function StrategyForm({
       </Field>
 
       {type === "ma-crossover" ? (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Field label="Short MA period" htmlFor="ma-short">
             <NumberInput
               id="ma-short"
@@ -240,7 +355,7 @@ export function StrategyForm({
       ) : null}
 
       {type === "rsi" ? (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <Field label="RSI period" htmlFor="rsi-p">
             <NumberInput
               id="rsi-p"
@@ -272,7 +387,7 @@ export function StrategyForm({
       ) : null}
 
       {type === "price-threshold" ? (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Field label="Buy ≤" htmlFor="pt-buy">
             <NumberInput
               id="pt-buy"
@@ -327,7 +442,7 @@ export function StrategyForm({
         ) : null}
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Field label="Start date (optional)" htmlFor="start">
           <input
             id="start"

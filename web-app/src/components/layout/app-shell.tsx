@@ -46,12 +46,12 @@ export function AppShell({ children }: AppShellProps) {
       <Sidebar collapsed={isCollapsed} onToggle={toggle} />
       <div
         className={cn(
-          "flex-1 flex flex-col min-h-screen transition-[margin-left] duration-200",
+          "flex-1 flex flex-col min-h-screen transition-[margin-left] duration-200 motion-reduce:transition-none",
           isCollapsed ? "md:ml-16" : "md:ml-64",
         )}
       >
         <TopBar />
-        <main className="flex-1 w-full max-w-container-max mx-auto p-margin-mobile md:p-gutter pb-24 md:pb-gutter">
+        <main id="main-content" className="flex-1 w-full max-w-container-max mx-auto p-margin-mobile md:p-gutter pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-gutter">
           {children}
         </main>
       </div>

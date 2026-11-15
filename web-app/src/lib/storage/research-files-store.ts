@@ -54,6 +54,11 @@ export interface UploadFileInput {
   sectionAnchor?: ResearchFileMeta["sectionAnchor"];
 }
 
+export interface ResearchFileBackupEntry {
+  meta: ResearchFileMeta;
+  blob: Blob;
+}
+
 const SSR_ERROR = "research-files-store: IndexedDB is only available in the browser";
 
 function isBrowser(): boolean {
@@ -258,6 +263,38 @@ export async function deleteAllFiles(): Promise<void> {
     tx.objectStore(BLOB_STORE).clear(),
     tx.done,
   ]);
+}
+
+/** Complete attachment snapshot used by the versioned backup service. */
+export async function listAllFilesForBackup(): Promise<ResearchFileBackupEntry[]> {
+  if (!isBrowser()) return [];
+  const db = await getDb();
+  const [metadata, blobs] = await Promise.all([
+    db.getAll(META_STORE),
+    db.getAll(BLOB_STORE),
+  ]);
+  const blobById = new Map(blobs.map((entry) => [entry.id, entry.blob]));
+  return metadata.flatMap((meta) => {
+    const blob = blobById.get(meta.id);
+    return blob ? [{ meta, blob }] : [];
+  });
+}
+
+/** Replace metadata and bytes in one IndexedDB transaction. */
+export async function replaceAllFilesFromBackup(
+  entries: ResearchFileBackupEntry[],
+): Promise<void> {
+  if (!isBrowser()) throw new Error(SSR_ERROR);
+  const db = await getDb();
+  const tx = db.transaction([META_STORE, BLOB_STORE], "readwrite");
+  const metaStore = tx.objectStore(META_STORE);
+  const blobStore = tx.objectStore(BLOB_STORE);
+  await Promise.all([metaStore.clear(), blobStore.clear()]);
+  for (const entry of entries) {
+    await metaStore.put(entry.meta);
+    await blobStore.put({ id: entry.meta.id, blob: entry.blob });
+  }
+  await tx.done;
 }
 
 // SPEC-016 / SPEC-027: compile-time conformance check vs the contract.

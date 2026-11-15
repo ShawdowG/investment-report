@@ -202,7 +202,7 @@ export function BadgeSelect<T extends string>({
         onClick={() => setOpen((o) => !o)}
         onKeyDown={onTriggerKeyDown}
         className={cn(
-          "inline-flex items-center gap-1 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "touch-target inline-flex items-center justify-center gap-1 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
           className,
         )}
       >

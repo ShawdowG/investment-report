@@ -231,7 +231,7 @@
   /* Primary / brand */
   --st-primary-container: #2563eb;
   --st-on-primary: #ffffff;
-  --st-on-primary-container: #1e3a8a;
+  --st-on-primary-container: #ffffff;
   --st-primary-fixed: #dbeafe;
   --st-primary-fixed-dim: #93c5fd;
   --st-on-primary-fixed: #1e3a8a;
@@ -383,7 +383,7 @@
 
   /* Regime indicators */
   --st-regime-risk-on: #10b981;
-  --st-regime-risk-off: #ef4444;
+  --st-regime-risk-off: #fca5a5;
   --st-regime-neutral: #f59e0b;
 
   /* Status indicators */
@@ -399,10 +399,18 @@
   body {
     @apply bg-background text-foreground;
   }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
 }
 
 /* Markdown body styles for research dispatches (and future surfaces). */
 @layer components {
+  .touch-target {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
   .markdown-body {
     @apply font-body-main text-body-main text-text-primary leading-relaxed;
   }
@@ -421,4 +429,20 @@
   .markdown-body a { @apply text-primary underline hover:text-primary-fixed-dim; }
   .markdown-body blockquote { @apply border-l-2 border-border-subtle pl-3 my-2 italic text-text-secondary; }
   .markdown-body hr { @apply border-border-subtle my-4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (pointer: coarse) {
+  [data-slot="button"] {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
 }

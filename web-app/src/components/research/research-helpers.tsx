@@ -85,16 +85,20 @@ interface ExternalLinkSpec {
 }
 
 function buildExternalLinks(symbol: string): ExternalLinkSpec[] {
+  const encodedSymbol = encodeURIComponent(symbol);
   const encoded = encodeURIComponent(`${symbol} stock news`);
   return [
-    { label: "Yahoo Finance", href: `https://finance.yahoo.com/quote/${symbol}` },
+    {
+      label: "Yahoo Finance",
+      href: `https://finance.yahoo.com/quote/${encodedSymbol}`,
+    },
     {
       label: "Yahoo Stats",
-      href: `https://finance.yahoo.com/quote/${symbol}/key-statistics`,
+      href: `https://finance.yahoo.com/quote/${encodedSymbol}/key-statistics`,
     },
     {
       label: "SEC EDGAR 10-K",
-      href: `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${symbol}&type=10-K&dateb=&owner=include&count=40`,
+      href: `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${encodedSymbol}&type=10-K&dateb=&owner=include&count=40`,
     },
     {
       // Macrotrends per-ticker URLs require a company-name slug we don't
@@ -106,17 +110,20 @@ function buildExternalLinks(symbol: string): ExternalLinkSpec[] {
     },
     {
       label: "Seeking Alpha",
-      href: `https://seekingalpha.com/symbol/${symbol}`,
+      href: `https://seekingalpha.com/symbol/${encodedSymbol}`,
     },
     {
       label: "Google Finance",
-      href: `https://www.google.com/finance/quote/${symbol}`,
+      href: `https://www.google.com/finance/quote/${encodedSymbol}`,
     },
     {
       label: "Google News",
       href: `https://www.google.com/search?q=${encoded}&tbm=nws`,
     },
-    { label: "Stocktwits", href: `https://stocktwits.com/symbol/${symbol}` },
+    {
+      label: "Stocktwits",
+      href: `https://stocktwits.com/symbol/${encodedSymbol}`,
+    },
   ];
 }
 
