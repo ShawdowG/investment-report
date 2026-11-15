@@ -34,8 +34,6 @@ jobs:
 
       - name: Quality gate and static export
         run: npm run check
-        env:
-          NODE_ENV: production
 
       - name: Deploy preview to Cloudflare Pages
         run: npx wrangler pages deploy out --project-name investment-report-app --branch ${{ github.ref_name }} --commit-dirty=true
