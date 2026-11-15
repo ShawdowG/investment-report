@@ -3,7 +3,7 @@
   "private": true,
   "type": "commonjs",
   "engines": {
-    "node": "20.19.x"
+    "node": ">=22.12.0 <25"
   },
   "scripts": {
     "fetch:quotes": "python scripts/fetch-quotes.py",
