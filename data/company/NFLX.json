@@ -1,6 +1,6 @@
 {
   "symbol": "NFLX",
-  "generatedAt": "2026-11-21T03:23:36.531819+00:00",
+  "generatedAt": "2026-11-24T06:18:13.308890+00:00",
   "description": "Netflix, Inc. provides entertainment services worldwide. The company offers television (TV) series, documentaries, feature films, games, and live programming across various genres and languages. It also provides members the ability to receive streaming content through a host of internet-connected devices, including TVs, digital video players, TV set-top boxes, and mobile devices. Netflix, Inc. was incorporated in 1997 and is headquartered in Los Gatos, California.",
   "industry": "Entertainment",
   "sector": "Communication Services",
@@ -10,10 +10,10 @@
   "city": "Los Gatos",
   "state": "CA",
   "metrics": {
-    "trailingPE": 16.395954,
-    "forwardPE": 15.042399,
-    "priceToBook": 7.9542904,
-    "enterpriseToEbitda": 15.182,
+    "trailingPE": 16.791906,
+    "forwardPE": 15.41343,
+    "priceToBook": 8.146382,
+    "enterpriseToEbitda": 15.534,
     "dividendYield": 0.0,
     "payoutRatio": 0.0,
     "profitMargins": 0.29691,
@@ -25,7 +25,7 @@
   },
   "analyst": {
     "recommendationMean": 1.92157,
-    "targetMeanPrice": 84.76326
+    "targetMeanPrice": 84.54884
   },
   "calendar": {
     "earningsDate": "2027-01-19",
